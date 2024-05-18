@@ -1,0 +1,66 @@
+# open shell
+[[manager.prepend_keymap]]
+on   = [ "<C-s>" ]
+run  = 'shell "$SHELL" --block --confirm'
+desc = "Open shell here"
+
+# hide-preview
+[[manager.prepend_keymap]]
+on  = [ "T" ]
+run = "plugin --sync hide-preview"
+desc = "Hide preview pane"
+
+# arrow
+[[manager.prepend_keymap]]
+on  = [ "k" ]
+run = "plugin --sync arrow --args=-1"
+
+[[manager.prepend_keymap]]
+on  = [ "j" ]
+run = "plugin --sync arrow --args=1"
+
+# parent-arrow
+[[manager.prepend_keymap]]
+on  = [ "K" ]
+run = "plugin --sync parent-arrow --args=-1"
+
+[[manager.prepend_keymap]]
+on  = [ "J" ]
+run = "plugin --sync parent-arrow --args=1"
+
+# fg
+[[manager.prepend_keymap]]
+on   = [ "f","g" ]
+run  = "plugin fg"
+desc = "find file by content (fuzzy match)"
+
+[[manager.prepend_keymap]]
+on   = [ "f","G" ]
+run  = "plugin fg --args='rg'"
+desc = "find file by content (ripgrep match)"
+
+[[manager.prepend_keymap]]
+on   = [ "f","f" ]
+run  = "plugin fg --args='fzf'"
+desc = "find file by filename"
+
+# bookmarks-persistence
+[[manager.prepend_keymap]]
+on = [ "b", "a" ]
+run = "plugin bookmarks-persistence --args=save"
+desc = "Save current position as a bookmark"
+
+[[manager.prepend_keymap]]
+on = [ "b", "g" ]
+run = "plugin bookmarks-persistence --args=jump"
+desc = "Jump to a bookmark"
+
+[[manager.prepend_keymap]]
+on = [ "b", "d" ]
+run = "plugin bookmarks-persistence --args=delete"
+desc = "Delete a bookmark"
+
+[[manager.prepend_keymap]]
+on = [ "b", "D" ]
+run = "plugin bookmarks-persistence --args=delete_all"
+desc = "Delete all bookmarks"
