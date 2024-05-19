@@ -6,9 +6,15 @@ desc = "Open shell here"
 
 # hide-preview
 [[manager.prepend_keymap]]
-on  = [ "T" ]
+on  = [ "T","H" ]
 run = "plugin --sync hide-preview"
 desc = "Hide preview pane"
+
+# max-preview
+[[manager.prepend_keymap]]
+on  = [ "T","M" ]
+run = "plugin --sync max-preview"
+desc = "Max preview pane"
 
 # arrow
 [[manager.prepend_keymap]]
