@@ -1,6 +1,6 @@
 [plugin]
 prepend_previewers = [
-# Markdown previewer
+  # Markdown previewer
   { name = "*.md", run = "glow" },
 
 	# Archive previewer
@@ -18,5 +18,8 @@ prepend_previewers = [
   { mime = "application/x-bittorrent",    run = "torrent-preview"},
 
   # Pdf previewer
-  { mime = "application/pdf", run = "pdftotext-preview"},
+  { mime = "application/pdf",             run = "pdftotext-preview"},
+  
+  # Djvu previewer
+  { name = "*.djvu",                      run = "djvutxt-preview"},
 ] 
