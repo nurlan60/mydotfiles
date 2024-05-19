@@ -4,7 +4,7 @@ function M:peek()
 	-- launch process
 	local process, code = Command("djvutxt")
 		:args({
-			"--pages=1-3",
+			"--pages=1-5",
 			tostring(self.file.url),
 		})
 		:stdout(Command.PIPED)

@@ -5,7 +5,7 @@ function M:peek()
 	local process, code = Command("pdftotext")
 		:args({
 			"-l",
-			"1",
+			"5",
 			"-q",
 			tostring(self.file.url),
 			"-",
