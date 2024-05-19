@@ -10,5 +10,6 @@ prepend_previewers = [
 	{ mime = "application/x-7z-compressed", run = "ouch" },
 	{ mime = "application/x-rar",           run = "ouch" },
 	{ mime = "application/x-xz",            run = "ouch" },
-]
-
+  { mime = "audio/*",                     run = "exifaudio"},
+  { mime = "application/x-bittorrent",    run = "torrent-preview"},
+] 
