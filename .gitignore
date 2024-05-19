@@ -1,1 +1,3 @@
 yazi/plugins/bookmarks-persistence.yazi/bookmarkcache
+nvim/lua/plugins/im-select.lua
+nvim/lua/plugins/xkbswitch.lua
