@@ -64,12 +64,19 @@ n ()
 
 # yazi
 function yy() {
+  # Block nesting of yazi in subshells
+  if [ -n "$YAZI_LEVEL" ]; then
+    echo "yazi is already running"
+    return
+  fi
+
+  # Change the current working directory when exiting Yazi 
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
 	yazi "$@" --cwd-file="$tmp"
 	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
 		cd -- "$cwd"
 	fi
-	rm -f -- "$tmp"
+	rm -f -- "$tmp" > /dev/null
 }
 
 # aliases
