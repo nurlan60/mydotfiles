@@ -38,7 +38,8 @@ function Status:render(area)
 	self.area = area
 
 	local left = ui.Line({ self:mode(), self:size(), self:name() })
-	local right = ui.Line({ self:owner(), self:permissions(), self:percentage(), self:position() })
+	-- local right = ui.Line({ self:owner(), self:permissions(), self:percentage(), self:position() })
+	local right = ui.Line({ self:owner(), self:permissions() })
 	return {
 		ui.Paragraph(area, { left }),
 		ui.Paragraph(area, { right }):align(ui.Paragraph.RIGHT),
