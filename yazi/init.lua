@@ -58,6 +58,8 @@ function Status:name()
 	local linked = ""
 	if h.link_to ~= nil then
 		linked = " -> " .. tostring(h.link_to)
+	else
+		linked = h.name
 	end
 	return ui.Span(" " .. linked)
 end
