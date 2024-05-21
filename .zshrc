@@ -89,6 +89,7 @@ alias :q="exit"
 alias mc="mc -u"
 alias python="/opt/homebrew/bin/python3" 
 alias pip="/opt/homebrew/bin/pip3"
+alias lg="lazygit"
 
 # key bindings
 bindkey '^[[A' history-substring-search-up
