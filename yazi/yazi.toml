@@ -1,3 +1,6 @@
+[manager]
+show_symlink   = false
+
 [plugin]
 prepend_previewers = [
 # Markdown previewer
