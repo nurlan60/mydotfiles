@@ -1,56 +1,63 @@
-# open shell
+[[manager.prepend_keymap]]
+on   = [ "e" ]
+run  = 'shell "$EDITOR $@" --block --confirm'
+desc = "Edit selected files"
+
+[[manager.prepend_keymap]]
+on   = [ "E" ]
+run  = 'shell "bat $@" --block --confirm'
+desc = "View selected files in bat"
+
 [[manager.prepend_keymap]]
 on   = [ "<C-s>" ]
 run  = 'shell "$SHELL" --block --confirm'
 desc = "Open shell here"
 
-# hide-preview
 [[manager.prepend_keymap]]
 on  = [ "T","H" ]
 run = "plugin --sync hide-preview"
 desc = "Hide preview pane"
 
-# max-preview
 [[manager.prepend_keymap]]
 on  = [ "T","M" ]
 run = "plugin --sync max-preview"
 desc = "Max preview pane"
 
-# arrow
 [[manager.prepend_keymap]]
 on  = [ "k" ]
 run = "plugin --sync arrow --args=-1"
+desc = "Move cursor up"
 
 [[manager.prepend_keymap]]
 on  = [ "j" ]
 run = "plugin --sync arrow --args=1"
+desc = "Move cursor down"
 
-# parent-arrow
 [[manager.prepend_keymap]]
 on  = [ "K" ]
 run = "plugin --sync parent-arrow --args=-1"
+desc = "Move parent up"
 
 [[manager.prepend_keymap]]
 on  = [ "J" ]
 run = "plugin --sync parent-arrow --args=1"
+desc = "Move parent cursor down"
 
-# fg
 [[manager.prepend_keymap]]
 on   = [ "f","g" ]
 run  = "plugin fg"
-desc = "find file by content (fuzzy match)"
+desc = "Find file by content (fuzzy match)"
 
 [[manager.prepend_keymap]]
 on   = [ "f","G" ]
 run  = "plugin fg --args='rg'"
-desc = "find file by content (ripgrep match)"
+desc = "Find file by content (ripgrep match)"
 
 [[manager.prepend_keymap]]
 on   = [ "f","f" ]
 run  = "plugin fg --args='fzf'"
-desc = "find file by filename"
+desc = "Find file by filename"
 
-# bookmarks-persistence
 [[manager.prepend_keymap]]
 on = [ "b", "a" ]
 run = "plugin bookmarks-persistence --args=save"
