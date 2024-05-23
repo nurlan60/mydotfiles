@@ -2,6 +2,9 @@
 show_symlink   = false
 
 [plugin]
+preloaders = [
+	{ name = "*", cond = "!mime", run = "mime", multi = true, prio = "high" },
+]
 prepend_previewers = [
 # Markdown previewer
   { name = "*.md", run = "glow" },
