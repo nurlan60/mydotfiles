@@ -5,28 +5,27 @@ show_symlink   = false
 preloaders = [
 	{ name = "*", cond = "!mime", run = "mime", multi = true, prio = "high" },
 ]
-prepend_previewers = [
-# Markdown previewer
+
+previewers = [
+	{ name = "*/", run = "folder", sync = true },
+	# Code
+	{ mime = "text/*", run = "code" },
+	{ mime = "*/{xml,javascript,x-wine-extension-ini}", run = "code" },
+	# JSON
+	{ mime = "application/json", run = "json" },
+	# Djvu
+	{ mime = "image/vnd.djvu", run = "djvutxt-preview" },
+	# PDF
+	{ mime = "application/pdf", run = "pdftotext-preview" },
+# Markdown 
   { name = "*.md", run = "glow" },
-
-	# Archive previewer
+	# Archive 
 	{ mime = "application/*zip",            run = "ouch" },
-	{ mime = "application/x-tar",           run = "ouch" },
-	{ mime = "application/x-bzip2",         run = "ouch" },
-	{ mime = "application/x-7z-compressed", run = "ouch" },
-	{ mime = "application/x-rar",           run = "ouch" },
-	{ mime = "application/x-xz",            run = "ouch" },
-
-  # Audio previewer
+	{ mime = "application/x-{tar,bzip2,7z-compressed,rar,xz}", run = "ouch" },
+  # Audio 
   { mime = "audio/*",                     run = "exifaudio"},
-
-  # Torrent preview
+  # Torrent 
   { mime = "application/x-bittorrent",    run = "torrent-preview"},
-
-  # Pdf previewer
-  { mime = "application/pdf",             run = "pdftotext-preview"},
-  
-  # Djvu previewer
-  # { name = "*.djvu",                      run = "djvutxt-preview"},
-  { mime = "image/vnd.djvu",              run = "djvutxt-preview"},
+  # Fallback
+	{ name = "*", run = "file" },
 ] 
