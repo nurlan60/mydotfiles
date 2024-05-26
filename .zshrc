@@ -81,7 +81,6 @@ function yy() {
 
 # aliases
 alias cd..="cd .."
-alias pwd="pwd && pwd | xclip -sel clipboard"
 alias ll="eza -alh"
 alias ls="eza"
 alias tree="eza --tree"
