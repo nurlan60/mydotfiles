@@ -80,15 +80,7 @@ function yy() {
 }
 
 # aliases
-alias cd..="cd .."
-alias ll="eza -alh"
-alias ls="eza"
-alias tree="eza --tree"
-alias :q="exit"
-alias mc="mc -u"
-alias python="/opt/homebrew/bin/python3" 
-alias pip="/opt/homebrew/bin/pip3"
-alias lg="lazygit"
+source ~/.aliases
 
 # key bindings
 bindkey '^[[A' history-substring-search-up
