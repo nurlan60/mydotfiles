@@ -79,7 +79,21 @@ function yy() {
 	rm -f -- "$tmp" > /dev/null
 }
 
-# aliases
+# common aliases
+alias cd..="cd .."
+alias ll="eza -alh"
+alias ls="eza"
+alias tree="eza --tree"
+alias :q="exit"
+alias mc="mc -u"
+alias lg="lazygit"
+alias mini="ssh mini"
+alias mac="ssh mac"
+alias asus="ssh asus"
+alias deb="ssh debian"
+alias gp="git pull"
+
+# specific
 source ~/.aliases
 
 # key bindings
