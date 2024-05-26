@@ -89,8 +89,9 @@ bindkey '^[[B' history-substring-search-down
 # zoxide
 eval "$(zoxide init zsh)"
 
-# fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
+
 # Use fd instead of the default find
 export FZF_DEFAULT_COMMAND='fd --type f'
 _fzf_compgen_path() {
