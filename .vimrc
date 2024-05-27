@@ -1,6 +1,7 @@
 set nocompatible
 filetype indent plugin on
 syntax on
+colorscheme habamax
 
 set wildmenu
 set showcmd
