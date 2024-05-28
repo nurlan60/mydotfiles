@@ -1,7 +1,7 @@
 local M = {}
 
 function M:peek()
-	local process, code = Command("docx2txt")
+	local process, code = Command("docx2txt.pl")
 		:args({
 			tostring(self.file.url),
 			"-",
