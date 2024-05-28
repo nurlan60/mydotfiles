@@ -26,6 +26,8 @@ previewers = [
   { mime = "audio/*",                     run = "exifaudio"},
   # Torrent 
   { mime = "application/x-bittorrent",    run = "torrent-preview"},
+  # Docx
+  { mime ="application/vnd.openxmlformats-officedocument.wordprocessingml.document", run = "docx-preview"},
   # Fallback
 	{ name = "*", run = "file" },
 ] 
