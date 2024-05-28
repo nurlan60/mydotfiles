@@ -28,6 +28,8 @@ previewers = [
   { mime = "application/x-bittorrent",    run = "torrent-preview"},
   # Docx
   { mime ="application/vnd.openxmlformats-officedocument.wordprocessingml.document", run = "docx-preview"},
+  # CSV
+  { mime = "text/csv", run = "miller"},
   # Fallback
 	{ name = "*", run = "file" },
 ] 
