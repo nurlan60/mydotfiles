@@ -11,7 +11,7 @@ case ${file:e} in
     pdftotext -layout -nopgbrk ${file} - | bat -p -S --pager 'less -R'
     ;;
   md)
-    glow --style dark ${file}
+    glow --style dark -p ${file}
     ;;
   djvu)
     djvutxt ${file} | bat -p -S --pager 'less -R'
