@@ -1,38 +1,38 @@
 #!/bin/zsh
 
 if [[ ! -f $1 ]]; then
-			echo "Usage: viewer [file]"
-      read -s -k '?Press any key to continue.'
-      exit 1
-	fi 
-file=$1
-case ${file:e} in
+	echo "Usage: viewer [file]"
+  read -s -k '?Press any key to continue.'
+  exit 1
+fi 
+
+case ${1:e} in
   pdf)
-    pdftotext -layout -nopgbrk ${file} - | bat -p -S --pager 'less -R'
+    pdftotext -layout -nopgbrk $1 - | bat -p -S --pager 'less -R'
     ;;
   md)
-    glow --style dark -p ${file}
+    glow --style dark -p $1
     ;;
   djvu)
-    djvutxt ${file} | bat -p -S --pager 'less -R'
+    djvutxt $1 | bat -p -S --pager 'less -R'
     ;;
   docx)
-    docx2txt.pl ${file} - | bat -p -S --pager 'less -R'
+    docx2txt.pl $1 - | bat -p -S --pager 'less -R'
     ;;
   xlsx)
-    in2csv ${file} | csvlook | bat -p -S --pager 'less -R'
+    in2csv $1 | csvlook | bat -p -S --pager 'less -R'
     ;;
   scv)
-    csvlook ${file}| bat -p -S --pager 'less -R'
+    csvlook $1| bat -p -S --pager 'less -R'
     ;;
   transmission)
-    transmission-show ${file}
+    transmission-show $1
     ;;
-  jl|log|lua|sh|pl|txt|tex|toml|zsh)
-  bat -p -S --pager 'less -R' $file
+  ""|jl|log|lua|sh|pl|txt|tex|toml|zsh)
+  bat -p -S --pager 'less -R' $1
     ;;
   *)
-    open ${file}
+    open $1
     ;;
 esac
 
