@@ -1,7 +1,17 @@
 [[manager.prepend_keymap]]
+on = [ "<Backspace>" ]
+run = 'leave'
+desc = "Go back to the parent directory"
+
+[[manager.prepend_keymap]]
 on = [ "o" ]
 run = 'open --interactive'
 desc = "Open the selected files interactively"
+
+[[manager.prepend_keymap]]
+on   = [ "<Enter>" ]
+run  = 'plugin --sync smart-enter'
+desc = "Enter the child directory, or open the file"
 
 [[manager.prepend_keymap]]
 on   = [ "l" ]
@@ -36,7 +46,7 @@ desc = "Move cursor down"
 [[manager.prepend_keymap]]
 on  = [ "K" ]
 run = "plugin --sync parent-arrow --args=-1"
-desc = "Move parent up"
+desc = "Move parent cursor up"
 
 [[manager.prepend_keymap]]
 on  = [ "J" ]
