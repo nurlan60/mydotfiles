@@ -4,6 +4,9 @@ export LANG=en_US.UTF-8
 export EDITOR='nvim'
 export VISUAL='nvim'
 
+# zathura dbus to work
+export DBUS_SESSION_BUS_ADDRESS="unix:path=$DBUS_LAUNCHD_SESSION_BUS_SOCKET"
+
 # nnn
 export NNN_COLORS='4321'
 export NNN_PLUG='d:diffs;j:autojump;f:fzcd;s:-!&/Applications/Skim.app/Contents/MacOS/Skim "$nnn";u:umounttree;v:-!bat "$nnn"'
