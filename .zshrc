@@ -92,7 +92,6 @@ alias mac="ssh mac"
 alias asus="ssh asus"
 alias deb="ssh debian"
 alias gp="git pull"
-alias nextonic="tectonic -X"
 
 # specific
 source ~/.aliases
