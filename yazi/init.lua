@@ -63,3 +63,8 @@ function Status:name()
 	end
 	return ui.Span(" " .. linked)
 end
+
+-- zoxide update db
+require("zoxide"):setup({
+	update_db = true,
+})
