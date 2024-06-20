@@ -10,6 +10,7 @@ return {
     "lervag/vimtex",
     opts = function()
       vim.g["vimtex_view_method"] = "sioyek"
+      vim.g["vimtex_view_sioyek_exe"] = "/Applications/sioyek.app/Contents/MacOS/sioyek"
       vim.g["vimtex_mappings_enabled"] = 1
       vim.g["vimtex_indent_enabled"] = 1
       vim.g["vimtex_syntax_enabled"] = 0
