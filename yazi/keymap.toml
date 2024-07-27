@@ -1,89 +1,94 @@
 [[manager.prepend_keymap]]
-on = [ "<Backspace>" ]
+on = ["C"]
+run = "plugin ouch --args=zip"
+desc = "Compress with ouch"
+
+[[manager.prepend_keymap]]
+on = ["<Backspace>"]
 run = 'leave'
 desc = "Go back to the parent directory"
 
 [[manager.prepend_keymap]]
-on = [ "o" ]
+on = ["o"]
 run = 'open --interactive'
 desc = "Open the selected files interactively"
 
 [[manager.prepend_keymap]]
-on   = [ "<Enter>" ]
-run  = 'plugin --sync smart-enter'
+on = ["<Enter>"]
+run = 'plugin --sync smart-enter'
 desc = "Enter the child directory, or open the file"
 
 [[manager.prepend_keymap]]
-on   = [ "l" ]
-run  = 'plugin --sync smart-enter'
+on = ["l"]
+run = 'plugin --sync smart-enter'
 desc = "Enter the child directory, or open the file"
 
 [[manager.prepend_keymap]]
-on   = [ ":" ]
-run  = 'shell "$SHELL" --block --confirm'
+on = [":"]
+run = 'shell "$SHELL" --block --confirm'
 desc = "Open shell here"
 
 [[manager.prepend_keymap]]
-on  = [ "T","H" ]
+on = ["T", "H"]
 run = "plugin --sync hide-preview"
 desc = "Hide preview pane"
 
 [[manager.prepend_keymap]]
-on  = [ "T","M" ]
+on = ["T", "M"]
 run = "plugin --sync max-preview"
 desc = "Max preview pane"
 
 [[manager.prepend_keymap]]
-on  = [ "k" ]
+on = ["k"]
 run = "plugin --sync arrow --args=-1"
 desc = "Move cursor up"
 
 [[manager.prepend_keymap]]
-on  = [ "j" ]
+on = ["j"]
 run = "plugin --sync arrow --args=1"
 desc = "Move cursor down"
 
 [[manager.prepend_keymap]]
-on  = [ "K" ]
+on = ["K"]
 run = "plugin --sync parent-arrow --args=-1"
 desc = "Move parent cursor up"
 
 [[manager.prepend_keymap]]
-on  = [ "J" ]
+on = ["J"]
 run = "plugin --sync parent-arrow --args=1"
 desc = "Move parent cursor down"
 
 [[manager.prepend_keymap]]
-on   = [ "f","g" ]
-run  = "plugin fg"
+on = ["f", "g"]
+run = "plugin fg"
 desc = "Find file by content (fuzzy match)"
 
 [[manager.prepend_keymap]]
-on   = [ "f","G" ]
-run  = "plugin fg --args='rg'"
+on = ["f", "G"]
+run = "plugin fg --args='rg'"
 desc = "Find file by content (ripgrep match)"
 
 [[manager.prepend_keymap]]
-on   = [ "f","f" ]
-run  = "plugin fg --args='fzf'"
+on = ["f", "f"]
+run = "plugin fg --args='fzf'"
 desc = "Find file by filename"
 
 [[manager.prepend_keymap]]
-on = [ "b", "a" ]
+on = ["b", "a"]
 run = "plugin bookmarks-persistence --args=save"
 desc = "Save current position as a bookmark"
 
 [[manager.prepend_keymap]]
-on = [ "b", "g" ]
+on = ["b", "g"]
 run = "plugin bookmarks-persistence --args=jump"
 desc = "Jump to a bookmark"
 
 [[manager.prepend_keymap]]
-on = [ "b", "d" ]
+on = ["b", "d"]
 run = "plugin bookmarks-persistence --args=delete"
 desc = "Delete a bookmark"
 
 [[manager.prepend_keymap]]
-on = [ "b", "D" ]
+on = ["b", "D"]
 run = "plugin bookmarks-persistence --args=delete_all"
 desc = "Delete all bookmarks"
