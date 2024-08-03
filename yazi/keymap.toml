@@ -135,7 +135,7 @@ desc = "Permanently delete the files"
 
 # Use o to open files using the editor
 [[manager.prepend_keymap]]
-on = ["o"]
+on = ["e"]
 run = "plugin augment-command --args='editor'"
 desc = "Open files with the default editor"
 
