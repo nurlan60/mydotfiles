@@ -128,3 +128,6 @@ if [[ -n "$YAZI_ID" ]]; then
 	}
 	add-zsh-hook zshexit _yazi_cd
 fi
+
+# Rust setup
+. "$HOME/.cargo/env"
