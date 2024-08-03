@@ -66,6 +66,8 @@ rules = [
 [plugin]
 
 prepend_previewers = [
+  # Folder
+  { name = "*/", run = "eza-preview" },
   # Djvu
   { mime = "image/vnd.djvu", run = "djvutxt-preview" },
   # PDF
