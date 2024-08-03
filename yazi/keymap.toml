@@ -133,7 +133,7 @@ on = ["X"]
 run = "plugin augment-command --args='remove --permanently'"
 desc = "Permanently delete the files"
 
-# Use o to open files using the editor
+# Use e to open files using the editor
 [[manager.prepend_keymap]]
 on = ["e"]
 run = "plugin augment-command --args='editor'"
