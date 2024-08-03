@@ -165,8 +165,8 @@ desc = "Compress with ouch"
 
 [[manager.prepend_keymap]]
 on = ["<Backspace>"]
-run = 'leave'
-desc = "Go back to the parent directory"
+run = 'back'
+desc = "Go back to the previous directory"
 
 [[manager.prepend_keymap]]
 on = [":"]

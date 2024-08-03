@@ -3,7 +3,7 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export EDITOR='nvim'
 export VISUAL='nvim'
-export PAGER='viewer.sh'
+export PAGER='bat'
 
 # nnn
 export NNN_COLORS='4321'
