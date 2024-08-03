@@ -7,31 +7,6 @@ view = [
   { run = 'code "%*"', orphan = true, desc = "code", for = "windows" },
   { run = 'code -w "%*"', block = true, desc = "code (block)", for = "windows" },
 ]
-edit = [
-  { run = '${EDITOR:=vi} "$@"', desc = "Edit", block = true, for = "unix" },
-  { run = 'code "%*"', orphan = true, desc = "code", for = "windows" },
-  { run = 'code -w "%*"', block = true, desc = "code (block)", for = "windows" },
-]
-open = [
-  { run = 'xdg-open "$@"', desc = "Open", for = "linux" },
-  { run = 'open "$@"', desc = "Open", for = "macos" },
-  { run = 'start "" "%1"', orphan = true, desc = "Open", for = "windows" },
-]
-reveal = [
-  { run = 'xdg-open "$(dirname "$0")"', desc = "Reveal", for = "linux" },
-  { run = 'open -R "$1"', desc = "Reveal", for = "macos" },
-  { run = 'explorer /select, "%1"', orphan = true, desc = "Reveal", for = "windows" },
-  { run = '''exiftool "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show EXIF", for = "unix" },
-]
-extract = [
-  { run = 'ya pub extract --list "$@"', desc = "Extract here", for = "unix" },
-  { run = 'ya pub extract --list %*', desc = "Extract here", for = "windows" },
-]
-play = [
-  { run = 'mpv "$@"', orphan = true, for = "unix" },
-  { run = 'mpv "%1"', orphan = true, for = "windows" },
-  { run = '''mediainfo "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show media info", for = "unix" },
-]
 
 [open]
 rules = [
@@ -61,7 +36,7 @@ rules = [
     "reveal",
   ] },
 
-  { mime = "application/*zip", use = [
+  { mime = "application/{,g}zip", use = [
     "extract",
     "reveal",
   ] },
@@ -90,13 +65,7 @@ rules = [
 
 [plugin]
 
-previewers = [
-  { name = "*/", run = "folder", sync = true },
-  # Code
-  { mime = "text/*", run = "code" },
-  { mime = "*/{xml,javascript,x-wine-extension-ini}", run = "code" },
-  # JSON
-  { mime = "application/json", run = "json" },
+prepend_previewers = [
   # Djvu
   { mime = "image/vnd.djvu", run = "djvutxt-preview" },
   # PDF
@@ -114,6 +83,4 @@ previewers = [
   { mime = "application/vnd.openxmlformats-officedocument.wordprocessingml.document", run = "docx-preview" },
   # CSV
   { mime = "text/csv", run = "miller" },
-  # Fallback
-  { name = "*", run = "file" },
 ]
