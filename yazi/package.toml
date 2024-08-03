@@ -1,5 +1,5 @@
 [plugin]
-deps = [{ use = "yazi-rs/plugins#max-preview", commit = "06e5fe1" }, { use = "yazi-rs/plugins#hide-preview", commit = "06e5fe1" }]
+deps = [{ use = "yazi-rs/plugins#max-preview", commit = "06e5fe1" }, { use = "yazi-rs/plugins#hide-preview", commit = "06e5fe1" }, { use = "hankertrix/augment-command", commit = "3268704" }]
 
 [flavor]
 deps = []

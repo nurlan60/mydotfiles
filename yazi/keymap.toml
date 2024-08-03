@@ -1,3 +1,138 @@
+# Use the augmented arrow up command for the k key
+[[manager.prepend_keymap]]
+on = ["k"]
+run = "plugin augment-command --args='arrow -1'"
+desc = "Move cursor up"
+
+
+# Use the augmented arrow down command for the j key
+[[manager.prepend_keymap]]
+on = ["j"]
+run = "plugin augment-command --args='arrow 1'"
+desc = "Move cursor down"
+
+
+# Use K to move up in the parent directory
+[[manager.prepend_keymap]]
+on = ["K"]
+run = "plugin augment-command --args='parent-arrow -1'"
+desc = "Move cursor up in the parent directory"
+
+
+# Use J to move down in the parent directory
+[[manager.prepend_keymap]]
+on = ["J"]
+run = "plugin augment-command --args='parent-arrow 1'"
+desc = "Move cursor down in the parent directory"
+
+
+# Use the augmented enter command for the l key
+[[manager.prepend_keymap]]
+on = ["l"]
+run = "plugin augment-command --args='enter'"
+desc = "Enter the child directory, or open the file"
+
+
+# Use the augmented enter command for the <Enter> key
+[[manager.prepend_keymap]]
+on = ["<Enter>"]
+run = "plugin augment-command --args='enter'"
+desc = "Enter the child directory, or open the file"
+
+
+# Use the augmented enter command for the <S-Enter> key
+[[manager.prepend_keymap]]
+on = ["<S-Enter>"]
+run = "plugin augment-command --args='enter --interactive'"
+desc = "Enter the child directory, or open the file interactively"
+
+
+# Use the augmented enter command for the <Right> key
+# but without skipping directories
+[[manager.prepend_keymap]]
+on = ["<Right>"]
+run = "plugin augment-command --args='enter --no-skip'"
+desc = "Enter the child directory, or open the file"
+
+
+# Use the augmented leave command for the h key
+[[manager.prepend_keymap]]
+on = ["h"]
+run = "plugin augment-command --args='leave'"
+desc = "Go back to the parent directory"
+
+
+# Use the augmented leave command for the <Left> key
+# but without skipping directories
+[[manager.prepend_keymap]]
+on = ["<Left>"]
+run = "plugin augment-command --args='leave --no-skip'"
+desc = "Go back to the parent directory"
+
+
+# Use the augmented open to open files interactively with O
+[[manager.prepend_keymap]]
+on = ["O"]
+run = "plugin augment-command --args='open --interactive'"
+desc = "Open selected files interactively"
+
+
+# Use u to unselect and unyank all files
+[[manager.prepend_keymap]]
+on = ["u"]
+run = ["select_all --state=false", "unyank"]
+desc = "Unselect all files and also unyank cut files"
+
+
+# Use d to cut files
+[[manager.prepend_keymap]]
+on = ["d"]
+run = "yank --cut"
+desc = "Cut the selected files"
+
+
+# Use p to paste files
+[[manager.prepend_keymap]]
+on = ["p"]
+run = "plugin augment-command --args='paste'"
+desc = "Paste the files"
+
+
+# Use P to paste files and
+# overwrite the destination file if it exists
+[[manager.prepend_keymap]]
+on = ["P"]
+run = "plugin augment-command --args='paste --force'"
+desc = "Paste the files (overwrite if the destination exists)"
+
+
+# Use _ to create a new file or directory
+[[manager.prepend_keymap]]
+on = ["_"]
+run = "create"
+desc = "Create a file or directory (ends with / for directories)"
+
+
+# Use + to create a new file or directory
+[[manager.prepend_keymap]]
+on = ["+"]
+run = "create"
+desc = "Create a file or directory (ends with / for directories)"
+
+
+# Use x to move files to the trash
+[[manager.prepend_keymap]]
+on = ["x"]
+run = "plugin augment-command --args='remove'"
+desc = "Move the files to the trash"
+
+
+# Use X to delete files permanently
+[[manager.prepend_keymap]]
+on = ["X"]
+run = "plugin augment-command --args='remove --permanently'"
+desc = "Permanently delete the files"
+
 [[manager.prepend_keymap]]
 on = ["C"]
 run = "plugin ouch --args=zip"
@@ -7,21 +142,6 @@ desc = "Compress with ouch"
 on = ["<Backspace>"]
 run = 'leave'
 desc = "Go back to the parent directory"
-
-[[manager.prepend_keymap]]
-on = ["o"]
-run = 'open --interactive'
-desc = "Open the selected files interactively"
-
-[[manager.prepend_keymap]]
-on = ["<Enter>"]
-run = 'plugin --sync smart-enter'
-desc = "Enter the child directory, or open the file"
-
-[[manager.prepend_keymap]]
-on = ["l"]
-run = 'plugin --sync smart-enter'
-desc = "Enter the child directory, or open the file"
 
 [[manager.prepend_keymap]]
 on = [":"]
@@ -37,26 +157,6 @@ desc = "Hide preview pane"
 on = ["T", "M"]
 run = "plugin --sync max-preview"
 desc = "Max preview pane"
-
-[[manager.prepend_keymap]]
-on = ["k"]
-run = "plugin --sync arrow --args=-1"
-desc = "Move cursor up"
-
-[[manager.prepend_keymap]]
-on = ["j"]
-run = "plugin --sync arrow --args=1"
-desc = "Move cursor down"
-
-[[manager.prepend_keymap]]
-on = ["K"]
-run = "plugin --sync parent-arrow --args=-1"
-desc = "Move parent cursor up"
-
-[[manager.prepend_keymap]]
-on = ["J"]
-run = "plugin --sync parent-arrow --args=1"
-desc = "Move parent cursor down"
 
 [[manager.prepend_keymap]]
 on = ["f", "g"]
