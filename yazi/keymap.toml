@@ -133,6 +133,31 @@ on = ["X"]
 run = "plugin augment-command --args='remove --permanently'"
 desc = "Permanently delete the files"
 
+# Use o to open files using the editor
+[[manager.prepend_keymap]]
+on = ["o"]
+run = "plugin augment-command --args='editor'"
+desc = "Open files with the default editor"
+
+# Use i to open files using the pager
+[[manager.prepend_keymap]]
+on = ["i"]
+run = "plugin augment-command --args='pager'"
+desc = "Open files with the default pager"
+
+# Use r to rename files with the cursor before the file extension
+[[manager.prepend_keymap]]
+on = ["r"]
+run = "plugin augment-command --args='rename --cursor=before_ext'"
+desc = "Rename a file or directory"
+
+
+# Use R to remove the whole file name when renaming
+[[manager.prepend_keymap]]
+on = ["R"]
+run = "plugin augment-command --args='rename --empty=all'"
+desc = "Rename file and remove the whole file name"
+
 [[manager.prepend_keymap]]
 on = ["C"]
 run = "plugin ouch --args=zip"
