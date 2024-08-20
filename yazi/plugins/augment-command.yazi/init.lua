@@ -33,6 +33,7 @@ local Commands = {
     Rename = "rename",
     Remove = "remove",
     Paste = "paste",
+    Shell = "shell",
     Arrow = "arrow",
     ParentArrow = "parent-arrow",
     Editor = "editor",
@@ -97,14 +98,30 @@ local is_directory_pattern = "(.*)[/\\]$"
 -- The pattern to get the filename of a file
 local get_filename_pattern = "(.*)%.[^%.]+$"
 
+-- The pattern to get the shell variables in a command
+local shell_variable_pattern = "[%$%%][%*@0]"
+
+-- The pattern to match the bat command with the pager option passed
+local bat_command_with_pager_pattern = "%f[%a]bat%f[%A].*%-%-pager%s+"
+
 -- Function to merge tables.
--- The tables given later in the argument list WILL OVERRIDE
+--
+-- The key-value pairs of the tables given later
+-- in the argument list WILL OVERRIDE
 -- the tables given earlier in the argument list.
+--
+-- The list items in the table will be added in order,
+-- with the items in the first table being added first,
+-- and the items in the second table being added second,
+-- and so on.
 local function merge_tables(...)
     --
 
     -- Initialise a new table
     local new_table = {}
+
+    -- Initialise the index variable
+    local index = 1
 
     -- Iterates over the tables given
     for _, table in ipairs({ ... }) do
@@ -114,8 +131,25 @@ local function merge_tables(...)
         for key, value in pairs(table) do
             --
 
-            -- Set the key in the new table to the value given
-            new_table[key] = value
+            -- If the key is a number, then add using the index
+            -- instead of the key.
+            -- This is to allow lists to be merged.
+            if type(key) == "number" then
+                --
+
+                -- Set the value mapped to the index
+                new_table[index] = value
+
+                -- Increment the index
+                index = index + 1
+
+            -- Otherwise, the key isn't a number
+            else
+                --
+
+                -- Set the key in the new table to the value given
+                new_table[key] = value
+            end
         end
     end
 
@@ -251,31 +285,57 @@ local initialise_config = ya.sync(function(state, opts)
     -- Get the operating system family
     local os_family = ya.target_family()
 
-    -- Set the shell variable prefix to the % symbol
-    -- if the target family is windows and $ otherwise
-    state.config.shell_variable_prefix = os_family == "windows" and "%" or "$"
+    -- Get whether the operating system is windows
+    local is_windows = os_family == "windows"
+
+    -- Initialise the shell variables
+    local shell_variables = {
+        hovered_items = is_windows and "%0" or "$0",
+        selected_items = is_windows and "%*" or "$@",
+    }
+
+    -- Set the shell variables in the config
+    state.config.shell_variables = shell_variables
 
     -- Return the configuration object for async functions
     return state.config
 end)
 
 -- The function to try if a shell command exists
-local function shell_command_exists(command, args)
+local function shell_command_exists(shell_command)
     --
 
-    -- Initialise the arguments if none are given
-    args = args or {}
+    -- Get whether the shell command is successfully executed
+    --
+    -- "1> /dev/null" redirects the standard output
+    -- of the shell command to /dev/null, which accepts
+    -- and discards all input and produces no output.
+    --
+    -- "2>&1" redirects the standard error to the file
+    -- descriptor of the standard output, which is the
+    -- /dev/null file, which accepts and discards
+    -- all input and produces no output.
+    --
+    -- The full thing, "1> /dev/null 2>&1" just makes sure
+    -- the shell command doesn't produce any output when executed.
+    --
+    -- https://stackoverflow.com/questions/10508843/what-is-dev-null-21
+    -- https://stackoverflow.com/questions/818255/what-does-21-mean
+    -- https://www.gnu.org/software/bash/manual/html_node/Redirections.html
+    local successfully_executed =
+        os.execute(shell_command .. " 1> /dev/null 2>&1")
 
-    -- Spawn the shell command and get the output
-    local output, err = Command(command)
-        :args(args)
-        :stdout(Command.PIPED)
-        :stderr(Command.PIPED)
-        :output()
-
-    -- Return true if there is an output
-    -- and false otherwise
-    return output and true or false
+    -- Return if the result of the os.execute
+    -- command is not nil.
+    --
+    -- This check is because the first result of
+    -- os.execute function returns nil
+    -- if the command fails instead of false
+    -- and we need to return a boolean instead of nil.
+    --
+    -- The os.execute function return true if the
+    -- the shell command is successfully executed.
+    return successfully_executed ~= nil
 end
 
 -- The function to initialise the plugin
@@ -657,9 +717,7 @@ local function extract_archive(archive_path, config)
 
         -- If it is the last try, then return false
         -- and the error message.
-        if tries == total_number_of_tries then
-            return false, error_message
-        end
+        if tries == total_number_of_tries then return false, error_message end
 
         -- Set the overwrite flag to true.
         --
@@ -729,6 +787,8 @@ local function handle_open(args, config, command_table)
     -- If the item group is the selected items,
     -- then execute the command and exit the function
     if item_group == ItemGroup.Selected then
+        --
+
         -- Emit the command and exit the function
         return ya.manager_emit("open", args)
     end
@@ -779,8 +839,7 @@ local function handle_open(args, config, command_table)
     if not archive_path then return end
 
     -- Run the function to extract the archive
-    local extract_successful, err =
-        extract_archive(archive_path, config)
+    local extract_successful, err = extract_archive(archive_path, config)
 
     -- If the extraction of the archive isn't successful,
     -- notify the user and exit the function
@@ -879,8 +938,8 @@ local function handle_leave(args, config)
     ya.manager_emit("cd", { directory })
 end
 
--- Function to handle the a command
-local function handle_command(command, args)
+-- Function to handle a Yazi command
+local function handle_yazi_command(command, args)
     --
 
     -- Call the function to get the item group
@@ -909,50 +968,6 @@ local function handle_command(command, args)
     end
 end
 
--- Function to handle a shell command
-local function handle_shell_command(command, args, config)
-    --
-
-    -- Call the function to get the item group
-    local item_group = get_item_group()
-
-    -- If no item group is returned, exit the function
-    if not item_group then return end
-
-    -- If the item group is the selected items
-    if item_group == ItemGroup.Selected then
-        --
-
-        -- Merge the arguments for the shell command with additional ones
-        args = merge_tables({
-            command .. " " .. config.shell_variable_prefix .. "@",
-            confirm = true,
-            block = true,
-        }, args)
-
-        -- Emit the command to operate the selected items
-        ya.manager_emit("shell", args)
-
-    -- If the item group is the hovered item
-    elseif item_group == ItemGroup.Hovered then
-        --
-
-        -- Merge the arguments for the shell command with additional ones
-        args = merge_tables({
-            command .. " " .. config.shell_variable_prefix .. "0",
-            confirm = true,
-            block = true,
-        }, args)
-
-        -- Emit the command to operate on the hovered item
-        ya.manager_emit("shell", args)
-
-    -- Otherwise, exit the function
-    else
-        return
-    end
-end
-
 -- Function to handle the paste command
 local function handle_paste(args, config)
     --
@@ -974,6 +989,192 @@ local function handle_paste(args, config)
     else
         ya.manager_emit("paste", args)
     end
+end
+
+-- Function to remove the F flag from the less command
+local function remove_f_flag_from_less_command(command)
+    --
+
+    -- Initialise the variable to store if the F flag is found
+    local f_flag_found = false
+
+    -- Initialise the variable to store the replacement count
+    local replacement_count = 0
+
+    -- Remove the F flag when it is passed at the start
+    -- of the flags given to the less command
+    command, replacement_count = command:gsub("(%f[%a]less%f[%A].*)%-F", "%1")
+
+    -- If the replacement count is not 0,
+    -- set the f_flag_found variable to true
+    if replacement_count ~= 0 then f_flag_found = true end
+
+    -- Remove the F flag when it is passed in the middle
+    -- or end of the flags given to the less command command
+    command, replacement_count =
+        command:gsub("(%f[%a]less%f[%A].*%-)(%a*)F(%a*)", "%1%2%3")
+
+    -- If the replacement count is not 0,
+    -- set the f_flag_found variable to true
+    if replacement_count ~= 0 then f_flag_found = true end
+
+    -- Return the command and whether or not the F flag was found
+    return command, f_flag_found
+end
+
+-- Function to fix a command containing less.
+-- All this function does is remove
+-- the F flag from a command containing less.
+local function fix_shell_command_containing_less(command)
+    --
+
+    -- Remove the F flag from the given command
+    local fixed_command = remove_f_flag_from_less_command(command)
+
+    -- Get the LESS environment variable
+    local less_environment_variable = os.getenv("LESS")
+
+    -- If the LESS environment variable is not set,
+    -- then return the given command with the F flag removed
+    if not less_environment_variable then return fixed_command end
+
+    -- Otherwise, remove the F flag from the LESS environment variable
+    -- and check if the F flag was found
+    local less_command_with_modified_env_variables, f_flag_found =
+        remove_f_flag_from_less_command("less " .. less_environment_variable)
+
+    -- If the F flag isn't found,
+    -- then return the given command with the F flag removed
+    if not f_flag_found then return fixed_command end
+
+    -- Add the less environment variable flags to the less command
+    fixed_command = fixed_command:gsub(
+        "%f[%a]less%f[%A]",
+        less_command_with_modified_env_variables
+    )
+
+    -- Unset the LESS environment variable before calling the command
+    fixed_command = "unset LESS; " .. fixed_command
+
+    -- Return the fixed command
+    return fixed_command
+end
+
+-- Function to fix the bat default pager command
+local function fix_bat_default_pager_shell_command(command)
+    --
+
+    -- Initialise the default pager command for bat without the F flag
+    local bat_default_pager_command_without_f_flag = "less -RX"
+
+    -- Get the modified command and the replacement count
+    -- when replacing the less command when it is quoted
+    local modified_command, replacement_count = command:gsub(
+        "("
+            .. bat_command_with_pager_pattern
+            .. "['\"]+%s*"
+            .. ")"
+            .. "less"
+            .. "(%s*['\"]+)",
+        "%1" .. bat_default_pager_command_without_f_flag .. "%2"
+    )
+
+    -- If the replacement count is not 0,
+    -- then return the modified command
+    if replacement_count ~= 0 then return modified_command end
+
+    -- Otherwise, get the modified command and the replacement count
+    -- when replacing the less command when it is unquoted
+    modified_command, replacement_count = command:gsub(
+        "(" .. bat_command_with_pager_pattern .. ")" .. "less",
+        '%1"' .. bat_default_pager_command_without_f_flag .. '"'
+    )
+
+    -- If the replacement count is not 0,
+    -- then return the modified command
+    if replacement_count ~= 0 then return modified_command end
+
+    -- Otherwise, return the given command
+    return command
+end
+
+-- Function to fix the shell commands given to work properly with Yazi
+local function fix_shell_command(command)
+    --
+
+    -- If the given command includes the less command
+    if command:find("%f[%a]less%f[%A]") ~= nil then
+        --
+
+        -- Fix the command containing less
+        command = fix_shell_command_containing_less(command)
+    end
+
+    -- If the given command contains the bat command with the pager
+    -- option passed
+    if command:find(bat_command_with_pager_pattern) ~= nil then
+        --
+
+        -- Calls the command to fix the bat command with the default pager
+        command = fix_bat_default_pager_shell_command(command)
+    end
+
+    -- Return the modified command
+    return command
+end
+
+-- Function to handle a shell command
+local function handle_shell(args, config)
+    --
+
+    -- Get the first item of the arguments given
+    -- and set it to the command variable
+    local command = table.remove(args, 1)
+
+    -- If the command isn't a string, exit the function
+    if type(command) ~= "string" then return end
+
+    -- Fix the given command
+    command = fix_shell_command(command)
+
+    -- Call the function to get the item group
+    local item_group = get_item_group()
+
+    -- If no item group is returned, exit the function
+    if not item_group then return end
+
+    -- If the item group is the selected items
+    if item_group == ItemGroup.Selected then
+        --
+
+        -- Replace the shell variable in the command
+        -- with the shell variable for the selected items
+        command = command:gsub(
+            shell_variable_pattern,
+            config.shell_variables.selected_items
+        )
+
+    -- If the item group is the hovered item
+    elseif item_group == ItemGroup.Hovered then
+        --
+
+        -- Replace the shell variable in the command
+        -- with the shell variable for the hovered item
+        command = command:gsub(
+            shell_variable_pattern,
+            config.shell_variables.hovered_items
+        )
+
+    -- Otherwise, exit the function
+    else
+        return
+    end
+
+    -- Merge the command back into the arguments given
+    args = merge_tables({ command }, args)
+
+    -- Emit the command to operate on the hovered item
+    ya.manager_emit("shell", args)
 end
 
 -- Function to do the wraparound for the arrow command
@@ -1131,8 +1332,8 @@ local function handle_parent_arrow(args, config)
     execute_parent_arrow_command(args, number_of_directories)
 end
 
--- Function to handle the pager command
-local function handle_pager(args, config)
+-- Function to handle the editor command
+local function handle_editor(args, config)
     --
 
     -- Call the function to get the item group
@@ -1141,39 +1342,52 @@ local function handle_pager(args, config)
     -- If no item group is returned, exit the function
     if not item_group then return end
 
-    -- If the item group is the selected items,
-    -- then execute the command and exit the function
-    if item_group == ItemGroup.Selected then
-        -- Combine the arguments with additional ones
-        args = merge_tables({
-            "$PAGER " .. config.shell_variable_prefix .. "@",
+    -- Get the editor environment variable
+    local editor = os.getenv("EDITOR")
+
+    -- If the editor not set, exit the function
+    if not editor then return end
+
+    -- Call the handle shell function
+    -- with the editor command
+    handle_shell(
+        merge_tables({
+            editor .. " $@",
             confirm = true,
             block = true,
-        }, args)
+        }, args),
+        config
+    )
+end
 
-        -- Emit the command and exit the function
-        return ya.manager_emit("shell", args)
-    end
+-- Function to handle the pager command
+local function handle_pager(args, config)
+    --
 
-    -- Otherwise, the item group is the hovered item,
-    -- and if the hovered item is a directory, exit the function
-    if hovered_item_is_dir() then
-        return
+    -- Get the pager environment variable
+    local pager = os.getenv("PAGER")
 
-    -- Otherwise
-    else
+    -- If the pager is not set, exit the function
+    if not pager then return end
+
+    -- If the pager is the less command
+    if pager:find("^less") ~= nil then
         --
 
-        -- Combine the arguments with additional ones
-        args = merge_tables({
-            "$PAGER " .. config.shell_variable_prefix .. "0",
+        -- Remove the F flag from the command
+        pager = pager:gsub("%-F", ""):gsub("(%a*)F(%a*)", "%1%2")
+    end
+
+    -- Call the handle shell function
+    -- with the pager command
+    handle_shell(
+        merge_tables({
+            pager .. " $@",
             confirm = true,
             block = true,
-        }, args)
-
-        -- Emit the command and exit the function
-        return ya.manager_emit("shell", args)
-    end
+        }, args),
+        config
+    )
 end
 
 -- Function to run the commands given
@@ -1186,17 +1400,16 @@ local function run_command_func(command, args, config)
         [Commands.Enter] = handle_enter,
         [Commands.Leave] = handle_leave,
         [Commands.Rename] = function(_)
-            handle_command("rename", args)
+            handle_yazi_command("rename", args)
         end,
         [Commands.Remove] = function(_)
-            handle_command("remove", args)
+            handle_yazi_command("remove", args)
         end,
         [Commands.Paste] = handle_paste,
+        [Commands.Shell] = handle_shell,
         [Commands.Arrow] = handle_arrow,
         [Commands.ParentArrow] = handle_parent_arrow,
-        [Commands.Editor] = function(_)
-            handle_shell_command("$EDITOR", args, config)
-        end,
+        [Commands.Editor] = handle_editor,
         [Commands.Pager] = handle_pager,
     }
 

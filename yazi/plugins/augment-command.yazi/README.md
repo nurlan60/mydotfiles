@@ -99,7 +99,7 @@ require("augment-command"):setup({
 ## What about the commands are augmented?
 
 All commands that can operate on multiple files and directories,
-like `open`, `rename` and `remove`,
+like `open`, `rename`, `remove` and `shell`,
 as well as the new commands `editor` and `pager`,
 now determine an item group to operate on.
 By default, the command will operate on the hovered item,
@@ -200,6 +200,48 @@ then it will operate on the selected items.
   into a hovered directory even when `smart_paste` is set to `false`.
   This allows you to set a key to use smart paste
   instead of using smart paste for every paste command.
+
+### Shell (`shell`)
+
+- This command runs the shell command given with the augment stated in
+  [this section above](#what-about-the-commands-are-augmented). You should
+  only use this command if you need the plugin to determine a suitable
+  item group for the command to operate on. Otherwise, you should just
+  use the default shell command provided by Yazi.
+- To use this command, the syntax is exactly the same as the default
+  shell command provided by Yazi. You just provide the command you want and
+  provide any Yazi shell variable, which is documented
+  [here](https://yazi-rs.github.io/docs/configuration/keymap/#manager.shell).
+  The plugin will automatically replace the shell variable you give
+  with the correct one for the item group before executing the command.
+- You will also need to escape the quotes when giving the shell command
+  if you use the same quotes to quote the given arguments to the plugin.
+  For example, if you pass the arguments to the plugin with double quotes,
+  i.e. `--args="shell"`, you will have to escape the double quotes with a
+  backslash character, like shown below:
+  ```toml
+  # ~/.config/yazi/keymap.toml
+  [[manager.prepend_keymap]]
+  on = [ "o" ]
+  run = 'plugin augment-command --args="shell \"$EDITOR $@\" --block --confirm"'
+  desc = "Open the editor"
+  ```
+- Alternatively, you can use the triple single quote `'''` delimiter
+  for the run string and avoid the escaping the shell command altogether,
+  like the two examples below:
+
+  ```toml
+  # ~/.config/yazi/keymap.toml
+  [[manager.prepend_keymap]]
+  on = [ "o" ]
+  run = '''plugin augment-command --args='shell "$EDITOR $@" --block --confirm''''
+  desc = "Open the editor"
+
+  [[manager.prepend_keymap]]
+  on = [ "i" ]
+  run = '''plugin augment-command --args="shell '$PAGER $@' --block --confirm"'''
+  desc = "Open the pager"
+  ```
 
 ### Arrow (`arrow`)
 
