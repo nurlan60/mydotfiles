@@ -79,9 +79,10 @@ prepend_previewers = [
   { mime = "application/x-bittorrent", run = "torrent-preview" },
   # Docx
   { mime = "application/vnd.openxmlformats-officedocument.wordprocessingml.document", run = "docx-preview" },
-  # Rich-cli
-  { name = "*.csv", run = "rich-preview" },   # for csv files
-  { name = "*.md", run = "rich-preview" },    # for markdown (.md) files
+  # { name = "*.csv", run = "rich-preview" },                                                                   # for csv files
+  { mime = "text/csv", run = "miller" },
+  # { name = "*.md", run = "rich-preview" },    # for markdown (.md) files
+  { name = "*.md", run = "glow" },            # for markdown (.md) files
   { name = "*.ipynb", run = "rich-preview" }, # for jupyter notebooks (.ipynb)
   { name = "*.json", run = "rich-preview" },  # for json (.json) files
   #    { name = "*.lang_type", run = "rich-preview"} # for particular language files eg. .py, .go., .lua, etc.
