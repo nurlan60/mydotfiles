@@ -71,8 +71,8 @@ prepend_previewers = [
   # PDF
   { mime = "application/pdf", run = "pdftotext-preview" },
   # Archive 
-  # { mime = "application/*zip", run = "ouch" },
-  # { mime = "application/x-{tar,bzip2,7z-compressed,rar,xz}", run = "ouch" },
+  { mime = "application/*zip", run = "ouch" },
+  { mime = "application/x-{tar,bzip2,7z-compressed,rar,xz}", run = "ouch" },
   # Audio 
   { mime = "audio/*", run = "exifaudio" },
   # Torrent 
