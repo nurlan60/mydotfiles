@@ -1,4 +1,9 @@
 [[manager.prepend_keymap]]
+on = "F"
+run = "plugin smart-filter"
+desc = "Smart filter"
+
+[[manager.prepend_keymap]]
 on = ["E"]
 run = "plugin eza-preview"
 desc = "Toggle tree/list dir preview"
@@ -89,13 +94,6 @@ run = ["select_all --state=false", "unyank"]
 desc = "Unselect all files and also unyank cut files"
 
 
-# Use d to cut files
-[[manager.prepend_keymap]]
-on = ["d"]
-run = "yank --cut"
-desc = "Cut the selected files"
-
-
 # Use p to paste files
 [[manager.prepend_keymap]]
 on = ["p"]
@@ -111,30 +109,16 @@ run = "plugin augment-command --args='paste --force'"
 desc = "Paste the files (overwrite if the destination exists)"
 
 
-# Use _ to create a new file or directory
+# Use d to move files to the trash
 [[manager.prepend_keymap]]
-on = ["_"]
-run = "create"
-desc = "Create a file or directory (ends with / for directories)"
-
-
-# Use + to create a new file or directory
-[[manager.prepend_keymap]]
-on = ["+"]
-run = "create"
-desc = "Create a file or directory (ends with / for directories)"
-
-
-# Use x to move files to the trash
-[[manager.prepend_keymap]]
-on = ["x"]
+on = ["d"]
 run = "plugin augment-command --args='remove'"
 desc = "Move the files to the trash"
 
 
-# Use X to delete files permanently
+# Use D to delete files permanently
 [[manager.prepend_keymap]]
-on = ["X"]
+on = ["D"]
 run = "plugin augment-command --args='remove --permanently'"
 desc = "Permanently delete the files"
 
