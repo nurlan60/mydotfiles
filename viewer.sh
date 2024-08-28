@@ -28,6 +28,9 @@ case ${1:e} in
   transmission)
     transmission-show $1
     ;;
+  json)
+    jq '.' $1
+    ;;
   ""|cls|jl|log|lua|sh|sty|pl|txt|tex|toml|zsh)
   bat -p -S --pager 'less -R' $1
     ;;
