@@ -22,7 +22,7 @@ vim.api.nvim_command([[
     menu Enc.cp866      :e ++enc=ibm866 ++ff=dos<CR>
     menu Enc.koi8-r     :e ++enc=koi8-r ++ff=unix<CR>
     menu Enc.ucs-2le    :e ++enc=ucs-2le<CR>
-    nmap  cod :emenu Enc.<Tab>
+    nmap kod :emenu Enc.<Tab>
 ]])
 
 -- con Convert file encoding
@@ -34,5 +34,5 @@ vim.api.nvim_command([[
     menu FEnc.cp866     :set fenc=ibm866<CR>
     menu FEnc.koi8-r    :set fenc=koi8-r<CR>
     menu FEnc.ucs-2le   :set fenc=ucs-2le<CR>
-    nmap  con :emenu FEnc.<Tab>
+    nmap  kon :emenu FEnc.<Tab>
 ]])
