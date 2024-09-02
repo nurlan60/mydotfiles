@@ -23,3 +23,6 @@ Host router
   User root
   HostKeyAlgorithms ssh-rsa
 
+Host bogdan
+  HostName 172.203.220.39
+  User nurlan
