@@ -1,16 +1,16 @@
 [plugin]
 deps = [
-  { use = "yazi-rs/plugins:max-preview", rev = "b659791" },
-  { use = "yazi-rs/plugins:hide-preview", rev = "b659791" },
+  { use = "yazi-rs/plugins:max-preview", rev = "d9bfa0b" },
+  { use = "yazi-rs/plugins:hide-preview", rev = "d9bfa0b" },
   { use = "hankertrix/augment-command", rev = "2a1fb5d" },
   { use = "sharklasers996/eza-preview", rev = "7ca4c25" },
-  { use = "yazi-rs/plugins:smart-filter", rev = "b659791" },
+  { use = "yazi-rs/plugins:smart-filter", rev = "d9bfa0b" },
   { use = "lpnh/fg", rev = "6051cdb" }, { use = "dedukun/bookmarks", rev = "ae06e0c" },
 ]
 
 [flavor]
 deps = [
-  { use = "yazi-rs/flavors:catppuccin-mocha", rev = "2a95af8" },
-  { use = "yazi-rs/flavors:catppuccin-frappe", rev = "2a95af8" },
-  { use = "yazi-rs/flavors:catppuccin-latte", rev = "2a95af8" },
+  { use = "yazi-rs/flavors:catppuccin-mocha", rev = "d479f67" },
+  { use = "yazi-rs/flavors:catppuccin-frappe", rev = "d479f67" },
+  { use = "yazi-rs/flavors:catppuccin-latte", rev = "d479f67" },
 ]
