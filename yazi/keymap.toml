@@ -211,3 +211,9 @@ desc = "find file by content (ripgrep-all)"
 on = ["f", "f"]
 run = "plugin fg --args='fzf'"
 desc = "Find file by filename"
+
+# Goto
+[[manager.prepend_keymap]]
+on = ["g", "d"]
+run = "cd ~/Downloads"
+desc = "Go to the downloads directory"
