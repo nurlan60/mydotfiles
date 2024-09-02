@@ -5,7 +5,7 @@ deps = [
   { use = "hankertrix/augment-command", rev = "2a1fb5d" },
   { use = "sharklasers996/eza-preview", rev = "7ca4c25" },
   { use = "yazi-rs/plugins:smart-filter", rev = "b659791" },
-  { use = "lpnh/fg", rev = "6051cdb" },
+  { use = "lpnh/fg", rev = "6051cdb" }, { use = "dedukun/bookmarks", rev = "ae06e0c" },
 ]
 
 [flavor]
