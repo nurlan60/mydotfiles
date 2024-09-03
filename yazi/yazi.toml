@@ -1,6 +1,9 @@
 [manager]
 show_symlink = false
 
+[preview]
+wrap = "yes"
+
 [opener]
 view = [
   { run = 'viewer.sh "$@"', desc = "View", block = true, for = "unix" },
