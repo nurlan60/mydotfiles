@@ -91,6 +91,7 @@ alias mini="ssh mini"
 alias mac="ssh mac"
 alias asus="ssh asus"
 alias deb="ssh debian"
+alias bogdan="ssh bogdan"
 alias gp="git pull"
 
 # specific
