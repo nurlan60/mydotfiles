@@ -99,6 +99,16 @@ on = ["<Left>"]
 run = "plugin augment-command --args='leave --no-skip'"
 desc = "Go back to the parent directory"
 
+# Seeking
+[[manager.prepend_keymap]]
+on = ["<C-j>"]
+run = "seek 5"
+desk = "Seek down 5 units in the preview"
+
+[[manager.prepend_keymap]]
+on = ["<C-k>"]
+run = "seek -5"
+desk = "Seek up 5 units in the preview"
 
 # Use the augmented open to open files interactively with O
 [[manager.prepend_keymap]]
