@@ -1,3 +1,9 @@
+-- cross-instance yank
+require("session"):setup({
+	sync_yanked = true,
+})
+
+-- show symlinks in status
 function Status:name()
 	local h = self._tab.current.hovered
 	if not h then
@@ -10,6 +16,7 @@ function Status:name()
 	return ui.Line(" " .. h.name .. linked)
 end
 
+-- show host in header
 Header:children_add(function()
 	if ya.target_family() ~= "unix" then
 		return ui.Line({})
