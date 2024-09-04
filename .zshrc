@@ -91,7 +91,6 @@ alias mini="ssh mini"
 alias mac="ssh mac"
 alias asus="ssh asus"
 alias deb="ssh debian"
-alias bogdan="ssh bogdan"
 alias gp="git pull"
 
 # specific
@@ -125,7 +124,7 @@ fi
 # Change Yazi's CWD to PWD on subshell exit
 if [[ -n "$YAZI_ID" ]]; then
 	function _yazi_cd() {
-		ya pub "$YAZI_ID" dds-cd --str "$PWD"
+		ya pub dds-cd --str "$PWD"
 	}
 	add-zsh-hook zshexit _yazi_cd
 fi
