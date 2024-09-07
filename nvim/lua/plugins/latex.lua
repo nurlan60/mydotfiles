@@ -39,7 +39,7 @@ return {
           opts.settings = {
             texlab = {
               forwardSearch = {
-                executable = "/Applications/Skim.app/Contents/SharedSupport/displayline",
+                executable = "displayline",
                 args = {
                   "%l",
                   "%p",
