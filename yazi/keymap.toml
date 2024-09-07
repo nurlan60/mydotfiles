@@ -18,11 +18,6 @@ on = ["b", "D"]
 run = "plugin bookmarks --args=delete_all"
 desc = "Delete all bookmarks"
 
-[[manager.prepend_keymap]]
-on = ["E"]
-run = "plugin eza-preview"
-desc = "Toggle tree/list dir preview"
-
 # Use the augmented arrow up command for the k key
 [[manager.prepend_keymap]]
 on = ["k"]

@@ -1,9 +1,8 @@
 [plugin]
 deps = [
-  { use = "yazi-rs/plugins:max-preview", rev = "d9bfa0b" },
-  { use = "yazi-rs/plugins:hide-preview", rev = "d9bfa0b" },
+  { use = "yazi-rs/plugins:max-preview", rev = "9a1129c" },
+  { use = "yazi-rs/plugins:hide-preview", rev = "9a1129c" },
   { use = "hankertrix/augment-command", rev = "2a1fb5d" },
-  { use = "sharklasers996/eza-preview", rev = "7ca4c25" },
 ]
 
 [flavor]

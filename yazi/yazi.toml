@@ -68,7 +68,7 @@ rules = [
 
 [plugin]
 
-prepend_previewers = [
+pprepend_previewers = [
   # Djvu
   { mime = "image/vnd.djvu", run = "djvutxt-preview" },
   # PDF
