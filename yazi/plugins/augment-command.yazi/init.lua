@@ -282,21 +282,6 @@ local initialise_config = ya.sync(function(state, opts)
     -- and set it to the state.
     state.config = merge_tables(DEFAULT_CONFIG, opts)
 
-    -- Get the operating system family
-    local os_family = ya.target_family()
-
-    -- Get whether the operating system is windows
-    local is_windows = os_family == "windows"
-
-    -- Initialise the shell variables
-    local shell_variables = {
-        hovered_items = is_windows and "%0" or "$0",
-        selected_items = is_windows and "%*" or "$@",
-    }
-
-    -- Set the shell variables in the config
-    state.config.shell_variables = shell_variables
-
     -- Return the configuration object for async functions
     return state.config
 end)
@@ -325,17 +310,8 @@ local function shell_command_exists(shell_command)
     local successfully_executed =
         os.execute(shell_command .. " 1> /dev/null 2>&1")
 
-    -- Return if the result of the os.execute
-    -- command is not nil.
-    --
-    -- This check is because the first result of
-    -- os.execute function returns nil
-    -- if the command fails instead of false
-    -- and we need to return a boolean instead of nil.
-    --
-    -- The os.execute function return true if the
-    -- the shell command is successfully executed.
-    return successfully_executed ~= nil
+    -- Return the result of the os.execute command
+    return successfully_executed
 end
 
 -- The function to initialise the plugin
@@ -383,15 +359,15 @@ local get_parent_directory = ya.sync(function(_)
     local parent_directory = cx.active.parent
 
     -- If the parent directory doesn't exist,
-    -- return nil
-    if not parent_directory then return nil end
+    -- exit the function
+    if not parent_directory then return end
 
     -- Otherwise, return the path of the parent directory
     return tostring(parent_directory.cwd)
 end)
 
--- Function to get the hovered item path
-local get_hovered_item_path = ya.sync(function(_)
+-- Function to get the path of the hovered item
+local get_path_of_hovered_item = ya.sync(function(_, quote)
     --
 
     -- Get the hovered item
@@ -401,12 +377,19 @@ local get_hovered_item_path = ya.sync(function(_)
     if hovered_item then
         --
 
-        -- Return the path of the hovered item
-        return tostring(cx.active.current.hovered.url)
+        -- Convert the url of the hovered item to a string
+        local hovered_item_path = tostring(cx.active.current.hovered.url)
 
-    -- Otherwise, return nil
+        -- If the quote flag is passed,
+        -- then quote the path of the hovered item
+        if quote then hovered_item_path = ya.quote(hovered_item_path) end
+
+        -- Return the path of the hovered item
+        return hovered_item_path
+
+    -- Otherwise, exit the function
     else
-        return nil
+        return
     end
 end)
 
@@ -431,6 +414,38 @@ local hovered_item_is_archive = ya.sync(function(_)
     -- Return if the hovered item exists and is an archive
     return hovered_item
         and list_contains(ARCHIVE_MIME_TYPES, hovered_item:mime())
+end)
+
+-- Function to get the paths of the selected items
+local get_paths_of_selected_items = ya.sync(function(_, quote)
+    --
+
+    -- Get the selected items
+    local selected_items = cx.active.selected
+
+    -- If there are no selected items, exit the function
+    if #selected_items == 0 then return end
+
+    -- Initialise the list of paths of the selected items
+    local paths_of_selected_items = {}
+
+    -- Iterate over the selected items
+    for _, item in pairs(selected_items) do
+        --
+
+        -- Convert the url of the item to a string
+        local item_path = tostring(item)
+
+        -- If the quote flag is passed,
+        -- then quote the path of the item
+        if quote then item_path = ya.quote(item_path) end
+
+        -- Add the path of the item to the list of paths
+        table.insert(paths_of_selected_items, item_path)
+    end
+
+    -- Return the list of paths of the selected items
+    return paths_of_selected_items
 end)
 
 -- Function to choose which group of items to operate on.
@@ -697,7 +712,7 @@ local function extract_archive(archive_path, config)
         if not output then return false, err end
 
         -- If the output was 0, which means the extraction was successful,
-        -- return true
+        -- return true and the empty error
         if output.status.code == 0 then return true, err end
 
         -- Set the error message to the standard error
@@ -724,7 +739,7 @@ local function extract_archive(archive_path, config)
         -- This overwrite flag is to force the archive extractor
         -- to keep trying to extract the archive even when it
         -- fails due to a wrong password, as it will stop extraction
-        -- in the other modes like skip will
+        -- in the other modes. For example, the skip mode will
         -- return that it succeeded in extracting the
         -- encrypted archive despite not actually doing so.
         --
@@ -833,7 +848,7 @@ local function handle_open(args, config, command_table)
     -- Otherwise, the hovered item is an archive
     -- and entering archives is wanted,
     -- so get the path of the hovered item
-    local archive_path = get_hovered_item_path()
+    local archive_path = get_path_of_hovered_item()
 
     -- If the archive path somehow doesn't exist, then exit the function
     if not archive_path then return end
@@ -1124,7 +1139,7 @@ local function fix_shell_command(command)
 end
 
 -- Function to handle a shell command
-local function handle_shell(args, config)
+local function handle_shell(args, _, _, exit_if_directory)
     --
 
     -- Get the first item of the arguments given
@@ -1148,21 +1163,26 @@ local function handle_shell(args, config)
         --
 
         -- Replace the shell variable in the command
-        -- with the shell variable for the selected items
+        -- with the quoted paths of the selected items
         command = command:gsub(
             shell_variable_pattern,
-            config.shell_variables.selected_items
+            table.concat(get_paths_of_selected_items(true), " ")
         )
 
     -- If the item group is the hovered item
     elseif item_group == ItemGroup.Hovered then
         --
 
+        -- If the exit if directory flag is passed,
+        -- and the hovered item is a directory,
+        -- then exit the function
+        if exit_if_directory and hovered_item_is_dir() then return end
+
         -- Replace the shell variable in the command
-        -- with the shell variable for the hovered item
+        -- with the quoted path of the hovered item
         command = command:gsub(
             shell_variable_pattern,
-            config.shell_variables.hovered_items
+            get_path_of_hovered_item(true)
         )
 
     -- Otherwise, exit the function
@@ -1361,7 +1381,7 @@ local function handle_editor(args, config)
 end
 
 -- Function to handle the pager command
-local function handle_pager(args, config)
+local function handle_pager(args, config, command_table)
     --
 
     -- Get the pager environment variable
@@ -1386,7 +1406,9 @@ local function handle_pager(args, config)
             confirm = true,
             block = true,
         }, args),
-        config
+        config,
+        command_table,
+        true
     )
 end
 
