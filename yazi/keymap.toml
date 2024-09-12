@@ -1,4 +1,9 @@
 [[manager.prepend_keymap]]
+on = ["c", "a"]
+run = "plugin compress"
+desc = "Archive selected files"
+
+[[manager.prepend_keymap]]
 on = ["B"]
 run = "plugin bookmarks --args=save"
 desc = "Save current position as a bookmark"
@@ -166,11 +171,6 @@ desc = "Rename a file or directory"
 on = ["R"]
 run = "plugin augment-command --args='rename --empty=all'"
 desc = "Rename file and remove the whole file name"
-
-[[manager.prepend_keymap]]
-on = ["C"]
-run = "plugin ouch --args=zip"
-desc = "Compress with ouch"
 
 [[manager.prepend_keymap]]
 on = ["<Backspace>"]

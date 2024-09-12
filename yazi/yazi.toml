@@ -72,10 +72,7 @@ pprepend_previewers = [
   # Djvu
   { mime = "image/vnd.djvu", run = "djvutxt-preview" },
   # PDF
-  { mime = "application/pdf", run = "pdftotext-preview" },
-  # Archive 
-  { mime = "application/*zip", run = "ouch" },
-  { mime = "application/x-{tar,bzip2,7z-compressed,rar,xz}", run = "ouch" },
+  # { mime = "application/pdf", run = "pdftotext-preview" },
   # Audio 
   { mime = "audio/*", run = "exifaudio" },
   # Torrent 

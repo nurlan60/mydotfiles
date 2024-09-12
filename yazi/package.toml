@@ -2,7 +2,7 @@
 deps = [
   { use = "yazi-rs/plugins:max-preview", rev = "9a1129c" },
   { use = "yazi-rs/plugins:hide-preview", rev = "9a1129c" },
-  { use = "hankertrix/augment-command", rev = "2a1fb5d" },
+  { use = "hankertrix/augment-command", rev = "2a1fb5d" }, { use = "KKV9/compress", rev = "60b24af" },
 ]
 
 [flavor]
