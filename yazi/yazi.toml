@@ -1,5 +1,5 @@
-[manager]
-show_symlink = false
+# [manager]
+# show_symlink = false
 
 [preview]
 wrap = "yes"
