@@ -3,15 +3,15 @@ Host debian
   User nurlan
 
 Host mini
-  HostName MacMini.local
+  HostName MacMini
   User nurlan
 
 Host mac
-  HostName MacBook.local
+  HostName MacBook
   User nurlan
 
 Host work
-  HostName Nurlans-Mac-mini.local
+  HostName Nurlans-Mac-mini
   User nurlan
 
 Host asus
