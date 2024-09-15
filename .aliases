@@ -13,5 +13,4 @@ export PATH
 
 # <<< juliaup initialize <<<
 
-source "${HOME}/.iterm2_shell_integration.zsh"
 
