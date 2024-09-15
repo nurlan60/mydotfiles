@@ -115,8 +115,6 @@ _fzf_compgen_dir() {
 fd --type d . "$1"
 }
 
-source "${HOME}/.iterm2_shell_integration.zsh"
-
 # Change Yazi's CWD to PWD on subshell exit
 if [[ -n "$YAZI_ID" ]]; then
 	function _yazi_cd() {
