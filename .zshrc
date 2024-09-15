@@ -115,11 +115,7 @@ _fzf_compgen_dir() {
 fd --type d . "$1"
 }
 
-if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
-##### WHAT YOU WANT TO DISABLE FOR WARP - BELOW
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-##### WHAT YOU WANT TO DISABLE FOR WARP - ABOVE
-fi
+source "${HOME}/.iterm2_shell_integration.zsh"
 
 # Change Yazi's CWD to PWD on subshell exit
 if [[ -n "$YAZI_ID" ]]; then
