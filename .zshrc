@@ -63,7 +63,7 @@ n ()
 }
 
 # yazi
-function yy() {
+function y() {
   # Block nesting of yazi in subshells
   if [ -n "$YAZI_LEVEL" ]; then
     echo "yazi is already running"
@@ -74,17 +74,18 @@ function yy() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
 	yazi "$@" --cwd-file="$tmp"
 	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		cd -- "$cwd"
+		builtin cd -- "$cwd"
 	fi
-	rm -f -- "$tmp" > /dev/null
+	rm -f -- "$tmp"
 }
 
 # common aliases
 alias cd..="cd .."
 alias ll="eza -alh"
 alias ls="eza"
-alias tree="eza --tree"
+alias lt="eza --tree"
 alias :q="exit"
+alias vim="nvim"
 alias mc="mc -u"
 alias lg="lazygit"
 alias mini="ssh mini"
