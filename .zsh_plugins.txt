@@ -1,4 +1,3 @@
-romkatv/powerlevel10k
 hlissner/zsh-autopair
 ael-code/zsh-colored-man-pages
 zsh-users/zsh-history-substring-search
