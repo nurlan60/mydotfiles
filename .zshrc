@@ -116,4 +116,5 @@ if [[ -n "$YAZI_ID" ]]; then
 fi
 
 # oh-my-posh
-eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/powerlevel10k_rainbow.omp.json)"
+# eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/powerlevel10k_rainbow.omp.json)"
+eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/my.omp.json)"
