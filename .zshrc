@@ -72,11 +72,12 @@ function y() {
 # common aliases
 alias c="clear"
 alias cd..="cd .."
-alias ll="eza -alh"
-alias ls="eza"
-alias lt="eza --tree"
+alias ls='eza -a --icons'
+alias ll='eza -al --icons'
+alias lt='eza -a --tree --level=1 --icons'
 alias :q="exit"
-alias vim="nvim"
+alias v='$EDITOR'
+alias vim='$EDITOR'
 alias mc="mc -u"
 alias lg="lazygit"
 alias mini="ssh mini"
@@ -117,4 +118,4 @@ fi
 
 # oh-my-posh
 # eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/powerlevel10k_rainbow.omp.json)"
-eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/my.omp.json)"
+eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/my.omp.json)"
