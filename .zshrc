@@ -12,7 +12,7 @@ compinit
 ######################################################
 
 # Enable vi mode
-bindkey -v
+# bindkey -v
 
 # source antidote
 source ~/.antidote.zsh

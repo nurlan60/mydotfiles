@@ -4,3 +4,4 @@ zsh-users/zsh-history-substring-search
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-syntax-highlighting
 aloxaf/fzf-tab
+jeffreytse/zsh-vi-mode
