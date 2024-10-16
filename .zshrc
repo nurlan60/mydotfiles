@@ -20,6 +20,46 @@ source ~/.antidote.zsh
 # initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
 antidote load
 
+# common aliases
+alias c="clear"
+alias cd..="cd .."
+alias ls='eza -a --icons'
+alias ll='eza -al --icons'
+alias lt='eza -a --tree --level=1 --icons'
+alias :q="exit"
+alias v='$EDITOR'
+alias vim='$EDITOR'
+alias mc="mc -u"
+alias lg="lazygit"
+alias mini="ssh mini"
+alias mac="ssh mac"
+alias asus="ssh asus"
+alias deb="ssh debian"
+alias gp="git pull"
+
+# specific
+source ~/.aliases
+
+# key bindings
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+# zoxide
+eval "$(zoxide init zsh)"
+
+# Set up fzf key bindings and fuzzy completion
+# source <(fzf --zsh)
+zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
+
+# Use fd instead of the default find
+export FZF_DEFAULT_COMMAND='fd --type f'
+_fzf_compgen_path() {
+fd --type f --hidden --follow --exclude .git . "$1"
+}
+_fzf_compgen_dir() {
+fd --type d . "$1"
+}
+
 # nnn
 n ()
 {
@@ -67,45 +107,6 @@ function y() {
 		builtin cd -- "$cwd"
 	fi
 	rm -f -- "$tmp"
-}
-
-# common aliases
-alias c="clear"
-alias cd..="cd .."
-alias ls='eza -a --icons'
-alias ll='eza -al --icons'
-alias lt='eza -a --tree --level=1 --icons'
-alias :q="exit"
-alias v='$EDITOR'
-alias vim='$EDITOR'
-alias mc="mc -u"
-alias lg="lazygit"
-alias mini="ssh mini"
-alias mac="ssh mac"
-alias asus="ssh asus"
-alias deb="ssh debian"
-alias gp="git pull"
-
-# specific
-source ~/.aliases
-
-# key bindings
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-
-# zoxide
-eval "$(zoxide init zsh)"
-
-# Set up fzf key bindings and fuzzy completion
-source <(fzf --zsh)
-
-# Use fd instead of the default find
-export FZF_DEFAULT_COMMAND='fd --type f'
-_fzf_compgen_path() {
-fd --type f --hidden --follow --exclude .git . "$1"
-}
-_fzf_compgen_dir() {
-fd --type d . "$1"
 }
 
 # Change Yazi's CWD to PWD on subshell exit

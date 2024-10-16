@@ -1,6 +1,5 @@
 jeffreytse/zsh-vi-mode
 hlissner/zsh-autopair
-aloxaf/fzf-tab
 ael-code/zsh-colored-man-pages
 zsh-users/zsh-history-substring-search
 zsh-users/zsh-autosuggestions
