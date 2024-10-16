@@ -30,7 +30,6 @@ alias :q="exit"
 alias v='$EDITOR'
 alias vim='$EDITOR'
 alias mc="mc -u"
-alias lg="lazygit"
 alias mini="ssh mini"
 alias mac="ssh mac"
 alias asus="ssh asus"
@@ -39,6 +38,7 @@ alias deb="ssh debian"
 # -----------------------------------------------------
 # Git
 # -----------------------------------------------------
+alias lg="lazygit"
 alias gs="git status"
 alias ga="git add"
 alias gc="git commit -m"
