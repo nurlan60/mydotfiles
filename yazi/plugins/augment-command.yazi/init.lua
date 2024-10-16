@@ -1,7 +1,33 @@
 -- Plugin to make some Yazi commands smarter
 -- Written in Lua 5.4
 
+-- The type for the arguments
+---@alias Arguments table<string|number, string|number|boolean>
+
+-- The type for the Command output
+---@class (exact) CommandOutput
+---@field stdout string
+---@field stderr string
+---@field status table { success: boolean, code: number }
+
+--- The type for the Url object
+---@class (exact) Url
+---@field frag string
+---@field is_regular boolean
+---@field is_search boolean
+---@field is_archive boolean
+---@field is_absolute boolean
+---@field has_root boolean
+---@field name function(): string|nil
+---@field stem function(): string|nil
+---@field join function(url: Url|string): Url
+---@field parent function(): Url|nil
+---@field starts_with function(url: Url|string): boolean
+---@field ends_with function(url: Url|string): boolean
+---@field strip_prefix function(url: Url|string): boolean
+
 -- The enum for which group of items to operate on
+---@enum ItemGroup
 local ItemGroup = {
     Hovered = "hovered",
     Selected = "selected",
@@ -9,23 +35,8 @@ local ItemGroup = {
     Prompt = "prompt",
 }
 
--- The enum for the archive extraction behaviour
-local ExtractBehaviour = {
-    Overwrite = "overwrite",
-    Rename = "rename",
-    RenameExisting = "rename_existing",
-    Skip = "skip",
-}
-
--- The enum for the flags for the archive extraction behaviour
-local ExtractBehaviourFlags = {
-    [ExtractBehaviour.Overwrite] = "-aoa",
-    [ExtractBehaviour.Rename] = "-aou",
-    [ExtractBehaviour.RenameExisting] = "-aot",
-    [ExtractBehaviour.Skip] = "-aos",
-}
-
 -- The enum for the supported commands
+---@enum SupportedCommands
 local Commands = {
     Open = "open",
     Enter = "enter",
@@ -41,33 +52,56 @@ local Commands = {
 }
 
 -- The default configuration for the plugin
+---@class (exact) Configuration
+---@field prompt boolean
+---@field default_item_group_for_prompt ItemGroup
+---@field smart_enter boolean
+---@field smart_paste boolean
+---@field enter_archives boolean
+---@field extract_retries number
+---@field must_have_hovered_item boolean
+---@field skip_single_subdirectory_on_enter boolean
+---@field skip_single_subdirectory_on_leave boolean
+---@field ignore_hidden_items boolean
+---@field wraparound_file_navigation boolean
+---@field sort_directories_first boolean
+---@field extractor_command string
 local DEFAULT_CONFIG = {
     prompt = false,
     default_item_group_for_prompt = ItemGroup.Hovered,
     smart_enter = true,
     smart_paste = false,
     enter_archives = true,
-    extract_behaviour = ExtractBehaviour.Rename,
     extract_retries = 3,
     must_have_hovered_item = true,
     skip_single_subdirectory_on_enter = true,
     skip_single_subdirectory_on_leave = true,
     ignore_hidden_items = false,
     wraparound_file_navigation = false,
+    sort_directories_first = true,
 }
 
 -- The default notification options for this plugin
+---@class (exact) NotificationOptions
+---@field title string
+---@field timeout number
+---@field content string
+---@field level "info" | "warn" | "error"
 local DEFAULT_NOTIFICATION_OPTIONS = {
     title = "Augment Command Plugin",
     timeout = 5.0,
 }
 
 -- The default input options for this plugin
+---@class (exact) InputOptions
+---@field position { x: number, y: number, w: number }
+---@field title string
 local DEFAULT_INPUT_OPTIONS = {
     position = { "top-center", y = 2, w = 50 },
 }
 
 -- The table of input options for the prompt
+---@enum InputOptionsTable
 local INPUT_OPTIONS_TABLE = {
     [ItemGroup.Hovered] = "(H/s)",
     [ItemGroup.Selected] = "(h/S)",
@@ -75,33 +109,36 @@ local INPUT_OPTIONS_TABLE = {
 }
 
 -- The list of archive mime types
+---@type string[]
 local ARCHIVE_MIME_TYPES = {
     "application/zip",
     "application/gzip",
-    "application/x-tar",
-    "application/x-bzip",
-    "application/x-bzip2",
-    "application/x-7z-compressed",
-    "application/x-rar",
-    "application/x-xz",
+    "application/tar",
+    "application/bzip",
+    "application/bzip2",
+    "application/7z-compressed",
+    "application/rar",
+    "application/xz",
 }
 
 -- The pattern to get the double dash from the front of the argument
+---@type string
 local double_dash_pattern = "^%-%-"
 
--- The pattern to get the parent directory of the current directory
-local get_parent_directory_pattern = "(.*)[/\\].*"
+-- The pattern to get the mime type without the "x-" prefix
+---@type string
+local get_mime_type_without_x_prefix_pattern = "^(%a-)/x%-([%-%d%a]-)$"
 
--- The pattern to get if a file path is a directory
-local is_directory_pattern = "(.*)[/\\]$"
-
--- The pattern to get the filename of a file
-local get_filename_pattern = "(.*)%.[^%.]+$"
+-- The pattern to get the information from an archive item
+---@type string
+local archive_item_info_pattern = "%s+([%.%a]+)%s+(%d+)%s+(%d+)%s+(.+)$"
 
 -- The pattern to get the shell variables in a command
+---@type string
 local shell_variable_pattern = "[%$%%][%*@0]"
 
 -- The pattern to match the bat command with the pager option passed
+---@type string
 local bat_command_with_pager_pattern = "%f[%a]bat%f[%A].*%-%-pager%s+"
 
 -- Function to merge tables.
@@ -114,6 +151,8 @@ local bat_command_with_pager_pattern = "%f[%a]bat%f[%A].*%-%-pager%s+"
 -- with the items in the first table being added first,
 -- and the items in the second table being added second,
 -- and so on.
+---@param ... table<any, any>[]
+---@return table<any, any>
 local function merge_tables(...)
     --
 
@@ -158,6 +197,9 @@ local function merge_tables(...)
 end
 
 -- Function to check if a list contains a given value
+---@param list any[]
+---@param value any
+---@return boolean
 local function list_contains(list, value)
     --
 
@@ -175,6 +217,9 @@ local function list_contains(list, value)
 end
 
 -- Function to split a string into a list
+---@param given_string string
+---@param separator string
+---@return string[]
 local function string_split(given_string, separator)
     --
 
@@ -196,12 +241,26 @@ local function string_split(given_string, separator)
     return splitted_strings
 end
 
+-- The function to trim a string
+---@param string string
+---@return string
+local function string_trim(string)
+    --
+
+    -- Return the string with the whitespace characters
+    -- removed from the start and end
+    return string:match("^%s*(.-)%s*$")
+end
+
 -- Function to parse the arguments given.
 -- This function takes the arguments passed to the entry function
+---@param args string[]
+---@return Arguments
 local function parse_args(args)
     --
 
     -- The table of arguments to pass to ya.manager_emit
+    ---@type table<(string|number), (string|number|boolean)>
     local parsed_arguments = {}
 
     -- Iterates over the arguments given
@@ -214,7 +273,7 @@ local function parse_args(args)
             --
 
             -- If the argument doesn't start with a double dash
-            if not argument:match(double_dash_pattern) then
+            if not argument:find(double_dash_pattern) then
                 --
 
                 -- Try to convert the argument to a number
@@ -275,6 +334,9 @@ local function parse_args(args)
 end
 
 -- Function to initialise the configuration
+---@param state any
+---@param opts Configuration
+---@return Configuration
 local initialise_config = ya.sync(function(state, opts)
     --
 
@@ -287,8 +349,21 @@ local initialise_config = ya.sync(function(state, opts)
 end)
 
 -- The function to try if a shell command exists
+---@param shell_command string
+---@return boolean
 local function shell_command_exists(shell_command)
     --
+
+    -- Initialise the null output
+    local null_output = "/dev/null"
+
+    -- If the OS is Windows
+    if ya.target_family() == "windows" then
+        --
+
+        -- Set the null output to the NUL device
+        null_output = "NUL"
+    end
 
     -- Get whether the shell command is successfully executed
     --
@@ -298,23 +373,32 @@ local function shell_command_exists(shell_command)
     --
     -- "2>&1" redirects the standard error to the file
     -- descriptor of the standard output, which is the
-    -- /dev/null file, which accepts and discards
+    -- /dev/null file or the NUL device on Windows,
+    -- which accepts and discards
     -- all input and produces no output.
     --
     -- The full thing, "1> /dev/null 2>&1" just makes sure
     -- the shell command doesn't produce any output when executed.
     --
+    -- The equivalent command on Windows is "1> NUL 2>&1".
+    --
     -- https://stackoverflow.com/questions/10508843/what-is-dev-null-21
     -- https://stackoverflow.com/questions/818255/what-does-21-mean
     -- https://www.gnu.org/software/bash/manual/html_node/Redirections.html
     local successfully_executed =
-        os.execute(shell_command .. " 1> /dev/null 2>&1")
+        os.execute(shell_command .. " 1> " .. null_output .. " 2>&1")
+
+    -- If the command was not successfully executed,
+    -- set the successfully executed variable to false
+    if not successfully_executed then successfully_executed = false end
 
     -- Return the result of the os.execute command
     return successfully_executed
 end
 
 -- The function to initialise the plugin
+---@param opts Configuration|nil
+---@return Configuration
 local function initialise_plugin(opts)
     --
 
@@ -330,15 +414,39 @@ local function initialise_plugin(opts)
     end
 
     -- Initialise the configuration object
-    local config = initialise_config(
-        merge_tables({ extractor_command = extractor_command }, opts)
-    )
+    local config = initialise_config(merge_tables({
+        extractor_command = extractor_command,
+    }, opts))
 
     -- Return the configuration object
     return config
 end
 
+-- Function to check if a given mime type is an archive
+---@param mime_type string|nil The mime type of the file
+---@return boolean is_archive Whether the mime type is an archive
+local function is_archive_mime_type(mime_type)
+    --
+
+    -- If the mime type is nil, return false
+    if not mime_type then return false end
+
+    -- Trim the whitespace from the mime type
+    mime_type = string_trim(mime_type)
+
+    -- Remove the "x-" prefix from the mime type
+    mime_type = mime_type:gsub(get_mime_type_without_x_prefix_pattern, "%1/%2")
+
+    -- Get if the mime type is an archive
+    local is_archive = list_contains(ARCHIVE_MIME_TYPES, mime_type)
+
+    -- Return if the mime type is an archive
+    return is_archive
+end
+
 -- Function to get the configuration from an async function
+---@param state any
+---@return Configuration
 local get_config = ya.sync(function(state)
     --
 
@@ -347,53 +455,39 @@ local get_config = ya.sync(function(state)
 end)
 
 -- Function to get the current working directory
+---@param _ any
+---@return string
 local get_current_directory = ya.sync(function(_)
     return tostring(cx.active.current.cwd)
 end)
 
--- Function to get the parent working directory
-local get_parent_directory = ya.sync(function(_)
-    --
-
-    -- Get the parent directory
-    local parent_directory = cx.active.parent
-
-    -- If the parent directory doesn't exist,
-    -- exit the function
-    if not parent_directory then return end
-
-    -- Otherwise, return the path of the parent directory
-    return tostring(parent_directory.cwd)
-end)
-
 -- Function to get the path of the hovered item
+---@param _ any
+---@param quote boolean
+---@return string|nil
 local get_path_of_hovered_item = ya.sync(function(_, quote)
     --
 
     -- Get the hovered item
     local hovered_item = cx.active.current.hovered
 
-    -- If the hovered item exists
-    if hovered_item then
-        --
+    -- If there is no hovered item, exit the function
+    if not hovered_item then return end
 
-        -- Convert the url of the hovered item to a string
-        local hovered_item_path = tostring(cx.active.current.hovered.url)
+    -- Convert the url of the hovered item to a string
+    local hovered_item_path = tostring(cx.active.current.hovered.url)
 
-        -- If the quote flag is passed,
-        -- then quote the path of the hovered item
-        if quote then hovered_item_path = ya.quote(hovered_item_path) end
+    -- If the quote flag is passed,
+    -- then quote the path of the hovered item
+    if quote then hovered_item_path = ya.quote(hovered_item_path) end
 
-        -- Return the path of the hovered item
-        return hovered_item_path
-
-    -- Otherwise, exit the function
-    else
-        return
-    end
+    -- Return the path of the hovered item
+    return hovered_item_path
 end)
 
 -- Function to get if the hovered item is a directory
+---@param _ any
+---@return boolean
 local hovered_item_is_dir = ya.sync(function(_)
     --
 
@@ -405,6 +499,8 @@ local hovered_item_is_dir = ya.sync(function(_)
 end)
 
 -- Function to get if the hovered item is an archive
+---@param _ any
+---@return boolean
 local hovered_item_is_archive = ya.sync(function(_)
     --
 
@@ -413,10 +509,13 @@ local hovered_item_is_archive = ya.sync(function(_)
 
     -- Return if the hovered item exists and is an archive
     return hovered_item
-        and list_contains(ARCHIVE_MIME_TYPES, hovered_item:mime())
+        and is_archive_mime_type(hovered_item:mime())
 end)
 
 -- Function to get the paths of the selected items
+---@param _ any
+---@param quote boolean
+---@return string[]|nil
 local get_paths_of_selected_items = ya.sync(function(_, quote)
     --
 
@@ -453,6 +552,8 @@ end)
 -- ItemGroup.Selected for the selected items,
 -- and ItemGroup.Prompt to tell the calling function
 -- to prompt the user.
+---@param state any
+---@return ItemGroup|nil
 local get_item_group_from_state = ya.sync(function(state)
     --
 
@@ -503,6 +604,7 @@ local get_item_group_from_state = ya.sync(function(state)
 end)
 
 -- Function to prompt the user for their desired item group
+---@return ItemGroup|nil
 local function prompt_for_desired_item_group()
     --
 
@@ -547,6 +649,7 @@ local function prompt_for_desired_item_group()
 end
 
 -- Function to get the item group
+---@return ItemGroup|nil
 local function get_item_group()
     --
 
@@ -564,20 +667,58 @@ local function get_item_group()
     end
 end
 
--- The ls command to get the items in the directory
-local function ls_command(directory, ignore_hidden_items)
-    return Command("ls")
-        :args({
-            directory,
-            ignore_hidden_items and "-1p" or "-1pA",
-            "--group-directories-first",
-        })
-        :stdout(Command.PIPED)
-        :stderr(Command.PIPED)
-        :output()
+-- The function to get all the items in the given directory
+---@param directory string
+---@param ignore_hidden_items boolean
+---@param directories_only boolean|nil
+---@return string[]
+local function get_directory_items(
+    directory,
+    ignore_hidden_items,
+    directories_only
+)
+    --
+
+    -- Initialise the list of directory items
+    local directory_items = {}
+
+    -- Read the contents of the directory
+    local directory_contents, _ = fs.read_dir(Url(directory), {})
+
+    -- If there are no directory contents,
+    -- then return the empty list of directory items
+    if not directory_contents then return directory_items end
+
+    -- Iterate over the directory contents
+    for _, item in ipairs(directory_contents) do
+        --
+
+        -- If the ignore hidden items flag is passed
+        -- and the item is a hidden item,
+        -- then continue the loop
+        if ignore_hidden_items and item.cha.is_hidden then goto continue end
+
+        -- If the directories only flag is passed
+        -- and the item is not a directory,
+        -- then continue the loop
+        if directories_only and not item.cha.is_dir then goto continue end
+
+        -- Otherwise, add the item path to the list of directory items
+        table.insert(directory_items, tostring(item.url))
+
+        -- The continue label to continue the loop
+        ::continue::
+    end
+
+    -- Return the list of directory items
+    return directory_items
 end
 
 -- Function to skip child directories with only one directory
+---@param args Arguments
+---@param config Configuration
+---@param initial_directory string
+---@return nil
 local function skip_single_child_directories(args, config, initial_directory)
     --
 
@@ -595,31 +736,27 @@ local function skip_single_child_directories(args, config, initial_directory)
     while true do
         --
 
-        -- Run the ls command to get the items in the directory
-        local output, _ = ls_command(directory, config.ignore_hidden_items)
-
-        -- If there is no output, then break out of the loop
-        if not output then break end
-
-        -- Get the list of items in the directory
-        local directory_items = string_split(output.stdout, "\n")
+        -- Get all the items in the current directory
+        local directory_items =
+            get_directory_items(directory, config.ignore_hidden_items)
 
         -- If the number of directory items is not 1,
-        -- then break out of the loop
+        -- then break out of the loop.
         if #directory_items ~= 1 then break end
 
-        -- Otherwise, get the item in the directory
+        -- Otherwise, get the directory item
         local directory_item = table.unpack(directory_items)
 
-        -- Match the directory item against the pattern to
-        -- check if it is a directory
-        directory_item = directory_item:match(is_directory_pattern)
+        -- Get the cha object of the directory item
+        -- and don't follow symbolic links
+        local directory_item_cha = fs.cha(Url(directory_item), false)
 
-        -- If the directory item isn't a directory, break the loop
-        if directory_item == nil then break end
+        -- If the directory item is not a directory,
+        -- break the loop
+        if not directory_item_cha.is_dir then break end
 
         -- Otherwise, set the directory to the inner directory
-        directory = directory .. "/" .. directory_item
+        directory = directory_item
     end
 
     -- Emit the change directory command to change to the directory variable
@@ -627,133 +764,176 @@ local function skip_single_child_directories(args, config, initial_directory)
 end
 
 -- The function to check if an archive is password protected
+---@param command_error_string string
+---@return boolean
 local function archive_is_encrypted(command_error_string)
-    return command_error_string:lower():find("wrong password", 1, true)
-end
-
--- The extract command to extract an archive
-local function extract_command(archive_path, config, password, overwrite)
     --
 
-    -- Initialise the password to an empty string if it's not given
-    password = password or ""
+    -- Return true if the string contains the word "wrong password",
+    -- and false otherwise
+    if command_error_string:lower():find("wrong password", 1, true) then
+        return true
+    else
+        return false
+    end
+end
 
-    -- Initialise the overwrite flag to false if it's not given
-    overwrite = overwrite or false
+-- The function to test the password on the archive
+-- without actually extracting the archive
+---@param archive_path string
+---@param config Configuration
+---@param password string
+---@return CommandOutput, integer
+local function test_archive_password(archive_path, config, password)
+    --
 
-    -- Return the command to extract the archive
+    -- Return the command to test the password on the archive
     return Command(config.extractor_command)
         :args({
 
-            -- Extract the archive with the full paths,
-            -- which keeps the archive structure.
-            -- Using e to extract will move all the
-            -- files in the archive into the current directory
-            -- and ignore the archive folder structure.
-            "x",
-
-            -- Assume yes to all prompts
-            "-y",
-
-            -- Configure the extraction behaviour.
-            -- It only overwrites if the overwrite flag is passed,
-            -- which is only used in the extract_archive function
-            -- to extract encrypted archives.
-            overwrite and ExtractBehaviourFlags[ExtractBehaviour.Overwrite]
-                or ExtractBehaviourFlags[config.extract_behaviour],
+            -- Test the archive
+            "t",
 
             -- Pass the password to the command
             "-p" .. password,
 
-            -- The archive file to extract
+            -- The archive file to test
             archive_path,
-
-            -- Always create a containing directory to contain the archive files
-            "-o*",
         })
         :stdout(Command.PIPED)
         :stderr(Command.PIPED)
         :output()
 end
 
--- The function to extract an archive.
--- This function returns a boolean to indicating
--- whether the extraction of the archive was successful or not.
-local function extract_archive(archive_path, config)
+-- The function to handle retrying the extractor command
+--
+-- The extractor command is a function that takes
+-- two arguments, first being the password to the archive,
+-- and the second being the configuration object.
+-- It returns the output and the err
+-- from the Command:output() function.
+--
+-- The initial password is the password given to the extractor command
+-- and the test encryption is to test the archive password without
+-- actually executing the given extractor command.
+---@param extractor_command function
+---@param config Configuration
+---@param initial_password string|nil
+---@param test_encryption boolean|nil
+---@param archive_path string|nil
+---@return boolean successful Whether the extraction was successful
+---@return string|nil error_message An error message for unsuccessful extracts
+---@return string|nil stdout The standard output of the extractor command
+---@return string|nil correct_password The correct password to the archive
+local function retry_extractor(
+    extractor_command,
+    config,
+    initial_password,
+    test_encryption,
+    archive_path
+)
     --
 
-    -- Initialise the password variable to an empty string
-    local password = ""
+    -- Initialise the password to the initial password
+    -- or an empty string if it's not given
+    local password = initial_password or ""
+
+    -- Initialise the test encryption flag to false if it is not given
+    test_encryption = test_encryption or false
+
+    -- Initialise the archive path to the given archive path
+    -- or an empty string if it's not given
+    archive_path = archive_path or ""
+
+    -- If the archive path is empty,
+    -- set the test encryption flag to false
+    if string.len(string_trim(archive_path)) < 1 then
+        test_encryption = false
+    end
 
     -- Initialise the error message from the archive extractor
     local error_message = ""
 
-    -- Initialise the overwrite flag to false
-    local overwrite = false
-
     -- Initialise the number of tries
-    -- to the number of retries plus 1.
-    --
-    -- The plus 1 is because the first try doesn't count
-    -- as a retry, so we need to try it once more than
-    -- the number of retries given by the user.
+    -- to the number of retries plus 1
     local total_number_of_tries = config.extract_retries + 1
 
     -- Iterate over the number of times to try the extraction
     for tries = 0, total_number_of_tries do
         --
 
-        -- Use the command to extract the archive
-        local output, err =
-            extract_command(archive_path, config, password, overwrite)
+        -- Initialise the output and error to nil
+        local output, err = nil, nil
+
+        -- If the test encryption flag is true
+        if test_encryption then
+            --
+
+            -- Call the function to test the encryption of the archive
+            output, err = test_archive_password(archive_path, config, password)
+
+        -- Otherwise, execute the extractor command
+        else
+            --
+
+            -- Execute the extractor command
+            output, err = extractor_command(password, config)
+        end
 
         -- If there is no output
-        -- then return the output and the error
-        if not output then return false, err end
+        -- then return false, the error code as a string,
+        -- nil for the output, and nil for the password
+        if not output then return false, tostring(err), nil, nil end
 
-        -- If the output was 0, which means the extraction was successful,
-        -- return true and the empty error
-        if output.status.code == 0 then return true, err end
+        -- If the test encryption flag is true and the output status code is 0
+        if test_encryption and output.status.code == 0 then
+            --
+
+            -- Actually execute the extractor command
+            output, err = extractor_command(password, config)
+        end
+
+        -- If the output was 0, which means the extractor command was successful
+        if output.status.code == 0 then
+            --
+
+            -- Initialise the correct password to nil
+            local correct_password = nil
+
+            -- If the password is not empty,
+            -- then set the correct password to the password
+            if string.len(string_trim(password)) > 0 then
+                correct_password = password
+            end
+
+            -- Return true, nil for the error message,
+            -- the standard output of the output,
+            -- and the correct password
+            return true, nil, output.stdout, correct_password
+        end
 
         -- Set the error message to the standard error
         -- from the archive extractor
         error_message = output.stderr
 
         -- If the command failed for some other reason other
-        -- than the archive being encrypted, then return false
-        -- and the error message
+        -- than the archive being encrypted, then return false,
+        -- the error message, the standard output of the output,
+        -- and nil for the password to the archive
         if
             not (
                 output.status.code == 2 and archive_is_encrypted(output.stderr)
             )
         then
-            return false, error_message
+            return false, error_message, output.stdout, nil
         end
 
         -- If it is the last try, then return false
-        -- and the error message.
-        if tries == total_number_of_tries then return false, error_message end
-
-        -- Set the overwrite flag to true.
-        --
-        -- This overwrite flag is to force the archive extractor
-        -- to keep trying to extract the archive even when it
-        -- fails due to a wrong password, as it will stop extraction
-        -- in the other modes. For example, the skip mode will
-        -- return that it succeeded in extracting the
-        -- encrypted archive despite not actually doing so.
-        --
-        -- This will allow the loop to continue and hence allow
-        -- the plugin to continue prompting the user for the
-        -- correct password to open the archive as the archive extractor
-        -- will keep reporting that it failed to extract the
-        -- archive instead of reporting that it succeeded despite
-        -- not actually succeeding in extracting the archive.
-        --
-        -- This also stops the archive extractor from polluting
-        -- the extract directory unlike when using the rename and
-        -- rename existing modes.
-        overwrite = true
+        -- and the error message, the standard output of the output,
+        -- and nil for the password to the archive.
+        if tries == total_number_of_tries then
+            return false, error_message, output.stdout, nil
+        end
 
         -- Initialise the prompt for the password
         local password_prompt = "Wrong password, please enter another password:"
@@ -776,20 +956,634 @@ local function extract_archive(archive_path, config)
         if event == 1 then
             password = user_input
 
-        -- Otherwise, exit the function
+        -- Otherwise, return false, the error message,
+        -- the standard output of the output,
+        -- and nil for the password to the archive
         -- as the user has cancelled the prompt,
         -- or an unknown error has occurred
         else
-            return false, error_message
+            return false, error_message, output.stdout, nil
         end
     end
 
     -- If all the tries have been exhausted,
-    -- then return false and the error message
-    return false, error_message
+    -- then return false, the error message
+    -- and nil
+    return false, error_message, nil, nil
+end
+
+-- The command to list the items in an archive
+---@param archive_path string
+---@param config Configuration
+---@param password string|nil
+---@param remove_headers boolean|nil
+---@param show_details boolean|nil
+---@return CommandOutput, integer
+local function list_archive_items_command(
+    archive_path,
+    config,
+    password,
+    remove_headers,
+    show_details
+)
+    --
+
+    -- Initialise the password to an empty string if it's not given
+    password = password or ""
+
+    -- Initialise the remove headers flag to false if it's not given
+    remove_headers = remove_headers or false
+
+    -- Initialise the show details flag to false if it's not given
+    show_details = show_details or false
+
+    -- Initialise the arguments for the command
+    local arguments = {
+
+        -- List the items in the archive
+        "l",
+
+        -- Pass the password to the command
+        "-p" .. password,
+    }
+
+    -- If the remove headers flag is passed
+    if remove_headers then
+        --
+
+        -- Add the switch to remove the headers (undocumented switch)
+        table.insert(arguments, "-ba")
+    end
+
+    -- If the show details flag is passed
+    if show_details then
+        --
+
+        -- Add the switch to show the details
+        table.insert(arguments, "-slt")
+    end
+
+    -- Add the archive path to the arguments
+    table.insert(arguments, archive_path)
+
+    -- Return the result of the command to list the items in the archive
+    return Command(config.extractor_command)
+        :args(arguments)
+        :stdout(Command.PIPED)
+        :stderr(Command.PIPED)
+        :output()
+end
+
+-- The function to get the items in the archive.
+---@param archive_path string The path to the archive file
+---@param config Configuration The configuration object
+---@param files_only boolean|nil Whether to only get the files in the archive
+---@return string[] archive_items The list of archive items
+---@return string[] directories The list of directories in the archive
+---@return string|nil error_message The error message for an incorrect password
+---@return string|nil correct_password The correct password to the archive
+local function get_archive_items(archive_path, config, files_only)
+    --
+
+    -- Initialise the files only flag to false if it's not given
+    files_only = files_only or false
+
+    -- The function to list the items in the archive
+    local function list_items_in_archive(password, configuration, _)
+        return list_archive_items_command(
+            archive_path,
+            configuration,
+            password,
+            true
+        )
+    end
+
+    -- Initialise the list of archive items
+    ---@type string[]
+    local archive_items = {}
+
+    -- Initialise the list of directories
+    ---@type string[]
+    local directories = {}
+
+    -- Call the function to retry the extractor command
+    -- with the list items in the archive function
+    local successful, error_message, output, password =
+        retry_extractor(list_items_in_archive, config)
+
+    -- If the extractor command was not successful,
+    -- or the output was nil,
+    -- then return the empty list of archive items,
+    -- the empty list of directories in the archive,
+    -- the error message, and nil as the correct password
+    if not successful or not output then
+        return archive_items, directories, error_message, nil
+    end
+
+    -- Otherwise, split the output at the newline character
+    local output_lines = string_split(output, "\n")
+
+    -- Iterate over the lines of the output
+    for _, line in ipairs(output_lines) do
+        --
+
+        -- Get the information about the archive item from the line.
+        -- The information is in the format:
+        -- Attributes, Size, Compressed Size, File Path
+        local attributes, _, _, file_path =
+            line:match(archive_item_info_pattern)
+
+        -- If the file path doesn't exist, then continue the loop
+        if not file_path then goto continue end
+
+        -- If the attributes of the item starts with a "D",
+        -- which means the item is a directory
+        if attributes and attributes:find("^D") then
+            --
+
+            -- Add the directory to the list of directories
+            table.insert(directories, file_path)
+
+            -- Continue the loop if only files are wanted
+            if files_only then goto continue end
+        end
+
+        -- Otherwise, add the file path to the list of archive items
+        table.insert(archive_items, file_path)
+
+        -- The continue label to continue the loop
+        ::continue::
+    end
+
+    -- Return the list of archive items, the list of directories,
+    -- nil for the error message and the correct password
+    return archive_items, directories, nil, password
+end
+
+-- Function to get a temporary name.
+-- The code is taken from Yazi's source code.
+---@param file_path string
+---@return string
+local function get_temporary_name(file_path)
+    return ".tmp_"
+        .. ya.md5(string.format("extract//%s//%.10f", file_path, ya.time()))
+end
+
+-- Function to get a temporary directory url
+-- for the given file path
+---@param file_path string
+---@return Url|nil
+local function get_temporary_directory_url(file_path)
+    --
+
+    -- Get the parent directory of the file path
+    local parent_directory = Url(file_path):parent()
+
+    -- If the parent directory doesn't exist, then return nil
+    if not parent_directory then return nil end
+
+    -- Otherwise, create the temporary directory path
+    local temporary_directory_url =
+        fs.unique_name(parent_directory:join(get_temporary_name(file_path)))
+
+    -- Return the temporary directory path
+    return temporary_directory_url
+end
+
+-- The extract command to extract an archive
+---@param archive_path string
+---@param destination_directory_path string
+---@param config Configuration
+---@param password string|nil
+---@param extract_files_only boolean|nil
+---@return CommandOutput, integer
+local function extract_command(
+    archive_path,
+    destination_directory_path,
+    config,
+    password,
+    extract_files_only
+)
+    --
+
+    -- Initialise the password to an empty string if it's not given
+    password = password or ""
+
+    -- Initialise the extract files only flag to false if it's not given
+    extract_files_only = extract_files_only or false
+
+    -- Initialise the extraction mode to use.
+    -- By default, it extracts the archive with
+    -- full paths, which keeps the archive structure.
+    local extraction_mode = "x"
+
+    -- If the extract files only flag is passed
+    if extract_files_only then
+        --
+
+        -- Use the regular extract,
+        -- without the full paths, which will move
+        -- all files in the archive into the current directory
+        -- and ignore the archive folder structure.
+        extraction_mode = "e"
+    end
+
+    -- Initialise the arguments for the command
+    local arguments = {
+
+        -- The extraction mode
+        extraction_mode,
+
+        -- Assume yes to all prompts
+        "-y",
+
+        -- Configure the extraction behaviour to rename
+        "-aou",
+
+        -- Pass the password to the command
+        "-p" .. password,
+
+        -- The archive file to extract
+        archive_path,
+
+        -- The destination directory path
+        "-o" .. destination_directory_path,
+    }
+
+    -- Return the command to extract the archive
+    return Command(config.extractor_command)
+        :args(arguments)
+        :stdout(Command.PIPED)
+        :stderr(Command.PIPED)
+        :output()
+end
+
+-- The function to get the mime type of a file
+---@param file_path string
+---@return string
+local function get_mime_type(file_path)
+    --
+
+    -- Get the output of the file command
+    local output, _ = Command("file")
+        :args({
+
+            -- Don't prepend file names to the output
+            "-b",
+
+            -- Print the mime type of the file
+            "--mime-type",
+
+            -- The file path to get the mime type of
+            file_path,
+        })
+        :stdout(Command.PIPED)
+        :stderr(Command.PIPED)
+        :output()
+
+    -- If there is no output, then return an empty string
+    if not output then return "" end
+
+    -- Otherwise, get the mime type from the standard output
+    local mime_type = string_trim(output.stdout)
+
+    -- Return the mime type
+    return mime_type
+end
+
+-- The function to check if a file is an archive
+---@param file_path string
+---@return boolean
+local function is_archive_file(file_path)
+    --
+
+    -- Initialise the is archive variable to false
+    local is_archive = false
+
+    -- Call the function to get the mime type of the file
+    local mime_type = get_mime_type(file_path)
+
+    -- Set the is archive variable
+    is_archive = is_archive_mime_type(mime_type)
+
+    -- Return the is archive variable
+    return is_archive
+end
+
+-- The function to clean up the temporary directory
+-- after extracting an archive.
+---@param temporary_directory_url Url
+---@param removal_mode "dir" | "dir_all" | "dir_clean"
+---@param ... any
+---@return ... any
+local function clean_up_temporary_directory(
+    temporary_directory_url,
+    removal_mode,
+    ...
+)
+    --
+
+    -- Remove the temporary directory
+    fs.remove(removal_mode, temporary_directory_url)
+
+    -- Return the given return values
+    return ...
+end
+
+-- The function to move extracted items out of the temporary directory
+---@param archive_url Url
+---@param temporary_directory_url Url
+---@return boolean move_successful A boolean if the move was successful
+---@return string|nil error_message An error message for unsuccessful extracts
+---@return string|nil extracted_items_path The path of the extracted item
+local function move_extracted_items_to_archive_parent_directory(
+    archive_url,
+    temporary_directory_url
+)
+    --
+
+    -- Initialise whether or not the move is successful to false
+    local move_successful = false
+
+    -- Initialise the path of the extracted items
+    local extracted_items_path = nil
+
+    -- Get the extracted items in the directory
+    -- containing the extracted items.
+    -- There is a limit of 2 as there should only be
+    -- a single item in the directory.
+    local extracted_items = fs.read_dir(temporary_directory_url, { limit = 2 })
+
+    -- If the extracted items doesn't exist,
+    -- clean up the temporary directory and
+    -- return that the move successful variable
+    -- the error message, and the extracted item path
+    if not extracted_items then
+        return clean_up_temporary_directory(
+            temporary_directory_url,
+            "dir_all",
+            move_successful,
+            "Failed to read the temporary directory",
+            extracted_items_path
+        )
+    end
+
+    -- If there are no extracted items,
+    -- clean up the temporary directory and
+    -- return that the move successful variable
+    -- the error message, and the extracted item path
+    if #extracted_items == 0 then
+        return clean_up_temporary_directory(
+            temporary_directory_url,
+            "dir",
+            move_successful,
+            "No files extracted from the archive",
+            extracted_items_path
+        )
+    end
+
+    -- Get the parent directory url of the archive
+    local parent_directory_url = archive_url:parent()
+
+    -- If the parent directory url is nil,
+    -- then return the move successful variable,
+    -- the error message, and the extracted item path
+    if not parent_directory_url then
+        return clean_up_temporary_directory(
+            temporary_directory_url,
+            "dir_all",
+            move_successful,
+            "Parent directory doesn't exist",
+            extracted_items_path
+        )
+    end
+
+    -- Get the first extracted item
+    local first_extracted_item = table.unpack(extracted_items)
+
+    -- Get the url of the first extracted item
+    local first_extracted_item_url = first_extracted_item.url
+
+    -- Initialise the variable to
+    -- store whether there is only
+    -- a single file in the archive
+    local only_one_item_in_archive = false
+
+    -- Initialise the target directory url to move the extracted items to,
+    -- which is the parent directory of the archive
+    -- joined with the file name of the archive without the extension
+    local target_url = parent_directory_url:join(archive_url:stem())
+
+    -- If there is only one item in the archive
+    if #extracted_items == 1 then
+        --
+
+        -- Set the only one item in archive variable to true
+        only_one_item_in_archive = true
+
+        -- Set the target url to the parent directory of the archive
+        -- joined with the file name of the extracted item
+        target_url = parent_directory_url:join(first_extracted_item_url:name())
+    end
+
+    -- Get a unique name for the target url
+    target_url = fs.unique_name(target_url)
+
+    -- If the target url is nil somehow,
+    -- clean up the temporary directory and
+    -- return the move successful variable,
+    -- the error message and the extracted item path
+    if not target_url then
+        return clean_up_temporary_directory(
+            temporary_directory_url,
+            "dir_all",
+            move_successful,
+            "Failed to get a unique name for to move the extracted items to",
+            extracted_items_path
+        )
+    end
+
+    -- Set the extracted items path to the target path
+    extracted_items_path = tostring(target_url)
+
+    -- Initialise the error message to nil
+    local error_message = nil
+
+    -- If there is only one item in the archive
+    if only_one_item_in_archive then
+        --
+
+        -- Move the item to the target path
+        move_successful, error_message =
+            os.rename(tostring(first_extracted_item_url), extracted_items_path)
+
+    -- Otherwise
+    else
+        --
+
+        -- Rename the temporary directory itself to the target path
+        move_successful, error_message =
+            os.rename(tostring(temporary_directory_url), extracted_items_path)
+    end
+
+    -- Clean up the temporary directory
+    -- and return if the move was successful
+    -- the error message and the extracted item path
+    return clean_up_temporary_directory(
+        temporary_directory_url,
+        move_successful and "dir" or "dir_all",
+        move_successful,
+        error_message,
+        extracted_items_path
+    )
+end
+
+--- The function to extract an archive.
+--- This function returns 2 values:
+--- 1. A boolean to indicate if the extraction of the archive was successful
+--- 2. An error message if the extraction was unsuccessful
+--- 3. The file path indicating the directory to change to, which can be nil
+---@param archive_path string
+---@param config Configuration
+---@return boolean successful A boolean indicating extraction success
+---@return string|nil error_message An error message if extraction failed
+---@return string|nil extracted_items_path The path of the extracted items
+local function extract_archive(archive_path, config)
+    --
+
+    -- Initialise the extract files only flag to false
+    local extract_files_only = false
+
+    -- Initialise the successful variable to false
+    local successful = false
+
+    -- Initialise the error message to nil
+    local error_message = nil
+
+    -- Get the list of archive items, the error message and the password
+    local archive_items, archive_directories, archive_error, correct_password =
+        get_archive_items(archive_path, config, true)
+
+    -- Initialise the extracted items path to nil
+    local extracted_items_path = nil
+
+    -- If there are no files in the archive,
+    -- then return the successful variable,
+    -- the error message, and the extracted items path
+    if #archive_items == 0 then
+        return successful, archive_error, extracted_items_path
+    end
+
+    -- Otherwise, if the number of archive items is 1,
+    -- and the number of directories in the archive is 0,
+    -- then set the files only flag to true
+    if #archive_items == 1 and #archive_directories == 0 then
+        extract_files_only = true
+    end
+
+    -- Get the url of the temporary directory
+    local temporary_directory_url = get_temporary_directory_url(archive_path)
+
+    -- If the temporary directory url is nil,
+    -- then return the successful variable, an error message
+    -- saying a path for the temporary directory
+    -- cannot be determined, and the extracted items path
+    if not temporary_directory_url then
+        return successful,
+            "Failed to determine a path for the temporary directory",
+            extracted_items_path
+    end
+
+    -- Get the url of the archive
+    local archive_url = Url(archive_path)
+
+    -- Get the name of the archive
+    local archive_name = archive_url:stem()
+
+    -- If the archive name is nil,
+    -- then return the successful variable,
+    -- an error message saying
+    -- that the archive file name is somehow empty,
+    -- and the extracted items path
+    if not archive_name then
+        return successful, "Archive file name is empty", extracted_items_path
+    end
+
+    -- Create the extractor command
+    local function extractor_command(password, configuration)
+        return extract_command(
+            archive_path,
+            tostring(temporary_directory_url),
+            configuration,
+            password,
+            extract_files_only
+        )
+    end
+
+    -- Call the function to retry the extractor command
+    successful, error_message, _, _ = retry_extractor(
+        extractor_command,
+        config,
+        correct_password,
+        true,
+        archive_path
+    )
+
+    -- If the extraction was not successful,
+    -- then return whether the extraction was successful,
+    -- the error message and the extracted items path
+    if not successful then
+        return successful, error_message, extracted_items_path
+    end
+
+    -- Otherwise, move the extracted items
+    -- to the parent directory of the archive
+    successful, error_message, extracted_items_path =
+        move_extracted_items_to_archive_parent_directory(
+            archive_url,
+            temporary_directory_url
+        )
+
+    -- If the extract files only flag is false,
+    -- then return whether the extraction was successful,
+    -- the error message and the extracted items path
+    if not extract_files_only or not extracted_items_path then
+        return successful, error_message, extracted_items_path
+    end
+
+    -- If the item is not an archive
+    -- then return whether the extraction was successful,
+    -- the error message and the extract directory
+    if not is_archive_file(extracted_items_path) then
+        return successful, error_message, extracted_items_path
+    end
+
+    -- Save the extracted archive path
+    local extracted_archive_path = extracted_items_path
+
+    -- Extract the archive item
+    successful, error_message, extracted_items_path =
+        extract_archive(extracted_archive_path, config)
+
+    -- If the extraction was not successful,
+    -- then return whether the extraction was successful,
+    -- the error message and the extracted items path
+    if not successful then
+        return successful, error_message, extracted_items_path
+    end
+
+    -- Remove the archive after extracting it successfully
+    fs.remove("file", Url(extracted_archive_path))
+
+    -- Return the result of the extraction
+    return successful, error_message, extracted_items_path
 end
 
 -- Function to handle the open command
+---@param args Arguments
+---@param config Configuration
+---@param command_table CommandTable
+---@return nil
 local function handle_open(args, config, command_table)
     --
 
@@ -854,7 +1648,8 @@ local function handle_open(args, config, command_table)
     if not archive_path then return end
 
     -- Run the function to extract the archive
-    local extract_successful, err = extract_archive(archive_path, config)
+    local extract_successful, err, extracted_items_path =
+        extract_archive(archive_path, config)
 
     -- If the extraction of the archive isn't successful,
     -- notify the user and exit the function
@@ -863,23 +1658,39 @@ local function handle_open(args, config, command_table)
             content = "Failed to extract archive at: "
                 .. archive_path
                 .. "\nError: "
-                .. tostring(err),
+                .. err,
             level = "error",
         }))
     end
 
-    -- Get the filename of the archive
-    local archive_filename = archive_path:match(get_filename_pattern)
+    -- If the extracted items path is nil,
+    -- then exit the function
+    if not extracted_items_path then return end
+
+    -- Get the cha object of the extracted items path
+    local extracted_items_cha = fs.cha(Url(extracted_items_path), false)
+
+    -- If the cha object of the extracted items path is nil
+    -- then exit the function
+    if not extracted_items_cha then return end
+
+    -- If the extracted items path is not a directory,
+    -- then exit the function
+    if not extracted_items_cha.is_dir then return end
 
     -- Enter the archive directory
-    ya.manager_emit("cd", { archive_filename })
+    ya.manager_emit("cd", { extracted_items_path })
 
     -- Calls the function to skip child directories
     -- with only a single directory inside
-    skip_single_child_directories(args, config, archive_filename)
+    skip_single_child_directories(args, config, extracted_items_path)
 end
 
 -- Function to handle the enter command
+---@param args Arguments
+---@param config Configuration
+---@param command_table CommandTable
+---@return nil
 local function handle_enter(args, config, command_table)
     --
 
@@ -911,6 +1722,9 @@ local function handle_enter(args, config, command_table)
 end
 
 -- Function to handle the leave command
+---@param args Arguments
+---@param config Configuration
+---@return nil
 local function handle_leave(args, config)
     --
 
@@ -927,26 +1741,27 @@ local function handle_leave(args, config)
     -- Otherwise, initialise the directory to the current directory
     local directory = get_current_directory()
 
-    -- Otherwise, start an infinite loop
+    -- Start an infinite loop
     while true do
         --
 
-        -- Run the ls command to get the items in the directory
-        local output, _ = ls_command(directory, config.ignore_hidden_items)
-
-        -- If there is no output, then break out of the loop
-        if not output then break end
-
-        -- Get the list of items in the directory
-        local directory_items = string_split(output.stdout, "\n")
+        -- Get all the items in the current directory
+        local directory_items =
+            get_directory_items(directory, config.ignore_hidden_items)
 
         -- If the number of directory items is not 1,
-        -- then break out of the loop
+        -- then break out of the loop.
         if #directory_items ~= 1 then break end
 
-        -- Otherwise, set the new directory
-        -- to the parent of the current directory
-        directory = directory:match(get_parent_directory_pattern)
+        -- Get the parent directory of the current directory
+        local parent_directory = Url(directory):parent()
+
+        -- If the parent directory is nil,
+        -- break the loop
+        if not parent_directory then break end
+
+        -- Otherwise, set the new directory to the parent directory
+        directory = tostring(parent_directory)
     end
 
     -- Emit the change directory command to change to the directory variable
@@ -954,6 +1769,9 @@ local function handle_leave(args, config)
 end
 
 -- Function to handle a Yazi command
+---@param command string A Yazi command
+---@param args Arguments
+---@return nil
 local function handle_yazi_command(command, args)
     --
 
@@ -984,6 +1802,9 @@ local function handle_yazi_command(command, args)
 end
 
 -- Function to handle the paste command
+---@param args Arguments
+---@param config Configuration
+---@return nil
 local function handle_paste(args, config)
     --
 
@@ -1000,13 +1821,18 @@ local function handle_paste(args, config)
         -- Leave the directory
         ya.manager_emit("leave", {})
 
-    -- Otherwise, just paste the items inside the current directory
-    else
-        ya.manager_emit("paste", args)
+        -- Exit the function
+        return
     end
+
+    -- Otherwise, just paste the items inside the current directory
+    ya.manager_emit("paste", args)
 end
 
 -- Function to remove the F flag from the less command
+---@param command string
+---@return string command The command with the F flag removed
+---@return boolean f_flag_found Whether the F flag was found
 local function remove_f_flag_from_less_command(command)
     --
 
@@ -1040,6 +1866,8 @@ end
 -- Function to fix a command containing less.
 -- All this function does is remove
 -- the F flag from a command containing less.
+---@param command string
+---@return string command The fixed shell command
 local function fix_shell_command_containing_less(command)
     --
 
@@ -1076,6 +1904,8 @@ local function fix_shell_command_containing_less(command)
 end
 
 -- Function to fix the bat default pager command
+---@param command string
+---@return string command The fixed bat command
 local function fix_bat_default_pager_shell_command(command)
     --
 
@@ -1114,6 +1944,8 @@ local function fix_bat_default_pager_shell_command(command)
 end
 
 -- Function to fix the shell commands given to work properly with Yazi
+---@param command string A shell command
+---@return string command The fixed shell command
 local function fix_shell_command(command)
     --
 
@@ -1139,6 +1971,10 @@ local function fix_shell_command(command)
 end
 
 -- Function to handle a shell command
+---@param args Arguments
+---@param _ nil
+---@param exit_if_directory boolean|nil
+---@return nil
 local function handle_shell(args, _, _, exit_if_directory)
     --
 
@@ -1158,9 +1994,46 @@ local function handle_shell(args, _, _, exit_if_directory)
     -- If no item group is returned, exit the function
     if not item_group then return end
 
+    -- If the exit if directory flag is not given,
+    -- and the arguments contain the
+    -- exit if directory flag
+    if not exit_if_directory and args.exit_if_directory then
+        --
+
+        -- Set the exit if directory flag to true
+        exit_if_directory = true
+    end
+
     -- If the item group is the selected items
     if item_group == ItemGroup.Selected then
         --
+
+        -- If the exit if directory flag is passed
+        if exit_if_directory then
+            --
+
+            -- Initialise the number of files
+            local number_of_files = 0
+
+            -- Iterate over all of the selected items
+            for _, item in pairs(get_paths_of_selected_items()) do
+                --
+
+                -- Get the cha object of the item
+                local item_cha = fs.cha(Url(item), false)
+
+                -- If the item isn't a directory
+                if not item_cha.is_dir then
+                    --
+
+                    -- Increment the number of files
+                    number_of_files = number_of_files + 1
+                end
+            end
+
+            -- If the number of files is 0, then exit the function
+            if number_of_files == 0 then return end
+        end
 
         -- Replace the shell variable in the command
         -- with the quoted paths of the selected items
@@ -1180,10 +2053,8 @@ local function handle_shell(args, _, _, exit_if_directory)
 
         -- Replace the shell variable in the command
         -- with the quoted path of the hovered item
-        command = command:gsub(
-            shell_variable_pattern,
-            get_path_of_hovered_item(true)
-        )
+        command =
+            command:gsub(shell_variable_pattern, get_path_of_hovered_item(true))
 
     -- Otherwise, exit the function
     else
@@ -1198,6 +2069,9 @@ local function handle_shell(args, _, _, exit_if_directory)
 end
 
 -- Function to do the wraparound for the arrow command
+---@param _ any
+---@param args Arguments
+---@return nil
 local wraparound_arrow = ya.sync(function(_, args)
     --
 
@@ -1228,6 +2102,9 @@ local wraparound_arrow = ya.sync(function(_, args)
 end)
 
 -- Function to handle the arrow command
+---@param args Arguments
+---@param config Configuration
+---@return nil
 local function handle_arrow(args, config)
     --
 
@@ -1242,117 +2119,168 @@ local function handle_arrow(args, config)
     end
 end
 
--- Function to execute the parent arrow command
-local execute_parent_arrow_command = ya.sync(
-    function(state, args, number_of_directories)
-        --
-
-        -- Gets the parent directory
-        local parent_directory = cx.active.parent
-
-        -- If the parent directory doesn't exist,
-        -- then exit the function
-        if not parent_directory then return end
-
-        -- Get the step from the arguments given
-        local step = table.remove(args, 1)
-
-        -- Initialise the new cursor index
-        -- to the current parent cursor index
-        local new_cursor_index = parent_directory.cursor
-
-        -- Otherwise, if wraparound file navigation is wanted
-        -- and the number of directories is given and isn't 0
-        if
-            state.config.wraparound_file_navigation
-            and number_of_directories
-            and number_of_directories ~= 0
-        then
-            --
-
-            -- Get the new cursor index by adding the step,
-            -- and modding the whole thing by the number of
-            -- directories given.
-            new_cursor_index = (parent_directory.cursor + step)
-                % number_of_directories
-
-        -- Otherwise, get the new cursor index normally.
-        else
-            new_cursor_index = parent_directory.cursor + step
-        end
-
-        -- Increment the cursor index by 1.
-        -- The cursor index needs to be increased by 1
-        -- as the cursor index is 0-based, while Lua
-        -- tables are 1-based.
-        new_cursor_index = new_cursor_index + 1
-
-        -- Get the target directory
-        local target_directory = parent_directory.files[new_cursor_index]
-
-        -- If the target directory exists and is a directory
-        if target_directory and target_directory.cha.is_dir then
-            --
-
-            -- Emit the command to change directory
-            -- to the target directory
-            ya.manager_emit("cd", { target_directory.url })
-        end
-    end
-)
-
--- Function to handle the parent arrow command
-local function handle_parent_arrow(args, config)
+-- Function to get the directory items in the parent directory
+---@param _ any
+---@param directories_only boolean
+---@return string[]
+local get_parent_directory_items = ya.sync(function(_, directories_only)
     --
 
-    -- If wraparound file navigation isn't wanted,
-    -- then execute the parent arrow command and exit the function
-    if not config.wraparound_file_navigation then
-        return execute_parent_arrow_command(args)
-    end
+    -- Initialise the list of directory items
+    local directory_items = {}
 
-    -- Otherwise, get the path of the parent directory
-    local parent_directory_path = get_parent_directory()
+    -- Get the parent directory
+    local parent_directory = cx.active.parent
 
-    -- If there is no parent directory, exit the function
-    if not parent_directory_path then return end
+    -- If the parent directory doesn't exist,
+    -- return the empty list of directory items
+    if not parent_directory then return directory_items end
 
-    -- Call the ls command to get the number of directories
-    local output, _ =
-        ls_command(parent_directory_path, config.ignore_hidden_items)
-
-    -- If there is no output, exit the function
-    if not output then return end
-
-    -- Get the item in the parent directory
-    local directory_items = string_split(output.stdout, "\n")
-
-    -- Initialise the number of directories
-    local number_of_directories = 0
-
-    -- Iterate over the directory items
-    for _, item in ipairs(directory_items) do
+    -- Otherwise, iterate over the items in the parent directory
+    for _, item in ipairs(parent_directory.files) do
         --
 
-        -- If the item is a directory
-        if item:match(is_directory_pattern) then
-            --
+        -- If the directories only flag is passed,
+        -- and the item is not a directory,
+        -- then skip the item
+        if directories_only and not item.cha.is_dir then goto continue end
 
-            -- Increment the number of directories by 1
-            number_of_directories = number_of_directories + 1
+        -- Otherwise, add the item to the list of directory items
+        table.insert(directory_items, item)
 
-        -- Otherwise, break out of the loop,
-        -- as the directories are grouped together
-        else
-            break
-        end
+        -- The continue label to skip the item
+        ::continue::
     end
 
+    -- Return the list of directory items
+    return directory_items
+end)
+
+-- Function to execute the parent arrow command
+---@param state any
+---@param args Arguments
+---@return nil
+local execute_parent_arrow_command = ya.sync(function(state, args)
+    --
+
+    -- Gets the parent directory
+    local parent_directory = cx.active.parent
+
+    -- If the parent directory doesn't exist,
+    -- then exit the function
+    if not parent_directory then return end
+
+    -- Get the offset from the arguments given
+    local offset = table.remove(args, 1)
+
+    -- If the offset is not a number, then exit the function
+    if type(offset) ~= "number" then return end
+
+    -- Get the number of items in the parent directory
+    local number_of_items = #parent_directory.files
+
+    -- Initialise the new cursor index
+    -- to the current cursor index
+    local new_cursor_index = parent_directory.cursor
+
+    -- If wraparound file navigation is wanted
+    if state.config.wraparound_file_navigation then
+        --
+
+        -- If the user sorts their directories first
+        if state.config.sort_directories_first then
+            --
+
+            -- Get the directories in the parent directory
+            local directories = get_parent_directory_items(true)
+
+            -- Get the number of directories in the parent directory
+            local number_of_directories = #directories
+
+            -- If the number of directories is 0, then exit the function
+            if number_of_directories == 0 then return end
+
+            -- Get the new cursor index by adding the offset,
+            -- and modding the whole thing by the number of directories
+            new_cursor_index = (parent_directory.cursor + offset)
+                % number_of_directories
+
+        -- Otherwise, if the user doesn't sort their directories first
+        else
+            --
+
+            -- Get the new cursor index by adding the offset,
+            -- and modding the whole thing by the number of
+            -- items in the parent directory
+            new_cursor_index = (parent_directory.cursor + offset)
+                % number_of_items
+        end
+
+    -- Otherwise, get the new cursor index normally
+    -- by adding the offset to the cursor index
+    else
+        new_cursor_index = parent_directory.cursor + offset
+    end
+
+    -- Increment the cursor index by 1.
+    -- The cursor index needs to be increased by 1
+    -- as the cursor index is 0-based, while Lua
+    -- tables are 1-based.
+    new_cursor_index = new_cursor_index + 1
+
+    -- Get the starting index of the loop
+    local start_index = new_cursor_index
+
+    -- Get the ending index of the loop.
+    --
+    -- If the offset given is negative, set the end index to 1,
+    -- as the loop will iterate backwards.
+    -- Otherwise, if the step given is positive,
+    -- set the end index to the number of items in the
+    -- parent directory.
+    local end_index = offset < 0 and 1 or number_of_items
+
+    -- Get the step for the loop.
+    --
+    -- If the offset given is negative, set the step to -1,
+    -- as the loop will iterate backwards.
+    -- Otherwise, if the step given is positive, set
+    -- the step to 1 to iterate forwards.
+    local step = offset < 0 and -1 or 1
+
+    -- Iterate over the parent directory items
+    for i = start_index, end_index, step do
+        --
+
+        -- Get the directory item
+        local directory_item = parent_directory.files[i]
+
+        -- If the directory item exists and is a directory
+        if directory_item and directory_item.cha.is_dir then
+            --
+
+            -- Emit the command to change directory to
+            -- the directory item and exit the function
+            return ya.manager_emit("cd", { directory_item.url })
+        end
+    end
+end)
+
+-- Function to handle the parent arrow command
+---@param args Arguments
+---@return nil
+local function handle_parent_arrow(args)
+    --
+
     -- Call the function to execute the parent arrow command
-    execute_parent_arrow_command(args, number_of_directories)
+    -- with the arguments given
+    execute_parent_arrow_command(args)
 end
 
 -- Function to handle the editor command
+---@param args Arguments
+---@param config Configuration
+---@return nil
 local function handle_editor(args, config)
     --
 
@@ -1381,6 +2309,10 @@ local function handle_editor(args, config)
 end
 
 -- Function to handle the pager command
+---@param args Arguments
+---@param config Configuration
+---@param command_table CommandTable
+---@return nil
 local function handle_pager(args, config, command_table)
     --
 
@@ -1413,10 +2345,15 @@ local function handle_pager(args, config, command_table)
 end
 
 -- Function to run the commands given
+---@param command string
+---@param args Arguments
+---@param config Configuration
+---@return nil
 local function run_command_func(command, args, config)
     --
 
     -- The command table
+    ---@enum CommandTable
     local command_table = {
         [Commands.Open] = handle_open,
         [Commands.Enter] = handle_enter,
@@ -1454,6 +2391,9 @@ local function run_command_func(command, args, config)
 end
 
 -- The setup function to setup the plugin
+---@param _ any
+---@param opts Configuration|nil
+---@return nil
 local function setup(_, opts)
     --
 
@@ -1462,6 +2402,9 @@ local function setup(_, opts)
 end
 
 -- The function to be called to use the plugin
+---@param _ any
+---@param args string[]
+---@return nil
 local function entry(_, args)
     --
 
@@ -1484,6 +2427,7 @@ local function entry(_, args)
 end
 
 -- Returns the table required for Yazi to run the plugin
+---@return table { setup: function, entry: function }
 return {
     setup = setup,
     entry = entry,
