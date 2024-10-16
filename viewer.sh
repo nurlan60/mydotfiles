@@ -1,10 +1,10 @@
 #!/bin/zsh
 
-if [[ ! -f $1 ]]; then
-	echo "Usage: viewer [file]"
-  read -s -k '?Press any key to continue.'
-  exit 1
-fi 
+# if [[ ! -a $1 ]]; then
+# 	echo "Usage: viewer [file]"
+#   read -s -k '?Press any key to continue.'
+#   exit 1
+# fi 
 
 case ${1:e} in
   pdf)
@@ -31,11 +31,11 @@ case ${1:e} in
   json)
     jq '.' $1
     ;;
-  ""|cls|jl|log|lua|sh|sty|pl|txt|tex|toml|zsh)
-  bat -p -S --pager 'less -R' $1
+  tar | tgz | tbz* | txz | zip | 7z | gz | xz | lzma | bz* |lz4 | sz | zst | rar )
+    ouch list $1 --tree | bat -p -S --pager 'less -R'
     ;;
   *)
-    open $1
+  bat -p -S --pager 'less -R' $1
     ;;
 esac
 
