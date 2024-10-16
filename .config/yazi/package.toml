@@ -1,0 +1,16 @@
+[plugin]
+deps = [
+  { use = "yazi-rs/plugins:max-preview", rev = "4f1d0ae" },
+  { use = "yazi-rs/plugins:hide-preview", rev = "4f1d0ae" },
+  { use = "hankertrix/augment-command", rev = "b0f113d" },
+  { use = "KKV9/compress", rev = "60b24af" },
+  { use = "yazi-rs/plugins:diff", rev = "4f1d0ae" },
+]
+
+[flavor]
+deps = [
+  { use = "yazi-rs/flavors:catppuccin-mocha", rev = "1f54993" },
+  { use = "yazi-rs/flavors:catppuccin-frappe", rev = "1f54993" },
+  { use = "yazi-rs/flavors:catppuccin-latte", rev = "1f54993" },
+  { use = "yazi-rs/flavors:catppuccin-macchiato", rev = "1f54993" },
+]
