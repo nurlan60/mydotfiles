@@ -132,3 +132,10 @@ fi
 # oh-my-posh
 # eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/powerlevel10k_rainbow.omp.json)"
 eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/my.omp.json)"
+
+# -----------------------------------------------------
+# Fastfetch
+# -----------------------------------------------------
+if [[ $SHLVL == 1 ]]; then
+    fastfetch --config examples/13
+fi
