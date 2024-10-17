@@ -22,18 +22,30 @@ antidote load
 
 # common aliases
 alias c="clear"
+alias :q="exit"
 alias cd..="cd .."
 alias ls='eza -a --icons'
 alias ll='eza -al --icons'
 alias lt='eza -a --tree --level=1 --icons'
-alias :q="exit"
+
 alias v='$EDITOR'
 alias vim='$EDITOR'
 alias mc="mc -u"
+
+# -----------------------------------------------------
+# Ssh
+# -----------------------------------------------------
 alias mini="ssh mini"
 alias mac="ssh mac"
 alias asus="ssh asus"
 alias deb="ssh debian"
+
+# -----------------------------------------------------
+# Fastfetch
+# -----------------------------------------------------
+alias nf='fastfetch'
+alias pf='fastfetch'
+alias ff='fastfetch'
 
 # -----------------------------------------------------
 # Git
