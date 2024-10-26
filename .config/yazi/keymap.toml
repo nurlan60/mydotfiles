@@ -183,7 +183,7 @@ run = 'back'
 desc = "Go back to the previous directory"
 
 [[manager.prepend_keymap]]
-on = [":"]
+on = ["!"]
 run = 'shell "$SHELL" --block --confirm'
 desc = "Open shell here"
 
@@ -196,9 +196,3 @@ desc = "Hide preview pane"
 on = ["T", "M"]
 run = "plugin --sync max-preview"
 desc = "Max preview pane"
-
-# Goto
-[[manager.prepend_keymap]]
-on = ["g", "d"]
-run = "cd ~/Downloads"
-desc = "Go to the downloads directory"
