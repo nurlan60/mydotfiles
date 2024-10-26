@@ -6,5 +6,5 @@ export VISUAL='nvim'
 
 # nnn
 export NNN_COLORS='4321'
-export NNN_PLUG='z:autojump;u:umounttree;i:-!bat "$nnn"'
+export NNN_PLUG='z:autojump;u:umounttree;i:-!viewer.sh "$nnn"'
 export NNN_SSHFS='sshfs -o follow_symlinks'
