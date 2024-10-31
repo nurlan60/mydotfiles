@@ -68,8 +68,9 @@ rules = [
 
 [plugin]
 
+pprepend_previewers = [
   { mime = "audio/*", run = "exifaudio" },
   { mime = "application/x-bittorrent", run = "torrent-preview" },
   { mime = "text/csv", run = "miller" },
-  { name = "*.md", run = "glow" },           # for markdown (.md) files
+  { name = "*.md", run = "glow" },                                # for markdown (.md) files
 ]
