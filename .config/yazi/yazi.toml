@@ -1,14 +1,14 @@
 # [manager]
 # show_symlink = false
 
-[[plugin.prepend_fetchers]]
-id = "mime"
-if = "!mime"
-name = "*"
-run = "mime-ext"
-prio = "high"
-[preview]
-wrap = "yes"
+# [[plugin.prepend_fetchers]]
+# id = "mime"
+# if = "!mime"
+# name = "*"
+# run = "mime-ext"
+# prio = "high"
+# [preview]
+# wrap = "yes"
 
 [opener]
 view = [
