@@ -68,17 +68,8 @@ rules = [
 
 [plugin]
 
-pprepend_previewers = [
-  # Djvu
-  { mime = "image/vnd.djvu", run = "djvutxt-preview" },
-  # PDF
-  # { mime = "application/pdf", run = "pdftotext-preview" },
-  # Audio 
   { mime = "audio/*", run = "exifaudio" },
-  # Torrent 
   { mime = "application/x-bittorrent", run = "torrent-preview" },
-  # Docx
-  { mime = "application/vnd.openxmlformats-officedocument.wordprocessingml.document", run = "docx-preview" },
   { mime = "text/csv", run = "miller" },
-  { name = "*.md", run = "glow" },                                                                            # for markdown (.md) files
+  { name = "*.md", run = "glow" },           # for markdown (.md) files
 ]
