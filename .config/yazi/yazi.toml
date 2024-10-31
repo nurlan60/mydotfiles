@@ -70,6 +70,8 @@ rules = [
 
 pprepend_previewers = [
   { mime = "audio/*", run = "exifaudio" },
+  { mime = "{image,audio,video}/*", run = "mediainfo" },
+  { mime = "application/x-subrip", run = "mediainfo" },
   { mime = "application/x-bittorrent", run = "torrent-preview" },
   { mime = "text/csv", run = "miller" },
   { name = "*.md", run = "glow" },                                # for markdown (.md) files
