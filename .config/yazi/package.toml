@@ -4,7 +4,7 @@ deps = [
   { use = "yazi-rs/plugins:hide-preview", rev = "4f1d0ae" },
   { use = "hankertrix/augment-command", rev = "b0f113d" },
   { use = "KKV9/compress", rev = "60b24af" },
-  { use = "yazi-rs/plugins:diff", rev = "4f1d0ae" },
+  { use = "yazi-rs/plugins:diff", rev = "4f1d0ae" }, { use = "yazi-rs/plugins:mime-ext", rev = "ad52adf" },
 ]
 
 [flavor]
