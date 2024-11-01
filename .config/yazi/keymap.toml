@@ -1,9 +1,4 @@
 [[manager.prepend_keymap]]
-on = ["_", "r"]
-run = "plugin reflink"
-desc = "Reflink the yanked files"
-
-[[manager.prepend_keymap]]
 on = "<C-d>"
 run = "plugin diff"
 desc = "Diff the selected with the hovered file"
