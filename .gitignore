@@ -2,3 +2,5 @@
 ._*
 .config/nvim/lazy-lock.json
 .config/nvim/lazyvim.json
+.config/nvim-linux/lazy-lock.json
+.config/nvim-linux/lazyvim.json
