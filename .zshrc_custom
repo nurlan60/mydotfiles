@@ -1,4 +1,4 @@
-PATH="${PATH}:/usr/local/texlive/2024/bin/x86_64-linux"
+PATH="${PATH}:/home/nurlan/.local/bin:/usr/local/texlive/2024/bin/x86_64-linux"
 export PATH
 
 alias :q="exit"
@@ -8,6 +8,7 @@ alias asus="ssh asus"
 alias deb="ssh debian"
 alias texlive='sh -c "xhost +si:localuser:root && sudo /usr/local/texlive/2024/bin/x86_64-linux/tlmgr --gui && xhost -si:localuser:root"'
 alias docx2txt.pl="docx2txt"
+alias lg="lazygit"
 
 # nnn config
 export NNN_COLORS='4321'
