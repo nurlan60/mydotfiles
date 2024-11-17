@@ -2,6 +2,6 @@ hlissner/zsh-autopair
 ael-code/zsh-colored-man-pages
 zsh-users/zsh-history-substring-search
 zsh-users/zsh-autosuggestions
-# zsh-users/zsh-syntax-highlighting
+zsh-users/zsh-syntax-highlighting
 zdharma-continuum/fast-syntax-highlighting
 jeffreytse/zsh-vi-mode
