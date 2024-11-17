@@ -9,7 +9,17 @@ alias deb="ssh debian"
 alias len="ssh lenovo"
 alias texlive='sh -c "xhost +si:localuser:root && sudo /usr/local/texlive/2024/bin/x86_64-linux/tlmgr --gui && xhost -si:localuser:root"'
 alias docx2txt.pl="docx2txt"
+
 alias lg="lazygit"
+alias gs="git status"
+alias ga="git add"
+alias gc="git commit -m"
+alias gp="git push"
+alias gpl="git pull"
+alias gst="git stash"
+alias gsp="git stash; git pull"
+alias gcheck="git checkout"
+alias gcredential="git config credential.helper store"
 
 # nnn config
 export NNN_COLORS='4321'
