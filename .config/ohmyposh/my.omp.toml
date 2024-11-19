@@ -46,13 +46,19 @@ fetch_status = true
 
 [[blocks.segments]]
 template = ' {{ if .Env.YAZI_LEVEL }} Yazi terminal {{ end }}'
-foreground = '#000000'
-background = '#c4a000'
+style = "diamond"
+leading_diamond = " "
+trailing_diamond = ""
+foreground = "#ffffff"
+background = "#d53c14"
 type = 'text'
 
 [[blocks.segments]]
 template = ' {{ if .Env.NNNLVL }} NNN terminal {{ end }}'
-foreground = '#000000'
+style = "diamond"
+leading_diamond = " "
+trailing_diamond = ""
+foreground = "#ffffff"
 background = '#c4a000'
 type = 'text'
 
