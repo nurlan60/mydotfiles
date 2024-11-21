@@ -13,26 +13,28 @@ vim.opt.spelllang = "en_us,ru"
 -----------------------------------------------------
 -- Encoding --
 --------------
--- cod Change encoding
+vim.opt.fileencodings = "utf-8, cp1251, cp866, koi8-r,ucs-2le"
+-------------
+-- F8 Change encoding
 vim.api.nvim_command([[
     set  wildmenu
     set  wcm=<Tab>
-    menu Enc.utf-8      :e ++enc=utf-8<CR>
-    menu Enc.cp1251     :e ++enc=cp1251 ++ff=dos<CR>
-    menu Enc.cp866      :e ++enc=ibm866 ++ff=dos<CR>
-    menu Enc.koi8-r     :e ++enc=koi8-r ++ff=unix<CR>
-    menu Enc.ucs-2le    :e ++enc=ucs-2le<CR>
-    nmap kod :emenu Enc.<Tab>
+    menu Encoding.utf-8      :e ++enc=utf-8<CR>
+    menu Encoding.cp1251     :e ++enc=cp1251 ++ff=dos<CR>
+    menu Encoding.cp866      :e ++enc=ibm866 ++ff=dos<CR>
+    menu Encoding.koi8-r     :e ++enc=koi8-r ++ff=unix<CR>
+    menu Encoding.ucs-2le    :e ++enc=ucs-2le<CR>
+    nmap <F8> :emenu Encoding.<Tab>
 ]])
 
--- con Convert file encoding
+-- S-F8 Convert file encoding
 vim.api.nvim_command([[
     set  wildmenu
     set  wcm=<Tab>
-    menu FEnc.utf-8     :set fenc=utf-8<CR>
-    menu FEnc.cp1251    :set fenc=cp1251<CR>
-    menu FEnc.cp866     :set fenc=ibm866<CR>
-    menu FEnc.koi8-r    :set fenc=koi8-r<CR>
-    menu FEnc.ucs-2le   :set fenc=ucs-2le<CR>
-    nmap  kon :emenu FEnc.<Tab>
+    menu File-Encoding.utf-8     :set fenc=utf-8<CR>
+    menu File-Encoding.cp1251    :set fenc=cp1251<CR>
+    menu File-Encoding.cp866     :set fenc=ibm866<CR>
+    menu File-Encoding.koi8-r    :set fenc=koi8-r<CR>
+    menu File-Encoding.ucs-2le   :set fenc=ucs-2le<CR>
+    nmap  <S-F8> :emenu File-Encoding.<Tab>
 ]])
