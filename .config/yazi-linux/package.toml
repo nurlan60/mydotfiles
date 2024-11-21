@@ -1,7 +1,10 @@
 [plugin]
 deps = [
   { use = "hankertrix/augment-command", rev = "57adf8d" },
-  { use = "dawsers/toggle-view", rev = "d326a53" }, { use = "yazi-rs/plugins:chmod", rev = "235437c" }, { use = "dawsers/fuse-archive", rev = "21363ce" }, { use = "Ape/reflink", rev = "34902d3" },
+  { use = "dawsers/toggle-view", rev = "d326a53" },
+  { use = "yazi-rs/plugins:chmod", rev = "235437c" },
+  { use = "dawsers/fuse-archive", rev = "21363ce" },
+  { use = "Ape/reflink", rev = "34902d3" },
 ]
 
 [flavor]
