@@ -2,6 +2,7 @@
 deps = [
   { use = "hankertrix/augment-command", rev = "57adf8d" },
   { use = "dawsers/toggle-view", rev = "d326a53" },
+  { use = "dawsers/dual-pane", rev = "c2fed12" },
 ]
 
 [flavor]

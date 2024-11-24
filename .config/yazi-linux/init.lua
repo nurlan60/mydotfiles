@@ -7,15 +7,6 @@ require("fuse-archive"):setup({
 	smart_enter = true,
 })
 
--- -- show host in header
--- Header:children_add(function()
--- 	if ya.target_family() ~= "unix" then
--- 		return ui.Line({})
--- 	end
--- 	return ui.Span(ya.user_name() .. "@" .. ya.host_name() .. ":"):fg("blue")
--- end, 500, Header.LEFT)
-
--- Bookmarks setup
 require("bookmarks"):setup({
 	persist = "vim",
 	desc_format = "parent",
