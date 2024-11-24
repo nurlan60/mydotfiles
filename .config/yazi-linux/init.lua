@@ -30,3 +30,5 @@ require("bookmarks"):setup({
 		},
 	},
 })
+
+require("dual-pane"):setup()

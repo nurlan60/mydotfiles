@@ -5,6 +5,7 @@ deps = [
   { use = "yazi-rs/plugins:chmod", rev = "235437c" },
   { use = "dawsers/fuse-archive", rev = "21363ce" },
   { use = "Ape/reflink", rev = "34902d3" },
+  { use = "dawsers/dual-pane", rev = "c2fed12" },
 ]
 
 [flavor]

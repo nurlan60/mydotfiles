@@ -1,3 +1,144 @@
+# Linemode
+[[manager.prepend_keymap]]
+on = ["p", "s"]
+run = "linemode size"
+desc = "Set linemode to size"
+
+[[manager.prepend_keymap]]
+on = ["p", "p"]
+run = "linemode permissions"
+desc = "Set linemode to permissions"
+
+[[manager.prepend_keymap]]
+on = ["p", "c"]
+run = "linemode ctime"
+desc = "Set linemode to ctime"
+
+[[manager.prepend_keymap]]
+on = ["p", "m"]
+run = "linemode mtime"
+desc = "Set linemode to mtime"
+
+[[manager.prepend_keymap]]
+on = ["p", "o"]
+run = "linemode owner"
+desc = "Set linemode to owner"
+
+[[manager.prepend_keymap]]
+on = ["p", "n"]
+run = "linemode none"
+desc = "Set linemode to none"
+
+[[manager.prepend_keymap]]
+on = ["b", "t"]
+run = "plugin --sync dual-pane --args=toggle"
+desc = "Dual-pane: toggle"
+
+[[manager.prepend_keymap]]
+on = ["b", "b"]
+run = "plugin --sync dual-pane --args=toggle_zoom"
+desc = "Dual-pane: toggle zoom"
+
+[[manager.prepend_keymap]]
+on = "<Tab>"
+run = "plugin --sync dual-pane --args=next_pane"
+desc = "Dual-pane: switch to the other pane"
+
+[[manager.prepend_keymap]]
+on = "["
+run = "plugin --sync dual-pane --args='tab_switch -1 --relative'"
+desc = "Dual-pane: switch active to previous tab"
+
+[[manager.prepend_keymap]]
+on = "]"
+run = "plugin --sync dual-pane --args='tab_switch 1 --relative'"
+desc = "Dual-pane: switch active to next tab"
+
+[[manager.prepend_keymap]]
+on = "1"
+run = "plugin --sync dual-pane --args='tab_switch 0'"
+desc = "Switch to the first tab"
+
+[[manager.prepend_keymap]]
+on = "2"
+run = "plugin --sync dual-pane --args='tab_switch 1'"
+desc = "Switch to the second tab"
+
+[[manager.prepend_keymap]]
+on = "3"
+run = "plugin --sync dual-pane --args='tab_switch 2'"
+desc = "Switch to the third tab"
+
+[[manager.prepend_keymap]]
+on = "4"
+run = "plugin --sync dual-pane --args='tab_switch 3'"
+desc = "Switch to the fourth tab"
+
+[[manager.prepend_keymap]]
+on = "5"
+run = "plugin --sync dual-pane --args='tab_switch 4'"
+desc = "Switch to the fifth tab"
+
+[[manager.prepend_keymap]]
+on = "6"
+run = "plugin --sync dual-pane --args='tab_switch 5'"
+desc = "Switch to the sixth tab"
+
+[[manager.prepend_keymap]]
+on = "7"
+run = "plugin --sync dual-pane --args='tab_switch 6'"
+desc = "Switch to the seventh tab"
+
+[[manager.prepend_keymap]]
+on = "8"
+run = "plugin --sync dual-pane --args='tab_switch 7'"
+desc = "Switch to the eighth tab"
+
+[[manager.prepend_keymap]]
+on = "9"
+run = "plugin --sync dual-pane --args='tab_switch 8'"
+desc = "Switch to the ninth tab"
+
+[[manager.prepend_keymap]]
+on = "t"
+run = "plugin --sync dual-pane --args='tab_create --current'"
+desc = "Dual-pane: create a new tab with CWD"
+
+[[manager.prepend_keymap]]
+on = "<F5>"
+run = "plugin --sync dual-pane --args='copy_files --follow'"
+desc = "Dual-pane: copy selected files from active to inactive pane"
+
+[[manager.prepend_keymap]]
+on = "<F6>"
+run = "plugin --sync dual-pane --args='move_files --follow'"
+desc = "Dual-pane: move selected files from active to inactive pane"
+
+[[manager.prepend_keymap]]
+on = ["b", "s"]
+run = "plugin --sync dual-pane --args=save_config"
+desc = "Dual-pane: save current configuration"
+
+[[manager.prepend_keymap]]
+on = ["b", "l"]
+run = "plugin --sync dual-pane --args=load_config"
+desc = "Dual-pane: load saved configuration"
+
+[[manager.prepend_keymap]]
+on = ["b", "r"]
+run = "plugin --sync dual-pane --args=reset_config"
+desc = "Dual-pane: reset saved configuration"
+
+[[manager.prepend_keymap]]
+on = ["b", "c"]
+run = "plugin dual-pane --args='shell_fzf /home/dawsers/.config/yazi/dual-pane.txt'"
+desc = "Dual-pane: run command (use fzf)"
+
+[[manager.prepend_keymap]]
+on = ["b", "i"]
+run = "plugin dual-pane --args='shell_fzf --interactive /home/dawsers/.config/yazi/dual-pane.txt'"
+desc = "Dual-pane: run command interactively (use fzf)"
+
 [[manager.prepend_keymap]]
 on = ["_", "r"]
 run = "plugin reflink"
@@ -54,7 +195,7 @@ run = "plugin compress"
 desc = "Archive selected files"
 
 [[manager.prepend_keymap]]
-on = ["B"]
+on = ["m"]
 run = "plugin bookmarks --args=save"
 desc = "Save current position as a bookmark"
 
@@ -64,12 +205,12 @@ run = "plugin bookmarks --args=jump"
 desc = "Jump to a bookmark"
 
 [[manager.prepend_keymap]]
-on = ["b", "d"]
+on = ["M", "d"]
 run = "plugin bookmarks --args=delete"
 desc = "Delete a bookmark"
 
 [[manager.prepend_keymap]]
-on = ["b", "D"]
+on = ["M", "D"]
 run = "plugin bookmarks --args=delete_all"
 desc = "Delete all bookmarks"
 
