@@ -317,25 +317,34 @@ on = ["d"]
 run = "plugin augment-command --args='remove'"
 desc = "Move the files to the trash"
 
-# Use D to delete files permanently
+# delete files permanently
 [[manager.prepend_keymap]]
 on = ["D"]
 run = "plugin augment-command --args='remove --permanently'"
 desc = "Permanently delete the files"
 
-# Use e to open files using the editor
+# open files using the editor
 [[manager.prepend_keymap]]
 on = ["e"]
 run = "plugin augment-command --args='editor'"
 desc = "Open files with the default editor"
 
-# Use i to open files using the viewer.sh
+[[manager.prepend_keymap]]
+on = ["<F4>"]
+run = "plugin augment-command --args='editor'"
+desc = "Open files with the default editor"
+
 [[manager.prepend_keymap]]
 on = ["i"]
 run = '''plugin augment-command --args="shell 'viewer.sh $@' --block --confirm"'''
 desc = "Open the viewer"
 
+[[manager.prepend_keymap]]
+on = ["<F3>"]
+run = '''plugin augment-command --args="shell 'viewer.sh $@' --block --confirm"'''
+desc = "Open the viewer"
 # Use r to rename files with the cursor before the file extension
+
 [[manager.prepend_keymap]]
 on = ["r"]
 run = "plugin augment-command --args='rename --cursor=before_ext'"
