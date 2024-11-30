@@ -1,14 +1,14 @@
 [plugin]
 deps = [
-  { use = "hankertrix/augment-command", rev = "57adf8d" },
+  { use = "hankertrix/augment-command", rev = "2212a97" },
   { use = "dawsers/toggle-view", rev = "d326a53" },
   { use = "dawsers/dual-pane", rev = "c2fed12" },
 ]
 
 [flavor]
 deps = [
-  { use = "yazi-rs/flavors:catppuccin-mocha", rev = "8465c93" },
-  { use = "yazi-rs/flavors:catppuccin-frappe", rev = "8465c93" },
-  { use = "yazi-rs/flavors:catppuccin-latte", rev = "8465c93" },
-  { use = "yazi-rs/flavors:catppuccin-macchiato", rev = "8465c93" },
+  { use = "yazi-rs/flavors:catppuccin-mocha", rev = "c686812" },
+  { use = "yazi-rs/flavors:catppuccin-frappe", rev = "c686812" },
+  { use = "yazi-rs/flavors:catppuccin-latte", rev = "c686812" },
+  { use = "yazi-rs/flavors:catppuccin-macchiato", rev = "c686812" },
 ]
