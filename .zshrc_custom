@@ -1,14 +1,9 @@
-PATH="${PATH}:/home/nurlan/.local/bin:/usr/local/texlive/2024/bin/x86_64-linux"
-export PATH
-
 alias :q="exit"
 alias mini="ssh mini"
 alias mac="ssh mac"
 alias asus="ssh asus"
 alias deb="ssh debian"
 alias len="ssh lenovo"
-alias texlive='sh -c "xhost +si:localuser:root && sudo /usr/local/texlive/2024/bin/x86_64-linux/tlmgr --gui && xhost -si:localuser:root"'
-alias docx2txt.pl="docx2txt"
 
 alias lg="lazygit"
 alias gs="git status"
@@ -83,6 +78,7 @@ if [[ -n "$YAZI_ID" ]]; then
 	add-zsh-hook zshexit _yazi_cd
 fi
 
+# zoxide
 eval "$(zoxide init zsh)"
 
 # -- Use fd instead of fzf --
