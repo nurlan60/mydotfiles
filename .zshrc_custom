@@ -1,3 +1,8 @@
+# key bindings
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+# aliases
 alias :q="exit"
 alias mini="ssh mini"
 alias mac="ssh mac"

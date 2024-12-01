@@ -23,10 +23,6 @@ antidote load
 # specific
 source ~/.aliases
 
-# key bindings
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-
 # oh-my-posh
 # eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/powerlevel10k_rainbow.omp.json)"
 eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/my.omp.json)"
