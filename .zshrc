@@ -34,3 +34,10 @@ eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/my.omp.json)"
 if [ -f ~/.zshrc_custom ] ;then
     source ~/.zshrc_custom
 fi
+
+# -----------------------------------------------------
+# Fastfetch
+# -----------------------------------------------------
+if [[ $SHLVL == 1 ]]; then
+    fastfetch --config examples/13
+fi
