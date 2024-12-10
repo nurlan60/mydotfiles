@@ -158,6 +158,14 @@ local ARCHIVE_MIME_TYPES = {
     "application/rar-compressed",
     "application/rar",
     "application/xz",
+
+    -- Bug in file(1) that classifies
+    -- some zip archives as a data stream,
+    -- hopefully this can be removed in the future.
+    --
+    -- Link to bug report:
+    -- https://bugs.astron.com/view.php?id=571
+    "application/octet-stream",
 }
 
 -- The list of archive file extensions
@@ -173,13 +181,25 @@ local ARCHIVE_FILE_EXTENSIONS = {
     "xz",
 }
 
+-- The list of mime type prefixes to remove
+--
+-- The prefixes are used in a lua pattern
+-- to match on the mime type, so special
+-- characters need to be escaped
+---@type string[]
+local MIME_TYPE_PREFIXES_TO_REMOVE = {
+    "x%-",
+    "vnd%.",
+}
+
 -- The pattern to get the double dash from the front of the argument
 ---@type string
 local double_dash_pattern = "^%-%-"
 
--- The pattern to get the mime type without the "x-" prefix
+-- The pattern template to get the mime type without a prefix
 ---@type string
-local get_mime_type_without_x_prefix_pattern = "^(%a-)/x%-([%-%d%a]-)$"
+local get_mime_type_without_prefix_template_pattern =
+    "^(%%a-)/%s([%%-%%d%%a]-)$"
 
 -- The pattern to get the information from an archive item
 ---@type string
@@ -541,6 +561,38 @@ local function initialise_plugin(opts)
     return config
 end
 
+-- Function to standardise the mime type of a file.
+-- This function will follow what Yazi does to standardise
+-- mime types returned by the file command.
+---@param mime_type string The mime type of the file
+---@return string standardised_mime_type The standardised mime type of the file
+local function standardise_mime_type(mime_type)
+    --
+
+    -- Trim the whitespace from the mime type
+    local trimmed_mime_type = string_trim(mime_type)
+
+    -- Iterate over the mime type prefixes to remove
+    for _, prefix in ipairs(MIME_TYPE_PREFIXES_TO_REMOVE) do
+        --
+
+        -- Get the pattern to remove the mime type prefix
+        local pattern =
+            get_mime_type_without_prefix_template_pattern:format(prefix)
+
+        -- Remove the prefix from the mime type
+        local mime_type_without_prefix, replacement_count =
+            trimmed_mime_type:gsub(pattern, "%1/%2")
+
+        -- If the replacement count is greater than zero,
+        -- return the mime type without the prefix
+        if replacement_count > 0 then return mime_type_without_prefix end
+    end
+
+    -- Return the mime type with whitespace removed
+    return trimmed_mime_type
+end
+
 -- Function to check if a given mime type is an archive
 ---@param mime_type string|nil The mime type of the file
 ---@return boolean is_archive Whether the mime type is an archive
@@ -550,14 +602,11 @@ local function is_archive_mime_type(mime_type)
     -- If the mime type is nil, return false
     if not mime_type then return false end
 
-    -- Trim the whitespace from the mime type
-    mime_type = string_trim(mime_type)
-
-    -- Remove the "x-" prefix from the mime type
-    mime_type = mime_type:gsub(get_mime_type_without_x_prefix_pattern, "%1/%2")
+    -- Standardise the mime type
+    local standardised_mime_type = standardise_mime_type(mime_type)
 
     -- Get if the mime type is an archive
-    local is_archive = list_contains(ARCHIVE_MIME_TYPES, mime_type)
+    local is_archive = list_contains(ARCHIVE_MIME_TYPES, standardised_mime_type)
 
     -- Return if the mime type is an archive
     return is_archive
@@ -599,9 +648,9 @@ end)
 -- Function to get the current working directory
 ---@param _ any
 ---@return string current_working_directory The current working directory
-local get_current_directory = ya.sync(function(_)
-    return tostring(cx.active.current.cwd)
-end)
+local get_current_directory = ya.sync(
+    function(_) return tostring(cx.active.current.cwd) end
+)
 
 -- Function to get the path of the hovered item
 ---@param _ any
@@ -2123,9 +2172,9 @@ end
 -- Function to handle a shell command
 ---@param args Arguments The arguments passed to the plugin
 ---@param _ any
----@param exit_if_directory boolean|nil Whether to exit when all are directories
+---@param exit_if_dir boolean|nil Whether to exit when all are directories
 ---@return nil
-local function handle_shell(args, _, _, exit_if_directory)
+local function handle_shell(args, _, _, exit_if_dir)
     --
 
     -- Get the first item of the arguments given
@@ -2147,11 +2196,11 @@ local function handle_shell(args, _, _, exit_if_directory)
     -- If the exit if directory flag is not given,
     -- and the arguments contain the
     -- exit if directory flag
-    if not exit_if_directory and args.exit_if_directory then
+    if not exit_if_dir and args.exit_if_dir then
         --
 
         -- Set the exit if directory flag to true
-        exit_if_directory = true
+        exit_if_dir = true
     end
 
     -- If the item group is the selected items
@@ -2159,7 +2208,7 @@ local function handle_shell(args, _, _, exit_if_directory)
         --
 
         -- If the exit if directory flag is passed
-        if exit_if_directory then
+        if exit_if_dir then
             --
 
             -- Initialise the number of files
@@ -2199,7 +2248,7 @@ local function handle_shell(args, _, _, exit_if_directory)
         -- If the exit if directory flag is passed,
         -- and the hovered item is a directory,
         -- then exit the function
-        if exit_if_directory and hovered_item_is_dir() then return end
+        if exit_if_dir and hovered_item_is_dir() then return end
 
         -- Replace the shell variable in the command
         -- with the quoted path of the hovered item
@@ -2226,7 +2275,7 @@ local function handle_paste(args, config)
     --
 
     -- If the hovered item is not a directory or smart paste is not wanted
-    if not hovered_item_is_dir() and not (config.smart_paste or args.smart) then
+    if not hovered_item_is_dir() or not (config.smart_paste or args.smart) then
         --
 
         -- Just paste the items inside the current directory
@@ -2622,12 +2671,8 @@ local function run_command_func(command, args, config)
         [Commands.Open] = handle_open,
         [Commands.Enter] = handle_enter,
         [Commands.Leave] = handle_leave,
-        [Commands.Rename] = function(_)
-            handle_yazi_command("rename", args)
-        end,
-        [Commands.Remove] = function(_)
-            handle_yazi_command("remove", args)
-        end,
+        [Commands.Rename] = function(_) handle_yazi_command("rename", args) end,
+        [Commands.Remove] = function(_) handle_yazi_command("remove", args) end,
         [Commands.Shell] = handle_shell,
         [Commands.Paste] = handle_paste,
         [Commands.TabCreate] = handle_tab_create,
