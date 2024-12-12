@@ -1,5 +1,8 @@
 [plugin]
 prepend_previewers = [
+  # Markdown previewer
+  { name = "*.md", run = "glow" },
+
   # Archive previewer
   { mime = "application/*zip", run = "ouch" },
   { mime = "application/x-tar", run = "ouch" },
