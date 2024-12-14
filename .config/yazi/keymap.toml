@@ -73,6 +73,18 @@ on = "!"
 run = 'shell "$SHELL" --block'
 desc = "Open shell here"
 
+# editor
+[[manager.prepend_keymap]]
+on = "e"
+run = 'shell "$EDITOR \"$@\"" --block'
+desc = "Open file in editor"
+
+# viewer
+[[manager.prepend_keymap]]
+on = "i"
+run = 'shell "viewer.sh \"$@\"" --block'
+desc = "Open file in viewer"
+
 # bookmarks
 [[manager.prepend_keymap]]
 on = ["m"]

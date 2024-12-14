@@ -1,6 +1,8 @@
 alias python="/opt/homebrew/bin/python3"
 alias pip="/opt/homebrew/bin/pip3"
 alias v="nvim"
+alias docx2txt="docx2txt.pl"
+
 
 # Rust setup
 . "$HOME/.cargo/env"
