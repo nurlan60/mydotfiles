@@ -17,7 +17,10 @@ case ${1:e} in
     djvutxt "$1" | less
     ;;
   docx)
-    docx2txt "$1" - | less
+    if [[ $(uname) == "Darwin" ]]; then
+      docx2txt.pl "$1" - | less
+    else docx2txt "$1" - | less
+    fi 
     ;;
   xlsx)
     in2csv "$1" | csvlook | less
