@@ -218,7 +218,7 @@
     "format": "{}",
     "format-en": "EN",
     "format-ru": "RU",
-    "keyboard-name": "at-translated-set-2-keyboard",
+    "keyboard-name": "at-translated-set-2-keyboard"
   },
   // Group Hardware
   "group/hardware": {
