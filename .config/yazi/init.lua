@@ -3,8 +3,6 @@ require("session"):setup({
 	sync_yanked = true,
 })
 
-require("fuse-archive"):setup()
-
 require("bookmarks"):setup({
 	persist = "vim",
 	desc_format = "parent",
