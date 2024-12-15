@@ -51,7 +51,7 @@
 "network",
         "group/hardware",
         "group/tools",
-"tray",
+//"tray",
         "custom/exit",
         "custom/ml4w-welcome",
         "clock"
