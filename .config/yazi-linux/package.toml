@@ -1,11 +1,11 @@
 [plugin]
 deps = [
   { use = "dedukun/bookmarks", rev = "20ece7e" },
-  { use = "yazi-rs/plugins:smart-enter", rev = "ec97f88" },
   { use = "yazi-rs/plugins:max-preview", rev = "62f0789" },
   { use = "yazi-rs/plugins:hide-preview", rev = "62f0789" },
   { use = "Reledia/glow", rev = "c2ed51e" },
-  { use = "KKV9/compress", rev = "60b24af" }, { use = "dawsers/fuse-archive", rev = "21363ce" },
+  { use = "KKV9/compress", rev = "60b24af" },
+  { use = "dawsers/fuse-archive", rev = "21363ce" },
 ]
 
 [flavor]
