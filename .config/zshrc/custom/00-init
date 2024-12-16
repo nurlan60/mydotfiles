@@ -10,3 +10,4 @@ export PATH="$PATH:/usr/lib/ccache/bin/:/home/nurlan/.local/bin:/usr/local/texli
 export ZSH="$HOME/.oh-my-zsh"
 
 alias texlive='sh -c "xhost +si:localuser:root && sudo /usr/local/texlive/2024/bin/x86_64-linux/tlmgr --gui && xhost -si:localuser:root"'
+
