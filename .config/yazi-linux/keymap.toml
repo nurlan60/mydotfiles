@@ -1,4 +1,9 @@
 [[manager.prepend_keymap]]
+desc = "Cancel the yank status" },Archive
+
+on = "u"
+run = "unyank"
+[[manager.prepend_keymap]]
 on = ["l"]
 run = "plugin fuse-archive --args=mount"
 desc = "Enter or Mount selected archive"

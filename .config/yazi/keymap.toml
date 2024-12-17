@@ -1,4 +1,10 @@
 [[manager.prepend_keymap]]
+desc = "Cancel the yank status" },Archive
+
+on = "u"
+run = "unyank"
+# Archive
+[[manager.prepend_keymap]]
 on = ["c", "a"]
 run = "plugin compress"
 desc = "Archive selected files"
