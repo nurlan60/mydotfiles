@@ -1,5 +1,14 @@
 return {
   {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        ["tex"] = { "tex-fmt" },
+      },
+    },
+  },
+
+  {
     "lervag/vimtex",
     opts = function()
       vim.g["vimtex_view_method"] = "sioyek"
