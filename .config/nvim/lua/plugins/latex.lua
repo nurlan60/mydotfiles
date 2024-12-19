@@ -1,19 +1,9 @@
 return {
   {
-    "conform.nvim",
-    formatters_by_ft = {
-      tex = { "tex-fmt" },
-    },
-  },
-
-  {
     "lervag/vimtex",
     opts = function()
       vim.g["vimtex_view_method"] = "sioyek"
       vim.g["vimtex_view_sioyek_exe"] = "/Applications/sioyek.app/Contents/MacOS/sioyek"
-      vim.g["vimtex_mappings_enabled"] = 1
-      vim.g["vimtex_indent_enabled"] = 1
-      vim.g["vimtex_syntax_enabled"] = 0
       vim.g["vimtex_quickfix_open_on_warning"] = 0
       vim.g["vimtex_quickfix_ignore_filters"] = {
         "Underfull \\hbox",
