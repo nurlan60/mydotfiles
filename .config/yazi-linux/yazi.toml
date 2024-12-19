@@ -3,6 +3,9 @@ extract = []
 
 [plugin]
 prepend_previewers = [
+  # Docx previewer
+  { name = "*.docx", run = "docx" },
+
   # Markdown previewer
   { name = "*.md", run = "glow" },
 
