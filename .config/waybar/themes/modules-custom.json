@@ -216,8 +216,8 @@
   "hyprland/language": {
     "on-click": "hyprctl switchxkblayout at-translated-set-2-keyboard next",
     "format": "{}",
-    "format-en": "EN",
-    "format-ru": "RU",
+    "format-en": "🇱🇷",
+    "format-ru": "🇷🇺",
     "keyboard-name": "at-translated-set-2-keyboard"
   },
   // Group Hardware
