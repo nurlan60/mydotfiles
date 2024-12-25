@@ -1,4 +1,19 @@
 [[manager.prepend_keymap]]
+on = "<C-1>"
+run = "plugin toggle-view --args=parent"
+desc = "Toggle parent"
+
+[[manager.prepend_keymap]]
+on = "<C-2>"
+run = "plugin toggle-view --args=current"
+desc = "Toggle current"
+
+[[manager.prepend_keymap]]
+on = "<C-3>"
+run = "plugin toggle-view --args=preview"
+desc = "Toggle preview"
+
+[[manager.prepend_keymap]]
 on = "u"
 run = "unyank"
 desc = "Cancel the yank status"
