@@ -1,4 +1,9 @@
 [[manager.prepend_keymap]]
+on = ["c", "m"]
+run = "plugin chmod"
+desc = "Chmod on selected files"
+
+[[manager.prepend_keymap]]
 on = "<C-1>"
 run = "plugin toggle-view --args=parent"
 desc = "Toggle parent"

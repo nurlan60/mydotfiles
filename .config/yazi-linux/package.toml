@@ -5,7 +5,9 @@ deps = [
   { use = "yazi-rs/plugins:hide-preview", rev = "71c4fc2" },
   # { use = "Reledia/glow", rev = "c2ed51e" },
   { use = "KKV9/compress", rev = "60b24af" },
-  { use = "dawsers/fuse-archive", rev = "62d30df" }, { use = "dawsers/toggle-view", rev = "9ae57f9" },
+  { use = "dawsers/fuse-archive", rev = "62d30df" },
+  { use = "dawsers/toggle-view", rev = "9ae57f9" },
+  { use = "yazi-rs/plugins:chmod", rev = "71c4fc2" },
 ]
 
 [flavor]
