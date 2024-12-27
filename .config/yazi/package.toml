@@ -4,14 +4,14 @@ deps = [
   { use = "yazi-rs/plugins:smart-enter", rev = "71c4fc2" },
   { use = "yazi-rs/plugins:max-preview", rev = "71c4fc2" },
   { use = "yazi-rs/plugins:hide-preview", rev = "71c4fc2" },
-  { use = "Reledia/glow", rev = "c2ed51e" },
+  { use = "Reledia/glow", rev = "5ce76dc" },
   { use = "KKV9/compress", rev = "60b24af" },
   { use = "dawsers/toggle-view", rev = "9ae57f9" },
 ]
 
 [flavor]
 deps = [
-  { use = "yazi-rs/flavors:catppuccin-mocha", rev = "8458d25" },
-  { use = "yazi-rs/flavors:catppuccin-latte", rev = "8458d25" },
-  { use = "yazi-rs/flavors:catppuccin-frappe", rev = "8458d25" },
+  { use = "yazi-rs/flavors:catppuccin-mocha", rev = "fc8eeaa" },
+  { use = "yazi-rs/flavors:catppuccin-latte", rev = "fc8eeaa" },
+  { use = "yazi-rs/flavors:catppuccin-frappe", rev = "fc8eeaa" },
 ]
