@@ -6,7 +6,7 @@ deps = [
   { use = "KKV9/compress", rev = "60b24af" },
   { use = "dawsers/fuse-archive", rev = "62d30df" },
   { use = "dawsers/toggle-view", rev = "9ae57f9" },
-  { use = "yazi-rs/plugins:chmod", rev = "71c4fc2" },
+  { use = "yazi-rs/plugins:chmod", rev = "71c4fc2" }, { use = "ahkohd/eza-preview", rev = "5ef05bc" },
 ]
 
 [flavor]
