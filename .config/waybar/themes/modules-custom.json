@@ -55,8 +55,8 @@
   },
   // ML4W Welcome App
   "custom/ml4w-welcome": {
-    "on-click": "ags toggle sidebar",
-    "on-click-right": "sleep 0.1 && ~/.config/ml4w/apps/ML4W_Welcome-x86_64.AppImage",
+    "on-click": "sleep 0.1 && ~/.config/ml4w/settings/ml4w-sidebar.sh",
+    "on-click-right": "sleep 0.1 && com.ml4w.welcome",
     "format": " ",
     "tooltip-format": "Open Sidebar"
   },
@@ -75,11 +75,11 @@
     "on-click": "sleep 0.1 && ~/.config/ml4w/scripts/cliphist.sh",
     "on-click-right": "sleep 0.1 && ~/.config/ml4w/scripts/cliphist.sh d",
     "on-click-middle": "sleep 0.1 && ~/.config/ml4w/scripts/cliphist.sh w",
-    "tooltip-format": "Clipboard Manager"
+    "tooltip-format": "Left: Open clipboard Manager\nRight: Delete an entry\nMiddle: Clear list"
   },
   // Updates Count
   "custom/updates": {
-    "format": "  {}",
+    "format": "  {}",
     "escape": true,
     "return-type": "json",
     "exec": "~/.config/ml4w/scripts/updates.sh",
@@ -90,7 +90,7 @@
   // Wallpaper
   "custom/wallpaper": {
     "format": "",
-    "on-click": "waypaper",
+    "on-click": "bash -c waypaper &",
     "on-click-right": "~/.config/hypr/scripts/wallpaper-effects.sh",
     "tooltip-format": "Left: Select a wallpaper\nRight: Select wallpaper effect"
   },
@@ -103,7 +103,7 @@
   // Settings
   "custom/settings": {
     "format": "",
-    "on-click": "com.ml4w.dotfilessettings",
+    "on-click": "sleep 0.1 && com.ml4w.dotfilessettings",
     "tooltip-format": "ML4W Dotfiles Settings"
   },
   // Keybindings
@@ -149,8 +149,9 @@
   // Power Menu
   "custom/exit": {
     "format": "",
-    "on-click": "wlogout",
-    "tooltip-format": "Power Menu"
+    "on-click": "~/.config/ml4w/scripts/wlogout.sh",
+    "on-click-right": "hyprlock",
+    "tooltip-format": "Left: Power menu\nRight: Lock screen"
   },
   // Hyprshade
   "custom/hyprshade": {
@@ -167,8 +168,7 @@
     "exec-on-event": true,
     "interval": 60,
     "exec": "~/.config/hypr/scripts/hypridle.sh status",
-    "on-click": "~/.config/hypr/scripts/hypridle.sh toggle",
-    "on-click-right": "hyprlock"
+    "on-click": "~/.config/hypr/scripts/hypridle.sh toggle"
   },
   // Keyboard State
   "keyboard-state": {
@@ -189,6 +189,7 @@
   "clock": {
     "format": "{:%H:%M %a}",
     "on-click": "ags toggle calendar",
+    "timezone": "",
     "tooltip": false
   },
   // System
