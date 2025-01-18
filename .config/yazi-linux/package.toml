@@ -19,11 +19,6 @@ rev = "60b24af"
 hash = "ee025be766240cc98e671754ac836da3"
 
 [[plugin.deps]]
-use = "dawsers/fuse-archive"
-rev = "62d30df"
-hash = "17aa58cd6c4a41ce11a1f9f910552fd6"
-
-[[plugin.deps]]
 use = "dawsers/toggle-view"
 rev = "9ae57f9"
 hash = "9d291f6cecb1f1f5542fc18177d5c107"
@@ -32,6 +27,11 @@ hash = "9d291f6cecb1f1f5542fc18177d5c107"
 use = "yazi-rs/plugins:chmod"
 rev = "71c4fc2"
 hash = "4c7e8fd0266eedee7b619d966bd2d025"
+
+[[plugin.deps]]
+use = "dawsers/fuse-archive"
+rev = "850bc76"
+hash = "25f3815c055f9d3e5eabb2bfa1722822"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
