@@ -2,16 +2,5 @@ alias python="/opt/homebrew/bin/python3"
 alias pip="/opt/homebrew/bin/pip3"
 
 
-# Rust setup
-. "$HOME/.cargo/env"
-
-# >>> juliaup initialize >>>
-
-# !! Contents within this block are managed by juliaup !!
-
-path=('/Users/nurlan/.juliaup/bin' $path)
-export PATH
-
-# <<< juliaup initialize <<<
 
 
