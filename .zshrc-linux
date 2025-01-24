@@ -1,0 +1,54 @@
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+setopt autocd
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/home/nurlan/.zshrc'
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+######################################################
+
+# Enable vi mode
+# bindkey -v
+
+# source antidote
+source /usr/share/zsh-antidote/antidote.zsh
+
+# initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
+antidote load
+
+# specific
+source ~/.aliases
+
+# oh-my-posh
+# eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/powerlevel10k_rainbow.omp.json)"
+eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/my.omp.toml)"
+
+# -----------------------------------------------------
+# Load single customization file (if exists)
+# -----------------------------------------------------
+
+if [ -f ~/.zshrc_custom ] ;then
+    source ~/.zshrc_custom
+fi
+
+# foot jumps
+precmd() {
+    print -Pn "\e]133;A\e\\"
+}
+
+# -----------------------------------------------------
+# Pywal
+# -----------------------------------------------------
+cat ~/.cache/wal/sequences
+
+# -----------------------------------------------------
+# Fastfetch
+# -----------------------------------------------------
+if [[ $SHLVL == 1 ]]; then
+    fastfetch --config examples/13
+fi
+
