@@ -1,0 +1,8 @@
+run = "kitty", desc = "Dual-pane: terminal", block = false
+run = "kitty nvim %f", desc = "Dual-pane: open in nvim", block = false
+run = "nvim -d %c %C", desc = "Dual-pane: diff files", block = true
+run = "nvim -c 'DirDiff %d %D'", desc = "Dual-pane: diff dirs", block = true
+run = "ouch decompress --dir=%D %f", desc = "Dual-pane: decompress with ouch", block = true
+run = "ouch compress %f %D/%d:n.tar.gz", desc = "Dual-pane: tar.gz compress with ouch", block = true
+run = "ouch compress %f %D/%d:n.zip", desc = "Dual-pane: zip compress with ouch", block = true
+run = "ouch compress %f %D/%d:n.7z", desc = "Dual-pane: 7z compress with ouch", block = true
