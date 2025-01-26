@@ -101,17 +101,7 @@ desc = "Dual-pane: reset saved configuration"
 [[manager.prepend_keymap]]
 on = ["b", "c"]
 desc = "Dual-pane: run command (use fzf)"
-run = "plugin dual-pane --args='shell_fzf /home/nurlan/.config/yazi/dual-pane.txt'"
-
-[[manager.prepend_keymap]]
-on = ["b", "i"]
-run = "plugin dual-pane --args='shell_fzf --interactive /home/nurlan/.config/yazi/dual-pane.txt'"
-desc = "Dual-pane: run command interactively (use fzf)"
-
-[[manager.prepend_keymap]]
-on = "<C-1>"
-run = "plugin toggle-view --args=parent"
-desc = "Toggle parent"
+run = "plugin dual-pane --args='shell_fzf /Users/nurlan/.config/yazi/dual-pane.txt'"
 
 [[manager.prepend_keymap]]
 on = "<C-2>"
