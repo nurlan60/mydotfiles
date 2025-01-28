@@ -3,6 +3,8 @@ extract = []
 
 [plugin]
 prepend_previewers = [
+  { name = "*/", run = "eza-preview" },
+
   # Docx previewer
   { name = "*.docx", run = "docx" },
 
