@@ -33,6 +33,11 @@ use = "dawsers/fuse-archive"
 rev = "850bc76"
 hash = "25f3815c055f9d3e5eabb2bfa1722822"
 
+[[plugin.deps]]
+use = "ahkohd/eza-preview"
+rev = "5ef05bc"
+hash = "72355a6c8b7c8de6ed4dda0f98f86fee"
+
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
 rev = "fc8eeaa"
