@@ -5,7 +5,7 @@ deps = [
   { use = "yazi-rs/plugins:max-preview", rev = "71c4fc2" },
   { use = "Reledia/glow", rev = "5ce76dc" },
   { use = "KKV9/compress", rev = "60b24af" },
-  { use = "dawsers/toggle-view", rev = "9ae57f9" },
+  { use = "dawsers/toggle-view", rev = "9ae57f9" }, { use = "ahkohd/eza-preview", rev = "5ef05bc" },
 ]
 
 [flavor]

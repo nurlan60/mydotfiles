@@ -15,7 +15,7 @@ compinit
 # bindkey -v
 
 # source antidote
-source ~/.antidote.zsh
+source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
 
 # initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
 antidote load
