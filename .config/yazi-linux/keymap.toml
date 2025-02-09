@@ -231,19 +231,19 @@ desc = "Linemode: none"
 # shell
 [[manager.prepend_keymap]]
 on = "!"
-run = 'shell --block "$SHELL"'
+run = 'shell --block -- $SHELL'
 desc = "Open shell here"
 
 # editor
 [[manager.prepend_keymap]]
 on = "e"
-run = 'shell --block "$EDITOR \"$@\""'
+run = 'shell --block -- $EDITOR "$@"'
 desc = "Open file in editor"
 
 # viewer
 [[manager.prepend_keymap]]
 on = "i"
-run = 'shell --block "viewer.sh \"$@\""'
+run = 'shell --block -- viewer.sh "$@"'
 desc = "Open file in viewer"
 
 # bookmarks
