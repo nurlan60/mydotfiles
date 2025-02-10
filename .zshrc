@@ -27,6 +27,7 @@ source ~/.aliases
 # eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/powerlevel10k_rainbow.omp.json)"
 eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/my.omp.json)"
 
+source $(brew --prefix)/Cellar/fzf/$(fzf --version | cut -d ' ' -f 1)/shell/completion.zsh
 source $(brew --prefix)/Cellar/fzf/$(fzf --version | cut -d ' ' -f 1)/shell/key-bindings.zsh
 
 # -----------------------------------------------------
