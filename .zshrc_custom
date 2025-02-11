@@ -117,4 +117,5 @@ _fzf_compgen_dir() {
 # Enable vi mode
 bindkey -v
 
-source ~/.fzf.zsh
+# fzf init after zsh-vi-mode
+zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
