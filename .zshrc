@@ -11,9 +11,6 @@ compinit
 # End of lines added by compinstall
 ######################################################
 
-# Enable vi mode
-# bindkey -v
-
 # source antidote
 source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
 
