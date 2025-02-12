@@ -43,6 +43,11 @@ use = "yazi-rs/plugins:mount"
 rev = "0725851"
 hash = "b80e65240c1d0651e87d0200522bb079"
 
+[[plugin.deps]]
+use = "yazi-rs/plugins:smart-filter"
+rev = "8945e54"
+hash = "b482f4f2d3c4e0aa3f8db89a95699439"
+
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
 rev = "fd85060"
