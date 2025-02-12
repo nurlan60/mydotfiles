@@ -33,6 +33,11 @@ use = "ahkohd/eza-preview"
 rev = "5ef05bc"
 hash = "72355a6c8b7c8de6ed4dda0f98f86fee"
 
+[[plugin.deps]]
+use = "yazi-rs/plugins:smart-filter"
+rev = "8945e54"
+hash = "b482f4f2d3c4e0aa3f8db89a95699439"
+
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
 rev = "fd85060"
