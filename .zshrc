@@ -38,3 +38,6 @@ fi
 if [[ $SHLVL == 1 ]]; then
     fastfetch --config examples/13
 fi
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
