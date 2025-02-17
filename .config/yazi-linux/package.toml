@@ -1,11 +1,11 @@
 [[plugin.deps]]
 use = "dedukun/bookmarks"
-rev = "202e450"
-hash = "9e2f6f7381542d3adb3080b394b431b4"
+rev = "420a384"
+hash = "48a97905b7180539702f5916eccfc52c"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:max-preview"
-rev = "0725851"
+rev = "beb586a"
 hash = "15b2ff7f6563c14d5b2e93b3e9da35de"
 
 [[plugin.deps]]
@@ -25,7 +25,7 @@ hash = "9d291f6cecb1f1f5542fc18177d5c107"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:chmod"
-rev = "0725851"
+rev = "beb586a"
 hash = "f28138c2e11e87962b66d583fef724c3"
 
 [[plugin.deps]]
@@ -40,25 +40,25 @@ hash = "72355a6c8b7c8de6ed4dda0f98f86fee"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mount"
-rev = "0725851"
-hash = "b80e65240c1d0651e87d0200522bb079"
+rev = "beb586a"
+hash = "5c4d8080367dd2561a18c1cf5a1dd295"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-filter"
-rev = "8945e54"
+rev = "beb586a"
 hash = "b482f4f2d3c4e0aa3f8db89a95699439"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
-rev = "fd85060"
+rev = "1a419b2"
 hash = "c40e434318a8ceffd01842f8dfb2390e"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-latte"
-rev = "fd85060"
+rev = "1a419b2"
 hash = "8c24a91f7e6abb2a9ac268bfbd356e77"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-frappe"
-rev = "fd85060"
+rev = "1a419b2"
 hash = "e88895e8f8b7926f20946f273ecc7348"
