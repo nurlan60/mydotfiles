@@ -1,22 +1,22 @@
 [[plugin.deps]]
 use = "dedukun/bookmarks"
-rev = "202e450"
-hash = "9e2f6f7381542d3adb3080b394b431b4"
+rev = "fe0b1de"
+hash = "221ed40593a5cb5bd80f963f05c556f"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-enter"
-rev = "8945e54"
+rev = "5186af7"
 hash = "aef2b1a805b80cce573bb766f1459d88"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:max-preview"
-rev = "8945e54"
-hash = "15b2ff7f6563c14d5b2e93b3e9da35de"
+rev = "5186af7"
+hash = "a8025f2bb311e869069364fba01abffc"
 
 [[plugin.deps]]
 use = "Reledia/glow"
-rev = "5ce76dc"
-hash = "52e5f5c602962e7cbf874da28f52ba45"
+rev = "c76bf4f"
+hash = "a6b78bf9af5390e3a85a6951fbb7b93"
 
 [[plugin.deps]]
 use = "KKV9/compress"
@@ -35,20 +35,20 @@ hash = "72355a6c8b7c8de6ed4dda0f98f86fee"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-filter"
-rev = "8945e54"
+rev = "5186af7"
 hash = "b482f4f2d3c4e0aa3f8db89a95699439"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
-rev = "fd85060"
+rev = "df95930"
 hash = "c40e434318a8ceffd01842f8dfb2390e"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-latte"
-rev = "fd85060"
+rev = "df95930"
 hash = "8c24a91f7e6abb2a9ac268bfbd356e77"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-frappe"
-rev = "fd85060"
+rev = "df95930"
 hash = "e88895e8f8b7926f20946f273ecc7348"
