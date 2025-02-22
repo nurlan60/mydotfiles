@@ -10,18 +10,14 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 ######################################################
+# Homebrew config
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # source antidote
 source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
 
 # initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
 antidote load
-
-# specific
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
-PATH="${PATH}:/Users/nurlan/.local/bin:/Users/nurlan/.juliaup/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-export PATH
 
 # Rust setup
 . "$HOME/.cargo/env"
@@ -34,6 +30,9 @@ alias pip="/opt/homebrew/bin/pip3"
 # oh-my-posh
 # eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/powerlevel10k_rainbow.omp.json)"
 eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/my.omp.json)"
+
+PATH="${PATH}:/Users/nurlan/.local/bin:/Users/nurlan/.juliaup/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+export PATH
 
 # -----------------------------------------------------
 # Load single customization file (if exists)
