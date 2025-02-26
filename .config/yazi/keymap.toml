@@ -1,4 +1,34 @@
 [[manager.prepend_keymap]]
+on = ["T", "1"]
+run = "plugin toggle-pane min-parent"
+desc = "Show or hide the parent pane"
+
+[[manager.prepend_keymap]]
+on = ["T", "!"]
+run = "plugin toggle-pane max-parent"
+desc = "Maximize or restore the parent pane"
+
+[[manager.prepend_keymap]]
+on = ["T", "2"]
+run = "plugin toggle-pane min-current"
+desc = "Show or hide the current pane"
+
+[[manager.prepend_keymap]]
+on = ["T", "@"]
+run = "plugin toggle-pane max-current"
+desc = "Maximize or restore the current pane"
+
+[[manager.prepend_keymap]]
+on = ["T", "3"]
+run = "plugin toggle-pane min-preview"
+desc = "Show or hide the preview pane"
+
+[[manager.prepend_keymap]]
+on = ["T", "#"]
+run = "plugin toggle-pane max-preview"
+desc = "Maximize or restore the preview pane"
+
+[[manager.prepend_keymap]]
 on = "F"
 run = "plugin smart-filter"
 desc = "Smart filter"
@@ -133,16 +163,6 @@ desc = "Dual-pane: run command (use fzf)"
 run = "plugin dual-pane 'shell_fzf /Users/nurlan/.config/yazi/dual-pane.txt'"
 
 [[manager.prepend_keymap]]
-on = "<C-2>"
-run = "plugin toggle-view current"
-desc = "Toggle current"
-
-[[manager.prepend_keymap]]
-on = "<C-3>"
-run = "plugin toggle-view preview"
-desc = "Toggle preview"
-
-[[manager.prepend_keymap]]
 on = "u"
 run = "unyank"
 desc = "Cancel the yank status"
@@ -164,11 +184,6 @@ desc = "Move up in the parent directory"
 on = ["J"]
 run = ["leave", "arrow 1", "enter"]
 desc = "Move down in the parent directory"
-
-[[manager.prepend_keymap]]
-on = ["P"]
-run = "plugin max-preview"
-desc = "Maximize or restore preview"
 
 [[manager.prepend_keymap]]
 on = ["C"]
