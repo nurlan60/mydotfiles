@@ -18,10 +18,10 @@ source /usr/share/zsh-antidote/antidote.zsh
 antidote load
 
 # specific
-PATH="${PATH}:/usr/lib/ccache/bin/:/home/nurlan/.local/bin:/usr/local/texlive/2024/bin/x86_64-linux"
+PATH="${PATH}:/usr/lib/ccache/bin/:/home/nurlan/.local/bin:/usr/local/texlive/2025/bin/x86_64-linux"
 export PATH
 
-alias texlive='sh -c "xhost +si:localuser:root && sudo /usr/local/texlive/2024/bin/x86_64-linux/tlmgr --gui && xhost -si:localuser:root"'
+alias texlive='sh -c "xhost +si:localuser:root && sudo /usr/local/texlive/2025/bin/x86_64-linux/tlmgr --gui && xhost -si:localuser:root"'
 
 # oh-my-posh
 # eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/powerlevel10k_rainbow.omp.json)"
