@@ -19,11 +19,6 @@ rev = "5186af7"
 hash = "f28138c2e11e87962b66d583fef724c3"
 
 [[plugin.deps]]
-use = "dawsers/fuse-archive"
-rev = "a58327c"
-hash = "6a6d24880ce7666048fb81ad758c48d3"
-
-[[plugin.deps]]
 use = "ahkohd/eza-preview"
 rev = "5ef05bc"
 hash = "72355a6c8b7c8de6ed4dda0f98f86fee"

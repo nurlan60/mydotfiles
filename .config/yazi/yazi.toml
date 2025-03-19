@@ -1,6 +1,3 @@
-[opener]
-extract = []
-
 [plugin]
 prepend_previewers = [
   { name = "*/", run = "eza-preview" },

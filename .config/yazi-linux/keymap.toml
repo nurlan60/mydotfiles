@@ -168,27 +168,6 @@ on = "u"
 run = "unyank"
 desc = "Cancel the yank status"
 
-#Archive
-[[manager.prepend_keymap]]
-on = ["l"]
-run = "plugin fuse-archive mount"
-desc = "Enter or Mount selected archive"
-
-[[manager.prepend_keymap]]
-on = ["<Right>"]
-run = "plugin fuse-archive mount"
-desc = "Enter or Mount selected archive"
-
-[[manager.prepend_keymap]]
-on = ["h"]
-run = "plugin fuse-archive unmount"
-desc = "Leave or Unmount selected archive"
-
-[[manager.prepend_keymap]]
-on = ["<Left>"]
-run = "plugin fuse-archive unmount"
-desc = "Leave or Unmount selected archive"
-
 [[manager.prepend_keymap]]
 on = ["c", "a"]
 run = "plugin compress"
