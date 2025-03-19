@@ -5,7 +5,7 @@ hash = "17a094653b7d0db4ac68ed531d2e1412"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-enter"
-rev = "79193b3"
+rev = "2730199"
 hash = "7918aab6a71caf31b58411f789195677"
 
 [[plugin.deps]]
@@ -25,13 +25,13 @@ hash = "72355a6c8b7c8de6ed4dda0f98f86fee"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-filter"
-rev = "79193b3"
+rev = "2730199"
 hash = "f0c4b41b5d19a3144958383333eff6e7"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "79193b3"
-hash = "812fd49667ab6823250f0411f8cf793a"
+rev = "2730199"
+hash = "5c9dda1a587b8f5b6f63e3d5375bda88"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
