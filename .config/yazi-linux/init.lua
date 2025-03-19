@@ -9,10 +9,6 @@ require("session"):setup({
 	sync_yanked = true,
 })
 
-require("fuse-archive"):setup({
-	smart_enter = true,
-})
-
 require("bookmarks"):setup({
 	persist = "vim",
 	desc_format = "parent",
