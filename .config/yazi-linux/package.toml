@@ -43,11 +43,6 @@ use = "yazi-rs/plugins:smart-enter"
 rev = "2730199"
 hash = "7918aab6a71caf31b58411f789195677"
 
-[[plugin.deps]]
-use = "boydaihungst/restore"
-rev = "5d22884"
-hash = "8e6fc2d660f661c91e30b10dd1a251b8"
-
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
 rev = "68326b4"

@@ -1,9 +1,4 @@
 [[input.prepend_keymap]]
-on = ["d", "u"]
-run = "plugin restore"
-desc = "Restore last deleted files/folders"
-
-[[input.prepend_keymap]]
 on = "<Esc>"
 run = "close"
 desc = "Cancel input"
