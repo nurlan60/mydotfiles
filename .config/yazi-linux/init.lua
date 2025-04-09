@@ -12,5 +12,6 @@ require("bunny"):setup({
 	hops = {
 		{ key = "m", path = "~/onedrive-sdu/teach/Matan4", desc = "Mat An" },
 		{ key = "f", path = "~/onedrive-sdu/teach/FAN", desc = "Func An" },
+		{ key = "y", path = "~/.config/yazi" },
 	},
 })
