@@ -1,3 +1,13 @@
+[[input.prepend_keymap]]
+on = "<Esc>"
+run = "close"
+desc = "Cancel input"
+
+[[manager.prepend_keymap]]
+desc = "Start bunny.yazi"
+on = "'"
+run = "plugin bunny"
+
 [[manager.prepend_keymap]]
 on = ["T", "1"]
 run = "plugin toggle-pane min-parent"
@@ -195,37 +205,6 @@ on = "l"
 run = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
 
-# Linemode
-[[manager.prepend_keymap]]
-on = ["n", "s"]
-run = "linemode size"
-desc = "Linemode: size"
-
-[[manager.prepend_keymap]]
-on = ["n", "p"]
-run = "linemode permissions"
-desc = "Linemode: permissions"
-
-[[manager.prepend_keymap]]
-on = ["n", "b"]
-run = "linemode btime"
-desc = "Linemode: btime"
-
-[[manager.prepend_keymap]]
-on = ["n", "m"]
-run = "linemode mtime"
-desc = "Linemode: mtime"
-
-[[manager.prepend_keymap]]
-on = ["n", "o"]
-run = "linemode owner"
-desc = "Linemode: owner"
-
-[[manager.prepend_keymap]]
-on = ["n", "n"]
-run = "linemode none"
-desc = "Linemode: none"
-
 # shell
 [[manager.prepend_keymap]]
 on = "!"
@@ -243,24 +222,3 @@ desc = "Open file in editor"
 on = "i"
 run = 'shell --block -- viewer.sh "$@"'
 desc = "Open file in viewer"
-
-# bookmarks
-[[manager.prepend_keymap]]
-on = ["m"]
-run = "plugin bookmarks save"
-desc = "Save current position as a bookmark"
-
-[[manager.prepend_keymap]]
-on = ["'"]
-run = "plugin bookmarks jump"
-desc = "Jump to a bookmark"
-
-[[manager.prepend_keymap]]
-on = ["b", "d"]
-run = "plugin bookmarks delete"
-desc = "Delete a bookmark"
-
-[[manager.prepend_keymap]]
-on = ["b", "D"]
-run = "plugin bookmarks delete_all"
-desc = "Delete all bookmarks"
