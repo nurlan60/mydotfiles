@@ -4,6 +4,11 @@ run = "close"
 desc = "Cancel input"
 
 [[manager.prepend_keymap]]
+desc = "Start bunny.yazi"
+on = "'"
+run = "plugin bunny"
+
+[[manager.prepend_keymap]]
 on = "l"
 run = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
@@ -199,37 +204,6 @@ desc = "Move down in the parent directory"
 on = ["C"]
 run = "plugin ouch zip"
 desc = "Compress with ouch"
-
-# Linemode
-[[manager.prepend_keymap]]
-on = ["n", "s"]
-run = "linemode size"
-desc = "Linemode: size"
-
-[[manager.prepend_keymap]]
-on = ["n", "p"]
-run = "linemode permissions"
-desc = "Linemode: permissions"
-
-[[manager.prepend_keymap]]
-on = ["n", "b"]
-run = "linemode btime"
-desc = "Linemode: btime"
-
-[[manager.prepend_keymap]]
-on = ["n", "m"]
-run = "linemode mtime"
-desc = "Linemode: mtime"
-
-[[manager.prepend_keymap]]
-on = ["n", "o"]
-run = "linemode owner"
-desc = "Linemode: owner"
-
-[[manager.prepend_keymap]]
-on = ["n", "n"]
-run = "linemode none"
-desc = "Linemode: none"
 
 # shell
 [[manager.prepend_keymap]]
