@@ -9,6 +9,11 @@ on = "'"
 run = "plugin bunny"
 
 [[manager.prepend_keymap]]
+on = "l"
+run = "plugin smart-enter"
+desc = "Enter the child directory, or open the file"
+
+[[manager.prepend_keymap]]
 on = ["T", "1"]
 run = "plugin toggle-pane min-parent"
 desc = "Show or hide the parent pane"
@@ -44,8 +49,8 @@ run = "plugin smart-filter"
 desc = "Smart filter"
 
 [[manager.prepend_keymap]]
-on = "<C-p>"
-run = 'shell -- qlmanage -p "$@"'
+on = "M"
+run = "plugin mount"
 
 [[manager.prepend_keymap]]
 on = ["E"]
@@ -168,20 +173,15 @@ run = "plugin dual-pane reset_config"
 desc = "Dual-pane: reset saved configuration"
 
 [[manager.prepend_keymap]]
-on = ["b", "c"]
-desc = "Dual-pane: run command (use fzf)"
-run = "plugin dual-pane 'shell_fzf /Users/nurlan/.config/yazi/dual-pane.txt'"
+on = ["c", "m"]
+run = "plugin chmod"
+desc = "Chmod on selected files"
 
+# Unyank
 [[manager.prepend_keymap]]
 on = "u"
 run = "unyank"
 desc = "Cancel the yank status"
-
-# Archive
-[[manager.prepend_keymap]]
-on = ["c", "a"]
-run = "plugin compress"
-desc = "Archive selected files"
 
 # Use K to move up in the parent directory
 [[manager.prepend_keymap]]
@@ -200,11 +200,6 @@ on = ["C"]
 run = "plugin ouch zip"
 desc = "Compress with ouch"
 
-[[manager.prepend_keymap]]
-on = "l"
-run = "plugin smart-enter"
-desc = "Enter the child directory, or open the file"
-
 # shell
 [[manager.prepend_keymap]]
 on = "!"
@@ -222,3 +217,24 @@ desc = "Open file in editor"
 on = "i"
 run = 'shell --block -- viewer.sh "$@"'
 desc = "Open file in viewer"
+
+# bookmarks
+[[manager.prepend_keymap]]
+on = ["m"]
+run = "plugin bookmarks save"
+desc = "Save current position as a bookmark"
+
+[[manager.prepend_keymap]]
+on = ["'"]
+run = "plugin bookmarks jump"
+desc = "Jump to a bookmark"
+
+[[manager.prepend_keymap]]
+on = ["b", "d"]
+run = "plugin bookmarks delete"
+desc = "Delete a bookmark"
+
+[[manager.prepend_keymap]]
+on = ["b", "D"]
+run = "plugin bookmarks delete_all"
+desc = "Delete all bookmarks"

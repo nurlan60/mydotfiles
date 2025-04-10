@@ -1,7 +1,7 @@
 local M = {}
 
 function M:peek(job)
-	local child = Command("docx2txt.pl")
+	local child = Command("docx2txt")
 		:args({
 			tostring(job.file.url),
 			"-",
