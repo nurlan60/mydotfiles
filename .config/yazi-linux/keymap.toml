@@ -183,11 +183,6 @@ on = "u"
 run = "unyank"
 desc = "Cancel the yank status"
 
-[[manager.prepend_keymap]]
-on = ["c", "a"]
-run = "plugin compress"
-desc = "Archive selected files"
-
 # Use K to move up in the parent directory
 [[manager.prepend_keymap]]
 on = ["K"]
