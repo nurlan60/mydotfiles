@@ -5,9 +5,6 @@ prepend_previewers = [
   # Docx previewer
   { name = "*.docx", run = "docx" },
 
-  # Markdown previewer
-  { name = "*.md", run = "glow" },
-
   # Archive previewer
   { mime = "application/{*zip,tar,bzip*,7z-compressed,xz,rar}", run = "ouch" },
 ]
