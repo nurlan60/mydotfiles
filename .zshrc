@@ -26,7 +26,6 @@ source "${HOME}/.iterm2_shell_integration.zsh"
 
 alias python="/opt/homebrew/bin/python3"
 alias pip="/opt/homebrew/bin/pip3"
-alias docx2txt="docx2txt.pl"
 
 # oh-my-posh
 # eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/powerlevel10k_rainbow.omp.json)"
