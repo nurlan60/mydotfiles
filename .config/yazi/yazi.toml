@@ -4,6 +4,9 @@ prepend_previewers = [
 
   { name = "*/", run = "eza-preview" },
 
+  # Doc previewer
+  { name = "*.doc", run = "doc" },
+
   # Docx previewer
   { name = "*.docx", run = "docx" },
 

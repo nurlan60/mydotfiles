@@ -16,6 +16,9 @@ case ${1:e} in
   djvu)
     djvutxt "$1" | less
     ;;
+  doc)
+    antiword "$1" | less
+    ;;
   docx)
     if [[ $(uname) == "Darwin" ]]; then
       docx2txt.pl "$1" - | less
