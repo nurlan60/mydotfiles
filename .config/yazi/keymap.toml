@@ -195,11 +195,6 @@ on = ["J"]
 run = ["leave", "arrow 1", "enter"]
 desc = "Move down in the parent directory"
 
-[[manager.prepend_keymap]]
-on = ["C"]
-run = "plugin ouch zip"
-desc = "Compress with ouch"
-
 # shell
 [[manager.prepend_keymap]]
 on = "!"
