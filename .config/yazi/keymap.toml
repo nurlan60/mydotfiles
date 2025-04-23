@@ -9,11 +9,6 @@ run = "close"
 desc = "Cancel input"
 
 [[manager.prepend_keymap]]
-desc = "Start bunny.yazi"
-on = "'"
-run = "plugin bunny"
-
-[[manager.prepend_keymap]]
 on = "l"
 run = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"

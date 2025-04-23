@@ -8,8 +8,3 @@ require("dual-pane"):setup()
 require("session"):setup({
 	sync_yanked = true,
 })
-require("bunny"):setup({
-	hops = {
-		{ key = "y", path = "~/.config/yazi" },
-	},
-})

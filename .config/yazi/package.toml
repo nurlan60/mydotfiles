@@ -24,11 +24,6 @@ rev = "b12a9ab"
 hash = "7918aab6a71caf31b58411f789195677"
 
 [[plugin.deps]]
-use = "stelcodes/bunny"
-rev = "a64f32a"
-hash = "22d9e6f72230be88ab322040626623a"
-
-[[plugin.deps]]
 use = "yazi-rs/plugins:piper"
 rev = "b12a9ab"
 hash = "a8e41f245a689dabee8e4ff06483a4eb"
