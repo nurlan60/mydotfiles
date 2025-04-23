@@ -28,6 +28,11 @@ use = "yazi-rs/plugins:piper"
 rev = "b12a9ab"
 hash = "a8e41f245a689dabee8e4ff06483a4eb"
 
+[[plugin.deps]]
+use = "dedukun/bookmarks"
+rev = "a70648a"
+hash = "b836fb264381f35dec79930438a906d5"
+
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
 rev = "68326b4"
