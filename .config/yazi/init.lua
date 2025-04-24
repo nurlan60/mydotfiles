@@ -9,7 +9,6 @@ require("session"):setup({
 	sync_yanked = true,
 })
 
--- ~/.config/yazi/init.lua
 require("bookmarks"):setup({
 	last_directory = { enable = false, persist = false, mode = "dir" },
 	persist = "vim",
