@@ -1,6 +1,6 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:chmod"
-rev = "b12a9ab"
+rev = "864a021"
 hash = "2f1053f89d1a301a648ab181d0948e38"
 
 [[plugin.deps]]
@@ -10,28 +10,33 @@ hash = "72355a6c8b7c8de6ed4dda0f98f86fee"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mount"
-rev = "b12a9ab"
+rev = "864a021"
 hash = "dd97eede8e20e59cd2604e8006e470e2"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "b12a9ab"
-hash = "5c9dda1a587b8f5b6f63e3d5375bda88"
+rev = "864a021"
+hash = "f3853bbdd1da2fad09d059ab5464abfd"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-enter"
-rev = "b12a9ab"
+rev = "864a021"
 hash = "7918aab6a71caf31b58411f789195677"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:piper"
-rev = "b12a9ab"
-hash = "a8e41f245a689dabee8e4ff06483a4eb"
+rev = "864a021"
+hash = "ca862f0008f47952e2bd3e19328aca02"
 
 [[plugin.deps]]
 use = "dedukun/bookmarks"
 rev = "a70648a"
 hash = "b836fb264381f35dec79930438a906d5"
+
+[[plugin.deps]]
+use = "boydaihungst/compress"
+rev = "341592e"
+hash = "cc40797417da8be83e130b492dbfb5f9"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"

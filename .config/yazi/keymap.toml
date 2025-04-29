@@ -1,19 +1,17 @@
 [input]
-
 prepend_keymap = [{ on = "<Esc>", run = "close", desc = "Cancel input" }]
 
 [manager]
-
 prepend_keymap = [
+  # Smart-enter
+  { on = "l", run = "plugin smart-enter", desc = "Enter the child directory, or open the file" },
+
+  # Mount
+  { on = "M", run = "plugin mount", desc = "Mount drive", for = 'unix' },
+
   # Go to 
-  { on = [
-    "g",
-    "c",
-  ], run = "cd ~/.config", desc = "Go ~/.config", for = 'unix' },
-  { on = [
-    "g",
-    "c",
-  ], run = "cd ~/AppData/Roaming", desc = "Go ~/.config", for = 'windows' },
+  { on = [ "g","c" ], run = "cd ~/.config", desc = "Go ~/.config", for = 'unix' },
+  { on = [ "g","c" ], run = "cd ~/AppData/Roaming", desc = "Go ~/.config", for = 'windows' },
 
   # Unyank
   { on = "u", run = "unyank", desc = "Cancel the yank status" },
@@ -22,68 +20,30 @@ prepend_keymap = [
   { on = "!", run = 'shell --block -- $SHELL', desc = "Open shell here", for = 'unix' },
   { on = "!", run = 'shell --block -- "pwsh.exe"', desc = "Open shell here", for = 'windows' },
 
-  # Editor
-  { on = "e", run = 'shell --block -- $EDITOR "$@"', desc = "Open file in editor", for = 'unix' },
-  { on = "e", run = 'shell --block -- cmd.exe /C nvim %*', desc = "Open file in editor", for = 'windows' },
-
   # Viewer
   { on = "i", run = 'shell --block -- viewer.sh "$@"', desc = "Open file in viewer", for = 'unix' },
 
   # Chmod
-  { on = [
-    "c",
-    "m",
-  ], run = "plugin chmod", desc = "Chmod on selected files", for = 'unix' },
+  { on = [ "c","m" ], run = "plugin chmod", desc = "Chmod on selected files", for = 'unix' },
 
   # Compress
-  { on = [
-    "c",
-    "a",
-  ], run = "plugin compress", desc = "Archive selected files" },
-
-  # Smart-enter
-  { on = "l", run = "plugin smart-enter", desc = "Enter the child directory, or open the file" },
-
-  # Mount
-  { on = "M", run = "plugin mount", desc = "Mount drive", for = 'unix' },
+  { on = [ "e","c" ], run = "plugin compress", desc = "Archive selected files" },
+  # If you input empty password, it will make an archive without password
+  { on = [ "e","C" ], run = "plugin compress -- --secure", desc = "Compress file(s) with password" },
 
   # Bookmarks
   { on = "n", run = "plugin bookmarks save", desc = "Save current position as a bookmark" },
   { on = "'", run = "plugin bookmarks jump", desc = "Jump to a bookmark" },
-  { on = [
-    "b",
-    "d",
-  ], run = "plugin bookmarks delete", desc = "Delete a bookmark" },
-  { on = [
-    "b",
-    "D",
-  ], run = "plugin bookmarks delete_all", desc = "Delete all bookmarks" },
+  { on = [ "b","d" ], run = "plugin bookmarks delete", desc = "Delete a bookmark" },
+  { on = [ "b","D" ], run = "plugin bookmarks delete_all", desc = "Delete all bookmarks" },
 
   # Toggle-pane
-  { on = [
-    "T",
-    "1",
-  ], run = "plugin toggle-pane min-parent", desc = "Show or hide the parent pane" },
-  { on = [
-    "T",
-    "!",
-  ], run = "plugin toggle-pane max-parent", desc = "Maximize or restore the parent pane" },
-  { on = [
-    "T",
-    "2",
-  ], run = "plugin toggle-pane min-current", desc = "Show or hide the current pane" },
-  { on = [
-    "T",
-    "@",
-  ], run = "plugin toggle-pane max-current", desc = "Maximize or restore the current pane" },
-  { on = [
-    "T",
-    "3",
-  ], run = "plugin toggle-pane min-preview", desc = "Show or hide the preview pane" },
-  { on = [
-    "T",
-    "#",
-  ], run = "plugin toggle-pane max-preview", desc = "Maximize or restore the preview pane" },
+  { on = [ "T","1" ], run = "plugin toggle-pane min-parent", desc = "Show or hide the parent pane" },
+  { on = [ "T","!" ], run = "plugin toggle-pane max-parent", desc = "Maximize or restore the parent pane" },
+  { on = [ "T","2" ], run = "plugin toggle-pane min-current", desc = "Show or hide the current pane" },
+  { on = [ "T","@" ], run = "plugin toggle-pane max-current", desc = "Maximize or restore the current pane" },
+  { on = [ "T","3" ], run = "plugin toggle-pane min-preview", desc = "Show or hide the preview pane" },
+  { on = [ "T","#" ], run = "plugin toggle-pane max-preview", desc = "Maximize or restore the preview pane" },
 
   # Eza-preview
   { on = "E", run = "plugin eza-preview", desc = "Toggle tree/list dir preview" },
@@ -92,14 +52,8 @@ prepend_keymap = [
   { on = "$", run = "plugin eza-preview -- '--toggle-follow-symlinks'", desc = "Toggle tree follow symlinks" },
 
   # Dual-pane
-  { on = [
-    "b",
-    "t",
-  ], run = "plugin dual-pane toggle", desc = "Dual-pane: toggle" },
-  { on = [
-    "b",
-    "b",
-  ], run = "plugin dual-pane toggle_zoom", desc = "Dual-pane: toggle zoom" },
+  { on = [ "b","t" ], run = "plugin dual-pane toggle", desc = "Dual-pane: toggle" },
+  { on = [ "b","b" ], run = "plugin dual-pane toggle_zoom", desc = "Dual-pane: toggle zoom" },
   { on = "<Tab>", run = "plugin dual-pane next_pane", desc = "Dual-pane: switch to the other pane" },
   { on = "[", run = "plugin dual-pane 'tab_switch -1 --relative'", desc = "Dual-pane: switch active to previous tab" },
   { on = "]", run = "plugin dual-pane 'tab_switch 1 --relative'", desc = "Dual-pane: switch active to next tab" },
@@ -115,16 +69,7 @@ prepend_keymap = [
   { on = "t", run = "plugin dual-pane 'tab_create --current'", desc = "Dual-pane: create a new tab with CWD" },
   { on = "<F5>", run = "plugin dual-pane 'copy_files --follow'", desc = "Dual-pane: copy selected files from active to inactive pane" },
   { on = "<F6>", run = "plugin dual-pane 'move_files --follow'", desc = "Dual-pane: move selected files from active to inactive pane" },
-  { on = [
-    "b",
-    "s",
-  ], run = "plugin dual-pane save_config", desc = "Dual-pane: save current configuration" },
-  { on = [
-    "b",
-    "l",
-  ], run = "plugin dual-pane load_config", desc = "Dual-pane: load saved configuration" },
-  { on = [
-    "b",
-    "r",
-  ], run = "plugin dual-pane reset_config", desc = "Dual-pane: reset saved configuration" },
+  { on = [ "b","s"], run = "plugin dual-pane save_config", desc = "Dual-pane: save current configuration" },
+  { on = [ "b","l" ], run = "plugin dual-pane load_config", desc = "Dual-pane: load saved configuration" },
+  { on = [ "b","r" ], run = "plugin dual-pane reset_config", desc = "Dual-pane: reset saved configuration" },
 ]
