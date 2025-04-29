@@ -1,6 +1,12 @@
-#!/bin/sh
+#!/bin/zsh
 
-case ${1##*.} in
+# if [[ ! -a $1 ]]; then
+# 	echo "Usage: viewer [file]"
+#   read -s -k '?Press any key to continue.'
+#   exit 1
+# fi
+
+case ${1:e} in
 pdf)
   pdftotext -layout -nopgbrk "$1" - | less
   ;;
