@@ -42,6 +42,6 @@ tar | tgz | tbz* | txz | zip | 7z | gz | xz | lzma | bz* | lz4 | sz | zst | rar)
   ouch list "$1" --tree | less
   ;;
 *)
-  bat "$1"
+  bat --paging=always "$1"
   ;;
 esac
