@@ -9,5 +9,5 @@ prepend_previewers = [
 
 edit = [
   { run = '${EDITOR:-vi} "$@"', desc = "$EDITOR", block = true, for = "unix" },
-  { run = "cmd.exe /C nvim %*", block = true, for = "windows" },
+  { run = "nvim %*", block = true, for = "windows" },
 ]
