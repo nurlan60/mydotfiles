@@ -18,7 +18,7 @@ prepend_keymap = [
 
   # Shell
   { on = "!", run = 'shell --block -- $SHELL', desc = "Open shell here", for = 'unix' },
-  { on = "!", run = 'shell --block -- "pwsh.exe"', desc = "Open shell here", for = 'windows' },
+  { on = "!", run = 'shell --block -- "bash.exe"', desc = "Open shell here", for = 'windows' },
 
   # Viewer
   { on = "i", run = 'shell --block -- viewer.sh "$@"', desc = "Open file in viewer", for = 'unix' },
