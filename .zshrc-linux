@@ -51,4 +51,3 @@ cat ~/.cache/wal/sequences
 if [[ $SHLVL == 1 ]]; then
     fastfetch --config examples/13
 fi
-
