@@ -28,14 +28,16 @@ alias deb="ssh debian"
 alias len="ssh lenovo"
 
 alias lg="lazygit"
+alias gf='git fetch'
 alias gs="git status"
 alias ga="git add"
 alias gc="git commit -m"
 alias gp="git push"
-alias gpl="git pull"
+alias gl="git pull"
+alias gac="git add . && git commit -m" # + commit message
 alias gst="git stash"
 alias gsp="git stash; git pull"
-alias gcheck="git checkout"
+alias gch="git checkout"
 alias gcredential="git config credential.helper store"
 
 # nnn config
