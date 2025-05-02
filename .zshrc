@@ -95,6 +95,7 @@ function y() {
 
 # Change Yazi's CWD to PWD on subshell exit
 if [[ -n "$YAZI_ID" ]]; then
+  autoload -U add-zsh-hook
 	function _yazi_cd() {
 		ya emit cd "$PWD"
 	}
