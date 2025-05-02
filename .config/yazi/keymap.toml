@@ -12,6 +12,7 @@ prepend_keymap = [
   # Go to 
   { on = [ "g","c" ], run = "cd ~/.config", desc = "Go ~/.config", for = 'unix' },
   { on = [ "g","c" ], run = "cd ~/AppData/Roaming", desc = "Go ~/.config", for = 'windows' },
+  { on = [ "g","H" ], run = "cd C:/Mac/Home", desc = "Go Mac Home", for = 'windows' },
 
   # Unyank
   { on = "u", run = "unyank", desc = "Cancel the yank status" },
