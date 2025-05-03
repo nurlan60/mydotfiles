@@ -28,29 +28,28 @@ autocmd("FileType", {
 local layout_ids = {
   ["English (US)"] = 0,
   Russian = 1,
-  normal = 0,
 }
 
 local get_current_layout = function()
   local file = io.popen("hyprctl devices -j | jq -r '.keyboards.[] | select(.main == true).active_keymap'")
   local output = file:read()
   file:close()
-  return output
+  return layout_ids[output]
 end
 
 local change_layout = function(layout)
-  vim.fn.jobstart(string.format("hyprctl switchxkblayout current %s", layout_ids[layout]))
+  vim.fn.jobstart(string.format("hyprctl switchxkblayout current %s", layout))
 end
 
 local manage_layout = function(current_layout, layout_to_change)
-  if layout_ids[current_layout] ~= layout_ids[layout_to_change] then
+  if current_layout ~= layout_to_change then
     change_layout(layout_to_change)
   end
 end
 
 local saved_layout = get_current_layout()
 
-local NORMAL_LAYOUT = "normal"
+local NORMAL_LAYOUT = 0
 
 -- When leaving Insert Mode:
 -- 1. Save the current layout
