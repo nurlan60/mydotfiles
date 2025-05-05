@@ -123,8 +123,6 @@ _fzf_compgen_dir() {
 }
 
 if [[ $(uname) == "Darwin" ]]; then
-    source "${HOME}/.iterm2_shell_integration.zsh"
-
     alias python="/opt/homebrew/bin/python3"
     alias pip="/opt/homebrew/bin/pip3"
     
