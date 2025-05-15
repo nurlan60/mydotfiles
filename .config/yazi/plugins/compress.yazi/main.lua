@@ -357,17 +357,17 @@ return {
 		end
 
 		local overwrite_answer = true
-		local output_fwithout_ext_cha = fs.cha(
-			Url(pathJoin(get_cwd(), type(output_furl.stem) == "function" and output_furl:stem() or output_furl.stem))
-		)
-		if output_fcha or output_fwithout_ext_cha then
-			local list_existed_files = {}
-			if output_fcha then
-				list_existed_files[#list_existed_files + 1] = ui.Span(output_name)
-			end
+		local list_existed_files = {}
+		if output_fcha then
+			list_existed_files[#list_existed_files + 1] = ui.Span(output_name)
+		end
+		if compress_cmd then
+			local output_fwithout_ext_cha = fs.cha(Url(pathJoin(get_cwd(), output_fname_without_ext)))
 			if output_fwithout_ext_cha then
-				list_existed_files[#list_existed_files + 1] = ui.Span(output_fwithout_ext_cha)
+				list_existed_files[#list_existed_files + 1] = ui.Span(output_fname_without_ext)
 			end
+		end
+		if #list_existed_files > 0 then
 			overwrite_answer = ya.confirm({
 				title = ui.Line("Create Archive File"),
 				content = ui.Text({
