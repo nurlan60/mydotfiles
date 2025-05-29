@@ -28,6 +28,7 @@ alias mac="ssh mac"
 alias asus="ssh asus"
 alias deb="ssh debian"
 alias len="ssh lenovo"
+alias rpi="ssh rpi"
 
 alias lg="lazygit"
 alias gf='git fetch'
