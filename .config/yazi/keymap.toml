@@ -28,7 +28,6 @@ prepend_keymap = [
   { on = [ "c","m" ], run = "plugin chmod", desc = "Chmod on selected files", for = 'unix' },
 
   # Compress
-  { on = "C", run = "plugin ouch", desc = "Compress with ouch" },
   { on = [ "e","c" ], run = "plugin compress", desc = "Compress file(s)" },
   # If you input empty password, it will make an archive without password
   { on = [ "e","C" ], run = "plugin compress -- --secure", desc = "Compress file(s) with password" },
