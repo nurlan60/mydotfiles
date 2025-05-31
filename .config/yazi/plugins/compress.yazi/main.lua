@@ -1,4 +1,4 @@
---- @since 25.4.8
+--- @since 25.5.28
 
 local supported_encryption = {
 	"%.zip$",
@@ -137,7 +137,7 @@ end
 return {
 	entry = function(_, job)
 		-- Exit visual mode
-		ya.mgr_emit("escape", { visual = true })
+		ya.emit("escape", { visual = true })
 		local secure = job.args.secure
 		local decrypt_password, input_pw_event
 		local files_to_archive = selected_or_hovered()
@@ -377,9 +377,9 @@ return {
 					ui.Line({
 						ui.Span(" "),
 						table.unpack(list_existed_files),
-					}):align(ui.Line.LEFT),
+					}):align(ui.Align.LEFT),
 				})
-					:align(ui.Text.LEFT)
+					:align(ui.Align.LEFT)
 					:wrap(ui.Text.WRAP),
 				pos = { "center", w = 70, h = 10 },
 			})
