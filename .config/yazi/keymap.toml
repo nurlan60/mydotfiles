@@ -26,11 +26,13 @@ prepend_keymap = [
 
   # Chmod
   { on = [ "c","m" ], run = "plugin chmod", desc = "Chmod on selected files", for = 'unix' },
-
+  
   # Compress
-  { on = [ "e","c" ], run = "plugin compress", desc = "Compress file(s)" },
-  # If you input empty password, it will make an archive without password
-  { on = [ "e","C" ], run = "plugin compress -- --secure", desc = "Compress file(s) with password" },
+  { on   = [ "c", "a", "a" ], run  = "plugin compress", desc = "Archive selected files" },
+  {on   = [ "c", "a", "p" ], run  = "plugin compress -p", desc = "Archive selected files (password)" },
+  { on   = [ "c", "a", "h" ], run  = "plugin compress -ph", desc = "Archive selected files (password+header)" },
+  { on   = [ "c", "a", "l" ], run  = "plugin compress -l", desc = "Archive selected files (compression level)" },
+  { on   = [ "c", "a", "u" ], run  = "plugin compress -phl", desc = "Archive selected files (password+header+level)" },
 
   # Bookmarks
   { on = "n", run = "plugin bookmarks save", desc = "Save current position as a bookmark" },

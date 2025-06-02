@@ -29,9 +29,9 @@ rev = "fbb7c00"
 hash = "1d231a808d3344546380df33daf43e91"
 
 [[plugin.deps]]
-use = "boydaihungst/compress"
-rev = "0be65a2"
-hash = "7b75a31010cb69fdcfd7df56f1391182"
+use = "KKV9/compress"
+rev = "163b8e6"
+hash = "24a6b6c1a44308bbd7361451487087ab"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
