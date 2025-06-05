@@ -17,7 +17,7 @@ local autocmd = vim.api.nvim_create_autocmd
 autocmd("FileType", {
   pattern = { "tex", "markdown" },
   callback = function()
-    vim.opt.conceallevel = 0
+    vim.opt_local.conceallevel = 0
   end,
 })
 
