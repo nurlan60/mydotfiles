@@ -11,13 +11,21 @@ local autocmd = vim.api.nvim_create_autocmd
 --   command = "set nopaste",
 -- })
 
+---------------------------------------------------- 
+-- Disable autoformat for toml files
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "toml" },
+  callback = function()
+    vim.b.autoformat = false
+  end,
+})
 ------------------------------------------------------
 -- Disable the concealing in some file formats
 -------------------
 autocmd("FileType", {
   pattern = { "tex", "markdown" },
   callback = function()
-    vim.opt.conceallevel = 0
+    vim.opt_local.conceallevel = 0
   end,
 })
 
