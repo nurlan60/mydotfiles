@@ -1,3 +1,17 @@
+require("eza-preview"):setup({
+	-- Directory depth level for tree preview (default: 3)
+	level = 3,
+
+	-- Follow symlinks when previewing directories (default: false)
+	follow_symlinks = true,
+
+	-- Show target file info instead of symlink info (default: false)
+	dereference = true,
+
+	-- Show hidden files (default: true)
+	all = true,
+})
+
 -- cross-instance yank
 require("session"):setup({
 	sync_yanked = true,
