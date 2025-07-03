@@ -54,7 +54,8 @@ n ()
 {
     # Block nesting of nnn in subshells
     if [[ "${NNNLVL:-0}" -ge 1 ]]; then
-        echo "nnn is already running"
+        # echo "nnn is already running"
+        exit
         return
     fi
 
@@ -85,7 +86,8 @@ n ()
 function y() {
   # Block nesting of yazi in subshells
   if [ -n "$YAZI_LEVEL" ]; then
-    echo "yazi is already running"
+    # echo "yazi is already running"
+    exit
     return
   fi
 
