@@ -48,4 +48,10 @@ prepend_keymap = [
   { on = [ "T","3" ], run = "plugin toggle-pane min-preview", desc = "Show or hide the preview pane" },
   { on = [ "T","#" ], run = "plugin toggle-pane max-preview", desc = "Maximize or restore the preview pane" },
 
+# Eza-preview
+  { on = [ "E" ], run = "plugin eza-preview",  desc = "Toggle tree/list dir preview" },
+  { on = [ "+" ], run = "plugin eza-preview inc-level", desc = "Increment tree level" },
+  { on = [ "=" ], run = "plugin eza-preview dec-level", desc = "Decrement tree level" },
+  { on = [ "$" ], run = "plugin eza-preview toggle-follow-symlinks", desc = "Toggle tree follow symlinks" },
+  { on = [ "*" ], run = "plugin eza-preview toggle-hidden", desc = "Toggle hidden files" },
 ]
