@@ -33,11 +33,6 @@ use = "KKV9/compress"
 rev = "9fc8fe0"
 hash = "2ad086899bf368fba211a33d8f68c39d"
 
-[[plugin.deps]]
-use = "ahkohd/eza-preview"
-rev = "b114b01"
-hash = "7676d7da18953f4351048004ab45f0f4"
-
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
 rev = "d04a298"
