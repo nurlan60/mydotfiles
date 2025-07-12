@@ -1,0 +1,7 @@
+[flavor]
+# dark = "catppuccin-mocha"
+dark = "catppuccin-frappe"
+light = "catppuccin-latte"
+
+[status]
+overall = { fg = "#cad3f5", bg = "#181926" }

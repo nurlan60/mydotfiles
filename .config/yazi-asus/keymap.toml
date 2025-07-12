@@ -1,0 +1,51 @@
+[input]
+prepend_keymap = [{ on = "<Esc>", run = "close", desc = "Cancel input" }]
+
+[mgr]
+prepend_keymap = [
+  # Smart-enter
+  { on = "l", run = "plugin smart-enter", desc = "Enter the child directory, or open the file" },
+
+  # Mount
+  { on = "M", run = "plugin mount", desc = "Mount drive", for = 'unix' },
+
+  # Go to 
+  { on = [ "g","c" ], run = "cd ~/.config", desc = "Go ~/.config", for = 'unix' },
+  { on = [ "g","c" ], run = "cd ~/AppData/Roaming", desc = "Go ~/.config", for = 'windows' },
+  { on = [ "g","H" ], run = "cd C:/Mac/Home", desc = "Go Mac Home", for = 'windows' },
+
+  # Unyank
+  { on = "u", run = "unyank", desc = "Cancel the yank status" },
+
+  # Shell
+  { on = "!", run = 'shell --block -- $SHELL', desc = "Open shell here", for = 'unix' },
+  { on = "!", run = 'shell --block -- "bash.exe"', desc = "Open shell here", for = 'windows' },
+
+  # Viewer
+  { on = "i", run = 'shell --block -- viewer.sh "$@"', desc = "Open file in viewer", for = 'unix' },
+
+  # Chmod
+  { on = [ "c","m" ], run = "plugin chmod", desc = "Chmod on selected files", for = 'unix' },
+  
+  # Compress
+  { on   = [ "c", "a", "a" ], run  = "plugin compress", desc = "Archive selected files" },
+  { on   = [ "c", "a", "p" ], run  = "plugin compress -p", desc = "Archive selected files (password)" },
+  { on   = [ "c", "a", "h" ], run  = "plugin compress -ph", desc = "Archive selected files (password+header)" },
+  { on   = [ "c", "a", "l" ], run  = "plugin compress -l", desc = "Archive selected files (compression level)" },
+  { on   = [ "c", "a", "u" ], run  = "plugin compress -phl", desc = "Archive selected files (password+header+level)" },
+
+  # Bookmarks
+  { on = "n", run = "plugin bookmarks save", desc = "Save current position as a bookmark" },
+  { on = "'", run = "plugin bookmarks jump", desc = "Jump to a bookmark" },
+  { on = [ "b","d" ], run = "plugin bookmarks delete", desc = "Delete a bookmark" },
+  { on = [ "b","D" ], run = "plugin bookmarks delete_all", desc = "Delete all bookmarks" },
+
+  # Toggle-pane
+  { on = [ "T","1" ], run = "plugin toggle-pane min-parent", desc = "Show or hide the parent pane" },
+  { on = [ "T","!" ], run = "plugin toggle-pane max-parent", desc = "Maximize or restore the parent pane" },
+  { on = [ "T","2" ], run = "plugin toggle-pane min-current", desc = "Show or hide the current pane" },
+  { on = [ "T","@" ], run = "plugin toggle-pane max-current", desc = "Maximize or restore the current pane" },
+  { on = [ "T","3" ], run = "plugin toggle-pane min-preview", desc = "Show or hide the preview pane" },
+  { on = [ "T","#" ], run = "plugin toggle-pane max-preview", desc = "Maximize or restore the preview pane" },
+
+]
