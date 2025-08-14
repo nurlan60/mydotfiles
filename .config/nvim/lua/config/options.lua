@@ -33,7 +33,7 @@ vim.api.nvim_command([[
     nmap <F8> :emenu Encoding.<Tab>
 ]])
 
--- S-F8 Convert file encoding
+-- F9 Convert file encoding
 vim.api.nvim_command([[
     set  wildmenu
     set  wcm=<Tab>
