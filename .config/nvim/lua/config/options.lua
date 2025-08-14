@@ -42,5 +42,5 @@ vim.api.nvim_command([[
     menu File-Encoding.cp866     :set fenc=ibm866<CR>
     menu File-Encoding.koi8-r    :set fenc=koi8-r<CR>
     menu File-Encoding.ucs-2le   :set fenc=ucs-2le<CR>
-    nmap  <S-F8> :emenu File-Encoding.<Tab>
+    nmap  <F9> :emenu File-Encoding.<Tab>
 ]])
