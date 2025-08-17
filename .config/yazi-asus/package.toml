@@ -33,6 +33,21 @@ use = "KKV9/compress"
 rev = "9fc8fe0"
 hash = "2ad086899bf368fba211a33d8f68c39d"
 
+[[plugin.deps]]
+use = "boydaihungst/fuse-archive"
+rev = "787d350"
+hash = "3ef0f4cb893827ecfbcd9a351e87e1d0"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:smart-filter"
+rev = "e95c7b3"
+hash = "e56b7abf3c06e8ce496eadcca168c093"
+
+[[plugin.deps]]
+use = "uhs-robert/sshfs"
+rev = "5010171"
+hash = "4a57605c3e788f9913f98c8b43f4b1de"
+
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
 rev = "d04a298"
