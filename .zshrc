@@ -153,8 +153,6 @@ else
     # source antidote
     source /usr/share/zsh-antidote/antidote.zsh
 
-    # Pywal
-    cat ~/.cache/wal/sequences
 fi
 
 export PATH
