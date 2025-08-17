@@ -1,7 +1,5 @@
 [plugin]
 prepend_previewers = [
-  { name = "*/", run = "eza-preview" },
-  # { name = "*/", run  = 'piper -- eza -TL=3 --color=always --icons=always --group-directories-first --no-quotes --follow-symlinks "$1"' },
   { name = "*.md", run = 'piper -- CLICOLOR_FORCE=1 glow -w=$w -s=dark "$1"' },
   { name = "*.doc", run = 'piper -- antiword "$1"' },
   { name = "*.docx", run = 'piper -- docx2txt "$1" -' },
@@ -13,4 +11,3 @@ edit = [
   { run = '${EDITOR:-vi} "$@"', desc = "$EDITOR", block = true, for = "unix" },
   { run = "nvim %*", block = true, for = "windows" },
 ]
-

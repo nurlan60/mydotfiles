@@ -4,7 +4,7 @@ prepend_keymap = [{ on = "<Esc>", run = "close", desc = "Cancel input" }]
 [mgr]
 prepend_keymap = [
   # Smart-enter
-  { on = "l", run = "plugin smart-enter", desc = "Enter the child directory, or open the file" },
+  # { on = "l", run = "plugin smart-enter", desc = "Enter the child directory, or open the file" },
 
   # Mount
   { on = "M", run = "plugin mount", desc = "Mount drive", for = 'unix' },
@@ -48,13 +48,17 @@ prepend_keymap = [
   { on = [ "T","3" ], run = "plugin toggle-pane min-preview", desc = "Show or hide the preview pane" },
   { on = [ "T","#" ], run = "plugin toggle-pane max-preview", desc = "Maximize or restore the preview pane" },
 
-# Eza-preview
-  { on = [ "E" ], run = "plugin eza-preview",  desc = "Toggle tree/list dir preview" },
-  { on = [ "+" ], run = "plugin eza-preview inc-level", desc = "Increment tree level" },
-  { on = [ "=" ], run = "plugin eza-preview dec-level", desc = "Decrement tree level" },
-  { on = [ "$" ], run = "plugin eza-preview toggle-follow-symlinks", desc = "Toggle tree follow symlinks" },
-  { on = [ "*" ], run = "plugin eza-preview toggle-hidden", desc = "Toggle hidden files" },
-
   # Smart filter
   { on   = "F", run  = "plugin smart-filter", desc = "Smart filter"},
+  
+  # Fuse-archive
+  { on   = [ "<Right>" ], run = "plugin fuse-archive -- mount", desc = "Enter or Mount selected archive" },
+    { on   = [ "<Left>" ], run = "plugin fuse-archive -- leave", desc = "Leave selected archive without unmount it" },
+    { on   = [ "l" ], run = "plugin fuse-archive -- mount", desc = "Enter or Mount selected archive" },
+    { on   = [ "h" ], run = "plugin fuse-archive -- leave", desc = "Leave selected archive without unmount it" },
+
+    # Over quit command for yazi <= v25.5.31 to unmount on quit. For nightly yazi, you don't need to add these lines.
+    { on   = [ "q" ], run = ["plugin fuse-archive -- unmount", "quit"], desc = "Quit the process" },
+    { on   = [ "Q" ], run = ["plugin fuse-archive -- unmount", "quit --no-cwd-file"], desc = "Quit without outputting cwd-file" },
+
 ]
