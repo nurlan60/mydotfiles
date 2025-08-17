@@ -157,7 +157,7 @@ fi
 
 export PATH
 
-# fzf init after zsh-vi-mode
+# fzf init after zsh-vi-mod
 zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
 
 # zoxide
@@ -171,6 +171,6 @@ bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
 # Fastfetch
-if [[ $SHLVL == 1 ]]; then
+if ! [[ (-v YAZI_LEVEL) || (-v NNNLVL) ]]; then
     fastfetch --config examples/13
 fi
