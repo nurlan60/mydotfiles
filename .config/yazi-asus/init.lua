@@ -1,7 +1,6 @@
 require("sshfs"):setup()
 require("fuse-archive"):setup({
 	smart_enter = true,
-	mount_options = "nocache,nosymlinks",
 })
 
 -- cross-instance yank
