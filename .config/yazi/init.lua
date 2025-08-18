@@ -1,6 +1,5 @@
 require("fuse-archive"):setup({
 	smart_enter = true,
-	mount_options = "nocache,nosymlinks",
 	mount_root_dir = os.getenv("HOME") .. "/tmp",
 })
 
