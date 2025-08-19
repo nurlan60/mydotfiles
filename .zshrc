@@ -152,7 +152,9 @@ else
     
     # source antidote
     source /usr/share/zsh-antidote/antidote.zsh
-
+    
+    # neovim-remote
+    export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 fi
 
 export PATH
