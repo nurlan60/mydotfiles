@@ -135,7 +135,7 @@ if [[ $(uname) == "Darwin" ]]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 
     # oh-my-posh
-    eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/my.omp.json)"
+    eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/new.omp.json)"
 
     # source antidote
     source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
