@@ -40,8 +40,8 @@ hash = "e56b7abf3c06e8ce496eadcca168c093"
 
 [[plugin.deps]]
 use = "boydaihungst/fuse-archive"
-rev = "787d350"
-hash = "3ef0f4cb893827ecfbcd9a351e87e1d0"
+rev = "754a544"
+hash = "faf90560ebe4b65b7e435a8dc43cc3d8"
 
 [[plugin.deps]]
 use = "Shallow-Seek/djvu-view"
