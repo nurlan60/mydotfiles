@@ -43,6 +43,11 @@ use = "boydaihungst/fuse-archive"
 rev = "787d350"
 hash = "3ef0f4cb893827ecfbcd9a351e87e1d0"
 
+[[plugin.deps]]
+use = "Shallow-Seek/djvu-view"
+rev = "f6572ea"
+hash = "f021f217fdd8b8f6bfd1015cea748557"
+
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
 rev = "9cd2ac4"
