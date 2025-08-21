@@ -3,9 +3,6 @@ prepend_keymap = [{ on = "<Esc>", run = "close", desc = "Cancel input" }]
 
 [mgr]
 prepend_keymap = [
-  # Smart-enter
-  # { on = "l", run = "plugin smart-enter", desc = "Enter the child directory, or open the file" },
-
   # Mount
   { on = [ "M","M" ], run = "plugin mount", desc = "Mount drive", for = 'unix' },
 
