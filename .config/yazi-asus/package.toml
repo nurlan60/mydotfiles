@@ -1,37 +1,37 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:chmod"
-rev = "e5f00e2"
+rev = "e95c7b3"
 hash = "1adc12c2b2b025411ab61eb8f0879574"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mount"
-rev = "e5f00e2"
-hash = "f10a14e823382d90fab5b3ee54cb38fe"
+rev = "e95c7b3"
+hash = "e1de3054c0d1a2d8dc6f007eadc0fa31"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "e5f00e2"
+rev = "e95c7b3"
 hash = "d6f60c24d8c0cf57a855bf46115b2502"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:piper"
-rev = "e5f00e2"
+rev = "e95c7b3"
 hash = "2143a53182dbbe935a1abd1623424aa5"
 
 [[plugin.deps]]
 use = "dedukun/bookmarks"
-rev = "fbb7c00"
-hash = "1d231a808d3344546380df33daf43e91"
+rev = "9ef1254"
+hash = "92fbb5483657fa7976cdf4e0104e18e0"
 
 [[plugin.deps]]
 use = "KKV9/compress"
-rev = "9fc8fe0"
-hash = "2ad086899bf368fba211a33d8f68c39d"
+rev = "c264639"
+hash = "e17c11b605d989568a1d1741ca17c584"
 
 [[plugin.deps]]
 use = "boydaihungst/fuse-archive"
-rev = "787d350"
-hash = "3ef0f4cb893827ecfbcd9a351e87e1d0"
+rev = "754a544"
+hash = "faf90560ebe4b65b7e435a8dc43cc3d8"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-filter"
@@ -50,15 +50,15 @@ hash = "f021f217fdd8b8f6bfd1015cea748557"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
-rev = "d04a298"
-hash = "288a0dedd5d13b28605cf82c05326dcd"
+rev = "9cd2ac4"
+hash = "f54b45bdd33f607ddde47f0afad96142"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-latte"
-rev = "d04a298"
-hash = "a4d508772dc7b20d739a2f9a1d2d396f"
+rev = "9cd2ac4"
+hash = "e03f3cc1dc61e84a501134784ca4ba57"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-frappe"
-rev = "d04a298"
-hash = "d659c6fde5148fb5c066518d7fdecddc"
+rev = "9cd2ac4"
+hash = "c769a6c541ae74b33a041ae1f00dcb40"
