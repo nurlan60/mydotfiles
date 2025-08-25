@@ -16,6 +16,7 @@ autoload -U add-zsh-hook
 alias v="nvim"
 alias mc="SHELL=/bin/bash mc"
 alias :q="exit"
+alias keys="glow ~/.config/ghostty/ghostty-shortcuts.md -p"
 
 alias ld='eza -lD'
 alias lf='eza -lF --color=always | grep -v /'
