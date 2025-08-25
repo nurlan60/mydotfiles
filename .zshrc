@@ -153,7 +153,9 @@ else
     
     # source antidote
     source /usr/share/zsh-antidote/antidote.zsh
-    
+
+    # colorscheme for zsh
+    source ~/.config/zshrc.d/dots-hyprland.zsh  
 fi
 
 export PATH
@@ -174,4 +176,9 @@ bindkey '^[[B' history-substring-search-down
 # Fastfetch
 if ! [[ (-v YAZI_LEVEL) || (-v NNNLVL) ]]; then
     fastfetch --config examples/13
+fi
+
+# auto-launch Hyprland
+if [[ $(uname) == "Linux" ]]; then
+    source ~/.config/zshrc.d/auto-Hypr.sh
 fi
