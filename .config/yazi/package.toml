@@ -39,11 +39,6 @@ rev = "e95c7b3"
 hash = "e56b7abf3c06e8ce496eadcca168c093"
 
 [[plugin.deps]]
-use = "boydaihungst/fuse-archive"
-rev = "754a544"
-hash = "faf90560ebe4b65b7e435a8dc43cc3d8"
-
-[[plugin.deps]]
 use = "Shallow-Seek/djvu-view"
 rev = "f6572ea"
 hash = "f021f217fdd8b8f6bfd1015cea748557"
