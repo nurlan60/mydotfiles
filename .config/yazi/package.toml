@@ -48,6 +48,11 @@ use = "boydaihungst/fuse-archive"
 rev = "5f72801"
 hash = "2b496dd4dcba137e2423783c3c31a823"
 
+[[plugin.deps]]
+use = "uhs-robert/sshfs"
+rev = "1a466c8"
+hash = "216b0497421e49b7fda5f07d20435400"
+
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
 rev = "4296a38"

@@ -1,3 +1,5 @@
+require("sshfs"):setup()
+
 require("fuse-archive"):setup({
 	smart_enter = true,
 })

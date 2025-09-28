@@ -8,6 +8,8 @@ prepend_keymap = [
 
   # Mount
   { on = [ "M","M"], run = "plugin mount", desc = "Mount drive", for = 'unix' },
+  # SSHFS
+  { on = ["M","s"], run = "plugin sshfs -- menu",            desc = "Open SSHFS options" },
 
   # Go to 
   { on = [ "g","c" ], run = "cd ~/.config", desc = "Go ~/.config", for = 'unix' },
@@ -63,4 +65,5 @@ prepend_keymap = [
     # Over quit command for yazi <= v25.5.31 to unmount on quit. For nightly yazi, you don't need to add these lines.
     { on   = [ "q" ], run = ["plugin fuse-archive -- unmount", "quit"], desc = "Quit the process" },
     { on   = [ "Q" ], run = ["plugin fuse-archive -- unmount", "quit --no-cwd-file"], desc = "Quit without outputting cwd-file" },
+
 ]
