@@ -31,71 +31,148 @@ autocmd("FileType", {
 -------------------------------------------------------
 -- Automatically switch keyboard layout
 --------------
+local os_name = vim.loop.os_uname().sysname
+if os_name == "Linux" then
+  local layout_ids = {
+    ["English (US)"] = 0,
+    Russian = 1,
+  }
 
-local get_current_layout = function()
-  local file = io.popen("macism")
-  local output = file:read()
-  file:close()
-  return output
-end
-
-local change_layout = function(layout)
-  vim.fn.jobstart(string.format("macism %s", layout))
-end
-
-local manage_layout = function(current_layout, layout_to_change)
-  if current_layout ~= layout_to_change then
-    change_layout(layout_to_change)
+  local get_current_layout = function()
+    local file = io.popen("hyprctl devices -j | jq -r '.keyboards.[] | select(.main == true).active_keymap'")
+    local output = file:read()
+    file:close()
+    return layout_ids[output]
   end
-end
 
-local saved_layout = get_current_layout()
+  local change_layout = function(layout)
+    vim.fn.jobstart(string.format("hyprctl switchxkblayout current %s", layout))
+  end
 
-local NORMAL_LAYOUT = "com.apple.keylayout.ABC"
+  local manage_layout = function(current_layout, layout_to_change)
+    if current_layout ~= layout_to_change then
+      change_layout(layout_to_change)
+    end
+  end
 
--- When leaving Insert Mode:
--- 1. Save the current layout
--- 2. Switch to the US layout
-autocmd("InsertLeave", {
-  pattern = "*",
-  callback = function()
-    vim.schedule(function()
-      saved_layout = get_current_layout()
-      manage_layout(saved_layout, NORMAL_LAYOUT)
-    end)
-  end,
-})
+  local saved_layout = get_current_layout()
 
--- When Neovim gets focus:
--- 1. Save the current layout
--- 2. Switch to the US layout if Normal Mode or Visual Mode is the current mode
-autocmd({ "FocusGained", "CmdlineLeave" }, {
-  pattern = "*",
-  callback = function()
-    vim.schedule(function()
-      saved_layout = get_current_layout()
-      local current_mode = vim.api.nvim_get_mode().mode
-      if
-        current_mode == "n"
-        or current_mode == "no"
-        or current_mode == "v"
-        or current_mode == "V"
-        or current_mode == "^V"
-      then
+  local NORMAL_LAYOUT = 0
+
+  -- When leaving Insert Mode:
+  -- 1. Save the current layout
+  -- 2. Switch to the US layout
+  autocmd("InsertLeave", {
+    pattern = "*",
+    callback = function()
+      vim.schedule(function()
+        saved_layout = get_current_layout()
         manage_layout(saved_layout, NORMAL_LAYOUT)
-      end
-    end)
-  end,
-})
+      end)
+    end,
+  })
 
--- When Neovim loses focus
--- When entering Insert Mode:
--- 1. Switch to the previously saved layout
-autocmd({ "FocusLost", "InsertEnter" }, {
-  pattern = "*",
-  callback = function()
-    vim.schedule(function()
-      manage_layout(NORMAL_LAYOUT, saved_layout)
-    end)
-  end,
-})
+  -- When Neovim gets focus:
+  -- 1. Save the current layout
+  -- 2. Switch to the US layout if Normal Mode or Visual Mode is the current mode
+  autocmd({ "FocusGained", "CmdlineLeave" }, {
+    pattern = "*",
+    callback = function()
+      vim.schedule(function()
+        saved_layout = get_current_layout()
+        local current_mode = vim.api.nvim_get_mode().mode
+        if
+          current_mode == "n"
+          or current_mode == "no"
+          or current_mode == "v"
+          or current_mode == "V"
+          or current_mode == "^V"
+        then
+          manage_layout(saved_layout, NORMAL_LAYOUT)
+        end
+      end)
+    end,
+  })
+
+  -- When Neovim loses focus
+  -- When entering Insert Mode:
+  -- 1. Switch to the previously saved layout
+  autocmd({ "FocusLost", "InsertEnter" }, {
+    pattern = "*",
+    callback = function()
+      vim.schedule(function()
+        manage_layout(NORMAL_LAYOUT, saved_layout)
+      end)
+    end,
+  })
+elseif os_name == "Darwin" then -- macOS
+  local get_current_layout = function()
+    local file = io.popen("macism")
+    local output = file:read()
+    file:close()
+    return output
+  end
+
+  local change_layout = function(layout)
+    vim.fn.jobstart(string.format("macism %s", layout))
+  end
+
+  local manage_layout = function(current_layout, layout_to_change)
+    if current_layout ~= layout_to_change then
+      change_layout(layout_to_change)
+    end
+  end
+
+  local saved_layout = get_current_layout()
+
+  local NORMAL_LAYOUT = "com.apple.keylayout.ABC"
+
+  -- When leaving Insert Mode:
+  -- 1. Save the current layout
+  -- 2. Switch to the US layout
+  autocmd("InsertLeave", {
+    pattern = "*",
+    callback = function()
+      vim.schedule(function()
+        saved_layout = get_current_layout()
+        manage_layout(saved_layout, NORMAL_LAYOUT)
+      end)
+    end,
+  })
+
+  -- When Neovim gets focus:
+  -- 1. Save the current layout
+  -- 2. Switch to the US layout if Normal Mode or Visual Mode is the current mode
+  autocmd({ "FocusGained", "CmdlineLeave" }, {
+    pattern = "*",
+    callback = function()
+      vim.schedule(function()
+        saved_layout = get_current_layout()
+        local current_mode = vim.api.nvim_get_mode().mode
+        if
+          current_mode == "n"
+          or current_mode == "no"
+          or current_mode == "v"
+          or current_mode == "V"
+          or current_mode == "^V"
+        then
+          manage_layout(saved_layout, NORMAL_LAYOUT)
+        end
+      end)
+    end,
+  })
+
+  -- When Neovim loses focus
+  -- When entering Insert Mode:
+  -- 1. Switch to the previously saved layout
+  autocmd({ "FocusLost", "InsertEnter" }, {
+    pattern = "*",
+    callback = function()
+      vim.schedule(function()
+        manage_layout(NORMAL_LAYOUT, saved_layout)
+      end)
+    end,
+  })
+elseif os_name == "Windows" then
+  -- Do something for Windows
+end
