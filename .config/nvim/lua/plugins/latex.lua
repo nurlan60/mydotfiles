@@ -1,3 +1,5 @@
+local viewer
+local options
 local os_name = vim.loop.os_uname().sysname
 if os_name == "Linux" then
   viewer = "zathura"
