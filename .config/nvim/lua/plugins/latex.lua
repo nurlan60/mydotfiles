@@ -6,8 +6,8 @@ if os_name == "Linux" then
       servers = {
         texlab = {
           keys = {
-            { "<leader>tb", "<cmd>TexlabBuild<CR>", desc = "Compile LaTeX" },
-            { "<leader>tv", "<cmd>TexlabForward<CR>", desc = "Forward View LaTeX" },
+            { "<leader>tb", "<cmd>LspTexlabBuild<CR>", desc = "Compile LaTeX" },
+            { "<leader>tv", "<cmd>LspTexlabForward<CR>", desc = "Forward View LaTeX" },
           },
         },
       },
@@ -36,8 +36,8 @@ elseif os_name == "Darwin" then -- macOS
       servers = {
         texlab = {
           keys = {
-            { "<leader>tb", "<cmd>TexlabBuild<CR>", desc = "Compile LaTeX" },
-            { "<leader>tv", "<cmd>TexlabForward<CR>", desc = "Forward View LaTeX" },
+            { "<leader>tb", "<cmd>LspTexlabBuild<CR>", desc = "Compile LaTeX" },
+            { "<leader>tv", "<cmd>LspTexlabForward<CR>", desc = "Forward View LaTeX" },
           },
         },
       },
