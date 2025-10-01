@@ -24,11 +24,6 @@ rev = "d7588f6"
 hash = "2143a53182dbbe935a1abd1623424aa5"
 
 [[plugin.deps]]
-use = "dedukun/bookmarks"
-rev = "9ef1254"
-hash = "92fbb5483657fa7976cdf4e0104e18e0"
-
-[[plugin.deps]]
 use = "KKV9/compress"
 rev = "c264639"
 hash = "e17c11b605d989568a1d1741ca17c584"
@@ -52,6 +47,11 @@ hash = "2b496dd4dcba137e2423783c3c31a823"
 use = "uhs-robert/sshfs"
 rev = "1a466c8"
 hash = "216b0497421e49b7fda5f07d20435400"
+
+[[plugin.deps]]
+use = "WhoSowSee/whoosh"
+rev = "60feac7"
+hash = "51d02a6e8dfb4d2a7fd387a34f068e46"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
