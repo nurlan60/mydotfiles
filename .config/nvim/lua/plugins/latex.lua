@@ -1,5 +1,10 @@
-local viewer
-local options
+local viewer = "displayline"
+local options = {
+  "%l",
+  "%p",
+  "%f",
+}
+
 local os_name = vim.loop.os_uname().sysname
 if os_name == "Linux" then
   viewer = "zathura"
@@ -7,13 +12,6 @@ if os_name == "Linux" then
     "--synctex-forward",
     "%l:1:%f",
     "%p",
-  }
-elseif os_name == "Darwin" then -- macOS
-  viewer = "displayline"
-  options = {
-    "%l",
-    "%p",
-    "%f",
   }
 elseif os_name == "Windows" then
   -- Do something for Windows

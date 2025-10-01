@@ -31,10 +31,13 @@ autocmd("FileType", {
 -------------------------------------------------------
 -- Automatically switch keyboard layout
 --------------
-local NORMAL_LAYOUT
-local layout_ids
-local get_command
-local change_command
+local NORMAL_LAYOU = "com.apple.keylayout.ABC"
+local layout_ids = {
+  ["com.apple.keylayout.ABC"] = "com.apple.keylayout.ABC",
+  ["com.apple.keylayout.Russian"] = "com.apple.keylayout.Russian",
+}
+local get_command = "macism"
+local change_command = "macism %s"
 
 local os_name = vim.loop.os_uname().sysname
 
@@ -46,14 +49,6 @@ if os_name == "Linux" then
   }
   get_command = "hyprctl devices -j | jq -r '.keyboards.[] | select(.main == true).active_keymap'"
   change_command = "hyprctl switchxkblayout current %s"
-elseif os_name == "Darwin" then -- macOS
-  NORMAL_LAYOUT = "com.apple.keylayout.ABC"
-  layout_ids = {
-    ["com.apple.keylayout.ABC"] = "com.apple.keylayout.ABC",
-    ["com.apple.keylayout.Russian"] = "com.apple.keylayout.Russian",
-  }
-  get_command = "macism"
-  change_command = "macism %s"
 elseif os_name == "Windows" then
   -- Do something for Windows
 end
