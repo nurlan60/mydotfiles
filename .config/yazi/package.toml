@@ -1,27 +1,27 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:chmod"
-rev = "d7588f6"
-hash = "1adc12c2b2b025411ab61eb8f0879574"
+rev = "d1c8baa"
+hash = "8ad3e90b079190b4905f24a44f4ca06b"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mount"
-rev = "d7588f6"
-hash = "e1de3054c0d1a2d8dc6f007eadc0fa31"
+rev = "d1c8baa"
+hash = "435a2af56ecfb3d05755fd5e24977d8b"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "d7588f6"
-hash = "d6f60c24d8c0cf57a855bf46115b2502"
+rev = "d1c8baa"
+hash = "8a7c58225816a163a6e8730c0adafbc8"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-enter"
-rev = "d7588f6"
+rev = "d1c8baa"
 hash = "56fdabc96fc1f4d53c96eb884b02a5be"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:piper"
-rev = "d7588f6"
-hash = "2143a53182dbbe935a1abd1623424aa5"
+rev = "d1c8baa"
+hash = "a20327710c3a8d37ee0972128dcb6a31"
 
 [[plugin.deps]]
 use = "KKV9/compress"
@@ -30,8 +30,8 @@ hash = "e17c11b605d989568a1d1741ca17c584"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-filter"
-rev = "d7588f6"
-hash = "e56b7abf3c06e8ce496eadcca168c093"
+rev = "d1c8baa"
+hash = "bcda8eeb3f4013bae156aecabfc745e8"
 
 [[plugin.deps]]
 use = "Shallow-Seek/djvu-view"
@@ -55,15 +55,15 @@ hash = "51d02a6e8dfb4d2a7fd387a34f068e46"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
-rev = "4296a38"
-hash = "deff42490f77b222e9d3a84dc16a76c5"
+rev = "2d73b79"
+hash = "d4c41d713b325710a9dd5ae86c3f8a5f"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-latte"
-rev = "4296a38"
-hash = "509055ecc7e6315cb574be36da7a4495"
+rev = "2d73b79"
+hash = "9e789c612c34f941a2afd42e7ded39f"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-frappe"
-rev = "4296a38"
-hash = "f9a1b9936072893ab27de5738988b710"
+rev = "2d73b79"
+hash = "ca94f5dc2b87919439b5be2a62cf4871"
