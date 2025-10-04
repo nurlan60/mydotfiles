@@ -31,7 +31,7 @@ autocmd("FileType", {
 -------------------------------------------------------
 -- Automatically switch keyboard layout
 --------------
-local NORMAL_LAYOU = "com.apple.keylayout.ABC"
+local NORMAL_LAYOUT = "com.apple.keylayout.ABC"
 local layout_ids = {
   ["com.apple.keylayout.ABC"] = "com.apple.keylayout.ABC",
   ["com.apple.keylayout.Russian"] = "com.apple.keylayout.Russian",
