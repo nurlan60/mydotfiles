@@ -48,6 +48,11 @@ use = "WhoSowSee/whoosh"
 rev = "60feac7"
 hash = "51d02a6e8dfb4d2a7fd387a34f068e46"
 
+[[plugin.deps]]
+use = "ndtoan96/ouch"
+rev = "0742fff"
+hash = "2bd799b42b8e42b8ef100310be71f8d1"
+
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
 rev = "2d73b79"
