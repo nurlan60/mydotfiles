@@ -32,7 +32,7 @@ autocmd("FileType", {
 -- Automatically switch keyboard layout
 --------------
 local NORMAL_LAYOUT
-local layout_ids
+local layout_ids = {}
 local get_command
 local change_command
 
@@ -45,7 +45,7 @@ if os_name == "Linux" then
     Russian = 1,
   }
   get_command = "hyprctl devices -j | jq -r '.keyboards.[] | select(.main == true).active_keymap'"
-  change_command = "hyprctl switchxkblayout current %s"
+  change_command = "hyprctl switchxkblayout current"
 elseif os_name == "Darwin" then
   NORMAL_LAYOUT = "com.apple.keylayout.ABC"
   layout_ids = {
@@ -53,9 +53,15 @@ elseif os_name == "Darwin" then
     ["com.apple.keylayout.Russian"] = "com.apple.keylayout.Russian",
   }
   get_command = "macism"
-  change_command = "macism %s"
-elseif os_name == "Windows" then
-  -- Do something for Windows
+  change_command = "macism"
+elseif os_name == "Windows_NT" then
+  NORMAL_LAYOUT = "1033"
+  layout_ids = {
+    ["1033"] = "1033",
+    ["1049"] = "1049",
+  }
+  get_command = "im-select.exe"
+  change_command = "im-select.exe"
 end
 
 local get_current_layout = function()
@@ -66,7 +72,7 @@ local get_current_layout = function()
 end
 
 local change_layout = function(layout)
-  vim.fn.jobstart(string.format(change_command, layout))
+  vim.fn.jobstart(string.format(change_command .. " %s", layout))
 end
 
 local manage_layout = function(current_layout, layout_to_change)
