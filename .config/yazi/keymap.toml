@@ -47,9 +47,6 @@ prepend_keymap = [
   # Smart filter
   { on   = "F", run  = "plugin smart-filter", desc = "Smart filter"},
 
-  # Smart Enter
-# { on   = "l", run  = "plugin smart-enter", desc = "Enter the child directory, or open the file"}, 
-
   # fuse-archive
   { on   = [ "<Right>" ], run = "plugin fuse-archive -- mount", desc = "Enter or Mount selected archive" },
   { on   = [ "<Left>" ], run = "plugin fuse-archive -- leave", desc = "Leave selected archive without unmount it" },
