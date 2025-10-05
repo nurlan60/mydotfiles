@@ -69,7 +69,6 @@ prepend_keymap = [
 { on = [ "]", "D" ], run = "plugin whoosh delete_by_fzf", desc = "Delete bookmarks by fzf (use TAB to select multiple)" },
   { on = [ "]", "C" ], run = "plugin whoosh delete_all", desc = "Delete all user bookmarks" },
   { on = [ "]", "r" ], run = "plugin whoosh rename_by_key", desc = "Rename bookmark by key" },
-  { on = [ "]", "R" ], run = "plugin whoosh rename_by_fzf", desc = "Rename bookmark by fzf" }
-
+  { on = [ "]", "R" ], run = "plugin whoosh rename_by_fzf", desc = "Rename bookmark by fzf" },
 
 ]
