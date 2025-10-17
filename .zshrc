@@ -142,8 +142,6 @@ if [[ $(uname) == "Darwin" ]]; then
     # source antidote
     source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
     
-    # Rust setup
-    . "$HOME/.cargo/env"
 else
     alias texlive='sh -c "xhost +si:localuser:root && sudo /usr/local/texlive/2025/bin/x86_64-linux/tlmgr --gui && xhost -si:localuser:root"'
     

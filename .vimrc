@@ -3,7 +3,6 @@ filetype on
 filetype plugin on
 filetype indent on 
 syntax on
-colorscheme habamax
 
 set expandtab
 set tabstop=4
