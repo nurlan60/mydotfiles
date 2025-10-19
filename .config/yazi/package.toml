@@ -45,8 +45,8 @@ hash = "458a404b1b9d6e72ee27812629782a0b"
 
 [[plugin.deps]]
 use = "WhoSowSee/whoosh"
-rev = "927f35d"
-hash = "fedcface47289871a7e7c583ff54d952"
+rev = "cba7239"
+hash = "c053ed009375d7e8f1557502f7a2d3a5"
 
 [[plugin.deps]]
 use = "ndtoan96/ouch"
