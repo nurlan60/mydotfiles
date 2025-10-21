@@ -20,6 +20,16 @@ type = 'prompt'
 alignment = 'left'
 newline = true
 
+
+[[blocks.segments]]
+type = "session"
+style = "diamond"
+foreground = "#ffffff"
+background = 'magenta'
+leading_diamond = ""
+trailing_diamond = ""
+template = "{{ if .SSHSession }} {{ end }}{{ .HostName }}"
+
 [[blocks.segments]]
 template = '{{ .Path }}'
 foreground = 'blue'
