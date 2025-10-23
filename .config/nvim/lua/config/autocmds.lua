@@ -11,9 +11,9 @@ local autocmd = vim.api.nvim_create_autocmd
 --   command = "set nopaste",
 -- })
 ----------------------------------------------------
--- Disable autoformat for toml files
+-- Disable autoformat for toml, json files
 autocmd({ "FileType" }, {
-  pattern = { "toml" },
+  pattern = { "toml", "json" },
   callback = function()
     vim.b.autoformat = false
   end,
