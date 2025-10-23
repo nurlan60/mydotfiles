@@ -40,8 +40,8 @@ hash = "2b496dd4dcba137e2423783c3c31a823"
 
 [[plugin.deps]]
 use = "uhs-robert/sshfs"
-rev = "0d6e699"
-hash = "458a404b1b9d6e72ee27812629782a0b"
+rev = "924f0eb"
+hash = "730c21c785d579a85be2ae34d9a316f1"
 
 [[plugin.deps]]
 use = "WhoSowSee/whoosh"
@@ -55,15 +55,15 @@ hash = "2bd799b42b8e42b8ef100310be71f8d1"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
-rev = "f9ae9f2"
-hash = "e96667b0eba436a59ee324cafe3f51e3"
+rev = "f6b425a"
+hash = "76b921b2d734331854d4a55b59a21388"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-latte"
-rev = "f9ae9f2"
-hash = "f917df5644d738363341d5f5e5f0690c"
+rev = "f6b425a"
+hash = "d7353bc6c4c10cff53bb63e1471f44a5"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-frappe"
-rev = "f9ae9f2"
-hash = "883fd019ac083db4042c083b0bfafc27"
+rev = "f6b425a"
+hash = "69cd81ca19a1039352ef981fc4cf1b63"
