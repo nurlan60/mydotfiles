@@ -15,13 +15,6 @@
           "type": "os"
         },
         {
-          "type": "session",
-          "style": "diamond",
-          "template": "{{ if .SSHSession }} SSH {{ end }}",
-          "foreground": "#ffffff",
-          "background": "#880000"
-        },
-        {
           "properties": {
             "home_icon": "~",
             "style": "full"
