@@ -1,5 +1,6 @@
 font-size = 13
 font-thicken = true
+macos-titlebar-style = tabs 
 
 keybind = global:cmd+grave_accent=toggle_quick_terminal
 quick-terminal-position = bottom
