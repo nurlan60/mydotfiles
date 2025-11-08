@@ -48,6 +48,11 @@ use = "ndtoan96/ouch"
 rev = "0742fff"
 hash = "2bd799b42b8e42b8ef100310be71f8d1"
 
+[[plugin.deps]]
+use = "peterfication/mux"
+rev = "266233e"
+hash = "1963dda85333e5e2cb6ff5d7d5a6ad4e"
+
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
 rev = "f6b425a"
