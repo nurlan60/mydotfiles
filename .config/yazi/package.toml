@@ -40,8 +40,8 @@ hash = "2b496dd4dcba137e2423783c3c31a823"
 
 [[plugin.deps]]
 use = "uhs-robert/sshfs"
-rev = "a6ddd03"
-hash = "617d83a0e1d916a5ddcb90968eb3b5f6"
+rev = "ea0b089"
+hash = "14c5b354b75e954a0b18a7e0706ac5f9"
 
 [[plugin.deps]]
 use = "ndtoan96/ouch"
