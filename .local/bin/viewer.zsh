@@ -2,41 +2,36 @@
 
 case ${1:e} in
 pdf)
-  pdftotext -layout -nopgbrk "$1" - | less
+  pdftotext -layout -nopgbrk $1 - | less
   ;;
 md)
-  glow --style dark -p "$1"
+  glow --style dark -p $1
   ;;
 djvu)
-  djvutxt "$1" | less
+  djvutxt $1 | less
   ;;
 doc)
-  antiword "$1" | less
+  antiword $1 | less
   ;;
 docx)
-doxx "$1"
-  # if [[ $(uname) == "Darwin" ]]; then
-  #   docx2txt.pl "$1" - | less
-  # else
-  #   docx2txt "$1" - | less
-  # fi
+doxx $1
   ;;
 xlsx)
-  in2csv "$1" | csvlook | less
+  in2csv $1 | csvlook | less
   ;;
-scv)
-  csvlook "$1" | less
+csv)
+  csvlook --max-column-width 30 $1 | less
   ;;
 json)
-  jq -C . "$1" | less -R
+  jq -C . $1 | less -R
   ;;
 transmission)
-  transmission-show "$1"
+  transmission-show $1
   ;;
 tar | tgz | tbz* | txz | zip | 7z | gz | xz | lzma | bz* | lz4 | sz | zst | rar)
-  ouch list "$1" --tree | less
+  ouch list $1 --tree | less
   ;;
 *)
-  bat --paging=always "$1"
+  bat --paging=always $1
   ;;
 esac

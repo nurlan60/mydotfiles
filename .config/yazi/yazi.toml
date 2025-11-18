@@ -10,6 +10,6 @@ prepend_previewers = [
 
 [opener]
 edit = [
-  { run = '${EDITOR:-vi} "%s"', desc = "$EDITOR", block = true, for = "unix" },
+  { run = '${EDITOR:-vi} %s', desc = "$EDITOR", block = true, for = "unix" },
   { run = "nvim %s", block = true, for = "windows" },
 ]
