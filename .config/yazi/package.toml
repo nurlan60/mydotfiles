@@ -1,21 +1,21 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:chmod"
-rev = "8f1d971"
+rev = "2301ff8"
 hash = "8ad3e90b079190b4905f24a44f4ca06b"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mount"
-rev = "8f1d971"
+rev = "2301ff8"
 hash = "4fccaaf10c36dc2466e2438a386ff017"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "8f1d971"
+rev = "2301ff8"
 hash = "8a7c58225816a163a6e8730c0adafbc8"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:piper"
-rev = "8f1d971"
+rev = "2301ff8"
 hash = "64713dcd74daf9ec644883a5895e5d1"
 
 [[plugin.deps]]
@@ -25,7 +25,7 @@ hash = "e17c11b605d989568a1d1741ca17c584"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-filter"
-rev = "8f1d971"
+rev = "2301ff8"
 hash = "bcda8eeb3f4013bae156aecabfc745e8"
 
 [[plugin.deps]]
