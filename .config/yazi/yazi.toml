@@ -3,6 +3,7 @@ prepend_previewers = [
   { url = "*/", run = "mux eza_tree_1 eza_tree_2 eza_tree_3 eza_tree_4" },
   { url = "*.md", run = 'piper -- CLICOLOR_FORCE=1 glow -w=$w -s=dark "$1"' },
   { url = "*.docx", run = 'piper -- doxx --export text "$1"' },
+  { url = "*.{xlsx,xls,xlsm,xlsb,ods}", run = 'piper -- xleak "$1"' },
   { mime = "application/msword", run = 'piper -- antiword "$1"' },
   { mime = "application/{*zip,tar,bzip*,7z-compressed,xz,rar}", run = "ouch" },
   { mime = "image/djvu", run  = "djvu-view"},
