@@ -39,13 +39,13 @@ local change_command
 local os_name = vim.loop.os_uname().sysname
 
 if os_name == "Linux" then
-  NORMAL_LAYOUT = 0
+  NORMAL_LAYOUT = "0"
   layout_ids = {
-    ["English (US)"] = 0,
-    Russian = 1,
+    ["0"] = "0",
+    ["1"] = "1",
   }
-  get_command = "hyprctl devices -j | jq -r '.keyboards.[] | select(.main == true).active_keymap'"
-  change_command = "hyprctl switchxkblayout current"
+  get_command = "niri msg -j keyboard-layouts | jq '.current_idx'"
+  change_command = "niri msg action switch-layout"
 elseif os_name == "Darwin" then
   NORMAL_LAYOUT = "com.apple.keylayout.ABC"
   layout_ids = {

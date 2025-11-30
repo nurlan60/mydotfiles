@@ -53,6 +53,11 @@ use = "peterfication/mux"
 rev = "266233e"
 hash = "1963dda85333e5e2cb6ff5d7d5a6ad4e"
 
+[[plugin.deps]]
+use = "GianniBYoung/rsync"
+rev = "14d2828"
+hash = "7394430ba473dce1023721622438bf3d"
+
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
 rev = "3edeb49"
