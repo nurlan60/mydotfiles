@@ -18,8 +18,6 @@ doxx $1
   ;;
 xlsx | xls | xlsm | xlsb | ods)
 xleak -i $1
-# xlsx)
-#   in2csv $1 | csvlook | less
   ;;
 csv)
   csvlook --max-column-width 30 $1 | less

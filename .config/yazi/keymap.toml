@@ -30,7 +30,7 @@ prepend_keymap = [
   { on = "!", run = 'shell --block -- "bash.exe"', desc = "Open shell here", for = 'windows' },
 
   # Viewer
-  { on = "i", run = 'shell --block -- viewer.zsh %s', desc = "Open file in viewer", for = 'unix' },
+  { on = "i", run = 'shell --block -- viewer.sh %s', desc = "Open file in viewer", for = 'unix' },
 
   # Chmod
   { on = [ "c","m" ], run = "plugin chmod", desc = "Chmod on selected files", for = 'unix' },

@@ -15,14 +15,9 @@ doc)
   ;;
 docx)
   doxx "$1"
-  # if [[ $(uname) == "Darwin" ]]; then
-  #   docx2txt.pl "$1" - | less
-  # else
-  #   docx2txt "$1" - | less
-  # fi
   ;;
-xlsx)
-  in2csv "$1" | csvlook | less
+xlsx | xls | xlsm | xlsb | ods)
+  xleak -i "$1"
   ;;
 scv)
   csvlook "$1" | less

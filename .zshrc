@@ -145,7 +145,7 @@ if [[ $(uname) == "Darwin" ]]; then
 else
     alias texlive='sh -c "xhost +si:localuser:root && sudo /usr/local/texlive/2025/bin/x86_64-linux/tlmgr --gui && xhost -si:localuser:root"'
     
-    PATH="${PATH}:/usr/lib/ccache/bin/:/home/nurlan/.local/bin:/usr/local/texlive/2025/bin/x86_64-linux"
+    PATH="${PATH}:/home/nurlan/.local/bin:/usr/local/texlive/2025/bin/x86_64-linux"
     
     # oh-my-posh
     eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/my.omp.toml)"
