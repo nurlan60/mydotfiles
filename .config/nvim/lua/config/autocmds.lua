@@ -32,7 +32,6 @@ autocmd("FileType", {
 -- Automatically switch keyboard layout
 --------------
 local NORMAL_LAYOUT
-local layout_ids = {}
 local get_command
 local change_command
 
@@ -40,26 +39,14 @@ local os_name = vim.loop.os_uname().sysname
 
 if os_name == "Linux" then
   NORMAL_LAYOUT = "0"
-  layout_ids = {
-    ["0"] = "0",
-    ["1"] = "1",
-  }
   get_command = "niri msg -j keyboard-layouts | jq '.current_idx'"
   change_command = "niri msg action switch-layout"
 elseif os_name == "Darwin" then
   NORMAL_LAYOUT = "com.apple.keylayout.ABC"
-  layout_ids = {
-    ["com.apple.keylayout.ABC"] = "com.apple.keylayout.ABC",
-    ["com.apple.keylayout.Russian"] = "com.apple.keylayout.Russian",
-  }
   get_command = "macism"
   change_command = "macism"
 elseif os_name == "Windows_NT" then
   NORMAL_LAYOUT = "1033"
-  layout_ids = {
-    ["1033"] = "1033",
-    ["1049"] = "1049",
-  }
   get_command = "im-select.exe"
   change_command = "im-select.exe"
 end
@@ -68,7 +55,7 @@ local get_current_layout = function()
   local file = io.popen(get_command)
   local output = file:read()
   file:close()
-  return layout_ids[output]
+  return output
 end
 
 local change_layout = function(layout)
