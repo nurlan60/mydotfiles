@@ -5,7 +5,7 @@ pdf)
   pdftotext -layout -nopgbrk $1 - | less
   ;;
 md)
-  glow --style dark -p $1
+  glow -t $1
   ;;
 djvu)
   djvutxt $1 | less
