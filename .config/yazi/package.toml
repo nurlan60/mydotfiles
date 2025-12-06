@@ -1,22 +1,22 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:chmod"
-rev = "eaf6920"
+rev = "19dc890"
 hash = "5b2eb0cc2050cec1e4de83cfa51a5b90"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mount"
-rev = "eaf6920"
+rev = "19dc890"
 hash = "4fccaaf10c36dc2466e2438a386ff017"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "eaf6920"
+rev = "19dc890"
 hash = "8a7c58225816a163a6e8730c0adafbc8"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:piper"
-rev = "eaf6920"
-hash = "64713dcd74daf9ec644883a5895e5d1"
+rev = "19dc890"
+hash = "b26d542e75151835d7bc885f6dda74cb"
 
 [[plugin.deps]]
 use = "KKV9/compress"
@@ -25,7 +25,7 @@ hash = "e17c11b605d989568a1d1741ca17c584"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-filter"
-rev = "eaf6920"
+rev = "19dc890"
 hash = "bcda8eeb3f4013bae156aecabfc745e8"
 
 [[plugin.deps]]
@@ -35,13 +35,13 @@ hash = "8205db73f10e23dbfe3436e7bec7b8b2"
 
 [[plugin.deps]]
 use = "boydaihungst/fuse-archive"
-rev = "5f72801"
-hash = "2b496dd4dcba137e2423783c3c31a823"
+rev = "9e65b39"
+hash = "c08cb3e76c83e57b3774e45e08d082f9"
 
 [[plugin.deps]]
 use = "uhs-robert/sshfs"
-rev = "ea0b089"
-hash = "14c5b354b75e954a0b18a7e0706ac5f9"
+rev = "75a025c"
+hash = "e1cebecfee70daef1f97aa083209340c"
 
 [[plugin.deps]]
 use = "ndtoan96/ouch"
