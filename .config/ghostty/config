@@ -1,5 +1,4 @@
 quit-after-last-window-closed = false
-font-family = "JetBrains Mono"
 font-size = 14
 font-thicken = true
 macos-titlebar-style = tabs 
