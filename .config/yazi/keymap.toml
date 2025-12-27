@@ -32,6 +32,9 @@ prepend_keymap = [
   # Viewer
   { on = "i", run = 'shell --block -- viewer.sh %s', desc = "Open file in viewer", for = 'unix' },
 
+  # Fresh Editor 
+  { on = "e", run = 'shell --block -- fresh %s', desc = " Open file in fresh editor", for = 'unix' },
+
   # Chmod
   { on = [ "c","m" ], run = "plugin chmod", desc = "Chmod on selected files", for = 'unix' },
   
