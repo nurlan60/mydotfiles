@@ -1,21 +1,21 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:chmod"
-rev = "7ca66b4"
-hash = "5b2eb0cc2050cec1e4de83cfa51a5b90"
+rev = "da5b695"
+hash = "8da0b15a97b5dfd13941d1ecc617ac7c"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mount"
-rev = "7ca66b4"
-hash = "4fccaaf10c36dc2466e2438a386ff017"
+rev = "da5b695"
+hash = "e2d4bfccf31e5ab05f46fee4797c5215"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "7ca66b4"
+rev = "da5b695"
 hash = "8a7c58225816a163a6e8730c0adafbc8"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:piper"
-rev = "7ca66b4"
+rev = "da5b695"
 hash = "d00cacddd5e4f58e2fb13aecae42d655"
 
 [[plugin.deps]]
@@ -25,8 +25,8 @@ hash = "e17c11b605d989568a1d1741ca17c584"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-filter"
-rev = "7ca66b4"
-hash = "bcda8eeb3f4013bae156aecabfc745e8"
+rev = "da5b695"
+hash = "407d19bc4fb46eff5fa8ff8337644847"
 
 [[plugin.deps]]
 use = "Shallow-Seek/djvu-view"
@@ -35,8 +35,8 @@ hash = "8205db73f10e23dbfe3436e7bec7b8b2"
 
 [[plugin.deps]]
 use = "boydaihungst/fuse-archive"
-rev = "9e65b39"
-hash = "c08cb3e76c83e57b3774e45e08d082f9"
+rev = "209880d"
+hash = "8c45699b9a90bfbef3f43a9581e1db53"
 
 [[plugin.deps]]
 use = "uhs-robert/sshfs"
