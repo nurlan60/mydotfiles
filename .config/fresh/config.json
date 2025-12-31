@@ -1,4 +1,5 @@
 {
+  "theme": "dark",
   "languages": {
     "latex": {
       "extensions": [
@@ -13,6 +14,8 @@
       "show_whitespace_tabs": true,
       "use_tabs": false,
       "tab_size": null,
+      "formatter": null,
+      "format_on_save": false,
       "on_save": []
     }
   },
