@@ -1,31 +1,31 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:chmod"
-rev = "da5b695"
+rev = "4e55902"
 hash = "8da0b15a97b5dfd13941d1ecc617ac7c"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mount"
-rev = "da5b695"
+rev = "4e55902"
 hash = "e2d4bfccf31e5ab05f46fee4797c5215"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "da5b695"
+rev = "4e55902"
 hash = "8a7c58225816a163a6e8730c0adafbc8"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:piper"
-rev = "da5b695"
-hash = "d00cacddd5e4f58e2fb13aecae42d655"
+rev = "4e55902"
+hash = "2dd68af59418b631b9703a03f606b31f"
 
 [[plugin.deps]]
 use = "KKV9/compress"
-rev = "c264639"
-hash = "e17c11b605d989568a1d1741ca17c584"
+rev = "c9c16d8"
+hash = "a68bde26a61da040131aa95069f638c2"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-filter"
-rev = "da5b695"
+rev = "4e55902"
 hash = "407d19bc4fb46eff5fa8ff8337644847"
 
 [[plugin.deps]]
@@ -35,13 +35,13 @@ hash = "8205db73f10e23dbfe3436e7bec7b8b2"
 
 [[plugin.deps]]
 use = "boydaihungst/fuse-archive"
-rev = "209880d"
-hash = "8c45699b9a90bfbef3f43a9581e1db53"
+rev = "7c52b6a"
+hash = "28d2f1fdd8b05c57358840e45f38f042"
 
 [[plugin.deps]]
 use = "uhs-robert/sshfs"
-rev = "75a025c"
-hash = "e1cebecfee70daef1f97aa083209340c"
+rev = "5edff3b"
+hash = "e92138f6eb884bef96d92b2d114ac927"
 
 [[plugin.deps]]
 use = "ndtoan96/ouch"
@@ -50,8 +50,8 @@ hash = "b5067143415bd2d46c0dfa57319ddcef"
 
 [[plugin.deps]]
 use = "peterfication/mux"
-rev = "266233e"
-hash = "1963dda85333e5e2cb6ff5d7d5a6ad4e"
+rev = "e76edd5"
+hash = "8e49c6f9b24993239c4d03a1aaabce80"
 
 [[plugin.deps]]
 use = "GianniBYoung/rsync"
@@ -60,15 +60,15 @@ hash = "7394430ba473dce1023721622438bf3d"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
-rev = "9276ffa"
+rev = "4a1802a"
 hash = "b951d27afe197d154f6da9683b46c5f8"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-latte"
-rev = "9276ffa"
+rev = "4a1802a"
 hash = "525675a9180ed23a097b07399627294a"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-frappe"
-rev = "9276ffa"
+rev = "4a1802a"
 hash = "6f261f00e5235001b8d6bcd7464d3077"
