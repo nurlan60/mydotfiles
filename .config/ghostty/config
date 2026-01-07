@@ -1,4 +1,5 @@
 theme = dark:Catppuccin Frappe,light:Catppuccin Latte
+shell-integration-features = "ssh-terminfo"
 quit-after-last-window-closed = false
 font-size = 14
 font-thicken = true
