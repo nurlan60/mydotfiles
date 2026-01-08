@@ -77,9 +77,6 @@ prepend_keymap = [
   { on = [ "]", "R" ], run = "plugin whoosh rename_by_fzf", desc = "Rename bookmark by fzf" },
 { on = "P", run = "plugin mux next", desc = "Cycle through mux previewers" },
 
-  # rsync
-{ on   = [ "R" ], run  = "plugin rsync", desc = "Copy files using rsync" },
-
   # eza-preview
 { on = [ "e", "t" ], run = "plugin eza-preview",  desc = "Toggle tree/list dir preview" },
   { on = [ "e", "-" ], run = "plugin eza-preview inc-level", desc = "Increment tree level" },
