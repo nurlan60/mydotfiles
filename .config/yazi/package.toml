@@ -1,21 +1,21 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:chmod"
-rev = "4e55902"
+rev = "68f7d48"
 hash = "8da0b15a97b5dfd13941d1ecc617ac7c"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mount"
-rev = "4e55902"
+rev = "68f7d48"
 hash = "e2d4bfccf31e5ab05f46fee4797c5215"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "4e55902"
+rev = "68f7d48"
 hash = "8a7c58225816a163a6e8730c0adafbc8"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:piper"
-rev = "4e55902"
+rev = "68f7d48"
 hash = "2dd68af59418b631b9703a03f606b31f"
 
 [[plugin.deps]]
@@ -25,7 +25,7 @@ hash = "a68bde26a61da040131aa95069f638c2"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-filter"
-rev = "4e55902"
+rev = "68f7d48"
 hash = "407d19bc4fb46eff5fa8ff8337644847"
 
 [[plugin.deps]]
@@ -57,6 +57,11 @@ hash = "8e49c6f9b24993239c4d03a1aaabce80"
 use = "GianniBYoung/rsync"
 rev = "14d2828"
 hash = "7394430ba473dce1023721622438bf3d"
+
+[[plugin.deps]]
+use = "ahkohd/eza-preview"
+rev = "7a2d60f"
+hash = "eed8e19469f3dca38fd977eb938dd34e"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
