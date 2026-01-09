@@ -26,7 +26,7 @@ vim.opt.spelllang = "en_us,ru"
 vim.opt.fileencodings = "utf-8, cp1251, cp866, koi8-r,ucs-2le"
 -------------
 -- <F7> EOL format (dos <CR><NL>,unix <NL>,mac <CR>)
-vim.api.nvim_command([[
+vim.cmd([[
     set  wildmenu
     set  wcm=<Tab>
     menu EOL.unix :set fileformat=unix<CR>
@@ -36,7 +36,7 @@ vim.api.nvim_command([[
 ]])
 
 -- F8 Change encoding
-vim.api.nvim_command([[
+vim.cmd([[
     set  wildmenu
     set  wcm=<Tab>
     menu Encoding.cp1251     :e ++enc=cp1251 ++ff=dos<CR>
@@ -48,7 +48,7 @@ vim.api.nvim_command([[
 ]])
 
 -- F9 Convert file encoding
-vim.api.nvim_command([[
+vim.cmd([[
     set  wildmenu
     set  wcm=<Tab>
     menu File-Encoding.cp1251    :set fenc=cp1251<CR>
