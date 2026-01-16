@@ -1,7 +1,7 @@
 theme = Catppuccin Frappe
 shell-integration-features = "ssh-terminfo"
 quit-after-last-window-closed = false
-font-size = 14
+font-size = 12
 font-thicken = true
 macos-titlebar-style = tabs 
 
