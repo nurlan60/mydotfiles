@@ -74,13 +74,14 @@ elseif os_name == "Windows" then
 end
 vim.lsp.config('texlab', {
 	 settings = {
-            texlab = {
-              		forwardSearch = {
-              		executable = viewer,
-              		args = options,
-              		},
-						},
-					},
+     texlab = {
+        forwardSearch = {
+        		executable = viewer,
+        		args = options,
+        },
+			latexFormatter = 'tex-fmt',
+			},
+		},
 })
 -------------------------------------------------------
 require('mini.files').setup({})
