@@ -6,9 +6,7 @@ vim.o.smartcase = true
 vim.o.ignorecase = true
 vim.o.hlsearch = false
 vim.o.signcolumn = 'yes'
-
-vim.keymap.set({'n', 'x'}, 'gy', '"+y', {desc = 'Copy to clipboard'})
-vim.keymap.set({'n', 'x'}, 'gp', '"+p', {desc = 'Paste clipboard text'})
+vim.o.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
 
 vim.g.mapleader = ' '
 -----------------------------------------------------------
@@ -54,7 +52,6 @@ vim.g.vimtex_quickfix_ignore_filters = {
 -------------------------------------------------------
 --- TexLab ---
 MiniDeps.add('neovim/nvim-lspconfig')
-vim.lsp.enable('texlab')
 local viewer = "displayline"
 local options = {
   "%l",
@@ -83,6 +80,7 @@ vim.lsp.config('texlab', {
 			},
 		},
 })
+vim.lsp.enable('texlab')
 -------------------------------------------------------
 require('mini.files').setup({})
 vim.keymap.set('n', '<leader>e', '<cmd>lua MiniFiles.open()<cr>', {desc = 'File explorer'})
