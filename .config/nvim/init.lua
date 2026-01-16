@@ -7,6 +7,10 @@ vim.o.ignorecase = true
 vim.o.hlsearch = false
 vim.o.signcolumn = 'yes'
 vim.o.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
+vim.o.backup = false -- Don't create backup files
+vim.o.writebackup = false -- Don't create backup before writing
+vim.o.swapfile = false -- Don't create swap files
+vim.o.undofile = true -- Persistent undo
 
 vim.g.mapleader = ' '
 -----------------------------------------------------------
