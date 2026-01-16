@@ -1,8 +1,4 @@
 *.DS_Store
 ._*
-.config/nvim/lazy-lock.json
-.config/nvim/lazyvim.json
-.config/nvim-linux/lazy-lock.json
-.config/nvim-linux/lazyvim.json
 .config/yazi/bookmarks
 .config/yazi/plugins/fuse-archive.yazi/assets/unmount_on_quit.sh
