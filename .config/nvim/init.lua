@@ -32,6 +32,8 @@ if not ok then
   vim.notify('[WARN] mini.deps module not found', vim.log.levels.WARN)
   return
 end
+vim.keymap.set({'n'}, '<leader>tb', '<cmd>LspTexlabBuild<CR>', {desc = 'Compile LaTeX'})
+vim.keymap.set({'n'}, '<leader>tv', '<cmd>LspTexlabForward<CR>', {desc = 'Forward View LaTeX'})
 -----------------------------------------------------------
 MiniDeps.setup({})
 
@@ -52,6 +54,33 @@ vim.g.vimtex_quickfix_ignore_filters = {
 -------------------------------------------------------
 MiniDeps.add('neovim/nvim-lspconfig')
 vim.lsp.enable('texlab')
+local viewer = "displayline"
+local options = {
+  "%l",
+  "%p",
+  "%f",
+}
+local os_name = vim.loop.os_uname().sysname
+if os_name == "Linux" then
+  viewer = "zathura"
+  options = {
+    "--synctex-forward",
+    "%l:1:%f",
+    "%p",
+  }
+elseif os_name == "Windows" then
+  -- Do something for Windows
+end
+vim.lsp.config('texlab', {
+	 settings = {
+            texlab = {
+              forwardSearch = {
+              executable = viewer,
+              args = options,
+              },
+						},
+					},
+})
 -------------------------------------------------------
 require('mini.files').setup({})
 vim.keymap.set('n', '<leader>e', '<cmd>lua MiniFiles.open()<cr>', {desc = 'File explorer'})
