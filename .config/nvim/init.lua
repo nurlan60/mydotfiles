@@ -42,7 +42,7 @@ MiniDeps.setup({})
 MiniDeps.add('folke/tokyonight.nvim')
 vim.cmd.colorscheme('tokyonight')
 -----------------------------------------------------------
---- Latex ---
+--- VimTex ---
 MiniDeps.add('lervag/vimtex')
 vim.g.vimtex_view_method = 'sioyek'
 vim.g.vimtex_quickfix_open_on_warning = 0
@@ -52,6 +52,7 @@ vim.g.vimtex_quickfix_ignore_filters = {
          "LaTeX Warning: Unused global option(s):",
 			}
 -------------------------------------------------------
+--- TexLab ---
 MiniDeps.add('neovim/nvim-lspconfig')
 vim.lsp.enable('texlab')
 local viewer = "displayline"
@@ -74,10 +75,10 @@ end
 vim.lsp.config('texlab', {
 	 settings = {
             texlab = {
-              forwardSearch = {
-              executable = viewer,
-              args = options,
-              },
+              		forwardSearch = {
+              		executable = viewer,
+              		args = options,
+              		},
 						},
 					},
 })
