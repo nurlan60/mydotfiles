@@ -36,6 +36,22 @@ require('mini.deps').setup({})
 --- Colorscheme ---
 MiniDeps.add('folke/tokyonight.nvim')
 vim.cmd.colorscheme('tokyonight')
+--------------------------------------------------------
+require('mini.files').setup({
+	mappings = {
+    show_help = 'gh',
+  },
+})
+vim.keymap.set('n', '<leader>e', '<cmd>lua MiniFiles.open()<cr>', {desc = 'File explorer'})
+-------------------------------------------------------
+require('mini.pick').setup({})
+vim.keymap.set('n', '<leader><space>', '<cmd>Pick buffers<cr>', {desc = 'Search open files'})
+vim.keymap.set('n', '<leader>ff', '<cmd>Pick files<cr>', {desc = 'Search all files'})
+vim.keymap.set('n', '<leader>fh', '<cmd>Pick help<cr>', {desc = 'Search help tags'})
+-------------------------------------------------------
+require('mini.snippets').setup({})
+require('mini.completion').setup({})
+require('mini.pairs').setup({})
 -----------------------------------------------------------
 --- VimTex ---
 MiniDeps.add('lervag/vimtex')
@@ -80,19 +96,7 @@ vim.lsp.config('texlab', {
 vim.lsp.enable('texlab')
 vim.keymap.set({'n'}, '<leader>tb', '<cmd>LspTexlabBuild<CR>', {desc = 'Compile LaTeX'})
 vim.keymap.set({'n'}, '<leader>tv', '<cmd>LspTexlabForward<CR>', {desc = 'Forward View LaTeX'})
--------------------------------------------------------
-require('mini.files').setup({})
-vim.keymap.set('n', '<leader>e', '<cmd>lua MiniFiles.open()<cr>', {desc = 'File explorer'})
--------------------------------------------------------
-require('mini.pick').setup({})
-vim.keymap.set('n', '<leader><space>', '<cmd>Pick buffers<cr>', {desc = 'Search open files'})
-vim.keymap.set('n', '<leader>ff', '<cmd>Pick files<cr>', {desc = 'Search all files'})
-vim.keymap.set('n', '<leader>fh', '<cmd>Pick help<cr>', {desc = 'Search help tags'})
--------------------------------------------------------
-require('mini.snippets').setup({})
-require('mini.completion').setup({})
-require('mini.pairs').setup({})
-----------------------------------------------------
+---------------------------------------------------
 -- Spelling --
 ---------------
 vim.opt.spelllang = "en_us,ru"
