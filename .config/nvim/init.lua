@@ -31,16 +31,7 @@ if not vim.loop.fs_stat(mini_path) then
   vim.cmd('packadd mini.nvim | helptags ALL')
   vim.cmd('echo "Installed `mini.nvim`" | redraw')
 end
-local ok, MiniDeps = pcall(require, 'mini.deps')
-if not ok then
-  vim.notify('[WARN] mini.deps module not found', vim.log.levels.WARN)
-  return
-end
-vim.keymap.set({'n'}, '<leader>tb', '<cmd>LspTexlabBuild<CR>', {desc = 'Compile LaTeX'})
-vim.keymap.set({'n'}, '<leader>tv', '<cmd>LspTexlabForward<CR>', {desc = 'Forward View LaTeX'})
------------------------------------------------------------
-MiniDeps.setup({})
-
+require('mini.deps').setup({})
 -----------------------------------------------------------
 --- Colorscheme ---
 MiniDeps.add('folke/tokyonight.nvim')
@@ -87,6 +78,8 @@ vim.lsp.config('texlab', {
 		},
 })
 vim.lsp.enable('texlab')
+vim.keymap.set({'n'}, '<leader>tb', '<cmd>LspTexlabBuild<CR>', {desc = 'Compile LaTeX'})
+vim.keymap.set({'n'}, '<leader>tv', '<cmd>LspTexlabForward<CR>', {desc = 'Forward View LaTeX'})
 -------------------------------------------------------
 require('mini.files').setup({})
 vim.keymap.set('n', '<leader>e', '<cmd>lua MiniFiles.open()<cr>', {desc = 'File explorer'})
