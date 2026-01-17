@@ -1,4 +1,6 @@
 vim.o.number = true
+vim.o.relativenumber = true
+vim.o.cursorline = true
 vim.o.wrap = true
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
