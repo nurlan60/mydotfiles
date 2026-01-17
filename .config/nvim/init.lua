@@ -17,10 +17,18 @@ if not vim.loop.fs_stat(mini_path) then
   vim.cmd('echo "Installed `mini.nvim`" | redraw')
 end
 require('mini.deps').setup({})
------------------------------------------------------------
+----------------------------------------------------
 --- Colorscheme ---
 MiniDeps.add('folke/tokyonight.nvim')
 vim.cmd.colorscheme('tokyonight')
+---------------------------------------------------
+require('mini.icons').setup()
+require('mini.statusline').setup()
+require('mini.tabline').setup() 
+require('mini.indentscope').setup()
+require('mini.snippets').setup({})
+require('mini.completion').setup({})
+require('mini.pairs').setup({})
 ---------------------------------------------------
 require('mini.files').setup({
 	mappings = {
@@ -33,11 +41,7 @@ require('mini.pick').setup({})
 vim.keymap.set('n', '<leader><space>', '<cmd>Pick buffers<cr>', {desc = 'Search open files'})
 vim.keymap.set('n', '<leader>ff', '<cmd>Pick files<cr>', {desc = 'Search all files'})
 vim.keymap.set('n', '<leader>fh', '<cmd>Pick help<cr>', {desc = 'Search help tags'})
--------------------------------------------------------
-require('mini.snippets').setup({})
-require('mini.completion').setup({})
-require('mini.pairs').setup({})
------------------------------------------------------------
+----------------------------------------------------
 --- VimTex ---
 MiniDeps.add('lervag/vimtex')
 vim.g.vimtex_view_method = 'sioyek'
@@ -47,7 +51,7 @@ vim.g.vimtex_quickfix_ignore_filters = {
 	 "Overfull \\hbox",
          "LaTeX Warning: Unused global option(s):",
 			}
--------------------------------------------------------
+----------------------------------------------------
 --- TexLab ---
 MiniDeps.add('neovim/nvim-lspconfig')
 local viewer = "displayline"
@@ -74,7 +78,7 @@ vim.lsp.config('texlab', {
         		executable = viewer,
         		args = options,
         },
-			latexFormatter = 'tex-fmt',
+		 latexFormatter = 'tex-fmt',
 			},
 		},
 })
