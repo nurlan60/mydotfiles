@@ -1,4 +1,4 @@
-shell-integration-features = "ssh-terminfo,ssh-env"
+# shell-integration-features = "ssh-terminfo,ssh-env"
 theme = Catppuccin Frappe
 quit-after-last-window-closed = false
 font-size = 13
