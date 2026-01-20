@@ -10,15 +10,13 @@ require("session"):setup({
 	sync_yanked = true,
 })
 
-local bookmarks = {
-	{ tag = "yazi", path = "~/.config/yazi", key =	"y" },
-	{ tag = "nvim", path = "~/.config/nvim", key =	"v" },
-	{ tag = "Documents", path = "~/Documents", key =	"o" },
-}
 require("whoosh"):setup({
-	bookmarks = bookmarks,
-
-special_keys = {
+	bookmarks = {
+		{ tag = "yazi", path = "~/.config/yazi", key =	"y" },
+		{ tag = "nvim", path = "~/.config/nvim", key =	"v" },
+		{ tag = "Documents", path = "~/Documents", key =	"o" },
+	},
+	special_keys = {
     create_temp = false,         -- Create a temporary bookmark from the menu
     fuzzy_search = false,        -- Launch fuzzy search (fzf)
     history = "<Tab>",               -- Open directory history
