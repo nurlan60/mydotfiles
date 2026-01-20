@@ -1,25 +1,11 @@
-vim.o.number = true
 vim.o.relativenumber = true
-vim.o.cursorline = true
 vim.o.wrap = true
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
-vim.o.smartcase = true
-vim.o.ignorecase = true
-vim.o.hlsearch = false
-vim.o.signcolumn = 'yes'
+vim.o.signcolumn = 'no'
 vim.o.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
-vim.o.backup = false -- Don't create backup files
-vim.o.writebackup = false -- Don't create backup before writing
 vim.o.swapfile = false -- Don't create swap files
-vim.o.undofile = true -- Persistent undo
-
-vim.g.mapleader = ' '
------------------------------------------------------
--- Spelling --
----------------
-vim.opt.spelllang = "en_us,ru"
-vim.keymap.set('n', '<leader>s', ':set spell<cr>')
+vim.o.spelllang = "en_us,ru"
 --------------------------------------------------------
 -- Encoding --
 --------------

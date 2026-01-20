@@ -1,5 +1,6 @@
 require('options')
 require('autocmds')
+require('keymaps')
 -----------------------------------------------------------
 --- Mini install ---
 local path_package = vim.fn.stdpath('data') .. '/site'
@@ -16,12 +17,9 @@ if not vim.loop.fs_stat(mini_path) then
   vim.cmd('packadd mini.nvim | helptags ALL')
   vim.cmd('echo "Installed `mini.nvim`" | redraw')
 end
-require('mini.deps').setup({})
-----------------------------------------------------
---- Colorscheme ---
-MiniDeps.add('folke/tokyonight.nvim')
-vim.cmd.colorscheme('tokyonight')
 ---------------------------------------------------
+require('mini.deps').setup({})
+require('mini.basics').setup()
 require('mini.starter').setup()
 require('mini.bracketed').setup()
 require('mini.icons').setup()
@@ -33,18 +31,13 @@ require('mini.completion').setup({})
 require('mini.pairs').setup({})
 require('mini.surround').setup()
 require('mini.ai').setup()
+require('mini.pick').setup({})
 ---------------------------------------------------
 require('mini.files').setup({
 	mappings = {
     show_help = 'gh',
   },
 })
-vim.keymap.set('n', '<leader>e', '<cmd>lua MiniFiles.open()<cr>', {desc = 'File explorer'})
--------------------------------------------------------
-require('mini.pick').setup({})
-vim.keymap.set('n', '<leader><space>', '<cmd>Pick buffers<cr>', {desc = 'Search open files'})
-vim.keymap.set('n', '<leader>ff', '<cmd>Pick files<cr>', {desc = 'Search all files'})
-vim.keymap.set('n', '<leader>fh', '<cmd>Pick help<cr>', {desc = 'Search help tags'})
 ---------------------------------------------------
 local miniclue = require('mini.clue')
 miniclue.setup({
@@ -89,6 +82,10 @@ miniclue.setup({
   },
 })
 ----------------------------------------------------
+--- Colorscheme ---
+MiniDeps.add('folke/tokyonight.nvim')
+vim.cmd.colorscheme('tokyonight')
+----------------------------------------------------
 --- VimTex ---
 MiniDeps.add('lervag/vimtex')
 vim.g.vimtex_view_method = 'sioyek'
@@ -130,5 +127,3 @@ vim.lsp.config('texlab', {
 		},
 })
 vim.lsp.enable('texlab')
-vim.keymap.set({'n'}, '<leader>tb', '<cmd>LspTexlabBuild<CR>', {desc = 'Compile LaTeX'})
-vim.keymap.set({'n'}, '<leader>tv', '<cmd>LspTexlabForward<CR>', {desc = 'Forward View LaTeX'})
