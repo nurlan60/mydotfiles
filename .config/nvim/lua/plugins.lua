@@ -14,11 +14,11 @@ if not vim.loop.fs_stat(mini_path) then
   vim.cmd('echo "Installed `mini.nvim`" | redraw')
 end
 ---------------------------------------------------
-require('mini.deps').setup({})
 require('mini.ai').setup()
 require('mini.basics').setup()
 require('mini.bracketed').setup()
 require('mini.completion').setup({})
+require('mini.deps').setup({})
 require('mini.files').setup()
 require('mini.icons').setup()
 require('mini.indentscope').setup()
