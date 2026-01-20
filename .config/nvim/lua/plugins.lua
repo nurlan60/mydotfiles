@@ -15,25 +15,20 @@ if not vim.loop.fs_stat(mini_path) then
 end
 ---------------------------------------------------
 require('mini.deps').setup({})
-require('mini.basics').setup()
-require('mini.starter').setup()
-require('mini.bracketed').setup()
-require('mini.icons').setup()
-require('mini.statusline').setup()
-require('mini.tabline').setup() 
-require('mini.indentscope').setup()
-require('mini.snippets').setup({})
-require('mini.completion').setup({})
-require('mini.pairs').setup({})
-require('mini.surround').setup()
 require('mini.ai').setup()
+require('mini.basics').setup()
+require('mini.bracketed').setup()
+require('mini.completion').setup({})
+require('mini.files').setup()
+require('mini.icons').setup()
+require('mini.indentscope').setup()
+require('mini.pairs').setup({})
 require('mini.pick').setup({})
----------------------------------------------------
-require('mini.files').setup({
-	mappings = {
-    show_help = 'gh',
-  },
-})
+require('mini.snippets').setup({})
+require('mini.starter').setup()
+require('mini.statusline').setup()
+require('mini.surround').setup()
+require('mini.tabline').setup() 
 ---------------------------------------------------
 local miniclue = require('mini.clue')
 miniclue.setup({
