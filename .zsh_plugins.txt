@@ -1,3 +1,4 @@
+Aloxaf/fzf-tab
 hlissner/zsh-autopair
 ael-code/zsh-colored-man-pages
 zsh-users/zsh-autosuggestions
