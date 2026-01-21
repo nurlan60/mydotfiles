@@ -15,7 +15,6 @@ if not vim.loop.fs_stat(mini_path) then
 end
 ---------------------------------------------------
 require('mini.ai').setup()
-require('mini.basics').setup()
 require('mini.bracketed').setup()
 require('mini.completion').setup({})
 require('mini.deps').setup({})
@@ -29,6 +28,15 @@ require('mini.starter').setup()
 require('mini.statusline').setup()
 require('mini.surround').setup()
 require('mini.tabline').setup() 
+---------------------------------------------------
+require('mini.basics').setup({
+  mappings = {
+    basic = true,
+    option_toggle_prefix = [[\]],
+    windows = true,
+    move_with_alt = true,
+  }
+})
 ---------------------------------------------------
 local miniclue = require('mini.clue')
 miniclue.setup({
