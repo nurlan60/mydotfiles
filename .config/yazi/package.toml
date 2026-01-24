@@ -14,11 +14,6 @@ rev = "de33976"
 hash = "8a7c58225816a163a6e8730c0adafbc8"
 
 [[plugin.deps]]
-use = "yazi-rs/plugins:piper"
-rev = "de33976"
-hash = "76ea4ff62db6ebe62e4653c2de95cbd"
-
-[[plugin.deps]]
 use = "KKV9/compress"
 rev = "e6007f7"
 hash = "e0b1051849756dd72fca874c320259a"
@@ -44,19 +39,9 @@ rev = "5edff3b"
 hash = "e92138f6eb884bef96d92b2d114ac927"
 
 [[plugin.deps]]
-use = "ndtoan96/ouch"
-rev = "594b8a2"
-hash = "c9e628fc0312d198db22ae2fa74883b"
-
-[[plugin.deps]]
-use = "peterfication/mux"
-rev = "e76edd5"
-hash = "8e49c6f9b24993239c4d03a1aaabce80"
-
-[[plugin.deps]]
-use = "ahkohd/eza-preview"
-rev = "7a2d60f"
-hash = "eed8e19469f3dca38fd977eb938dd34e"
+use = "alberti42/faster-piper"
+rev = "419c04f"
+hash = "e954f3d314ba732336592101bb47dd03"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"

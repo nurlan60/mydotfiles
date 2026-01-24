@@ -1,14 +1,18 @@
 [plugin]
 prepend_previewers = [
-  # { url = "*/", run = "mux eza_tree_1 eza_tree_2 eza_tree_3 eza_tree_4" },
-  { url = "*/", run = "eza-preview" },
-  { url = "*.md", run = 'piper -- CLICOLOR_FORCE=1 glow -w=$w -s=dark "$1"' },
-  { url = "*.docx", run = 'piper -- doxx --export text "$1"' },
-  { url = "*.{xlsx,xls,xlsm,xlsb,ods}", run = 'piper -- xleak "$1"' },
-  { mime = "application/msword", run = 'piper -- antiword "$1"' },
-  { mime = "application/{*zip,tar,bzip*,7z-compressed,xz,rar}", run = "ouch" },
   { mime = "image/djvu", run  = "djvu-view"},
+  { url = "*.md", run = 'faster-piper --rely-on-preloader' },
+  { url = "*.docx", run = 'faster-piper --rely-on-preloader' },
+  { url = "*.{xlsx,xls,xlsm,xlsb,ods}", run = 'faster-piper --rely-on-preloader' },
+  { mime = "application/msword", run = 'faster-piper --rely-on-preloader' },
 ]
+prepend_preloaders = [
+  { url = "*.md",     run = 'faster-piper -- CLICOLOR_FORCE=1 glow -w=$w -s=dracula -- "$1"' },
+  { url = "*.docx",   run = 'fasterpiper -- doxx --export text "$1"' },
+  { url = "*.{xlsx,xls,xlsm,xlsb,ods}", run = 'faster-piper -- xleak "$1"' },
+  { mime = "application/msword", run = 'faster-piper -- antiword "$1"' },
+]
+
 
 [opener]
 edit = [
