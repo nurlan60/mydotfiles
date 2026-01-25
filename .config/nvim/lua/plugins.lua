@@ -24,7 +24,6 @@ require('mini.indentscope').setup()
 require('mini.notify').setup()
 require('mini.pairs').setup({})
 require('mini.pick').setup({})
-require('mini.snippets').setup({})
 require('mini.starter').setup()
 require('mini.statusline').setup()
 require('mini.surround').setup()
@@ -39,6 +38,7 @@ require('mini.basics').setup({
   }
 })
 ---------------------------------------------------
+--- Keymap helper ---
 local miniclue = require('mini.clue')
 miniclue.setup({
   triggers = {
@@ -86,6 +86,23 @@ miniclue.setup({
 MiniDeps.add('folke/tokyonight.nvim')
 vim.cmd.colorscheme('tokyonight')
 ----------------------------------------------------
+--- Snippets ---
+MiniDeps.add('rafamadriz/friendly-snippets')
+
+local gen_loader = require('mini.snippets').gen_loader
+require('mini.snippets').setup({
+  snippets = {
+    -- Load custom file with global snippets first (adjust for Windows)
+    gen_loader.from_file('~/.config/nvim/snippets/global.json'),
+
+    -- Load snippets based on current language by reading files from
+    -- "snippets/" subdirectories from 'runtimepath' directories.
+    gen_loader.from_lang(),
+  },
+})
+
+MiniSnippets.start_lsp_server() 
+---------------------------------------------------
 --- VimTex ---
 MiniDeps.add('lervag/vimtex')
 vim.g.vimtex_view_method = 'sioyek'
