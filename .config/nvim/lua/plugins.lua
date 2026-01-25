@@ -16,13 +16,11 @@ end
 ---------------------------------------------------
 require('mini.ai').setup()
 require('mini.bracketed').setup()
-require('mini.completion').setup({})
 require('mini.deps').setup({})
 require('mini.files').setup()
 require('mini.icons').setup()
 require('mini.indentscope').setup()
 require('mini.notify').setup()
-require('mini.pairs').setup({})
 require('mini.pick').setup({})
 require('mini.starter').setup()
 require('mini.statusline').setup()
@@ -42,6 +40,16 @@ require('mini.basics').setup({
 MiniDeps.add('folke/tokyonight.nvim')
 vim.cmd.colorscheme('tokyonight')
 ----------------------------------------------------
+--- Completion and Pairs ---
+require('mini.completion').setup({})
+require('mini.pairs').setup({})
+
+local map_multistep = require('mini.keymap').map_multistep
+map_multistep('i', '<Tab>',   { 'pmenu_next' })
+map_multistep('i', '<S-Tab>', { 'pmenu_prev' })
+map_multistep('i', '<CR>',    { 'pmenu_accept', 'minipairs_cr' })
+map_multistep('i', '<BS>',    { 'minipairs_bs' })
+---------------------------------------------------
 --- Snippets ---
 MiniDeps.add('rafamadriz/friendly-snippets')
 
