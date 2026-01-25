@@ -8,7 +8,7 @@ prepend_previewers = [
 ]
 prepend_preloaders = [
   { url = "*.md",     run = 'faster-piper -- CLICOLOR_FORCE=1 glow -w=$w -s=dracula -- "$1"' },
-  { url = "*.docx",   run = 'fasterpiper -- doxx --export text "$1"' },
+  { url = "*.docx",   run = 'faster-piper -- doxx --export text "$1"' },
   { url = "*.{xlsx,xls,xlsm,xlsb,ods}", run = 'faster-piper -- xleak "$1"' },
   { mime = "application/msword", run = 'faster-piper -- antiword "$1"' },
 ]
