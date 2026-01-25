@@ -19,11 +19,6 @@ rev = "e6007f7"
 hash = "e0b1051849756dd72fca874c320259a"
 
 [[plugin.deps]]
-use = "yazi-rs/plugins:smart-filter"
-rev = "de33976"
-hash = "407d19bc4fb46eff5fa8ff8337644847"
-
-[[plugin.deps]]
 use = "Shallow-Seek/djvu-view"
 rev = "b281c7f"
 hash = "8205db73f10e23dbfe3436e7bec7b8b2"
