@@ -1,36 +1,8 @@
 {
+  "version": 1,
   "theme": "dark",
-  "languages": {
-    "latex": {
-      "extensions": [
-        "tex"
-      ],
-      "filenames": [],
-      "grammar": "latex",
-      "comment_prefix": "%",
-      "auto_indent": true,
-      "highlighter": "auto",
-      "textmate_grammar": null,
-      "show_whitespace_tabs": true,
-      "use_tabs": false,
-      "tab_size": null,
-      "formatter": null,
-      "format_on_save": false,
-      "on_save": []
-    }
-  },
-  "lsp": {
-    "latex": {
-      "command": "texlab",
-      "args": [],
-      "enabled": true,
-      "auto_start": false,
-      "process_limits": {
-        "max_memory_percent": 50,
-        "max_cpu_percent": 90,
-        "enabled": true
-      },
-      "initialization_options": null
-    }
+  "editor": {
+    "tab_size": 4,
+    "line_numbers": true
   }
 }

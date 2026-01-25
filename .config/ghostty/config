@@ -4,6 +4,7 @@ quit-after-last-window-closed = false
 font-size = 13
 font-thicken = true
 macos-titlebar-style = tabs 
+macos-option-as-alt = left
 
 keybind = global:cmd+grave_accent=toggle_quick_terminal
 quick-terminal-position = bottom
