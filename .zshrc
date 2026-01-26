@@ -152,9 +152,6 @@ else
     
     # source antidote
     source /usr/share/zsh-antidote/antidote.zsh
-
-    # QT 
-    export QT_QPA_PLATFORMTHEME=qt6ct
 fi
 
 export PATH
