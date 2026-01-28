@@ -1,0 +1,6 @@
+[services.rpi]
+type     = "sftp"
+host     = "rpi.local"
+user     = "nurlan"
+port     = 22
+password = "0691"
