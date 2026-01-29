@@ -1,27 +1,27 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:chmod"
-rev = "de33976"
+rev = "6f50636"
 hash = "8da0b15a97b5dfd13941d1ecc617ac7c"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mount"
-rev = "de33976"
-hash = "e2d4bfccf31e5ab05f46fee4797c5215"
+rev = "6f50636"
+hash = "563e4068979d1466d3dfc2e70a296947"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "de33976"
+rev = "6f50636"
 hash = "8a7c58225816a163a6e8730c0adafbc8"
 
 [[plugin.deps]]
 use = "KKV9/compress"
-rev = "e6007f7"
-hash = "e0b1051849756dd72fca874c320259a"
+rev = "cb6e8ec"
+hash = "424ada4807b20ccd4fc85d1d7c26d1e4"
 
 [[plugin.deps]]
 use = "Shallow-Seek/djvu-view"
-rev = "b281c7f"
-hash = "8205db73f10e23dbfe3436e7bec7b8b2"
+rev = "f218aa6"
+hash = "522db0412d7839c8c343f9c733713d24"
 
 [[plugin.deps]]
 use = "boydaihungst/fuse-archive"
