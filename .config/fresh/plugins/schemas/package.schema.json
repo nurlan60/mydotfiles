@@ -98,7 +98,7 @@
           "properties": {
             "file": {
               "type": "string",
-              "description": "Path to TextMate grammar file (.tmLanguage.json)"
+              "description": "Path to grammar file (.sublime-syntax recommended, or .tmLanguage)"
             },
             "extensions": {
               "type": "array",
@@ -139,6 +139,10 @@
             "autoIndent": {
               "type": "boolean",
               "description": "Enable automatic indentation"
+            },
+            "showWhitespaceTabs": {
+              "type": "boolean",
+              "description": "Whether to show whitespace tab indicators (→). Defaults to true. Set to false for languages like Go/Hare that use tabs for indentation."
             },
             "formatter": {
               "type": "object",

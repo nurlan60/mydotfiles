@@ -559,6 +559,11 @@ type LanguagePackConfig = {
 	*/
 	autoIndent: boolean | null;
 	/**
+	* Whether to show whitespace tab indicators (→) for this language
+	* Defaults to true. Set to false for languages like Go/Hare that use tabs for indentation.
+	*/
+	showWhitespaceTabs: boolean | null;
+	/**
 	* Formatter configuration
 	*/
 	formatter: FormatterPackConfig | null;
@@ -1063,6 +1068,10 @@ interface EditorAPI {
 	* Enable or disable line numbers for a buffer
 	*/
 	setLineNumbers(bufferId: number, enabled: boolean): boolean;
+	/**
+	* Enable or disable line wrapping for a buffer/split
+	*/
+	setLineWrap(bufferId: number, splitId: number | null, enabled: boolean): boolean;
 	/**
 	* Create a scroll sync group for anchor-based synchronized scrolling
 	*/
