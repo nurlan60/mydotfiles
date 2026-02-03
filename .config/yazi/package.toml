@@ -1,16 +1,16 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:chmod"
-rev = "6f50636"
+rev = "230b9c6"
 hash = "8da0b15a97b5dfd13941d1ecc617ac7c"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mount"
-rev = "6f50636"
-hash = "563e4068979d1466d3dfc2e70a296947"
+rev = "230b9c6"
+hash = "9ad20d763df07ce40fd09de549d914b0"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "6f50636"
+rev = "230b9c6"
 hash = "8a7c58225816a163a6e8730c0adafbc8"
 
 [[plugin.deps]]
@@ -35,20 +35,20 @@ hash = "e92138f6eb884bef96d92b2d114ac927"
 
 [[plugin.deps]]
 use = "alberti42/faster-piper"
-rev = "419c04f"
-hash = "e954f3d314ba732336592101bb47dd03"
+rev = "8b794bf"
+hash = "fac71f8ce9447ad509b5aad9e0d8c694"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
-rev = "ca61658"
+rev = "9e053d0"
 hash = "8eabb4e88096f10905a6df62cfaadbf4"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-latte"
-rev = "ca61658"
+rev = "9e053d0"
 hash = "c6b710b2aa0fb9c6c7f1ec4db6146104"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-frappe"
-rev = "ca61658"
+rev = "9e053d0"
 hash = "e25fb61c14484de843b52430a72b5196"
