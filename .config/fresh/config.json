@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "theme": "dracula",
+  "theme": "dark",
   "editor": {
     "tab_size": 4,
     "line_numbers": true

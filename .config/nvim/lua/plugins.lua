@@ -67,6 +67,10 @@ require('mini.snippets').setup({
 
 MiniSnippets.start_lsp_server() 
 ---------------------------------------------------
+--- Lsp ---
+MiniDeps.add('neovim/nvim-lspconfig')
+vim.lsp.enable({ 'lua_ls', 'texlab' })
+---------------------------------------------------
 --- VimTex ---
 MiniDeps.add('lervag/vimtex')
 vim.g.vimtex_view_method = 'sioyek'
@@ -77,38 +81,6 @@ vim.g.vimtex_quickfix_ignore_filters = {
          "LaTeX Warning: Unused global option(s):",
 			}
 ----------------------------------------------------
---- TexLab ---
-MiniDeps.add('neovim/nvim-lspconfig')
-local viewer = "displayline"
-local options = {
-  "%l",
-  "%p",
-  "%f",
-}
-local os_name = vim.loop.os_uname().sysname
-if os_name == "Linux" then
-  viewer = "zathura"
-  options = {
-    "--synctex-forward",
-    "%l:1:%f",
-    "%p",
-  }
-elseif os_name == "Windows" then
-  -- Do something for Windows
-end
-vim.lsp.config('texlab', {
-	 settings = {
-     texlab = {
-        forwardSearch = {
-        		executable = viewer,
-        		args = options,
-        },
-		 latexFormatter = 'tex-fmt',
-			},
-		},
-})
-vim.lsp.enable('texlab')
----------------------------------------------------
 --- Keymap helper ---
 local miniclue = require('mini.clue')
 miniclue.setup({
