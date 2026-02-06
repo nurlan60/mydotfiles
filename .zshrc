@@ -136,9 +136,6 @@ if [[ $(uname) == "Darwin" ]]; then
     # Homebrew config
     eval "$(/opt/homebrew/bin/brew shellenv)"
 
-    # oh-my-posh
-    eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/my.omp.json)"
-
     # source antidote
     source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
     
@@ -147,15 +144,15 @@ else
     
     PATH="${PATH}:/home/nurlan/.local/bin:/usr/local/texlive/2025/bin/x86_64-linux"
     
-    # oh-my-posh
-    eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/my.omp.toml)"
-    
     # source antidote
     source /usr/share/zsh-antidote/antidote.zsh
 fi
 
 export PATH
 
+# oh-my-posh
+eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/my.omp.json)"
+    
 # fzf init after zsh-vi-mod
 zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
 
