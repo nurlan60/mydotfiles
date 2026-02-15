@@ -38,8 +38,6 @@ require('mini.basics').setup({
 })
 ----------------------------------------------------
 --- Colorscheme ---
--- MiniDeps.add('folke/tokyonight.nvim')
--- vim.cmd.colorscheme('tokyonight')
 MiniDeps.add({ source = "catppuccin/nvim", name = "catppuccin" })
 vim.cmd.colorscheme('catppuccin-mocha')
 ----------------------------------------------------
