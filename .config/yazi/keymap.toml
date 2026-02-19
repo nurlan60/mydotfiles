@@ -6,9 +6,11 @@ prepend_keymap = [
 	# Smart Enter
 	{ on   = "l", run  = "plugin smart-enter", desc = "Enter the child directory, or open the file" },
 	{ on   = "<Right>", run  = "plugin smart-enter", desc = "Enter the child directory, or open the file" },
-  # Mount
+  
+	# Mount
   { on = [ "M","M"], run = "plugin mount", desc = "Mount drive", for = 'unix' },
-  # SSHFS
+  
+	# SSHFS
   { on = ["M","m"], run = "plugin sshfs -- mount --jump",    desc = "Mount & jump" },
   { on = ["M","u"], run = "plugin sshfs -- unmount",         desc = "Unmount SSHFS" },
   { on = ["M","j"], run = "plugin sshfs -- jump",            desc = "Jump to mount" },
@@ -30,10 +32,7 @@ prepend_keymap = [
   { on = "!", run = 'shell --block -- "bash.exe"', desc = "Open shell here", for = 'windows' },
 
   # Viewer
-  { on = [ "i","i" ], run = 'shell --block -- viewer.sh %s', desc = "Open file in viewer", for = 'unix' },
-
-  # Fresh Editor 
-  { on = [ "i","e" ], run = 'shell --block -- fresh %s', desc = " Open file in fresh editor" },
+  { on = "i", run = 'shell --block -- viewer.sh %s', desc = "Open file in viewer", for = 'unix' },
 
   # Chmod
   { on = [ "c","m" ], run = "plugin chmod", desc = "Chmod on selected files", for = 'unix' },
