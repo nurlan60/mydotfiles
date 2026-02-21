@@ -16,7 +16,6 @@ autoload -U add-zsh-hook
 alias v="nvim"
 alias mc="SHELL=/bin/bash mc"
 alias :q="exit"
-alias keys="glow ~/.config/ghostty/ghostty-shortcuts.md -p"
 
 alias ld='eza -lD'
 alias lf='eza -lF --color=always | grep -v /'
@@ -127,6 +126,7 @@ _fzf_compgen_dir() {
 }
 
 if [[ $(uname) == "Darwin" ]]; then
+		alias keys="glow ~/.config/ghostty/ghostty-shortcuts.md -p"
     alias python="/opt/homebrew/bin/python3"
     alias pip="/opt/homebrew/bin/pip3"
     
@@ -139,6 +139,7 @@ if [[ $(uname) == "Darwin" ]]; then
     source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
     
 else
+	  alias keys="zathura ~/.config/alacritty/alacritty-shortcuts.pdf"
     alias texlive='sh -c "xhost +si:localuser:root && sudo /usr/local/texlive/2025/bin/x86_64-linux/tlmgr --gui && xhost -si:localuser:root"'
     
     PATH="${PATH}:/home/nurlan/.local/bin:/usr/local/texlive/2025/bin/x86_64-linux"
