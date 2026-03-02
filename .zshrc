@@ -130,7 +130,7 @@ if [[ $(uname) == "Darwin" ]]; then
     alias python="/opt/homebrew/bin/python3"
     alias pip="/opt/homebrew/bin/pip3"
     
-    PATH="${PATH}:/Users/nurlan/.local/bin:/Users/nurlan/.juliaup/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+    PATH="${PATH}:/Users/nurlan/.local/bin"
     
     # Homebrew config
     eval "$(/opt/homebrew/bin/brew shellenv)"
