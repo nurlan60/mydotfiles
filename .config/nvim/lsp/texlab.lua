@@ -1,4 +1,4 @@
-local viewer = "displayline"
+local viewer = "/Applications/Skim.app/Contents/SharedSupport/displayline"
 local options = {
   "%l",
   "%p",
