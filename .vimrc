@@ -4,8 +4,6 @@ filetype plugin on
 filetype indent on 
 syntax on
 
-colorscheme catppuccin
-
 set expandtab
 set tabstop=4
 set shiftwidth=4
