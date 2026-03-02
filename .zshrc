@@ -140,11 +140,13 @@ if [[ $(uname) == "Darwin" ]]; then
     
 else
 	  alias keys="zathura ~/.config/alacritty/alacritty-shortcuts.pdf"
-    alias texlive='sh -c "xhost +si:localuser:root && sudo /usr/local/texlive/2025/bin/x86_64-linux/tlmgr --gui && xhost -si:localuser:root"'
+    alias texlive='sh -c "xhost +si:localuser:root && sudo /usr/local/texlive/2026/bin/x86_64-linux/tlmgr --gui && xhost -si:localuser:root"'
     
-    PATH="${PATH}:/home/nurlan/.local/bin:/usr/local/texlive/2025/bin/x86_64-linux"
+    PATH="${PATH}:/home/nurlan/.local/bin:/usr/local/texlive/2026/bin/x86_64-linux"
+ 		export MANPATH=/usr/local/texlive/2026/texmf-dist/doc/man:$MANPATH
+		export INFOPATH=/usr/local/texlive/2026/texmf-dist/doc/info:$INFOPATH   
     
-    # source antidote
+		# source antidote
     source /usr/share/zsh-antidote/antidote.zsh
 fi
 
