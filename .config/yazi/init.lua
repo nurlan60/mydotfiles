@@ -11,6 +11,7 @@ require("whoosh"):setup({
 		{ tag = "nvim", path = "~/.config/nvim", key =	"v" },
 		{ tag = "Documents", path = "~/Documents", key =	"o" },
 		{ tag = "rpi", path = "sftp://rpi//home/nurlan", key =	"r" },
+		{ tag = "mac", path = "sftp://mac//Users/nurlan", key =	"m" },
 	},
 	special_keys = {
     create_temp = false,         -- Create a temporary bookmark from the menu
