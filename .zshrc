@@ -137,7 +137,8 @@ if [[ $(uname) == "Darwin" ]]; then
 
     # source antidote
     source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
-    
+    # libarchive
+		export PKG_CONFIG_PATH="/opt/homebrew/opt/libarchive/lib/pkgconfig"
 else
 	  alias keys="zathura ~/.config/alacritty/alacritty-shortcuts.pdf"
     alias texlive='sh -c "xhost +si:localuser:root && sudo /usr/local/texlive/2026/bin/x86_64-linux/tlmgr --gui && xhost -si:localuser:root"'
