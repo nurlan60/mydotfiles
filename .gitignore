@@ -1,4 +1,4 @@
 *.DS_Store
 ._*
 .config/yazi/bookmarks
-.config/yazi/plugins/fuse-archive.yazi/assets/unmount_on_quit.sh
+.config/nvim/nvim-pack-lock.json

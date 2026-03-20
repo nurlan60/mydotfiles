@@ -23,10 +23,6 @@
     "nvim-treesitter-textobjects": {
       "rev": "4e91b5d0394329a229725b021a8ea217099826ef",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
-    },
-    "vimtex": {
-      "rev": "82d2305ff71dfb3bd91602534cc9bb9a195bcb38",
-      "src": "https://github.com/lervag/vimtex"
     }
   }
 }
