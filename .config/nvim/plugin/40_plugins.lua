@@ -174,6 +174,7 @@ later(function() add({ 'https://github.com/rafamadriz/friendly-snippets' }) end)
 
 add({ 'https://github.com/lervag/vimtex' }) 
 vim.g.vimtex_view_method = 'sioyek'
+vim.g.vimtex_view_sioyek_options = '--new-window'
 vim.g.vimtex_quickfix_open_on_warning = 0
 vim.g.vimtex_quickfix_ignore_filters = {
          "Underfull \\hbox",
