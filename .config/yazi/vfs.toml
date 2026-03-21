@@ -12,6 +12,13 @@ user     = "nurlan"
 port     = 22
 key_file = "~/.ssh/id_ed25519"
 
+[services.mini]
+type     = "sftp"
+host     = "macmini.local"
+user     = "nurlan"
+port     = 22
+key_file = "~/.ssh/id_ed25519"
+
 [services.work]
 type     = "sftp"
 host     = "nurlans-mac-mini.local"

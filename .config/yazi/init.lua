@@ -12,6 +12,7 @@ require("whoosh"):setup({
 		{ tag = "Documents", path = "~/Documents", key =	"o" },
 		{ tag = "rpi", path = "sftp://rpi//home/nurlan", key =	"r" },
 		{ tag = "mac", path = "sftp://mac//Users/nurlan", key =	"m" },
+		{ tag = "mini", path = "sftp://mini//Users/nurlan", key =	"h" },
 	},
 	special_keys = {
     create_temp = false,         -- Create a temporary bookmark from the menu
