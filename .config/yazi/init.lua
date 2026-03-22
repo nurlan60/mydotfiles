@@ -21,4 +21,4 @@ require("whoosh"):setup({
     previous_dir = "<Backspace>",    -- Jump back to the previous directory
   },
 })
-
+require("fuse-archive"):setup()
