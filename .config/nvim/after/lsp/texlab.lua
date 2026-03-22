@@ -1,5 +1,5 @@
-local os_name = vim.loop.os_uname().sysname
 local viewer, opt
+local os_name = vim.loop.os_uname().sysname
 
 if os_name == "Linux" then
   viewer = "zathura"
@@ -11,6 +11,7 @@ elseif os_name == "Windows_NT" then
   viewer = ""
   opt = ""
 end
+
 return {
   settings = {
     texlab = {
