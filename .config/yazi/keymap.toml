@@ -61,10 +61,16 @@ prepend_keymap = [
   { on = [ "]", "T" ], run = "plugin whoosh save_cwd_temp", desc = "Add temporary bookmark (current directory)" },
   { on = [ "]", "f" ], run = "plugin whoosh jump_by_fzf", desc = "Jump bookmark by fzf" },
   { on = [ "]", "d" ], run = "plugin whoosh delete_by_key", desc = "Delete bookmark by key" },
-{ on = [ "]", "D" ], run = "plugin whoosh delete_by_fzf", desc = "Delete bookmarks by fzf (use TAB to select multiple)" },
+  { on = [ "]", "D" ], run = "plugin whoosh delete_by_fzf", desc = "Delete bookmarks by fzf (use TAB to select multiple)" },
   { on = [ "]", "C" ], run = "plugin whoosh delete_all", desc = "Delete all user bookmarks" },
   { on = [ "]", "r" ], run = "plugin whoosh rename_by_key", desc = "Rename bookmark by key" },
   { on = [ "]", "R" ], run = "plugin whoosh rename_by_fzf", desc = "Rename bookmark by fzf" },
-{ on = "P", run = "plugin mux next", desc = "Cycle through mux previewers" },
+  { on = "P", run = "plugin mux next", desc = "Cycle through mux previewers" },
+
+  # fuse-archive
+  { on   = [ "<Right>" ], run = "plugin fuse-archive -- mount", desc = "Enter or Mount selected archive" },
+  { on   = [ "<Left>" ], run = "plugin fuse-archive -- leave", desc = "Leave selected archive without unmount it" },
+  { on   = [ "l" ], run = "plugin fuse-archive -- mount", desc = "Enter or Mount selected archive" },
+  { on   = [ "h" ], run = "plugin fuse-archive -- leave", desc = "Leave selected archive without unmount it" },
 
 ]
