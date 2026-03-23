@@ -127,6 +127,11 @@ later(function()
       lsp_format = 'fallback',
     },
     formatters_by_ft = { lua = { 'stylua' }, tex = { 'fmt-tex' } },
+    format_on_save = {
+       -- These options will be passed to conform.format()
+        timeout_ms = 500,
+        lsp_format = "fallback",
+      },
   })
 end)
 
