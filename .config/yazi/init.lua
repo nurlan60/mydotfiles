@@ -23,8 +23,8 @@ require("whoosh"):setup({
 })
 require("fuse-archive"):setup({
   smart_enter = true,
-  excluded_extensions = { "doc", "docx", "xls", "xlsx" },
+  excluded_extensions = { "docx", "xlsx" },
   -- extra_extensions = { "xyz" },
   mount_options = "nocache,nosymlinks",
-  -- mount_root_dir = os.getenv("HOME") .. "/abc_folder",
+  -- mount_root_dir = os.getenv("HOME") .. "/mnt",
 })
