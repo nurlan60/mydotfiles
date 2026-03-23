@@ -21,10 +21,3 @@ require("whoosh"):setup({
 		previous_dir = "<Backspace>", -- Jump back to the previous directory
 	},
 })
-require("fuse-archive"):setup({
-	smart_enter = true,
-	excluded_extensions = { "docx", "xlsx" },
-	-- extra_extensions = { "xyz" },
-	mount_options = "nocache,nosymlinks",
-	-- mount_root_dir = os.getenv("HOME") .. "/mnt",
-})
