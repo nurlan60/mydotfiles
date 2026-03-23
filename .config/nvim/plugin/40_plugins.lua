@@ -180,3 +180,6 @@ vim.g.vimtex_quickfix_ignore_filters = {
 	 "Overfull \\hbox",
          "LaTeX Warning: Unused global option(s):",
 			}
+
+vim.cmd("packadd kbswitch.nvim")
+require('kbswitch').setup()
