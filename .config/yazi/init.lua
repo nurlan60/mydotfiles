@@ -7,24 +7,24 @@ require("session"):setup({
 
 require("whoosh"):setup({
 	bookmarks = {
-		{ tag = "yazi", path = "~/.config/yazi", key =	"y" },
-		{ tag = "nvim", path = "~/.config/nvim", key =	"v" },
-		{ tag = "Documents", path = "~/Documents", key =	"o" },
-		{ tag = "rpi", path = "sftp://rpi//home/nurlan", key =	"r" },
-		{ tag = "mac", path = "sftp://mac//Users/nurlan", key =	"m" },
-		{ tag = "mini", path = "sftp://mini//Users/nurlan", key =	"h" },
+		{ tag = "yazi", path = "~/.config/yazi", key = "y" },
+		{ tag = "nvim", path = "~/.config/nvim", key = "v" },
+		{ tag = "Documents", path = "~/Documents", key = "o" },
+		{ tag = "rpi", path = "sftp://rpi//home/nurlan", key = "r" },
+		{ tag = "mac", path = "sftp://mac//Users/nurlan", key = "m" },
+		{ tag = "mini", path = "sftp://mini//Users/nurlan", key = "h" },
 	},
 	special_keys = {
-    create_temp = false,         -- Create a temporary bookmark from the menu
-    fuzzy_search = false,        -- Launch fuzzy search (fzf)
-    history = "<Tab>",               -- Open directory history
-    previous_dir = "<Backspace>",    -- Jump back to the previous directory
-  },
+		create_temp = false, -- Create a temporary bookmark from the menu
+		fuzzy_search = false, -- Launch fuzzy search (fzf)
+		history = "<Tab>", -- Open directory history
+		previous_dir = "<Backspace>", -- Jump back to the previous directory
+	},
 })
 require("fuse-archive"):setup({
-  smart_enter = true,
-  excluded_extensions = { "docx", "xlsx" },
-  -- extra_extensions = { "xyz" },
-  mount_options = "nocache,nosymlinks",
-  -- mount_root_dir = os.getenv("HOME") .. "/mnt",
+	smart_enter = true,
+	excluded_extensions = { "docx", "xlsx" },
+	-- extra_extensions = { "xyz" },
+	mount_options = "nocache,nosymlinks",
+	-- mount_root_dir = os.getenv("HOME") .. "/mnt",
 })
