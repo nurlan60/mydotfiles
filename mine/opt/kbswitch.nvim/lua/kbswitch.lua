@@ -14,8 +14,8 @@ if os_name == "Linux" then
 	change_command = "niri msg action switch-layout"
 elseif os_name == "Darwin" then
 	NORMAL_LAYOUT = "com.apple.keylayout.ABC"
-	get_command = "macism"
-	change_command = "macism"
+	get_command = "macime"
+	change_command = "macime"
 elseif os_name == "Windows_NT" then
 	NORMAL_LAYOUT = "1033"
 	get_command = "im-select.exe"
