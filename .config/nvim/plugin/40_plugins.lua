@@ -194,22 +194,24 @@ vim.g.vimtex_quickfix_ignore_filters = {
 	"LaTeX Warning: Unused global option(s):",
 }
 
--- vim.cmd("packadd kbswitch.nvim")
--- require("kbswitch").setup()
-
-add({ "https://github.com/riodelphino/macime.nvim" })
-require("macime").setup({
-	vim = {
-		ttimeoutlen = 0, -- Reduce delay after InsertLeave and InsertEnter
-	},
-	save = {
-		enabled = true,
-		scope = "session", -- Save previous IME per nvim pid
-	},
-	socket = {
-		enabled = true, -- Enable `macimed` launchd service for blazing faster switching
-	},
-	-- exclude = {
-	-- 	filetype = { "TelescopePrompt", "snacks_picker_input", "neo-tree-popup", "neo-tree-filter" }, -- Exclude specific filetypes
-	-- },
-})
+if os_name == "Linux" or os_name == "Windows_NT" then
+	vim.cmd("packadd kbswitch.nvim")
+	require("kbswitch").setup()
+elseif os_name == "Darwin" then
+	add({ "https://github.com/riodelphino/macime.nvim" })
+	require("macime").setup({
+		vim = {
+			ttimeoutlen = 0, -- Reduce delay after InsertLeave and InsertEnter
+		},
+		save = {
+			enabled = true,
+			scope = "session", -- Save previous IME per nvim pid
+		},
+		socket = {
+			enabled = true, -- Enable `macimed` launchd service for blazing faster switching
+		},
+		-- exclude = {
+		-- 	filetype = { "TelescopePrompt", "snacks_picker_input", "neo-tree-popup", "neo-tree-filter" }, -- Exclude specific filetypes
+		-- },
+	})
+end
