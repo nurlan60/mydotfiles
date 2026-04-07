@@ -193,11 +193,6 @@ vim.g.vimtex_quickfix_ignore_filters = {
 	"Overfull \\hbox",
 	"LaTeX Warning: Unused global option(s):",
 }
-
-if os_name == "Linux" or os_name == "Windows_NT" then
-	vim.cmd("packadd kbswitch.nvim")
-	require("kbswitch").setup()
-elseif os_name == "Darwin" then
 	add({ "https://github.com/riodelphino/macime.nvim" })
 	require("macime").setup({
 		vim = {
@@ -214,4 +209,3 @@ elseif os_name == "Darwin" then
 		-- 	filetype = { "TelescopePrompt", "snacks_picker_input", "neo-tree-popup", "neo-tree-filter" }, -- Exclude specific filetypes
 		-- },
 	})
-end
