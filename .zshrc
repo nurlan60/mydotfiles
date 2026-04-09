@@ -125,6 +125,8 @@ _fzf_compgen_dir() {
   fd --type=d --hidden --exclude .git . "$1"
 }
 
+export COLORTERM=truecolor
+
 if [[ $(uname) == "Darwin" ]]; then
 		alias keys="glow ~/.config/ghostty/ghostty-shortcuts.md -p"
     alias python="/opt/homebrew/bin/python3"
