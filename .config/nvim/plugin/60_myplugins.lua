@@ -14,6 +14,8 @@ vim.g.vimtex_quickfix_ignore_filters = {
 -----------------------------------------------
 ---kbswitch
 -----------------------------------------------
+local os_name = vim.loop.os_uname().sysname
+
 if os_name == "Darwin" then
 	add({ "https://github.com/riodelphino/macime.nvim" })
 	require("macime").setup({
