@@ -12,8 +12,9 @@ vim.g.vimtex_quickfix_ignore_filters = {
 	"LaTeX Warning: Unused global option(s):",
 }
 -----------------------------------------------
---- Macime: keyboard switching
+---kbswitch
 -----------------------------------------------
+if os_name == "Darwin" then
 	add({ "https://github.com/riodelphino/macime.nvim" })
 	require("macime").setup({
 		vim = {
@@ -30,3 +31,7 @@ vim.g.vimtex_quickfix_ignore_filters = {
 		-- 	filetype = { "TelescopePrompt", "snacks_picker_input", "neo-tree-popup", "neo-tree-filter" }, -- Exclude specific filetypes
 		-- },
 	})
+else
+  vim.cmd('packadd kbswitch.nvim')
+  require('kbswitch').setup({})
+end
