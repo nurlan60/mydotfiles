@@ -78,10 +78,9 @@ function M.setup()
 		end,
 	})
 
-	-- When Neovim loses focus
 	-- When entering Insert Mode:
 	-- 1. Switch to the previously saved layout
-	autocmd({ "FocusLost", "InsertEnter" }, {
+	autocmd({ "InsertEnter" }, {
 		pattern = "*",
 		callback = function()
 			vim.schedule(function()
