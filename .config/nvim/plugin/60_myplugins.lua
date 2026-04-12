@@ -1,6 +1,7 @@
-
 local add = vim.pack.add
-
+-----------------------------------------------
+--- Vimtex
+-----------------------------------------------
 add({ "https://github.com/lervag/vimtex" })
 vim.g.vimtex_view_method = "sioyek"
 vim.g.vimtex_view_sioyek_options = "--new-window"
@@ -10,6 +11,9 @@ vim.g.vimtex_quickfix_ignore_filters = {
 	"Overfull \\hbox",
 	"LaTeX Warning: Unused global option(s):",
 }
+-----------------------------------------------
+--- Macime: keyboard switching
+-----------------------------------------------
 	add({ "https://github.com/riodelphino/macime.nvim" })
 	require("macime").setup({
 		vim = {

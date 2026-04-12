@@ -1,8 +1,8 @@
 vim.g.maplocalleader = ',' -- Use `,` as <Localleader> key
 vim.cmd.colorscheme("catppuccin")
-
+---------------------------------------------
 -- Encoding --
---------------
+---------------------------------------------
 vim.opt.fileencodings = "utf-8, cp1251, cp866, koi8-r,ucs-2le"
 -------------
 -- <F7> EOL format (dos <CR><NL>,unix <NL>,mac <CR>)
