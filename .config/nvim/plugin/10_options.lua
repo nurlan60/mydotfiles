@@ -21,13 +21,11 @@
 
 -- General ====================================================================
 vim.g.mapleader = ' ' -- Use `<Space>` as <Leader> key
-vim.g.maplocalleader = ',' -- Use `,` as <Localleader> key
 
 vim.o.mouse       = 'a'            -- Enable mouse
 vim.o.mousescroll = 'ver:25,hor:6' -- Customize mouse scroll
 vim.o.switchbuf   = 'usetab'       -- Use already opened buffers when switching
 vim.o.undofile    = true           -- Enable persistent undo
-vim.o.swapfile = false -- Don't create swap files
 
 vim.o.shada = "'100,<50,s10,:1000,/100,@100,h" -- Limit ShaDa file (for startup)
 
@@ -79,7 +77,6 @@ vim.o.shiftwidth    = 2       -- Use this number of spaces for indentation
 vim.o.smartcase     = true    -- Respect case if search pattern has upper case
 vim.o.smartindent   = true    -- Make indenting smart
 vim.o.spelloptions  = 'camel' -- Treat camelCase word parts as separate words
-vim.o.spelllang = "en_us,ru"
 vim.o.tabstop       = 2       -- Show tab as this number of spaces
 vim.o.virtualedit   = 'block' -- Allow going past end of line in blockwise mode
 
@@ -130,42 +127,3 @@ local diagnostic_opts = {
 -- Use `later()` to avoid sourcing `vim.diagnostic` on startup
 Config.later(function() vim.diagnostic.config(diagnostic_opts) end)
 -- stylua: ignore end
-
---------------------------------------------------------
--- Encoding --
---------------
-vim.opt.fileencodings = "utf-8, cp1251, cp866, koi8-r,ucs-2le"
--------------
--- <F7> EOL format (dos <CR><NL>,unix <NL>,mac <CR>)
-vim.cmd([[
-    set  wildmenu
-    set  wcm=<Tab>
-    menu EOL.unix :set fileformat=unix<CR>
-    menu EOL.dos  :set fileformat=dos<CR>
-    menu EOL.mac  :set fileformat=mac<CR>
-    map  <F7> :emenu EOL.<Tab>
-]])
-
--- F8 Change encoding
-vim.cmd([[
-    set  wildmenu
-    set  wcm=<Tab>
-    menu Encoding.cp1251     :e ++enc=cp1251 ++ff=dos<CR>
-    menu Encoding.cp866      :e ++enc=ibm866 ++ff=dos<CR>
-    menu Encoding.koi8-r     :e ++enc=koi8-r ++ff=unix<CR>
-    menu Encoding.utf-8      :e ++enc=utf-8<CR>
-    menu Encoding.ucs-2le    :e ++enc=ucs-2le<CR>
-    nmap <F8> :emenu Encoding.<Tab>
-]])
-
--- F9 Convert file encoding
-vim.cmd([[
-    set  wildmenu
-    set  wcm=<Tab>
-    menu File-Encoding.cp1251    :set fenc=cp1251<CR>
-    menu File-Encoding.cp866     :set fenc=ibm866<CR>
-    menu File-Encoding.koi8-r    :set fenc=koi8-r<CR>
-    menu File-Encoding.utf-8     :set fenc=utf-8<CR>
-    menu File-Encoding.ucs-2le   :set fenc=ucs-2le<CR>
-    nmap  <F9> :emenu File-Encoding.<Tab>
-]])
