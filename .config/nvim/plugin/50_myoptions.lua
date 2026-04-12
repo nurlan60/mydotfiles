@@ -1,3 +1,14 @@
+vim.opt.clipboard = "unnamedplus"
+vim.keymap.set('n', '<leader>y', function()
+  if vim.opt.clipboard:get()[1] == 'unnamedplus' then
+    vim.opt.clipboard = ''
+    print('Clipboard: Internal')
+  else
+    vim.opt.clipboard = 'unnamedplus'
+    print('Clipboard: System (unnamedplus)')
+  end
+end, { desc = 'Toggle unnamedplus clipboard' })
+
 vim.g.maplocalleader = ',' -- Use `,` as <Localleader> key
 vim.cmd.colorscheme("catppuccin")
 ---------------------------------------------
