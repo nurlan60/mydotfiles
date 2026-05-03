@@ -1,3 +1,8 @@
+vim.g.maplocalleader = ',' -- Use `,` as <Localleader> key
+vim.cmd.colorscheme("catppuccin")
+vim.opt.spell = true
+vim.opt.spelllang = { 'en_us', 'ru' }
+---------------------------------------------
 --- clipboard toggle
 ---------------------------------------------
 vim.opt.clipboard = "unnamedplus"
@@ -10,9 +15,6 @@ vim.keymap.set('n', '<leader>y', function()
     print('Clipboard: System (unnamedplus)')
   end
 end, { desc = 'Toggle unnamedplus clipboard' })
----------------------------------------------
-vim.g.maplocalleader = ',' -- Use `,` as <Localleader> key
-vim.cmd.colorscheme("catppuccin")
 ---------------------------------------------
 -- Encoding --
 ---------------------------------------------
