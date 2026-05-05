@@ -1,6 +1,7 @@
 vim.g.maplocalleader = ',' -- Use `,` as <Localleader> key
 vim.cmd.colorscheme("catppuccin")
 vim.opt.spell = true
+vim.opt.wrap = true
 vim.opt.spelllang = { 'en_us', 'ru' }
 vim.opt.langmap = 'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz'
 ---------------------------------------------
