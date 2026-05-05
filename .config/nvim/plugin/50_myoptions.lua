@@ -7,7 +7,7 @@ vim.opt.langmap = 'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGH
 --- clipboard toggle
 ---------------------------------------------
 vim.opt.clipboard = "unnamedplus"
-vim.keymap.set('n', '<leader>y', function()
+vim.keymap.set('n', '\\y', function()
   if vim.opt.clipboard:get()[1] == 'unnamedplus' then
     vim.opt.clipboard = ''
     print('Clipboard: Internal')
