@@ -64,6 +64,8 @@ prepend_keymap = [
   { on = [ "]", "C" ], run = "plugin whoosh delete_all", desc = "Delete all user bookmarks" },
   { on = [ "]", "r" ], run = "plugin whoosh rename_by_key", desc = "Rename bookmark by key" },
   { on = [ "]", "R" ], run = "plugin whoosh rename_by_fzf", desc = "Rename bookmark by fzf" },
+# Переход к закладкам
+  { on = "<A-y>", run = "plugin whoosh jump_key_y", desc = "Мгновенный переход к закладке с клавишей y" },
 
   # smart-enter
   { on   = "l", run  = "plugin smart-enter", desc = "Enter the child directory, or open the file" },
