@@ -1,3 +1,6 @@
+[mgr]
+ratio = [1,3,4] 
+
 [plugin]
 prepend_previewers = [
   { mime = "image/djvu", run  = "djvu-view"},
@@ -12,7 +15,6 @@ prepend_preloaders = [
   { url = "*.{xlsx,xls,xlsm,xlsb,ods}", run = 'faster-piper -- xleak "$1"' },
   { mime = "application/msword", run = 'faster-piper -- antiword "$1"' },
 ]
-
 
 [opener]
 edit = [
