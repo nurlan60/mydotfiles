@@ -142,7 +142,6 @@ if [[ $(uname) == "Darwin" ]]; then
     # libarchive
 		export PKG_CONFIG_PATH="/opt/homebrew/opt/libarchive/lib/pkgconfig"
 else
-	  alias keys="zathura ~/.config/alacritty/alacritty-shortcuts.pdf"
     alias texlive='sh -c "xhost +si:localuser:root && sudo /usr/local/texlive/2026/bin/x86_64-linux/tlmgr --gui && xhost -si:localuser:root"'
     
     PATH="${PATH}:/home/nurlan/.local/bin:/usr/local/texlive/2026/bin/x86_64-linux"
