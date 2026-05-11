@@ -14,7 +14,6 @@ autoload -U add-zsh-hook
 
 # aliases
 alias v="nvim"
-alias mc="SHELL=/bin/bash mc"
 alias :q="exit"
 
 alias ld='eza -lD'
