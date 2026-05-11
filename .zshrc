@@ -131,6 +131,7 @@ if [[ $(uname) == "Darwin" ]]; then
 		alias keys="glow ~/.config/ghostty/ghostty-shortcuts.md -p"
     alias python="/opt/homebrew/bin/python3"
     alias pip="/opt/homebrew/bin/pip3"
+    alias inkscape="open -a /Applications/Inkscape.app"
     
     PATH="${PATH}:/Users/nurlan/.local/bin"
     
