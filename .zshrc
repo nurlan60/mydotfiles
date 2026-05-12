@@ -15,6 +15,7 @@ autoload -U add-zsh-hook
 # aliases
 alias v="nvim"
 alias :q="exit"
+alias keys="glow ~/.config/ghostty/ghostty-shortcuts.md -p"
 
 alias ld='eza -lD'
 alias lf='eza -lF --color=always | grep -v /'
@@ -127,7 +128,6 @@ _fzf_compgen_dir() {
 export COLORTERM=truecolor
 
 if [[ $(uname) == "Darwin" ]]; then
-		alias keys="glow ~/.config/ghostty/ghostty-shortcuts.md -p"
     alias python="/opt/homebrew/bin/python3"
     alias pip="/opt/homebrew/bin/pip3"
     alias inkscape="open -a /Applications/Inkscape.app"
