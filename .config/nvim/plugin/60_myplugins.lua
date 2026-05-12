@@ -5,6 +5,8 @@ local add = vim.pack.add
 add({ "https://github.com/lervag/vimtex" })
 vim.g.vimtex_view_method = "sioyek"
 vim.g.vimtex_view_sioyek_options = "--new-window"
+-- Disable VimTeX's native completion if you want TexLab to handle it
+vim.g.vimtex_complete_enabled = 0
 vim.g.vimtex_quickfix_open_on_warning = 0
 vim.g.vimtex_quickfix_ignore_filters = {
 	"Underfull \\hbox",
@@ -34,6 +36,6 @@ if os_name == "Darwin" then
 		-- },
 	})
 else
-  vim.cmd('packadd kbswitch.nvim')
-  require('kbswitch').setup({})
+	vim.cmd("packadd kbswitch.nvim")
+	require("kbswitch").setup({})
 end

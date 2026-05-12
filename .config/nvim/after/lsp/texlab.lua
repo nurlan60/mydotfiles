@@ -16,12 +16,14 @@ return {
 	settings = {
 		texlab = {
 			build = {
-				onSave = true,
 				args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
 			},
 			forwardSearch = {
 				executable = viewer,
 				args = opt,
+			},
+			chktex = {
+				onOpenAndSave = true, -- Enable linting diagnostics
 			},
 			diagnostics = {
 				ignoredPatterns = {
