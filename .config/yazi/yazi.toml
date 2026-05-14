@@ -7,6 +7,7 @@ prepend_previewers = [
   { url = "*.docx",   run = 'piper -- doxx --export text "$1"' },
   { url = "*.{xlsx,xls,xlsm,xlsb,ods}", run = 'piper -- xleak "$1"' },
   { mime = "application/msword", run = 'piper -- antiword "$1"' },
+  { mime = "image/djvu", run  = "djvu-view" },
 ]
 
 [opener]
