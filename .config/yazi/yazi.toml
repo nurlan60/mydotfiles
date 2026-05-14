@@ -10,8 +10,3 @@ prepend_previewers = [
   { mime = "image/djvu", run  = "djvu-view" },
 ]
 
-[opener]
-edit = [
-  { run = '${EDITOR:-vi} %s', desc = "$EDITOR", block = true, for = "unix" },
-  { run = "nvim %s", block = true, for = "windows" },
-]
