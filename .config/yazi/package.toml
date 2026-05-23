@@ -43,6 +43,11 @@ use = "alberti42/faster-piper"
 rev = "8b794bf"
 hash = "fac71f8ce9447ad509b5aad9e0d8c694"
 
+[[plugin.deps]]
+use = "WhoSowSee/whoosh"
+rev = "8e31145"
+hash = "376cb4847934906862a3b4df857146d7"
+
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
 rev = "54ab389"
