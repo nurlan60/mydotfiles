@@ -85,4 +85,7 @@ prepend_keymap = [
   
   { on  = "K", run = "plugin parent-arrow -1" },
   { on  = "J", run = "plugin parent-arrow 1" },
+
+  # trash
+  {on   = "R", run  = "plugin macos-trash", desc = "Open macOS Trash"},
 ]
