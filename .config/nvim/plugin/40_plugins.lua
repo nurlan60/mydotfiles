@@ -140,7 +140,7 @@ later(function()
 		-- Make sure that necessary CLI tool is available
 		formatters_by_ft = {
 			lua = { "stylua" },
-			tex = { "tex-fmt" },
+			-- tex = { "tex-fmt" },
 		},
 	})
 end)
