@@ -2,7 +2,8 @@
 
 case ${1##*.} in
 pdf)
-  pdftotext -layout -nopgbrk "$1" - | less
+  # pdftotext -layout -nopgbrk "$1" - | less
+  tdf "$1"
   ;;
 md)
   # glow -t "$1"
