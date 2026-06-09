@@ -5,7 +5,8 @@ pdf)
   pdftotext -layout -nopgbrk "$1" - | less
   ;;
 md)
-  glow -t "$1"
+  # glow -t "$1"
+  leaf "$1"
   ;;
 djvu)
   djvutxt "$1" | less
