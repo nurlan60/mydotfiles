@@ -7,3 +7,4 @@ export OLLAMA_MODELS="/Volumes/DNS/ollama_models"
 export OLLAMA_FLASH_ATTENTION=1
 export OLLAMA_KV_CACHE_TYPE=q8_0
 export OLLAMA_MAX_LOADED_MODELS=1
+

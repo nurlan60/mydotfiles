@@ -51,3 +51,4 @@ menu FEnc.cp866     :set fenc=ibm866<CR>
 menu FEnc.utf-8     :set fenc=utf-8<CR>
 menu FEnc.ucs-2le   :set fenc=ucs-2le<CR>
 map  <F9> :emenu FEnc.<Tab>
+

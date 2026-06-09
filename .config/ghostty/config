@@ -11,3 +11,4 @@ quick-terminal-position = bottom
 quick-terminal-size = 25%,50%
 
 keybind = cmd+p=toggle_command_palette
+

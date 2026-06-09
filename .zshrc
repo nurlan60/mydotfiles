@@ -15,7 +15,7 @@ autoload -U add-zsh-hook
 # aliases
 alias v="nvim"
 alias :q="exit"
-alias keys="glow ~/.config/ghostty/ghostty-shortcuts.md -p"
+alias keys="leaf ~/.config/ghostty/ghostty-shortcuts.md"
 
 alias ls='eza --color=always --group-directories-first --icons'
 alias ll='eza -la --icons --octal-permissions --group-directories-first'

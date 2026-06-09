@@ -35,3 +35,4 @@ tar | tgz | tbz* | txz | zip | 7z | gz | xz | lzma | bz* | lz4 | sz | zst | rar)
   bat --paging=always "$1"
   ;;
 esac
+

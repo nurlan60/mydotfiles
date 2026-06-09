@@ -115,3 +115,4 @@ alias gcredential="git config credential.helper store"
 eval "$(fzf --bash)"
 eval "$(oh-my-posh init bash --config ~/.config/ohmyposh/my.omp.toml)"
 eval "$(zoxide init bash)"
+
