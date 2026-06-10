@@ -55,6 +55,7 @@ now_if_args(function()
     'lua',
     'vimdoc',
     'markdown',
+    'typst',
     -- Add here more languages with which you want to use tree-sitter
     -- To see available languages:
     -- - Execute `:=require('nvim-treesitter').get_available()`
