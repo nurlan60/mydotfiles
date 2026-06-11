@@ -55,12 +55,12 @@ now_if_args(function()
     'lua',
     'vimdoc',
     'markdown',
-    'typst',
     -- Add here more languages with which you want to use tree-sitter
     -- To see available languages:
     -- - Execute `:=require('nvim-treesitter').get_available()`
     -- - Visit 'SUPPORTED_LANGUAGES.md' file at
     --   https://github.com/nvim-treesitter/nvim-treesitter/blob/main
+    'typst',
   }
   local isnt_installed = function(lang)
     return #vim.api.nvim_get_runtime_file('parser/' .. lang .. '.*', false) == 0
@@ -107,7 +107,7 @@ now_if_args(function()
   vim.lsp.enable({
     -- For example, if `lua-language-server` is installed, use `'lua_ls'` entry
     "texlab",
-    "tinymist"
+    "tinymist",
   })
 end)
 
@@ -135,7 +135,8 @@ later(function()
     -- Make sure that necessary CLI tool is available
     formatters_by_ft = { 
       lua = { 'stylua' } },
-			-- tex = { "tex-fmt" },
+			tex = { "tex-fmt" },
+      typst = { "typstyle" },
   })
 end)
 
