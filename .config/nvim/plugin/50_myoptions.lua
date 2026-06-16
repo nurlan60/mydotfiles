@@ -1,3 +1,9 @@
+local socket_path = "/tmp/nvim-latex.pipe"
+if not vim.loop.fs_stat(socket_path) then
+  vim.fn.serverstart(socket_path)
+end
+
+
 vim.g.maplocalleader = ',' -- Use `,` as <Localleader> key
 vim.cmd.colorscheme("catppuccin")
 vim.opt.spell = false
