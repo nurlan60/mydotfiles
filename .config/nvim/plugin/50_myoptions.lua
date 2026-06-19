@@ -26,38 +26,81 @@ end, { desc = 'Toggle unnamedplus clipboard' })
 ---------------------------------------------
 -- Encoding --
 ---------------------------------------------
-vim.opt.fileencodings = "utf-8, cp1251, cp866, koi8-r,ucs-2le"
+vim.opt.fileencodings = "utf-8, cp1251, cp866, koi8-r"
 -------------
--- <F7> EOL format (dos <CR><NL>,unix <NL>,mac <CR>)
-vim.cmd([[
-    set  wildmenu
-    set  wcm=<Tab>
-    menu EOL.unix :set fileformat=unix<CR>
-    menu EOL.dos  :set fileformat=dos<CR>
-    menu EOL.mac  :set fileformat=mac<CR>
-    map  <F7> :emenu EOL.<Tab>
-]])
+local actions = {
+    ["EOL format"] = {
+        unix = function()
+            vim.bo.fileformat = "unix"
+        end,
+        dos = function()
+            vim.bo.fileformat = "dos"
+        end,
+        mac = function()
+            vim.bo.fileformat = "mac"
+        end,
+    },
 
--- F8 Change encoding
-vim.cmd([[
-    set  wildmenu
-    set  wcm=<Tab>
-    menu Encoding.cp1251     :e ++enc=cp1251 ++ff=dos<CR>
-    menu Encoding.cp866      :e ++enc=ibm866 ++ff=dos<CR>
-    menu Encoding.koi8-r     :e ++enc=koi8-r ++ff=unix<CR>
-    menu Encoding.utf-8      :e ++enc=utf-8<CR>
-    menu Encoding.ucs-2le    :e ++enc=ucs-2le<CR>
-    nmap <F8> :emenu Encoding.<Tab>
-]])
+    ["Reopen with encoding"] = {
+        cp1251 = function()
+            vim.cmd("edit ++enc=cp1251 ++ff=dos")
+        end,
+        cp866 = function()
+            vim.cmd("edit ++enc=ibm866 ++ff=dos")
+        end,
+        ["koi8-r"] = function()
+            vim.cmd("edit ++enc=koi8-r ++ff=unix")
+        end,
+        ["utf-8"] = function()
+            vim.cmd("edit ++enc=utf-8")
+        end,
+    },
 
--- F9 Convert file encoding
-vim.cmd([[
-    set  wildmenu
-    set  wcm=<Tab>
-    menu File-Encoding.cp1251    :set fenc=cp1251<CR>
-    menu File-Encoding.cp866     :set fenc=ibm866<CR>
-    menu File-Encoding.koi8-r    :set fenc=koi8-r<CR>
-    menu File-Encoding.utf-8     :set fenc=utf-8<CR>
-    menu File-Encoding.ucs-2le   :set fenc=ucs-2le<CR>
-    nmap  <F9> :emenu File-Encoding.<Tab>
-]])
+    ["Convert file encoding"] = {
+        cp1251 = function()
+            vim.bo.fileencoding = "cp1251"
+        end,
+        cp866 = function()
+            vim.bo.fileencoding = "ibm866"
+        end,
+        ["koi8-r"] = function()
+            vim.bo.fileencoding = "koi8-r"
+        end,
+        ["utf-8"] = function()
+            vim.bo.fileencoding = "utf-8"
+        end,
+    },
+}
+
+local function encoding_menu()
+    local categories = vim.tbl_keys(actions)
+    table.sort(categories)
+
+    vim.ui.select(categories, {
+        prompt = "Select action:",
+    }, function(category)
+        if not category then
+            return
+        end
+
+        local submenu = actions[category]
+        local items = vim.tbl_keys(submenu)
+        table.sort(items)
+
+        vim.ui.select(items, {
+            prompt = category .. ":",
+        }, function(choice)
+            if not choice then
+                return
+            end
+
+            submenu[choice]()
+
+            vim.notify(category .. " → " .. choice)
+        end)
+    end)
+end
+
+vim.keymap.set("n", "<Leader>c", encoding_menu, {
+    desc = "Encoding/EOL menu",
+})
