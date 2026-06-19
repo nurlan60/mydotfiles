@@ -29,45 +29,41 @@ end, { desc = 'Toggle unnamedplus clipboard' })
 vim.opt.fileencodings = "utf-8, cp1251, cp866, koi8-r"
 -------------
 local actions = {
-    ["EOL format"] = {
-        unix = function()
-            vim.bo.fileformat = "unix"
-        end,
-        dos = function()
-            vim.bo.fileformat = "dos"
-        end,
-        mac = function()
-            vim.bo.fileformat = "mac"
-        end,
-    },
-
     ["Reopen with encoding"] = {
         cp1251 = function()
-            vim.cmd("edit ++enc=cp1251 ++ff=dos")
+            vim.cmd("edit ++enc=cp1251")
         end,
         cp866 = function()
-            vim.cmd("edit ++enc=ibm866 ++ff=dos")
+            vim.cmd("edit ++enc=cp866")
         end,
         ["koi8-r"] = function()
-            vim.cmd("edit ++enc=koi8-r ++ff=unix")
+            vim.cmd("edit ++enc=koi8-r")
         end,
         ["utf-8"] = function()
             vim.cmd("edit ++enc=utf-8")
         end,
     },
 
-    ["Convert file encoding"] = {
+    ["Set encoding and reopen"] = {
         cp1251 = function()
             vim.bo.fileencoding = "cp1251"
+            vim.cmd("write")
+            vim.cmd("edit ++enc=cp1251")
         end,
         cp866 = function()
-            vim.bo.fileencoding = "ibm866"
+            vim.bo.fileencoding = "cp866"
+            vim.cmd("write")
+            vim.cmd("edit ++enc=cp866")
         end,
         ["koi8-r"] = function()
             vim.bo.fileencoding = "koi8-r"
+            vim.cmd("write")
+            vim.cmd("edit ++enc=koi8-r")
         end,
         ["utf-8"] = function()
             vim.bo.fileencoding = "utf-8"
+            vim.cmd("write")
+            vim.cmd("edit ++enc=utf-8")
         end,
     },
 }
