@@ -51,7 +51,7 @@ alias gcredential="git config credential.helper store"
 # nnn config
 export NNN_FIFO=/tmp/nnn.fifo
 export NNN_COLORS='4321'
-export NNN_PLUG='z:autojump;u:umounttree;i:-!viewer.sh "$nnn"'
+export NNN_PLUG='z:autojump;u:umounttree;i:-!viewer.zsh "$nnn"'
 export NNN_SSHFS='sshfs -o follow_symlinks'
 
 # nnn start
