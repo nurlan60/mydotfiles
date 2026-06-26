@@ -53,6 +53,11 @@ use = "walavave/macos-trash"
 rev = "130e6dd"
 hash = "e480ef57299a14ae1414bc010a02551d"
 
+[[plugin.deps]]
+use = "AminurAlam/yazi-plugins:preview-typst"
+rev = "dc36177"
+hash = "2aacd8b872663cc36ac6c5bf6b6dc867"
+
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
 rev = "0f9204b"
