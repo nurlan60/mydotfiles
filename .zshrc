@@ -34,6 +34,7 @@ alias asus="ssh asus"
 alias deb="ssh debian"
 alias len="ssh lenovo"
 alias rpi="ssh rpi"
+alias work="ssh work"
 
 alias lg="lazygit"
 alias gf='git fetch'
