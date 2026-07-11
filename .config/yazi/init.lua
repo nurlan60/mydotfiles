@@ -10,10 +10,10 @@ require("whoosh"):setup({
 		{ tag = "yazi", path = "~/.config/yazi", key = "y" },
 		{ tag = "nvim", path = "~/.config/nvim", key = "v" },
 		{ tag = "Documents", path = "~/Documents", key = "o" },
-		{ tag = "rpi", path = "sftp://rpi//home/nurlan", key = "r" },
-		{ tag = "mac", path = "sftp://mac//Users/nurlan", key = "m" },
-		{ tag = "mini", path = "sftp://mini//Users/nurlan", key = "h" },
-    { tag = "work", path ="sftp://work/Users/nurlan", key = "w" },
+		{ tag = "rpi", path = "sftp://rpi", key = "r" },
+		{ tag = "mac", path = "sftp://mac", key = "m" },
+		{ tag = "mini", path = "sftp://mini", key = "h" },
+    { tag = "work", path ="sftp://work", key = "w" },
 	},
 	special_keys = {
 		create_temp = false, -- Create a temporary bookmark from the menu

@@ -21,7 +21,7 @@ key_file = "~/.ssh/id_ed25519"
 
 [services.work]
 type     = "sftp"
-host     = "work"
+host     = "100.103.198.13"
 user     = "nurlan"
 port     = 22
 key_file = "~/.ssh/id_ed25519"
