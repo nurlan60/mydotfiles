@@ -3,6 +3,7 @@ if status is-interactive
 end
 
 set -g fish_greeting ""
+set -g fish_key_bindings fish_vi_key_bindings
 set -gx EDITOR nvim
 
 alias ls='eza --color=always --group-directories-first --icons'
