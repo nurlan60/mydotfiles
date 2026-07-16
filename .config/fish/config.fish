@@ -9,9 +9,16 @@ set -gx EDITOR nvim
 abbr -a ls eza --color=always --group-directories-first --icons
 abbr -a ll eza -la --icons --octal-permissions --group-directories-first
 
+abbr -a :q exit
 abbr -a v nvim
 
-abbr -a :q exit
+abbr -a asus ssh asus
+abbr -a mac ssh mac
+abbr -a mini ssh mini
+abbr -a rog ssh rog
+abbr -a rpi ssh rpi
+abbr -a work ssh work
+
 abbr -a lg lazygit
 abbr -a ga git add
 abbr -a gc git commit -m
