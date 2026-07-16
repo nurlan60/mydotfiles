@@ -1,2 +1,3 @@
 --paging=always
+--italic-text=always
 --theme="Catppuccin Mocha"
