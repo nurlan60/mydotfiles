@@ -1,0 +1,23 @@
+[mgr]
+ratio = [1,3,4] 
+[plugin]
+prepend_previewers = [
+  { mime = "image/djvu", run  = "djvu-view"},
+  { mime = "application/msword", run = 'faster-piper --rely-on-preloader' },
+  { url = "*.md", run = 'faster-piper --rely-on-preloader' },
+  { url = "*.docx", run = 'faster-piper --rely-on-preloader' },
+  { url = "*.{xlsx,xls,xlsm,xlsb,ods}", run = 'faster-piper --rely-on-preloader' },
+  { url = "*.tar*",   run = 'faster-piper --rely-on-preloader --format=url' },
+  { url = "*.txt.gz", run = 'faster-piper --rely-on-preloader' },
+  { url = '*.typ', run = 'preview-typst' },
+]
+prepend_preloaders = [
+  { mime = "application/msword", run = 'faster-piper -- antiword "$1"' },
+  { url = "*.md",     run = 'faster-piper -- leaf --inline "$1"' },
+  { url = "*.docx",   run = 'faster-piper -- doxx --export text "$1"' },
+  { url = "*.{xlsx,xls,xlsm,xlsb,ods}", run = 'faster-piper -- xleak "$1"' },
+  { url = "*.tar*",   run = 'faster-piper -- tar tf "$1"' },
+  { url = "*.txt.gz", run = 'faster-piper -- gzip -dc "$1"' },
+  { url = '*.typ', run = 'preview-typst' },
+]
+
