@@ -1,40 +1,32 @@
-#!/bin/sh
+#!/usr/bin/env fish
 
-case ${1##*.} in
-pdf)
-  # pdftotext -layout -nopgbrk "$1" - | less
-  tdf "$1"
-  ;;
-md)
-  # glow -t "$1"
-  leaf "$1"
-  ;;
-djvu)
-  djvutxt "$1" | less
-  ;;
-doc)
-  antiword "$1" | less
-  ;;
-docx)
-  doxx "$1"
-  ;;
-xlsx | xls | xlsm | xlsb | ods)
-  xleak -i "$1"
-  ;;
-scv)
-  csvlook "$1" | less
-  ;;
-json)
-  jq -C . "$1" | less -R
-  ;;
-transmission)
-  transmission-show "$1"
-  ;;
-tar | tgz | tbz* | txz | zip | 7z | gz | xz | lzma | bz* | lz4 | sz | zst | rar)
-  ouch list "$1" --tree | less
-  ;;
-*)
-  bat --paging=always "$1"
-  ;;
-esac
+if test (count $argv) -eq 0
+    echo "Error: Please provide at least one file path."
+    echo "Usage: ./viewer.fish <file>"
+    exit 1
+end
 
+set file $argv[1]
+
+switch (path extension $file)
+  case .pdf
+      tdf $file
+  case md
+      leaf $file
+  case .djvu
+      djvutxt $file | bat
+  case .doc
+      antiword $file | bat
+  case .docx
+      doxx $file
+  case .xlsx .xls .xlsm .xlsb .ods
+      xleak -i $file
+  case .json
+      jq -C . $file | bat
+  case transmission
+      transmission-show $file
+  case .tar .tgz .txz .zip .7z .gz .xz .lzma .lz4 .sz .zst .rar
+      ouch list $file --tree | bat
+  case '*'
+      bat $file
+end
