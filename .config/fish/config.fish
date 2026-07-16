@@ -1,5 +1,5 @@
-if status is-interactive
-    # Commands to run in interactive sessions can go here
+if status is-interactive; and not set -q "YAZI_ID" 
+    fastfetch
 end
 
 set -g fish_greeting ""
