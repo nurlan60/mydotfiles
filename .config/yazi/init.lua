@@ -11,6 +11,7 @@ require("whoosh"):setup({
 		{ tag = "nvim", path = "~/.config/nvim", key = "v" },
 		{ tag = "Documents", path = "~/Documents", key = "o" },
 		{ tag = "rpi", path = "sftp://rpi", key = "r" },
+		{ tag = "rog", path = "sftp://rog", key = "g" },
 		{ tag = "mac", path = "sftp://mac", key = "m" },
 		{ tag = "mini", path = "sftp://mini", key = "h" },
     { tag = "work", path ="sftp://work", key = "w" },
