@@ -14,7 +14,7 @@ abbr -a v nvim
 abbr -a :q exit
 abbr -a lg lazygit
 abbr -a ga git add
-abbr -a gc cgit commit -m
+abbr -a gc git commit -m
 abbr -a gl git pull
 abbr -a gp git push
 abbr -a gs git status
