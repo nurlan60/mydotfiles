@@ -11,9 +11,13 @@ alias ll='eza -la --icons --octal-permissions --group-directories-first'
 alias v="nvim"
 alias :q="exit"
 alias lg="lazygit"
-alias gac="git add . && git commit -m" # + commit message
+alias ga="git add"
+alias gc="git commit -m"
 alias gl="git pull"
 alias gp="git push"
+alias gs="git status"
+alias gac="git add . && git commit -m" # + commit message
+alias gst="git stash"
 
 # Change Yazi's CWD to PWD on subshell exit
 if [ -n "$YAZI_ID" ]
