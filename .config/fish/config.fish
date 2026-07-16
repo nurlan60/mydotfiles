@@ -8,6 +8,9 @@ set -gx EDITOR nvim
 
 abbr -a ls eza --color=always --group-directories-first --icons
 abbr -a ll eza -la --icons --octal-permissions --group-directories-first
+
+abbr -a v nvim
+
 abbr -a :q exit
 abbr -a lg lazygit
 abbr -a ga git add
@@ -18,8 +21,7 @@ abbr -a gs git status
 abbr -a gac 'git add . && git commit -m'
 abbr -a gst git stash
 
-alias v="nvim"
-
+# Yazi helper
 function y
   if test -n "$YAZI_LEVEL" 
     exit
