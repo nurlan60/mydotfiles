@@ -6,18 +6,32 @@ set -g fish_greeting ""
 set -g fish_key_bindings fish_vi_key_bindings
 set -gx EDITOR nvim
 
-alias ls='eza --color=always --group-directories-first --icons'
-alias ll='eza -la --icons --octal-permissions --group-directories-first'
+abbr -a ls eza --color=always --group-directories-first --icons
+abbr -a ll eza -la --icons --octal-permissions --group-directories-first
+abbr -a :q exit
+abbr -a lg lazygit
+abbr -a ga git add
+abbr -a gc cgit commit -m
+abbr -a gl git pull
+abbr -a gp git push
+abbr -a gs git status
+abbr -a gac 'git add . && git commit -m'
+abbr -a gst git stash
+
 alias v="nvim"
-alias :q="exit"
-alias lg="lazygit"
-alias ga="git add"
-alias gc="git commit -m"
-alias gl="git pull"
-alias gp="git push"
-alias gs="git status"
-alias gac="git add . && git commit -m" # + commit message
-alias gst="git stash"
+
+function y
+  if test -n "$YAZI_LEVEL" 
+    exit
+    return 0
+  end
+	set tmp (mktemp -t "yazi-cwd.XXXXXX")
+	command yazi $argv --cwd-file="$tmp"
+	if read -z cwd < "$tmp"; and [ "$cwd" != "$PWD" ]; and test -d "$cwd"
+		builtin cd -- "$cwd"
+	end
+	command rm -f -- "$tmp"
+end
 
 # Change Yazi's CWD to PWD on subshell exit
 if [ -n "$YAZI_ID" ]
