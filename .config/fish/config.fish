@@ -12,11 +12,11 @@ abbr -a ll eza -la --icons --octal-permissions --group-directories-first
 abbr -a :q exit
 abbr -a v nvim
 
-abbr -a asus ssh asus
-abbr -a mac ssh mac
-abbr -a mini ssh mini
-abbr -a rog ssh rog
-abbr -a rpi ssh rpi
+abbr -a asus ssh nurlan@asus.local
+abbr -a mac ssh nurlan@macbook.local
+abbr -a mini ssh nurlan@macmini.local
+abbr -a rog ssh nurlan@rog.local
+abbr -a rpi ssh nurlan@rpi.local
 abbr -a work ssh work
 
 abbr -a lg lazygit
