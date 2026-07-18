@@ -23,8 +23,6 @@ switch (path extension $file)
       xleak -i $file
   case .json
       jq -C . $file | bat
-  case transmission
-      transmission-show $file
   case .tar .tgz .txz .zip .7z .gz .xz .lzma .lz4 .sz .zst .rar
       ouch list $file --tree | bat
   case '*'
