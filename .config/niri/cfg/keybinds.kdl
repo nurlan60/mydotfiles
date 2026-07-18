@@ -10,7 +10,7 @@ binds {
 
     // ─── Applications ───
     // Mod+Return                          hotkey-overlay-title="Open Terminal: Alacritty" { spawn "alacritty"; }
-    Mod+Return                          hotkey-overlay-title="Open Terminal: Ghostty" { spawn-sh "ghostty +new-window"; }
+    Mod+G                          hotkey-overlay-title="Open Terminal: Ghostty" { spawn-sh "ghostty +new-window"; }
     // Mod+CTRL+Return                     hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
     Mod+SPACE                     hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
     Mod+B                               hotkey-overlay-title="Open Browser: firefox" { spawn "firefox"; }
