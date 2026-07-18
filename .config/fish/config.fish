@@ -28,6 +28,9 @@ abbr -a gs git status
 abbr -a gac 'git add . && git commit -m'
 abbr -a gst git stash
 
+abbr -a texlive 'sh -c "xhost +si:localuser:root && sudo /usr/local/texlive/2026/bin/x86_64-linux/tlmgr --gui && xhost -si:localuser:root"'
+
+
 # Yazi helper
 function y
   if test -n "$YAZI_LEVEL" 
