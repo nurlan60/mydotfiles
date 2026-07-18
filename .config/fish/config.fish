@@ -27,10 +27,9 @@ abbr -a gp git push
 abbr -a gs git status
 abbr -a gac 'git add . && git commit -m'
 abbr -a gst git stash
-
 abbr -a gu 'cd ~/mydotfiles && git pull'
-# abbr --add texlive 'xhost +si:localuser:root && sudo /usr/local/texlive/2026/bin/x86_64-linux/tlmgr --gui && xhost -si:localuser:root'
 
+abbr - texlive 'xhost +si:localuser:root && sudo /usr/local/texlive/2026/bin/x86_64-linux/tlmgr --gui && xhost -si:localuser:root'
 
 # Yazi helper
 function y
