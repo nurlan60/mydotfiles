@@ -1,9 +1,5 @@
 *.DS_Store
 ._*
-.config/yazi.mac/bookmarks
-.config/yazi.mac/package.toml
-.config/yazi.linux/bookmarks
-.config/yazi.linux/package.toml
 .config/nvim/nvim-pack-lock.json
 .config/fish/fish_variables
 
