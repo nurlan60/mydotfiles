@@ -6,6 +6,9 @@ set -g fish_greeting ""
 set -g fish_key_bindings fish_vi_key_bindings
 set -gx EDITOR nvim
 
+abbr -a .. cd ..
+abbr -a ... cd ../..
+
 abbr -a ls eza --color=always --group-directories-first --icons
 abbr -a ll eza -la --icons --octal-permissions --group-directories-first
 
@@ -22,6 +25,7 @@ abbr -a work ssh work
 abbr -a lg lazygit
 abbr -a ga git add
 abbr -a gc git commit -m
+abbr -a gd git diff -M
 abbr -a gl git pull
 abbr -a gp git push
 abbr -a gs git status
