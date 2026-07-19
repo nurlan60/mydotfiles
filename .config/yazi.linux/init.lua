@@ -11,6 +11,8 @@ require("session"):setup({
 
 require("whoosh"):setup({
 	bookmarks = {
+		{ tag = "mydotfiles", path = "~/mydotfiles", key = "g" },
+		{ tag = "bin", path = "~/.local/bin", key = "b" },
 		{ tag = "yazi", path = "~/.config/yazi", key = "y" },
 		{ tag = "nvim", path = "~/.config/nvim", key = "v" },
 		{ tag = "Documents", path = "~/Documents", key = "o" },
