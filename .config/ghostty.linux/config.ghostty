@@ -1,8 +1,8 @@
 theme = Catppuccin Mocha
 quit-after-last-window-closed = false
 
-keybind = global:win+grave_accent=toggle_quick_terminal
+keybind = global:ctrl+grave_accent=toggle_quick_terminal
 quick-terminal-position = bottom
 quick-terminal-size = 25%,50%
 
-keybind = win+p=toggle_command_palette
+keybind = ctrl+shift+p=toggle_command_palette
