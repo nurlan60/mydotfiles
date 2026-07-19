@@ -87,7 +87,7 @@ prepend_keymap = [
   { on  = "J", run = "plugin parent-arrow 1" },
 
   # trash
-  {on   = "R", run  = "plugin macos-trash", desc = "Open macOS Trash"},
+  {on   = "R", run  = "plugin omni-trash", desc = "Open Omni Trash"},
 
   # fuse-archive
   { on   = [ "<Right>" ], run = "plugin fuse-archive -- mount", desc = "Enter or Mount selected archive" },
