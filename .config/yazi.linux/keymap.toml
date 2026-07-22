@@ -89,9 +89,4 @@ prepend_keymap = [
   # trash
   {on   = "R", run  = "plugin omni-trash", desc = "Open Omni Trash"},
 
-  # fuse-archive
-  { on   = [ "<Right>" ], run = "plugin fuse-archive -- mount", desc = "Enter or Mount selected archive" },
-  { on   = [ "<Left>" ], run = "plugin fuse-archive -- leave", desc = "Leave selected archive without unmount it" },
-  { on   = [ "l" ], run = "plugin fuse-archive -- mount", desc = "Enter or Mount selected archive" },
-  { on   = [ "h" ], run = "plugin fuse-archive -- leave", desc = "Leave selected archive without unmount it" },
 ]
