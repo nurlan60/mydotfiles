@@ -1,4 +1,4 @@
-#!/usr/bin/env fish
+#!/bin/zsh
 
 if test (count $argv) -eq 0
     echo "Error: Please provide at least one file path."

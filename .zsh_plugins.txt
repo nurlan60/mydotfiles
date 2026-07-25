@@ -1,0 +1,9 @@
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-syntax-highlighting
+jeffreytse/zsh-vi-mode
+ael-code/zsh-colored-man-pages
+Aloxaf/fzf-tab
+hlissner/zsh-autopair
+zsh-users/zsh-history-substring-search
+romkatv/powerlevel10k
+

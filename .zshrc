@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=1000
@@ -13,6 +20,10 @@ compinit
 autoload -U add-zsh-hook
 
 # aliases
+alias python="/opt/homebrew/bin/python3"
+alias pip="/opt/homebrew/bin/pip3"
+alias inkscape="open -a /Applications/Inkscape.app"
+    
 alias v="nvim"
 alias :q="exit"
 alias keys="leaf ~/.config/ghostty/ghostty-shortcuts.md"
@@ -49,37 +60,14 @@ alias gsp="git stash; git pull"
 alias gch="git checkout"
 alias gcredential="git config credential.helper store"
 
-# nnn config
-export NNN_FIFO=/tmp/nnn.fifo
-export NNN_COLORS='4321'
-export NNN_PLUG='z:autojump;u:umounttree;i:-!viewer.zsh "$nnn"'
-export NNN_SSHFS='sshfs -o follow_symlinks'
-
-# nnn start
+# nnn helper
 n ()
 {
-    # Block nesting of nnn in subshells
     if [[ "${NNNLVL:-0}" -ge 1 ]]; then
-        # echo "nnn is already running"
         exit
         return
     fi
-
-    # The behaviour is set to cd on quit (nnn checks if NNN_TMPFILE is set)
-    # If NNN_TMPFILE is set to a custom path, it must be exported for nnn to
-    # see. To cd on quit only on ^G, remove the "export" and make sure not to
-    # use a custom path, i.e. set NNN_TMPFILE *exactly* as follows:
-    #     NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
     export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
-
-    # Unmask ^Q (, ^V etc.) (if required, see `stty -a`) to Quit nnn
-    # stty start undef
-    # stty stop undef
-    # stty lwrap undef
-    # stty lnext undef
-
-    # The backslash allows one to alias n to nnn if desired without making an
-    # infinitely recursive alias
     \nnn -u "$@"
 
     if [ -f "$NNN_TMPFILE" ]; then
@@ -88,11 +76,9 @@ n ()
     fi
 }
 
-# yazi start
+# yazi helper
 function y() {
-  # Block nesting of yazi in subshells
   if [ -n "$YAZI_LEVEL" ]; then
-    # echo "yazi is already running"
     exit
     return
   fi
@@ -130,38 +116,7 @@ _fzf_compgen_dir() {
   fd --type=d --hidden --exclude .git . "$1"
 }
 
-export COLORTERM=truecolor
 
-if [[ $(uname) == "Darwin" ]]; then
-    alias python="/opt/homebrew/bin/python3"
-    alias pip="/opt/homebrew/bin/pip3"
-    alias inkscape="open -a /Applications/Inkscape.app"
-    
-    PATH="${PATH}:/Users/nurlan/.local/bin"
-    
-    # Homebrew config
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-
-    # source antidote
-    source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
-    # libarchive
-		export PKG_CONFIG_PATH="/opt/homebrew/opt/libarchive/lib/pkgconfig"
-else
-    alias texlive='sh -c "xhost +si:localuser:root && sudo /usr/local/texlive/2026/bin/x86_64-linux/tlmgr --gui && xhost -si:localuser:root"'
-    
-    PATH="${PATH}:/home/nurlan/.local/bin:/usr/local/texlive/2026/bin/x86_64-linux"
- 		export MANPATH=/usr/local/texlive/2026/texmf-dist/doc/man:$MANPATH
-		export INFOPATH=/usr/local/texlive/2026/texmf-dist/doc/info:$INFOPATH   
-    
-		# source antidote
-    source /usr/share/zsh-antidote/antidote.zsh
-fi
-
-export PATH
-
-# oh-my-posh
-eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/my.omp.json)"
-    
 # fzf init after zsh-vi-mod
 zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
 
@@ -180,3 +135,5 @@ if ! [[ (-v YAZI_LEVEL) || (-v NNNLVL) ]]; then
     fastfetch --config examples/13
 fi
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
