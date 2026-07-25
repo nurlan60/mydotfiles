@@ -1,15 +1,12 @@
 export COLORTERM=truecolor
 export EDITOR=nvim
-export PATH="/Users/nurlan/.local/bin:$PATH"
-
-# Homebrew config
-eval "$(/opt/homebrew/bin/brew shellenv)"
+export PATH="/home/nurlan/.local/bin:$PATH"
 
 # source antidote
-source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
+source /usr/share/zsh-antidote/antidote.zsh
 
 # libarchive
-export PKG_CONFIG_PATH="/opt/homebrew/opt/libarchive/lib/pkgconfig"
+# export PKG_CONFIG_PATH="/opt/homebrew/opt/libarchive/lib/pkgconfig"
 
 # nnn config
 export NNN_FIFO=/tmp/nnn.fifo
