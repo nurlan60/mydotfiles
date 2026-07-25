@@ -54,6 +54,7 @@ alias ga="git add"
 alias gc="git commit -m"
 alias gp="git push"
 alias gl="git pull"
+alias gu="pushd ~/mydotfiles && git pull && popd"
 alias gac="git add . && git commit -m" # + commit message
 alias gst="git stash"
 alias gsp="git stash; git pull"
