@@ -44,14 +44,14 @@ rev = "ce325af"
 hash = "2aacd8b872663cc36ac6c5bf6b6dc867"
 
 [[plugin.deps]]
-use = "goon/omni-trash"
-rev = "3c2a992"
-hash = "6e5bf967707c8c9b6495cf5863ff497f"
-
-[[plugin.deps]]
 use = "yazi-rs/plugins:piper"
 rev = "bbac5e7"
 hash = "e0d59bd47866a6a574c74574097e5070"
+
+[[plugin.deps]]
+use = "goon/omni-trash"
+rev = "3c2a992"
+hash = "6e5bf967707c8c9b6495cf5863ff497f"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"

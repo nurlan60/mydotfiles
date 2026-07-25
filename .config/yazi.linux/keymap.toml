@@ -88,5 +88,4 @@ prepend_keymap = [
 
   # trash
   {on   = "R", run  = "plugin omni-trash", desc = "Open Omni Trash"},
-
 ]
