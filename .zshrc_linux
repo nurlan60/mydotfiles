@@ -38,12 +38,11 @@ alias lS='eza -1 --color=always --group-directories-first --icons'
 alias lt='eza --tree --level=2 --color=always --group-directories-first --icons'
 alias l.="eza -a | grep -E '^\.'"
 
-alias mini="ssh mini"
-alias mac="ssh mac"
-alias asus="ssh asus"
-alias deb="ssh debian"
-alias len="ssh lenovo"
-alias rpi="ssh rpi"
+alias mini="ssh nurlan@macmini.local"
+alias mac="ssh nurlan@macbook.local"
+alias asus="ssh nurlan@asus.local"
+alias rpi="ssh nurlan@rpi.local"
+alias rog="ssh nurlan@rog.local"
 alias work="ssh work"
 
 alias lg="lazygit"
