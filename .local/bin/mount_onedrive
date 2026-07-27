@@ -1,0 +1,1 @@
+rclone mount onedrive: ~/cloud/onedrive --vfs-cache-mode full --daemon

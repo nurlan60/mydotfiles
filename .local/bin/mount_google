@@ -1,0 +1,1 @@
+rclone mount google: ~/cloud/google --vfs-cache-mode full --daemon

@@ -1,1 +1,0 @@
-rclone mount dropbox: ~/dropbox --vfs-cache-mode full --daemon

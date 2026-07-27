@@ -1,0 +1,1 @@
+rclone mount pspace: ~/cloud/pspace --vfs-cache-mode full --daemon
