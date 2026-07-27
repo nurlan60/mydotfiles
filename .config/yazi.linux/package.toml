@@ -24,11 +24,6 @@ rev = "f218aa6"
 hash = "522db0412d7839c8c343f9c733713d24"
 
 [[plugin.deps]]
-use = "uhs-robert/sshfs"
-rev = "a8b8903"
-hash = "8c1b36103121a66b37308afaf7124575"
-
-[[plugin.deps]]
 use = "yazi-rs/plugins:diff"
 rev = "bbac5e7"
 hash = "a2b67c52fc36d4c7d3ccb8940d9a140"

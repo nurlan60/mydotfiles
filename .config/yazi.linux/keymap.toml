@@ -6,15 +6,14 @@ prepend_keymap = [
 	# Mount
   { on = [ "M","M"], run = "plugin mount", desc = "Mount drive", for = 'unix' },
   
-	# SSHFS
-  { on = ["M","m"], run = "plugin sshfs -- mount --jump",    desc = "Mount & jump" },
-  { on = ["M","u"], run = "plugin sshfs -- unmount",         desc = "Unmount SSHFS" },
-  { on = ["M","j"], run = "plugin sshfs -- jump",            desc = "Jump to mount" },
-  { on = ["M","a"], run = "plugin sshfs -- add",             desc = "Add SSH host" },
-  { on = ["M","r"], run = "plugin sshfs -- remove",          desc = "Remove SSH host" },
-  { on = ["M","h"], run = "plugin sshfs -- home",            desc = "Go to mount home" },
-  { on = ["M","c"], run = "cd ~/.ssh/",                      desc = "Go to ssh config" },
-
+  # Cloud
+  { on = ["M","d"], run = 'shell mount_dropbox', desc = "Mount Dropbox"},
+  { on = ["M","o"], run = 'shell mount_onedrive', desc = "Mount OneDrive"},
+  { on = ["M","y"], run = 'shell mount_yandex', desc = "Mount Yandex"},
+  { on = ["M","g"], run = 'shell mount_google', desc = "Mount Google"},
+  { on = ["M","p"], run = 'shell mount_pcloud', desc = "Mount pCloud"},
+  { on = ["M","s"], run = 'shell mount_pspace', desc = "Mount pSpace"},
+  
   # Go to 
   { on = [ "g","c" ], run = "cd ~/.config", desc = "Go ~/.config", for = 'unix' },
   { on = [ "g","c" ], run = "cd ~/AppData/Roaming", desc = "Go ~/.config", for = 'windows' },
