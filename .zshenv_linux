@@ -1,6 +1,6 @@
 export COLORTERM=truecolor
 export EDITOR=nvim
-export PATH="/home/nurlan/.local/bin:$PATH"
+export PATH="/home/nurlan/.local/bin:/usr/local/texlive/2026/bin/x86_64-linux:$PATH"
 
 # source antidote
 source /usr/share/zsh-antidote/antidote.zsh
