@@ -1,32 +1,32 @@
-[services.rpi]
+[sftp.rpi]
 type     = "sftp"
 host     = "rpi.local"
 user     = "nurlan"
 port     = 22
 key_file = "~/.ssh/id_ed25519"
 
-[services.rog]
+[sftp.rog]
 type     = "sftp"
 host     = "rog.local"
 user     = "nurlan"
 port     = 22
 key_file = "~/.ssh/id_ed25519"
 
-[services.mac]
+[sftp.mac]
 type     = "sftp"
 host     = "macbook.local"
 user     = "nurlan"
 port     = 22
 key_file = "~/.ssh/id_ed25519"
 
-[services.mini]
+[sftp.mini]
 type     = "sftp"
 host     = "macmini.local"
 user     = "nurlan"
 port     = 22
 key_file = "~/.ssh/id_ed25519"
 
-[services.work]
+[sftp.work]
 type     = "sftp"
 host     = "work"
 user     = "nurlan"
