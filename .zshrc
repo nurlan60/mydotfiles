@@ -117,7 +117,7 @@ _fzf_compgen_dir() {
 
 
 # fzf init after zsh-vi-mod
-zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
+zvm_after_init_commands+=('source <(fzf --zsh)')
 
 # zoxide
 eval "$(zoxide init zsh)"
