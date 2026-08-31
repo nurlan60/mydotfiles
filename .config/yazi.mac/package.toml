@@ -40,7 +40,7 @@ hash = "da14dfe482886e756150ae4f5c2bb23"
 
 [[plugin.deps]]
 use = "AminurAlam/yazi-plugins:preview-typst"
-rev = "8c2ce96"
+rev = "5c1711e"
 hash = "2aacd8b872663cc36ac6c5bf6b6dc867"
 
 [[plugin.deps]]
