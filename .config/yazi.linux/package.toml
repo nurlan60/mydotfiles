@@ -1,16 +1,16 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:chmod"
-rev = "c591a36"
+rev = "58c4f4e"
 hash = "87472b05a8c420100f6a2b9cde1e7746"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mount"
-rev = "c591a36"
+rev = "58c4f4e"
 hash = "b95f898e6dc60b52edbc415952e14395"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "c591a36"
+rev = "58c4f4e"
 hash = "5b2fbef7d1513ce38ff72623a071a5e"
 
 [[plugin.deps]]
@@ -25,7 +25,7 @@ hash = "522db0412d7839c8c343f9c733713d24"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:diff"
-rev = "c591a36"
+rev = "58c4f4e"
 hash = "14558d2829c0aa05e99c57de8f74d199"
 
 [[plugin.deps]]
@@ -35,12 +35,12 @@ hash = "da14dfe482886e756150ae4f5c2bb23"
 
 [[plugin.deps]]
 use = "AminurAlam/yazi-plugins:preview-typst"
-rev = "8c2ce96"
+rev = "9997d5b"
 hash = "2aacd8b872663cc36ac6c5bf6b6dc867"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:piper"
-rev = "c591a36"
+rev = "58c4f4e"
 hash = "45a533508a9840cc5a10cf6129f63e6a"
 
 [[flavor.deps]]
