@@ -1,5 +1,8 @@
-#!/usr/bin/env fish
+#!/bin/zsh
 echo "Syncing Documents to PCloud"
 rclone sync ~/Documents pcloud:/"My Documents"
+echo "Done"
+echo "Syncing Narxoz to PCloud"
+rclone sync "/Users/nurlan/OneDrive - Некоммерческое Акционерное Общество Университет Нархоз" pcloud:/Narxoz
 echo "Done"
 
