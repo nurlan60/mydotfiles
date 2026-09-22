@@ -10,6 +10,7 @@ vim.opt.spell = false
 vim.opt.wrap = true
 vim.opt.spelllang = { 'en_us', 'ru' }
 vim.opt.langmap = 'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz'
+vim.opt.mousescroll = "ver:1,hor:1"
 ---------------------------------------------
 --- clipboard toggle
 ---------------------------------------------
