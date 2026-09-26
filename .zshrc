@@ -81,13 +81,11 @@ function y() {
     exit
     return
   fi
-
-  # Change the current working directory when exiting Yazi 
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+  local tmp cwd; tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
 	command yazi "$@" --cwd-file="$tmp"
 	IFS= read -r -d '' cwd < "$tmp"
-	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
-	rm -f -- "$tmp"
+	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd" || builtin true
+	command rm -f -- "$tmp"
 }
 
 # Change Yazi's CWD to PWD on subshell exit
