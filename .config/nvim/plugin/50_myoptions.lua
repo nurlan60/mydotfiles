@@ -27,6 +27,7 @@ end, { desc = 'Toggle unnamedplus clipboard' })
 ---------------------------------------------
 -- Encoding --
 ---------------------------------------------
+vim.opt.fileencodings = { "utf-8", "cp1251", "cp866", "koi8-r" }
 -- Список поддерживаемых кодировок
 local encodings = { "utf-8", "cp1251", "cp866", "koi8-r" }
 
