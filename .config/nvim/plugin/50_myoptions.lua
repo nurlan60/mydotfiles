@@ -27,77 +27,45 @@ end, { desc = 'Toggle unnamedplus clipboard' })
 ---------------------------------------------
 -- Encoding --
 ---------------------------------------------
-vim.opt.fileencodings = "utf-8, cp1251, cp866, koi8-r"
--------------
-local actions = {
-    ["Reopen with encoding"] = {
-        cp1251 = function()
-            vim.cmd("edit ++enc=cp1251")
-        end,
-        cp866 = function()
-            vim.cmd("edit ++enc=cp866")
-        end,
-        ["koi8-r"] = function()
-            vim.cmd("edit ++enc=koi8-r")
-        end,
-        ["utf-8"] = function()
-            vim.cmd("edit ++enc=utf-8")
-        end,
-    },
+-- Список поддерживаемых кодировок
+local encodings = { "utf-8", "cp1251", "cp866", "koi8-r" }
 
-    ["Set encoding and reopen"] = {
-        cp1251 = function()
-            vim.bo.fileencoding = "cp1251"
-            vim.cmd("write")
-            vim.cmd("edit ++enc=cp1251")
-        end,
-        cp866 = function()
-            vim.bo.fileencoding = "cp866"
-            vim.cmd("write")
-            vim.cmd("edit ++enc=cp866")
-        end,
-        ["koi8-r"] = function()
-            vim.bo.fileencoding = "koi8-r"
-            vim.cmd("write")
-            vim.cmd("edit ++enc=koi8-r")
-        end,
-        ["utf-8"] = function()
-            vim.bo.fileencoding = "utf-8"
-            vim.cmd("write")
-            vim.cmd("edit ++enc=utf-8")
-        end,
-    },
+-- Две основные операции
+local operations = {
+  ["Reopen with encoding"] = function(enc)
+    vim.cmd("edit! ++enc=" .. enc)
+  end,
+  ["Set encoding and reopen"] = function(enc)
+    vim.bo.fileencoding = enc
+    vim.cmd("write")
+    vim.cmd("edit! ++enc=" .. enc)
+  end,
 }
 
 local function encoding_menu()
-    local categories = vim.tbl_keys(actions)
-    table.sort(categories)
-
-    vim.ui.select(categories, {
-        prompt = "Select action:",
-    }, function(category)
-        if not category then
-            return
-        end
-
-        local submenu = actions[category]
-        local items = vim.tbl_keys(submenu)
-        table.sort(items)
-
-        vim.ui.select(items, {
-            prompt = category .. ":",
-        }, function(choice)
-            if not choice then
-                return
-            end
-
-            submenu[choice]()
-
-            vim.notify(category .. " → " .. choice)
-        end)
+  local categories = vim.tbl_keys(operations)
+  table.sort(categories)
+  
+  -- 1. Выбор действия (Reopen... или Set...)
+  vim.ui.select(categories, { prompt = "Select action: " }, function(category)
+    if not category then return end
+    
+    -- 2. Выбор кодировки из списка
+    vim.ui.select(encodings, { prompt = category .. ": " }, function(enc)
+      if not enc then return end
+      
+      -- Безопасный отложенный вызов, чтобы mini.pick успел закрыться
+      vim.schedule(function()
+        operations[category](enc)
+        vim.notify(category .. " → " .. enc, vim.log.levels.INFO)
+      end)
     end)
+  end)
 end
 
-vim.keymap.set("n", "<Leader>c", encoding_menu, {
-    desc = "Encoding/EOL menu",
+-- Создаем команду для удобного вызова (:EncodingMenu)
+vim.api.nvim_create_user_command("EncodingMenu", encoding_menu, {})
+
+vim.keymap.set("n", "<Leader>c", ':EncodingMenu<CR>', {
+    desc = "Encoding",
 })
