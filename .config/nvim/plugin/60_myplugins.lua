@@ -22,7 +22,6 @@ vim.g.vimtex_quickfix_ignore_filters = {
 
 -- Конфигурация вьюера для VimTeX
 vim.g.vimtex_view_method = "sioyek"
-vim.g.vimtex_view_sioyek_options = "--new-window"
 -----------------------------------------------
 ---kbswitch
 -----------------------------------------------
