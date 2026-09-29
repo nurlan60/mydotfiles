@@ -5,12 +5,12 @@ local add = vim.pack.add
 add({ "https://github.com/lervag/vimtex" })
 -- Конфигурация компилятора ratex для VimTeX
 vim.g.vimtex_compiler_method = 'generic'
+
 vim.g.vimtex_compiler_generic = {
-    command = 'ratex -pdf -interaction=nonstopmode',
-    options = {
-        '--synctex=1',
-    },
+  command = 'ratex -pdf -interaction=nonstopmode',
+  options = {
     hooks = {},
+  }
 }
 -- Рекомендуется для Neovim: включить скрытие синтаксиса (например, замену \alpha на α в коде)
 vim.g.vimtex_syntax_enabled = 1
