@@ -13,10 +13,11 @@ vim.g.vimtex_compiler_generic = {
 -- Рекомендуется для Neovim: включить скрытие синтаксиса (например, замену \alpha на α в коде)
 vim.g.vimtex_syntax_enabled = 1
 vim.wo.conceallevel = 2
+
+-- Игнорировать предупреждения о переполнении строк в VimTeX
 vim.g.vimtex_quickfix_ignore_filters = {
-	"Underfull \\hbox",
-	"Overfull \\hbox",
-	"LaTeX Warning: Unused global option(s):",
+  'Overfull',
+  'Underfull',
 }
 
 -- Конфигурация вьюера для VimTeX
