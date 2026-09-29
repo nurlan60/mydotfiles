@@ -16,7 +16,8 @@ return {
 	settings = {
 		texlab = {
 			build = {
-				args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
+        executable = 'ratex',
+				args = { '-pdf', '-interaction=nonstopmode', '%f' },
 			},
 			forwardSearch = {
 				executable = viewer,
