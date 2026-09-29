@@ -6,10 +6,12 @@ add({ "https://github.com/lervag/vimtex" })
 -- Конфигурация компилятора ratex для VimTeX
 vim.g.vimtex_compiler_method = 'generic'
 vim.g.vimtex_compiler_generic = {
-    command = 'ratex',
-    options = {},
+    command = 'ratex -pdf -interaction=nonstopmode',
+    options = {
+        '--synctex=1',
+    },
+    hooks = {},
 }
-
 -- Рекомендуется для Neovim: включить скрытие синтаксиса (например, замену \alpha на α в коде)
 vim.g.vimtex_syntax_enabled = 1
 vim.wo.conceallevel = 2
