@@ -1,19 +1,5 @@
 local add = vim.pack.add
 -----------------------------------------------
---- Vimtex
------------------------------------------------
-add({ "https://github.com/lervag/vimtex" })
-vim.g.vimtex_view_method = "sioyek"
-vim.g.vimtex_view_sioyek_options = "--new-window"
--- Disable VimTeX's native completion if you want TexLab to handle it
-vim.g.vimtex_complete_enabled = 0
-vim.g.vimtex_quickfix_open_on_warning = 0
-vim.g.vimtex_quickfix_ignore_filters = {
-	"Underfull \\hbox",
-	"Overfull \\hbox",
-	"LaTeX Warning: Unused global option(s):",
-}
------------------------------------------------
 ---kbswitch
 -----------------------------------------------
 local os_name = vim.loop.os_uname().sysname

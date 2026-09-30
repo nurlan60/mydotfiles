@@ -18,9 +18,11 @@ return {
 			build = {
         executable = 'ratex',
 				args = { '-pdf', '-interaction=nonstopmode', '%f' },
+        onSave = true,
+        forwardSearchAfter =true,
 			},
 			forwardSearch = {
-				executable = viewer,
+			executable = viewer,
 				args = opt,
 			},
 			chktex = {

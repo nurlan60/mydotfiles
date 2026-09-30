@@ -1,6 +1,6 @@
 -- TexLab commands
-vim.keymap.set("n", "<Localleader>tb", ":LspTexlabBuild<CR>", { buffer = true })
-vim.keymap.set("n", "<Localleader>tv", ":LspTexlabForward<CR>", { buffer = true })
+vim.keymap.set("n", "<Localleader>ll", ":LspTexlabBuild<CR>", { buffer = true })
+vim.keymap.set("n", "<Localleader>lv", ":LspTexlabForward<CR>", { buffer = true })
 
 -- TeX-only: mini.surround custom LaTeX commands
 local cfg = vim.b.minisurround_config or {}
