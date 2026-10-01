@@ -29,25 +29,4 @@ cfg.custom_surroundings.q = {
 
 vim.b.minisurround_config = cfg
 
-if os_name == "Linux" then
-	viewer = "sioyek"
-elseif os_name == "Darwin" then
-	viewer = "/Applications/Skim.app/Contents/SharedSupport/displayline"
-	opt = { "-b", "-g", "%l", "%p", "%f" }
-elseif os_name == "Windows_NT" then
-	viewer = ""
-	opt = ""
-end
-
-local function open_pdf()
-  local full_path = vim.fn.expand("%:p")
-  local pdf_file = vim.fn.substitute(full_path, ".tex", ".pdf", "")
-  local line = vim.fn.line(".")
-  vim.cmd("silent !sioyek '" .. pdf_file .. "' &")
-end
-
-vim.api.nvim_create_user_command('OpenPdf', open_pdf, {})
-
-vim.keymap.set('n', '<localleader>lp', open_pdf, { desc = 'Открыть PDF в Sioyek' })
-
 
