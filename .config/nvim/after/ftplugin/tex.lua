@@ -28,3 +28,15 @@ cfg.custom_surroundings.q = {
 }
 
 vim.b.minisurround_config = cfg
+
+local function open_pdf()
+  local full_path = vim.fn.expand("%:p")
+  local pdf_file = vim.fn.substitute(full_path, ".tex", ".pdf", "")
+  vim.cmd("silent !sioyek '" .. pdf_file .. "' &")
+end
+
+vim.api.nvim_create_user_command('ZathuraOpen', open_pdf, {})
+
+vim.keymap.set('n', '<localleader>lp', open_pdf, { desc = 'Открыть PDF в Sioyek' })
+
+
