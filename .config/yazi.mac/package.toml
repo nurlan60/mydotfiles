@@ -48,6 +48,11 @@ use = "yazi-rs/plugins:piper"
 rev = "58c4f4e"
 hash = "45a533508a9840cc5a10cf6129f63e6a"
 
+[[plugin.deps]]
+use = "yazi-rs/plugins:rclone"
+rev = "6229767"
+hash = "6b4528de89eb3c3b5b2ecb92704e770c"
+
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
 rev = "20b47bf"
