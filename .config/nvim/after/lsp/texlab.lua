@@ -16,7 +16,7 @@ return {
 	settings = {
 		texlab = {
 			build = {
-        executable = 'ratex',
+        executable = 'texres',
 				args = { '-pdf', '-interaction=nonstopmode', '%f' },
         onSave = true,
         forwardSearchAfter =true,
