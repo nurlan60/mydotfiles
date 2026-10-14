@@ -1,0 +1,4 @@
+#!/bin/zsh
+echo "Bisyncing Documents to PCloud"
+rclone bisync ~/Documents pcloud:/"My Documents"
+echo "Done"
