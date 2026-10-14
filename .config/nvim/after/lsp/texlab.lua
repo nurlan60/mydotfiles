@@ -17,7 +17,7 @@ return {
 		texlab = {
 			build = {
         executable = 'texres',
-				args = { '-pdf', '-interaction=nonstopmode', '%f' },
+				args = { "-verbose", "-synctex=1", "-interaction=nonstopmode", "-file-line-error", '%f' },
         onSave = true,
         forwardSearchAfter =true,
 			},
