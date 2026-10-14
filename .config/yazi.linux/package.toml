@@ -1,16 +1,16 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:chmod"
-rev = "58c4f4e"
+rev = "603fa36"
 hash = "87472b05a8c420100f6a2b9cde1e7746"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mount"
-rev = "58c4f4e"
+rev = "603fa36"
 hash = "b95f898e6dc60b52edbc415952e14395"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "58c4f4e"
+rev = "603fa36"
 hash = "5b2fbef7d1513ce38ff72623a071a5e"
 
 [[plugin.deps]]
@@ -25,40 +25,40 @@ hash = "522db0412d7839c8c343f9c733713d24"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:diff"
-rev = "58c4f4e"
+rev = "603fa36"
 hash = "14558d2829c0aa05e99c57de8f74d199"
 
 [[plugin.deps]]
 use = "WhoSowSee/whoosh"
-rev = "43f3202"
-hash = "da14dfe482886e756150ae4f5c2bb23"
+rev = "35d98a7"
+hash = "455f3ccc47546df40fd973ba050b5648"
 
 [[plugin.deps]]
 use = "AminurAlam/yazi-plugins:preview-typst"
-rev = "9997d5b"
+rev = "28eea47"
 hash = "2aacd8b872663cc36ac6c5bf6b6dc867"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:piper"
-rev = "58c4f4e"
-hash = "45a533508a9840cc5a10cf6129f63e6a"
+rev = "603fa36"
+hash = "d1e0499cae5f3aeb628c267616d4b682"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:rclone"
-rev = "6229767"
-hash = "6b4528de89eb3c3b5b2ecb92704e770c"
+rev = "603fa36"
+hash = "1e1aaa1396d3cb51249308b7be761904"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
-rev = "20b47bf"
+rev = "1183892"
 hash = "ce320f877fe709b189433941aba747c4"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-latte"
-rev = "20b47bf"
+rev = "1183892"
 hash = "273ee53369ccfbf7feb9b0c65e387ed8"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-frappe"
-rev = "20b47bf"
+rev = "1183892"
 hash = "ab7c71d442d3a9e16331ea0d95ab36a8"
