@@ -36,3 +36,16 @@ require 'typst-preview'.setup {
   formatterIndentSize = 4,   -- indentation width
 }
 
+add({ "https://github.com/lervag/vimtex" })
+vim.g.vimtex_compiler_method = 'generic'
+
+vim.g.vimtex_compiler_generic = {
+  command = 'texres',
+  options = {
+    '-synctex=1',
+    '-interaction=nonstopmode',
+    '%S'
+  },
+  hooks = {}
+}
+vim.g.vimtex_view_method = "skim"

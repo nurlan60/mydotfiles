@@ -18,8 +18,8 @@ return {
 			build = {
         executable = 'texres',
 				args = { "-verbose", "-synctex=1", "-interaction=nonstopmode", "-file-line-error", '%f' },
-        onSave = true,
-        forwardSearchAfter =true,
+        onSave = false,
+        forwardSearchAfter =false,
 			},
 			forwardSearch = {
 			executable = viewer,
