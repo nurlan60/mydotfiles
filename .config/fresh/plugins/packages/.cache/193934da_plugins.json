@@ -1,0 +1,129 @@
+{
+  "$schema": "./schemas/registry.schema.json",
+  "schema_version": 1,
+  "updated": "2026-10-13T00:00:00Z",
+  "packages": {
+    "calculator": {
+      "description": "In-editor calculator with expression evaluation",
+      "repository": "https://github.com/sinelaw/fresh-plugins#calculator",
+      "author": "Fresh Editor Team",
+      "license": "MIT",
+      "keywords": [
+        "calculator",
+        "math",
+        "utility"
+      ],
+      "latest_version": "1.0.0",
+      "fresh_min_version": "0.1.0"
+    },
+    "color-highlighter": {
+      "description": "Highlights color codes (hex, rgb, hsl) with their actual colors",
+      "repository": "https://github.com/sinelaw/fresh-plugins#color-highlighter",
+      "author": "Fresh Editor Team",
+      "license": "MIT",
+      "keywords": [
+        "color",
+        "css",
+        "highlighting",
+        "preview"
+      ],
+      "latest_version": "1.0.0",
+      "fresh_min_version": "0.1.0"
+    },
+    "todo-highlighter": {
+      "description": "Highlights TODO, FIXME, HACK, and other comment annotations",
+      "repository": "https://github.com/sinelaw/fresh-plugins#todo-highlighter",
+      "author": "Fresh Editor Team",
+      "license": "MIT",
+      "keywords": [
+        "todo",
+        "fixme",
+        "highlighting",
+        "annotations"
+      ],
+      "latest_version": "1.0.0",
+      "fresh_min_version": "0.1.0"
+    },
+    "amp": {
+      "description": "Amp AI coding agent integration for Fresh Editor",
+      "repository": "https://github.com/sinelaw/fresh-plugins#amp",
+      "author": "Fresh Editor Team",
+      "license": "Apache-2.0",
+      "keywords": [
+        "amp",
+        "ai",
+        "coding",
+        "agent",
+        "sourcegraph"
+      ],
+      "latest_version": "0.1.0",
+      "fresh_min_version": "0.1.0"
+    },
+    "dotfiles": {
+      "description": "Syntax Highlighting support for Environment (.env) Files",
+      "repository": "https://github.com/2fd/dotfiles-fresh-language",
+      "author": "2fd <i@2fd.me>",
+      "license": "MIT",
+      "keywords": [
+        "env",
+        "environment"
+      ],
+      "latest_version": "1.0.0",
+      "fresh_min_version": "0.1.0"
+    },
+    "text-actions": {
+      "description": "Adds text encode, decode and transform actions for developers",
+      "repository": "https://github.com/PavelLoparev/fresh-text-actions-plugin",
+      "author": "Pavel Loparev",
+      "license": "MIT",
+      "keywords": [
+        "transform",
+        "encode",
+        "decode"
+      ],
+      "latest_version": "0.1.0",
+      "fresh_min_version": "0.1.0"
+    },
+    "file-diff": {
+      "description": "Side-by-side diff of any two files on disk — no git, no repository required",
+      "repository": "https://github.com/sinelaw/fresh-plugins#file-diff",
+      "author": "Fresh Editor Team",
+      "license": "MIT",
+      "keywords": [
+        "diff",
+        "compare",
+        "files",
+        "side-by-side"
+      ],
+      "latest_version": "1.0.0",
+      "fresh_min_version": "0.4.9"
+    },
+    "polkit": {
+      "description": "JavaScript syntax highlighting for polkit rules.d files",
+      "author": "asukaminato0721",
+      "license": "MIT",
+      "keywords": [
+        "polkit",
+        "javascript",
+        "rules"
+      ],
+      "repository": "https://github.com/sinelaw/fresh-plugins#polkit",
+      "latest_version": "0.1.0"
+    },
+    "fresh-discord-rpc": {
+      "description": "Zero-configuration Discord Rich Presence integration for Fresh editor",
+      "repository": "https://github.com/faraway-world/fresh-discord-rpc",
+      "author": "faraway-world",
+      "license": "MIT",
+      "keywords": [
+        "discord",
+        "rpc",
+        "rich-presence",
+        "presence",
+        "status"
+      ],
+      "latest_version": "1.0.0",
+      "fresh_min_version": "0.1.0"
+    }
+  }
+}

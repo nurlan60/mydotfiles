@@ -1,0 +1,150 @@
+{
+  "$schema": "./schemas/registry.schema.json",
+  "schema_version": 1,
+  "updated": "2026-10-13T00:00:00Z",
+  "packages": {
+    "elixir": {
+      "description": "Elixir language support - syntax highlighting and LSP",
+      "repository": "https://github.com/sinelaw/fresh-plugins#languages/elixir",
+      "author": "Fresh Editor Team",
+      "license": "MIT",
+      "keywords": [
+        "elixir",
+        "erlang",
+        "beam",
+        "functional"
+      ],
+      "latest_version": "0.1.0",
+      "fresh_min_version": "0.1.0"
+    },
+    "hare": {
+      "description": "Hare programming language support - syntax highlighting and LSP",
+      "repository": "https://github.com/sinelaw/fresh-plugins#languages/hare",
+      "author": "Fresh Editor Team",
+      "license": "MIT",
+      "keywords": [
+        "hare",
+        "systems-programming"
+      ],
+      "latest_version": "0.1.0",
+      "fresh_min_version": "0.1.0"
+    },
+    "solidity": {
+      "description": "Solidity language support - syntax highlighting and LSP for smart contracts",
+      "repository": "https://github.com/sinelaw/fresh-plugins#languages/solidity",
+      "author": "Fresh Editor Team",
+      "license": "MIT",
+      "keywords": [
+        "solidity",
+        "ethereum",
+        "smart-contracts",
+        "blockchain",
+        "web3"
+      ],
+      "latest_version": "0.1.0",
+      "fresh_min_version": "0.1.0"
+    },
+    "vue-sfc-basic": {
+      "description": "Basic Vue 3 Single File Component (SFC) support for Fresh – syntax highlighting + Volar LSP",
+      "repository": "https://github.com/unoctanium/fresh-vue-language",
+      "author": "Odo Maletzki",
+      "license": "MIT",
+      "keywords": [
+        "vue",
+        "vue3",
+        "sfc",
+        "volar",
+        "typescript",
+        "javascript",
+        "fresh-editor"
+      ],
+      "latest_version": "1.0.0",
+      "fresh_min_version": "0.1.0"
+    },
+    "coq": {
+      "description": "Coq/Rocq syntax highlighting, from Fresh PR #3026 by asukaminato0721",
+      "author": "asukaminato0721",
+      "license": "GPL-2.0-only",
+      "keywords": [
+        "coq",
+        "rocq",
+        "proof-assistant"
+      ],
+      "repository": "https://github.com/sinelaw/fresh-plugins#languages/coq",
+      "latest_version": "0.1.0"
+    },
+    "dafny": {
+      "description": "Dafny syntax highlighting, from Fresh PR #3026 by asukaminato0721",
+      "author": "asukaminato0721",
+      "license": "GPL-2.0-only",
+      "keywords": [
+        "dafny",
+        "verification"
+      ],
+      "repository": "https://github.com/sinelaw/fresh-plugins#languages/dafny",
+      "latest_version": "0.1.0"
+    },
+    "dune": {
+      "description": "Dune syntax highlighting, from Fresh PR #3026 by asukaminato0721",
+      "author": "asukaminato0721",
+      "license": "GPL-2.0-only",
+      "keywords": [
+        "dune",
+        "ocaml",
+        "build-system"
+      ],
+      "repository": "https://github.com/sinelaw/fresh-plugins#languages/dune",
+      "latest_version": "0.1.0"
+    },
+    "nginx": {
+      "description": "Nginx syntax highlighting, from Fresh PR #3026 by asukaminato0721",
+      "author": "asukaminato0721",
+      "license": "GPL-2.0-only",
+      "keywords": [
+        "nginx",
+        "configuration",
+        "web-server"
+      ],
+      "repository": "https://github.com/sinelaw/fresh-plugins#languages/nginx",
+      "latest_version": "0.1.0"
+    },
+    "smtlib2": {
+      "description": "SMT-LIB 2 syntax highlighting, from Fresh PR #3026 by asukaminato0721",
+      "author": "asukaminato0721",
+      "license": "GPL-2.0-only",
+      "keywords": [
+        "smtlib2",
+        "smt2",
+        "smt",
+        "z3"
+      ],
+      "repository": "https://github.com/sinelaw/fresh-plugins#languages/smtlib2",
+      "latest_version": "0.1.0"
+    },
+    "linker-script": {
+      "description": "GNU linker script syntax highlighting",
+      "author": "asukaminato0721",
+      "license": "MIT",
+      "keywords": [
+        "linker",
+        "ld",
+        "lds",
+        "embedded"
+      ],
+      "repository": "https://github.com/sinelaw/fresh-plugins#languages/linker-script",
+      "latest_version": "0.1.0"
+    },
+    "ssh-config": {
+      "description": "OpenSSH client configuration syntax highlighting and file detection",
+      "author": "asukaminato0721",
+      "license": "MIT",
+      "keywords": [
+        "ssh",
+        "openssh",
+        "config"
+      ],
+      "repository": "https://github.com/sinelaw/fresh-plugins#languages/ssh-config",
+      "latest_version": "0.1.0"
+    }
+  }
+}
