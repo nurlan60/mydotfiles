@@ -19,7 +19,7 @@ return {
         executable = 'texres',
 				args = { "-verbose", "-synctex=1", "-interaction=nonstopmode", "-file-line-error", '%f' },
         onSave = true,
-        forwardSearchAfter =true,
+        forwardSearchAfter = true,
 			},
 			forwardSearch = {
 			executable = viewer,
