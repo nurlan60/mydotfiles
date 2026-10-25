@@ -1,5 +1,5 @@
 # shell-integration-features = "ssh-terminfo,ssh-env"
-theme = Catppuccin Mocha
+theme = TokyoNight
 quit-after-last-window-closed = false
 font-size = 14
 font-thicken = true
