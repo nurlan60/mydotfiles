@@ -66,9 +66,10 @@ prepend_keymap = [
 # Переход к закладкам
   { on = "<A-y>", run = "plugin whoosh jump_key_y", desc = "Мгновенный переход к закладке с клавишей y" },
 
-  # smart-enter
-  { on   = "l", run  = "plugin smart-enter", desc = "Enter the child directory, or open the file" },
-  { on   = "<Right>", run  = "plugin smart-enter", desc = "Enter the child directory, or open the file" },
+  # wise-enter
+  { on   = "l", run  = "plugin wise-enter", desc = "Wise enter" },
+  { on   = "<Right>", run  = "plugin wise-enter", desc = "Wise enter" },
+  { on   = "<Enter>", run  = "plugin wise-enter", desc = "Wise enter" },
 
   # diff
   { on   = "<C-d>", run  = "plugin diff", desc = "Diff the selected with the hovered file" },
