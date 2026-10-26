@@ -2,4 +2,4 @@
 ._*
 .config/nvim/nvim-pack-lock.json
 .config/yazi/vfs.toml
-
+.config/yazi/bookmarks
