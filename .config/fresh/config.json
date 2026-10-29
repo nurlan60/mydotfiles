@@ -1,11 +1,4 @@
 {
-  "plugins": {
-    "vi_mode": {
-      "settings": {
-        "autoStart": true
-      }
-    }
-  },
   "lsp": {
     "latex": [
       {
