@@ -247,6 +247,69 @@ type TsCompositeHunk = {
 	ops?: string;
 };
 /**
+* One side of a [`CompareHunk`]: where the hunk's lines are, in lines and
+* in the buffer's own bytes.
+*/
+type CompareSide = {
+	/**
+	* First line of the hunk on this side (0-based).
+	*/
+	start: number;
+	/**
+	* Number of lines (0 when the other side alone has lines here).
+	*/
+	count: number;
+	/**
+	* Byte offset of the hunk's first line — for an empty side, where the
+	* other side's lines would go.
+	*/
+	from: number;
+	/**
+	* Byte offset just past the hunk's last line, terminator included.
+	* `from..to` is what replacing this side's lines of the hunk replaces.
+	*/
+	to: number;
+	/**
+	* Where a jump to the hunk puts this side's cursor: `from`, or, for an
+	* empty side, the start of the line before the gap — the line a view's
+	* filler rows for the other side's lines go under, so the cursor sits
+	* at the change rather than past it. At the very top of the text, where
+	* there is no line before, `from`.
+	*/
+	jump: number;
+	/**
+	* Each line's text without its line terminator, as `[start, end)`
+	* byte offsets.
+	*/
+	lines: Array<[number, number]>;
+	/**
+	* For the lines that have a counterpart on the other side (the first
+	* `min(count, other.count)`): the part that differs from it, as
+	* `[start, end)` byte offsets, or `null` when only the line terminator
+	* differs.
+	*/
+	spans: Array<[number, number] | null>;
+};
+/**
+* One hunk of a [`CompareResult`], with the geometry a side-by-side view
+* paints from.
+*/
+type CompareHunk = {
+	/**
+	* The first (left, old) text's side.
+	*/
+	left: CompareSide;
+	/**
+	* The second (right, new) text's side.
+	*/
+	right: CompareSide;
+	/**
+	* The two sides have the same lines but for their terminators: a
+	* missing final newline, or `\r\n` against `\n`.
+	*/
+	eolOnly: boolean;
+};
+/**
 * A run of rows in a plugin-composed buffer that carry code, for the
 * host's highlighter (`setSyntaxRegions`).
 *
@@ -1284,6 +1347,30 @@ type TerminalResult = {
 	* The split ID (if created in a new split)
 	*/
 	splitId: number | null;
+};
+/**
+* A terminal's visible screen, returned by `getTerminalScreens`
+*/
+type TerminalScreen = {
+	/**
+	* The terminal's buffer (for `showBuffer`, `getBufferInfo`)
+	*/
+	bufferId: number;
+	/**
+	* The screen's lines, top to bottom, as plain text: rows a wrap
+	* continues are joined into one
+	*/
+	lines: Array<string>;
+	/**
+	* The terminal's backing file (in `getTerminalDir()`), or "" when it
+	* has none. A checkpoint leaves the screen there too, after the
+	* scrollback, until the next one replaces it.
+	*/
+	file: string;
+	/**
+	* The terminal's tab label (e.g. `claude`, `Terminal 1`)
+	*/
+	name: string;
 };
 /**
 * Options for `createWindowWithTerminal` — the atomic
@@ -3018,6 +3105,33 @@ type BufferSavedDiff = {
 	byte_ranges: Array<[number, number]>;
 };
 /**
+* Result of `compareBuffers`: the line diff of two buffers, measured in
+* their own bytes.
+*/
+type CompareResult = {
+	/**
+	* Hunks in increasing order; empty when the buffers are equal.
+	*/
+	hunks: Array<CompareHunk>;
+	/**
+	* Lines in each buffer, a final unterminated line included.
+	*/
+	leftLines: number;
+	rightLines: number;
+	/**
+	* Each buffer's length in bytes.
+	*/
+	leftLen: number;
+	rightLen: number;
+	/**
+	* Each buffer's content version when it was read. An edit since bumps
+	* it, so a caller about to edit from these offsets can tell they are
+	* stale.
+	*/
+	leftVersion: number;
+	rightVersion: number;
+};
+/**
 * Options for createVirtualBufferInExistingSplit
 */
 type CreateVirtualBufferInExistingSplitOptions = {
@@ -3320,13 +3434,18 @@ type GrepMatch = {
 	*/
 	line: number;
 	/**
-	* 1-indexed column number
+	* 1-indexed byte column within the line
 	*/
 	column: number;
 	/**
-	* The matched line content (for display)
+	* The matched line, for display — on a long line only up to 4096 bytes
+	* of it on each side of the match
 	*/
 	context: string;
+	/**
+	* Where the match starts in `context`, in bytes
+	*/
+	contextOffset: number;
 };
 /**
 * Language configuration for language packs
@@ -4311,8 +4430,9 @@ interface EditorConfig {
 		*/
 		auto_recovery_save_interval_secs?: number;
 		/**
-		* How often (ms) to check open files for outside changes when auto-revert is
-		* on. Lower is faster but uses more CPU. Default: 2000
+		* How often (ms) to check open files for outside changes. A buffer is
+		* checked unless auto-revert is off for it ("Toggle Auto-Revert (Current
+		* Buffer)"). Lower is faster but uses more CPU. Default: 2000
 		*
 		* Default: `2000`
 		*/
@@ -5067,6 +5187,15 @@ interface TerminalConfig {
 		* Default: `false`
 		*/
 		close_on_exit?: boolean;
+		/**
+		* When the system clipboard holds no text (an image, or nothing), terminal
+		* paste sends Ctrl+V to the program instead of your last yank, so an agent
+		* CLI can read an image from the clipboard itself. Turn off to paste the
+		* yank as before. Default: true
+		*
+		* Default: `true`
+		*/
+		pass_ctrl_v_without_text?: boolean;
 	}
 	/**
 	* When programs in the terminal get mouse events.
@@ -5161,8 +5290,16 @@ interface EditorAPI {
 	hasActiveSearch(): boolean;
 	/**
 	* List all open buffers - returns array of BufferInfo objects
+	* 
+	* @param windowId - List this window's buffers (from `listWindows()`)
+	* instead of the active window's. A buffer of a window not on screen
+	* is in no split, so its `view_mode`, `splits` and the like describe
+	* nothing visible. An unknown window has none. Such a buffer's id works
+	* with `searchBuffer`, and with `showBuffer` once its window is active;
+	* `getBufferInfo` and the other buffer reads answer for the active
+	* window's buffers only.
 	*/
-	listBuffers(): BufferInfo[];
+	listBuffers(windowId?: number): BufferInfo[];
 	/**
 	* List all available grammars with source info - returns array of GrammarInfo objects
 	* Grammars come from all sources: built-in, user-installed, language packs,
@@ -5715,6 +5852,22 @@ interface EditorAPI {
 	*/
 	fileLaunch(): boolean;
 	/**
+	* The two files of a `fresh --diff LEFT RIGHT` launch, as absolute paths
+	* `[left, right]`; empty for any other launch. The editor doesn't open
+	* them: the plugin that reads this at `ready` does (the bundled
+	* `compare_files` plugin, into the panels of one tab, with a
+	* buffer-group `path` leaf).
+	*/
+	diffLaunch(): string[];
+	/**
+	* Tell the editor the files of a `fresh --diff` launch are on screen, or
+	* that they won't be (the comparison failed). Until then, or for at most
+	* a few seconds, the editor draws nothing, so the launch doesn't flash
+	* the empty editor it starts with. Call it once the view is complete,
+	* decorations and all, from the plugin that read `diffLaunch()`.
+	*/
+	diffLaunchShown(): boolean;
+	/**
 	* Whether the left dock slot is open: a panel is in it, or the host is
 	* holding the column for one its manifest declared. The plugin that
 	* fills the dock mounts it at
@@ -6183,10 +6336,12 @@ interface EditorAPI {
 	/**
 	* Directory holding terminal scrollback backing files for the current
 	* working directory. Each project root / worktree has its own subdir, so
-	* Universal Search's terminal scope can stay scoped to the active
-	* project rather than spanning every project's terminals.
+	* Universal Search's terminal scope can stay scoped to one project.
+	* 
+	* @param windowId - The directory of this window's root instead (from
+	* `listWindows()`); `""` for an unknown window.
 	*/
-	getTerminalDir(): string;
+	getTerminalDir(windowId?: number): string;
 	/**
 	* Per-working-directory data root for plugin state scoped to the current
 	* project root / worktree (`<data_dir>/workdirs/<encoded-cwd>/`). Use
@@ -7926,6 +8081,13 @@ interface EditorAPI {
 	* directly into the named file instead of buffering it. The
 	* resolved `SpawnResult.stdout` is empty in that case; the bytes
 	* land on disk for `openFile` to pick up as a file-backed buffer.
+	* 
+	* @deprecated Run commands on a machine instead: `editor.runOnTarget`
+	* for the active window, or `run` on the machine
+	* `editor.openMachine({ kind: "window", window })` returns for any
+	* window, so the command runs where that window's files are. Both take
+	* the same arguments, return the same killable handle, and resolve with
+	* `{ code, stdout, stderr }`. `spawnHostProcess` runs on this computer.
 	*/
 	spawnProcess(command: string, args: string[], cwd?: string, stdoutTo?: string): ProcessHandle<SpawnResult>;
 	/**
@@ -8069,6 +8231,32 @@ interface EditorAPI {
 	*/
 	diffBaselinePair(oldBaselineId: number, newBaselineId: number): Promise<DiffBaselineResult>;
 	/**
+	* Line diff of two live buffers, measured in their own bytes (async):
+	* each hunk's byte range on both sides, each changed line's text
+	* range, and the part of a paired line that differs from its
+	* counterpart. The texts never cross into the plugin — use this
+	* instead of `getBufferText` + `computeLineDiff` when the offsets will
+	* be used to decorate or edit the buffers.
+	* 
+	* Rejects when either buffer is binary or in large-file mode.
+	*/
+	compareBuffers(leftId: number, rightId: number): Promise<CompareResult>;
+	/**
+	* Replace the bytes `start..end` of a buffer with `text`, as one edit
+	* and one undo step (async). Resolves `true` once applied; `false`,
+	* leaving the buffer as it was, when it is read-only or binary or the
+	* range is outside it.
+	* 
+	* `expectedVersion` (a `leftVersion` / `rightVersion` from
+	* `compareBuffers`) makes the edit conditional: if the buffer has
+	* changed since, the offsets may name other text, so nothing is done
+	* and it resolves `false`.
+	* 
+	* `deleteRange` followed by `insertText` is two edits, so undoing it
+	* stops half way.
+	*/
+	replaceRange(bufferId: number, start: number, end: number, text: string, expectedVersion?: number): Promise<boolean>;
+	/**
 	* Fetch baseline lines for `(startLine, count)` ranges in one
 	* batched call (async). Lines come back without trailing newlines,
 	* grouped per requested range — fetch only the old-side lines a
@@ -8204,7 +8392,8 @@ interface EditorAPI {
 	* Begin a streaming project-wide search and return a `SearchHandle`.
 	* The producer (host) writes matches at full speed into shared state;
 	* the consumer drains via `handle.take()` at its own cadence. Call
-	* `handle.cancel()` to abort. Searches the same files as `grepProject`.
+	* `handle.cancel()` to abort. Searches the same files as `grepProject`,
+	* or with `bufferId` only that buffer, as it is.
 	*/
 	beginSearch(pattern: string, opts?: {
 		fixedString?: boolean;
@@ -8213,7 +8402,26 @@ interface EditorAPI {
 		wholeWords?: boolean;
 		sourceBufferId?: number;
 		fileGlob?: string;
+		bufferId?: number;
 	}): SearchHandle;
+	/**
+	* Search one buffer as it is now, unsaved edits included, with the
+	* editor's own search — the one Ctrl+F and `beginSearch` use. Resolves
+	* with its matches in order: each with its byte offset and length, its
+	* 1-based line and byte column, and the text of its line. `bufferId` 0
+	* is the active buffer; a buffer of any window (`listBuffers(windowId)`)
+	* can be searched. Every match is found unless `maxResults` is
+	* given; `fixedString` and `caseSensitive` default to true. `cancel()`
+	* stops it, resolving with no matches.
+	*/
+	searchBuffer(bufferId: number, pattern: string, opts?: {
+		fixedString?: boolean;
+		caseSensitive?: boolean;
+		wholeWords?: boolean;
+		maxResults?: number;
+	}): Promise<GrepMatch[]> & {
+		cancel(): void;
+	};
 	/**
 	* Replace matches in a file's buffer (async)
 	* Opens the file if not already in a buffer, applies edits via the buffer model,
@@ -8309,6 +8517,15 @@ interface EditorAPI {
 	* example while it shuts down).
 	*/
 	setWindowPreparing(id: number, message: string, label: string | null, failed: boolean, done: boolean): boolean;
+	/**
+	* The visible screen of each terminal open in a window, read from
+	* memory: a terminal's backing file (in `getTerminalDir()`) holds only
+	* the lines that have scrolled off it.
+	* 
+	* @param windowId - The window (from `listWindows()`); defaults to the
+	* active one. An unknown window has no terminals.
+	*/
+	getTerminalScreens(windowId?: number): Promise<TerminalScreen[]>;
 	/**
 	* Send input data to a terminal
 	* 
@@ -8421,7 +8638,13 @@ interface FreshMachine {
 		path: string;
 		maxBytes: number;
 	}[]): Promise<FilePrefix[]>;
-	run(program: string, args?: string[], cwd?: string): Promise<CommandResult>;
+	/** Run a command here, without a shell. `stdoutTo` streams stdout into
+	*  that file instead (`stdout` then resolves empty; this computer only).
+	*  Never rejects: a command that could not be started, or a machine that
+	*  is closed or whose window has closed, resolves with `code` -1 and the
+	*  reason in `stderr`. `kill()` stops it here, on an SSH host or in a
+	*  Kubernetes pod; in a container it runs to completion. */
+	run(program: string, args?: string[], cwd?: string, stdoutTo?: string): ProcessHandle<CommandResult>;
 	/** Environment variables, for the names that are set. A remote machine is
 	*  asked with `printenv`; never this computer's values for another machine. */
 	env(names: string[]): Promise<Record<string, string>>;
@@ -8466,9 +8689,11 @@ interface CommandResult {
 /** Bare shapes bound to machine 0, the active window's own authority. */
 interface EditorAPI {
 	/** Open a machine to read without attaching it to a window.
-	*  `{ kind: "window", window?: number }` borrows a window's own authority.
+	*  `{ kind: "window", window?: number }` borrows a window's own authority
+	*  (the active window's when `window` is omitted): `run` on it runs where
+	*  that window's files are, whichever window is active.
 	*  `{ kind: "ssh" | "kubectl-exec", ... }` connects to a machine nothing is
-	*  attached to; it is read-only, so `run` rejects. Anything else is an
+	*  attached to; it is read-only, so `run` resolves with `code` -1. Anything else is an
 	*  `AuthorityPayload`, as `setAuthority` takes. */
 	openMachine(spec: {
 		kind: "window";
@@ -8479,8 +8704,15 @@ interface EditorAPI {
 		path: string;
 		maxBytes: number;
 	}[]): Promise<FilePrefix[]>;
-	/** Unlike `spawnHostProcess`, a remote authority runs the command there. */
-	runOnTarget(program: string, args?: string[], cwd?: string): Promise<CommandResult>;
+	/** Run a command on the active window's machine, without a shell: a remote
+	*  window runs it there, unlike `spawnHostProcess`. For another window, use
+	*  `run` on the machine `openMachine({ kind: "window", window })` returns.
+	*  `stdoutTo` streams stdout into that file instead (`stdout` then resolves
+	*  empty). Resolves with a non-zero `code` rather than rejecting, and with
+	*  `code` -1 (the reason in `stderr`) when the command could not be
+	*  started; `kill()` stops it, as `run` says. The replacement for
+	*  `spawnProcess`. */
+	runOnTarget(program: string, args?: string[], cwd?: string, stdoutTo?: string): ProcessHandle<CommandResult>;
 	machineEnv(names: string[]): Promise<Record<string, string>>;
 }
 /**
@@ -9089,6 +9321,12 @@ interface EditorAPI {
 	* buffer: editable, in its tabs, and left open when the group closes.
 	* Each panel has its own view of it, so two panels can show one file in
 	* different view modes. Closing the buffer closes the group.
+	*
+	* A scrollable leaf with `path` shows that file: the buffer that has it
+	* open, as for `bufferId`, or else one the group opens without a tab.
+	* Such a buffer is an ordinary file buffer otherwise (the quit prompt and
+	* hot exit cover it); closing the group closes it if it has no unsaved
+	* changes, and gives it a tab in the group's pane if it has.
 	*
 	* The result names each panel's buffer (`panels`) and split
 	* (`panelSplits`, for `createScrollSyncGroup`, `setLineWrap` and

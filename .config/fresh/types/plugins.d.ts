@@ -152,22 +152,77 @@ declare global {
 }
 
 // ── live_grep ─────────────────────
+/**
+* Live Grep Plugin
+*
+* Project-wide search rendered as a centred floating overlay
+* (issue #1796). Search results stream in as the user types; arrow
+* keys navigate; Enter opens at the match location.
+*
+* Search backend is pluggable. The plugin ships three built-in
+* providers (ripgrep → git grep → grep) selected by priority on
+* each invocation; users and other plugins can register additional
+* providers via the exported plugin API:
+*
+*     const liveGrep = editor.getPluginApi("live-grep");
+*     liveGrep?.registerProvider({
+*       name: "fff",
+*       priority: 100,                     // higher wins
+*       isAvailable: async ({ machine, cwd }) => {
+*         const r = await machine.run("fff", ["--version"], cwd);
+*         return r.code === 0;
+*       },
+*       search: async (query, { machine, cwd, maxResults }) => {
+*         const r = await machine.run("fff", [query], cwd);
+*         return parseFFFOutput(r.stdout);
+*       },
+*     });
+*
+* A provider runs its commands on the `machine` it is handed: the searched
+* workspace's (its SSH host or container for a remote one). The provider
+* whose `isAvailable()` returns true with the highest priority is selected
+* on each Live Grep invocation; the result is cached for the duration of
+* the prompt. "All workspaces" probes each other workspace's machine too.
+*/
+import { type SearchCancellation } from "./lib/finder.ts";
+import { type Workspace } from "./lib/workspace_groups.ts";
 /** The data sources Universal Search can look in. `files` is the
 *  classic project-file grep; the others are opt-in scopes layered on
 *  top. Each enabled scope contributes tagged matches to one merged
-*  result list. See `docs/internal/global-search-ux.md`. */
-type ScopeId = "files" | "ignored" | "buffers" | "terminals" | "diagnostics";
+*  result list. See `docs/internal/global-search-ux.md`. `workspaces`
+*  is not a source but *which* workspaces the others look in: the
+*  current one, or every open one, grouped. */
+type ScopeId = "files" | "ignored" | "buffers" | "terminals" | "diagnostics" | "workspaces";
 interface GrepMatch {
 	file: string;
 	line: number;
 	column: number;
 	content: string;
 	source?: ScopeId;
+	/** A line on a terminal's screen, which is in no file: the terminal's
+	*  buffer, shown when the match is picked. */
+	bufferId?: number;
+	/** The file to open when it is not `file` itself: a terminal's backing
+	*  file (`file` is the terminal's name), or an unsaved edit's file. */
+	openPath?: string;
+	/** The workspace the match is in, when "All workspaces" is on. */
+	workspace?: Workspace;
+	/** Set on a group's header row (no match itself): the number of matches
+	*  in `workspace` listed under it. */
+	heading?: number;
+	/** False when the preview would not show what matched (`previewable`). */
+	preview?: boolean;
+}
+/** Where a provider runs: the searched workspace's machine, and its root. */
+export interface ProviderContext {
+	/** The workspace's machine (`openMachine({ kind: "window" })`): run every
+	*  command on it, so a remote workspace is searched on its host. */
+	machine: FreshMachine;
+	/** The workspace's root: the directory to search. */
+	cwd: string;
 }
 /** Options passed to a provider's `search` callback. */
-export interface SearchOpts {
-	/** Working directory the search should run in (the editor's cwd). */
-	cwd: string;
+export interface SearchOpts extends ProviderContext {
 	/** Caller's preferred result cap. Providers may return fewer.
 	*  Returning more is allowed; the Finder caps at its own
 	*  `maxResults`. */
@@ -197,6 +252,9 @@ export interface SearchOpts {
 	*  and disagree with the Case toggle on the toolbar. Built-ins pass
 	*  rg `--case-sensitive`/`--ignore-case`, git-grep/grep/ack `-i`. */
 	caseSensitive?: boolean;
+	/** Fires when the search is superseded by a newer query or the overlay
+	*  closes: kill what you started (`runSearch` does it for you). */
+	cancellation?: SearchCancellation;
 }
 /** A registered Live Grep backend. */
 export interface LiveGrepProvider {
@@ -207,10 +265,10 @@ export interface LiveGrepProvider {
 	/** Higher priority wins. Built-ins use 0/-1/-2; user-registered
 	*  providers default to 0 if omitted. */
 	priority?: number;
-	/** Cheap probe — typically `editor.spawnProcess("foo", [], cwd)`
-	*  and check `exit_code`. May be sync or async. Failures (thrown
+	/** Cheap probe — typically `ctx.machine.run("foo", ["--version"],
+	*  ctx.cwd)` and check `code`. May be sync or async. Failures (thrown
 	*  errors) are treated as "not available". */
-	isAvailable: () => boolean | Promise<boolean>;
+	isAvailable: (ctx: ProviderContext) => boolean | Promise<boolean>;
 	/** Run the search. Return an array of matches; an empty array
 	*  means "no matches" (not "provider broken"). Errors thrown
 	*  here surface as a status message and bypass the next
@@ -525,6 +583,15 @@ export type OrchestratorApi = DiscoveryHost & {
 	*  needs to find the one it made earlier, or to report on all of them.
 	*  Reads the live model, so it reflects creations made moments ago. */
 	listWorkspaces(): WorkspaceSummary[];
+	/** The open workspaces, top to bottom as the dock rows list them (folders
+	*  flattened) while the dock is up, and in the order it first saw them
+	*  otherwise: each one's `windowId` and its short name (a rename, else its
+	*  directory's name — a row's label without the terminal title). Universal
+	*  Search's "All workspaces" groups its results in this order. */
+	workspaceOrder(): {
+		windowId: number;
+		name: string;
+	}[];
 	/** One workspace — by `workspaceId`, `windowId` (or its decimal string),
 	*  or dock name — with the decision chain behind its `agentState`
 	*  (`explain`: reasons, the question line and rule that matched, output
