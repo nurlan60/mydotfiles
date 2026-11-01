@@ -1,16 +1,16 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:chmod"
-rev = "e0bbd20"
+rev = "896fa5a"
 hash = "87472b05a8c420100f6a2b9cde1e7746"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mount"
-rev = "e0bbd20"
+rev = "896fa5a"
 hash = "ba1a606728adb75b091b6eaf3fd60372"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "e0bbd20"
+rev = "896fa5a"
 hash = "5b2fbef7d1513ce38ff72623a071a5e"
 
 [[plugin.deps]]
@@ -25,7 +25,7 @@ hash = "522db0412d7839c8c343f9c733713d24"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:diff"
-rev = "e0bbd20"
+rev = "896fa5a"
 hash = "14558d2829c0aa05e99c57de8f74d199"
 
 [[plugin.deps]]
@@ -40,13 +40,13 @@ hash = "b51195fb14479a22751230b638830097"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:piper"
-rev = "e0bbd20"
+rev = "896fa5a"
 hash = "d1e0499cae5f3aeb628c267616d4b682"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:rclone"
-rev = "e0bbd20"
-hash = "9a52c0963a3cd14d133ba5ae33a7f872"
+rev = "896fa5a"
+hash = "71144cde634ada51e13f086c12aff9cb"
 
 [[plugin.deps]]
 use = "jaam8/wise-enter"
