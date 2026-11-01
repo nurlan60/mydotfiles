@@ -32,5 +32,6 @@ require("whoosh"):setup({
 		fuzzy_search = false, -- Launch fuzzy search (fzf)
 		history = "<Tab>", -- Open directory history
 		previous_dir = "<Backspace>", -- Jump back to the previous directory
+    project_root = "-",              -- Jump to the current Git repository root
 	},
 })
