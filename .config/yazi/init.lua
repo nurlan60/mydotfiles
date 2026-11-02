@@ -27,8 +27,4 @@ require("whoosh"):setup({
     { tag = "onedrive", path = "rclone://onedrive", key = "O" },
     { tag = "yandex",   path = "rclone://yandex",   key = "Y" },
 	},
-	special_keys = {
-		create_temp = false, -- Create a temporary bookmark from the menu
-		fuzzy_search = false, -- Launch fuzzy search (fzf)
-	},
 })
