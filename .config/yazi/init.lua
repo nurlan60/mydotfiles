@@ -25,6 +25,5 @@ require("whoosh"):setup({
     { tag = "dropbox",  path = "rclone://dropbox",  key = "D" },
     { tag = "google",   path = "rclone://google",   key = "G" },
     { tag = "onedrive", path = "rclone://onedrive", key = "O" },
-    { tag = "yandex",   path = "rclone://yandex",   key = "Y" },
 	},
 })
