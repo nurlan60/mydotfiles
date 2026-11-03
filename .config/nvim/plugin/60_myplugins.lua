@@ -30,7 +30,7 @@ end
 -----------------------------------------------
 add({ "https://github.com/chomosuke/typst-preview.nvim" })
 require 'typst-preview'.setup {
-  ormatterMode = "typstyle", -- or "typstfmt"
+  formatterMode = "typstyle", -- or "typstfmt"
   formatterProseWrap = true, -- wrap lines in content mode
   formatterPrintWidth = 80,  -- limit line length to 80 if possible
   formatterIndentSize = 4,   -- indentation width
