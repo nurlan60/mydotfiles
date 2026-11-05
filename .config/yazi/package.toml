@@ -1,16 +1,16 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:chmod"
-rev = "25d992d"
+rev = "0f28df2"
 hash = "87472b05a8c420100f6a2b9cde1e7746"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mount"
-rev = "25d992d"
+rev = "0f28df2"
 hash = "dbfc342600993eefbb055bff145fa22a"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "25d992d"
+rev = "0f28df2"
 hash = "5b2fbef7d1513ce38ff72623a071a5e"
 
 [[plugin.deps]]
@@ -20,7 +20,7 @@ hash = "522db0412d7839c8c343f9c733713d24"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:diff"
-rev = "25d992d"
+rev = "0f28df2"
 hash = "14558d2829c0aa05e99c57de8f74d199"
 
 [[plugin.deps]]
@@ -35,12 +35,12 @@ hash = "b51195fb14479a22751230b638830097"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:piper"
-rev = "25d992d"
+rev = "0f28df2"
 hash = "d1e0499cae5f3aeb628c267616d4b682"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:rclone"
-rev = "25d992d"
+rev = "0f28df2"
 hash = "3150647e9fb2a47153412d976571dc33"
 
 [[plugin.deps]]
