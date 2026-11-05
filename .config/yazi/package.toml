@@ -14,11 +14,6 @@ rev = "25d992d"
 hash = "5b2fbef7d1513ce38ff72623a071a5e"
 
 [[plugin.deps]]
-use = "KKV9/compress"
-rev = "80e5268"
-hash = "868db729374b97871bc30b96d0e9061f"
-
-[[plugin.deps]]
 use = "Shallow-Seek/djvu-view"
 rev = "f218aa6"
 hash = "522db0412d7839c8c343f9c733713d24"
@@ -52,6 +47,11 @@ hash = "3150647e9fb2a47153412d976571dc33"
 use = "jaam8/wise-enter"
 rev = "341f289"
 hash = "f35a1a045c1dd63160fcfb62b9cb082a"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:compress"
+rev = "0f28df2"
+hash = "d90da0b6c0e92bf4a43f2f83019e91b6"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"

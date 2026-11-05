@@ -36,11 +36,7 @@ prepend_keymap = [
   { on = [ "c","m" ], run = "plugin chmod", desc = "Chmod on selected files", for = 'unix' },
   
   # Compress
-  { on   = [ "c", "a", "a" ], run  = "plugin compress", desc = "Archive selected files" },
-  { on   = [ "c", "a", "p" ], run  = "plugin compress -p", desc = "Archive selected files (password)" },
-  { on   = [ "c", "a", "h" ], run  = "plugin compress -ph", desc = "Archive selected files (password+header)" },
-  { on   = [ "c", "a", "l" ], run  = "plugin compress -l", desc = "Archive selected files (compression level)" },
-  { on   = [ "c", "a", "u" ], run  = "plugin compress -phl", desc = "Archive selected files (password+header+level)" },
+  { on   = [ "C"], run  = "plugin compress -phl", desc = "Archive selected files (password+header+level)" },
 
   # Toggle-pane
   { on = [ "T","1" ], run = "plugin toggle-pane min-parent", desc = "Show or hide the parent pane" },
