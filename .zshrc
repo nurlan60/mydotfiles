@@ -19,13 +19,9 @@ compinit
 ######################################################
 autoload -U add-zsh-hook
 
-# aliases
-alias python="/opt/homebrew/bin/python3"
-alias pip="/opt/homebrew/bin/pip3"
-    
+# common aliases
 alias v="nvim"
 alias :q="exit"
-alias keys="leaf ~/.config/ghostty/ghostty-shortcuts.md"
 
 alias ls='eza --color=always --group-directories-first --icons'
 alias ll='eza -la --icons --octal-permissions --group-directories-first'
@@ -58,6 +54,17 @@ alias gsp="git stash; git pull"
 alias gch="git checkout"
 alias gcredential="git config credential.helper store"
 
+# os-dependent aliases
+if [[ `uname` == "Darwin" ]]; then
+  alias python="/opt/homebrew/bin/python3"
+  alias pip="/opt/homebrew/bin/pip3"
+  alias keys="leaf ~/.config/ghostty/ghostty-shortcuts.md"
+  # source antidote
+  source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
+else 
+  source /usr/share/zsh-antidote/antidote.zsh
+fi   
+
 # nnn helper
 n ()
 {
@@ -80,9 +87,9 @@ function y() {
     exit
     return
   fi
-  
+
   # Change the current working directory when exiting Yazi 
-  local tmp cwd; tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	local tmp cwd; tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
 	command yazi "$@" --cwd-file="$tmp"
 	IFS= read -r -d '' cwd < "$tmp"
 	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd" || builtin true
@@ -114,10 +121,8 @@ _fzf_compgen_dir() {
   fd --type=d --hidden --exclude .git . "$1"
 }
 
-
 # fzf init after zsh-vi-mod
 zvm_after_init_commands+=('source <(fzf --zsh)')
-
 # zoxide
 eval "$(zoxide init zsh)"
 
@@ -135,4 +140,3 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
