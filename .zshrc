@@ -22,7 +22,6 @@ autoload -U add-zsh-hook
 # aliases
 alias python="/opt/homebrew/bin/python3"
 alias pip="/opt/homebrew/bin/pip3"
-alias inkscape="open -a /Applications/Inkscape.app"
     
 alias v="nvim"
 alias :q="exit"
@@ -81,6 +80,8 @@ function y() {
     exit
     return
   fi
+  
+  # Change the current working directory when exiting Yazi 
   local tmp cwd; tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
 	command yazi "$@" --cwd-file="$tmp"
 	IFS= read -r -d '' cwd < "$tmp"
@@ -134,3 +135,4 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+

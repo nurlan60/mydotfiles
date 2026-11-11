@@ -7,19 +7,14 @@ input {
             //If you want to overwrite your keyboard layout,
             // uncomment the line below and change the layout accordingly.
             layout "us,ru" // Use the American keyboard layout
-
-	    // Sets Caps Lock to toggle between layouts (change to your preference)
-            options "grp:caps_toggle,compose:ralt"
+            options "grp:caps_toggle"
         }
         numlock // Enable numlock on startup
-	// Keeps the same layout active globally across all windows
-        track-layout "global"
     }
 
     touchpad {
         tap // Enable tap-to-click
         natural-scroll // Enable natural (macOS-style) scrolling
-        dwt // This enables disable-while-typing
     }
 
     mouse {
