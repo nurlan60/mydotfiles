@@ -1,16 +1,16 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:chmod"
-rev = "0f28df2"
+rev = "1ef5fe0"
 hash = "87472b05a8c420100f6a2b9cde1e7746"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mount"
-rev = "0f28df2"
-hash = "dbfc342600993eefbb055bff145fa22a"
+rev = "1ef5fe0"
+hash = "f0dcc0ea71d5c59ce0d527f4b8a3937b"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "0f28df2"
+rev = "1ef5fe0"
 hash = "5b2fbef7d1513ce38ff72623a071a5e"
 
 [[plugin.deps]]
@@ -20,28 +20,28 @@ hash = "522db0412d7839c8c343f9c733713d24"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:diff"
-rev = "0f28df2"
+rev = "1ef5fe0"
 hash = "14558d2829c0aa05e99c57de8f74d199"
 
 [[plugin.deps]]
 use = "WhoSowSee/whoosh"
-rev = "d6ede98"
+rev = "cad8079"
 hash = "f6c11dc58d674764a4dd20e644138534"
 
 [[plugin.deps]]
 use = "AminurAlam/yazi-plugins:preview-typst"
-rev = "50d82a7"
+rev = "aebeaa7"
 hash = "b51195fb14479a22751230b638830097"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:piper"
-rev = "0f28df2"
+rev = "1ef5fe0"
 hash = "d1e0499cae5f3aeb628c267616d4b682"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:rclone"
-rev = "0f28df2"
-hash = "3150647e9fb2a47153412d976571dc33"
+rev = "1ef5fe0"
+hash = "bc400c5fad30db75cbc1ace5950964b5"
 
 [[plugin.deps]]
 use = "jaam8/wise-enter"
@@ -50,23 +50,23 @@ hash = "f35a1a045c1dd63160fcfb62b9cb082a"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:compress"
-rev = "0f28df2"
-hash = "d90da0b6c0e92bf4a43f2f83019e91b6"
+rev = "1ef5fe0"
+hash = "e360c7d4f40ecd5d4926dd8f5bca4774"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
-rev = "1183892"
-hash = "ce320f877fe709b189433941aba747c4"
+rev = "38c08d8"
+hash = "57d33c9c6107017bf8afc8df186356c5"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-latte"
-rev = "1183892"
-hash = "273ee53369ccfbf7feb9b0c65e387ed8"
+rev = "38c08d8"
+hash = "f4044a93fcd86ac34f170f9f69d40a2"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-frappe"
-rev = "1183892"
-hash = "ab7c71d442d3a9e16331ea0d95ab36a8"
+rev = "38c08d8"
+hash = "7d6e604c6f458f57e5c27d19163203c5"
 
 [[flavor.deps]]
 use = "BennyOe/tokyo-night"

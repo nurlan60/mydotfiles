@@ -3,14 +3,14 @@
 
 local function fail(s, ...) error(string.format(s, ...)) end
 
-local state = ya.sync(function()
+local state = ya.sync(function(_, hovered)
 	local tab = cx.tab
 	if not tab then
 		return
 	end
 
 	local paths = {}
-	for _, file in pairs(tab.selected) do
+	for _, file in pairs(hovered and {} or tab.selected) do
 		paths[#paths + 1] = file.path
 	end
 	if #paths == 0 and tab.current.hovered then
@@ -19,27 +19,14 @@ local state = ya.sync(function()
 	return tab.current.cwd.physical, paths
 end)
 
-local M = {
-	suffixes = {
-		["7z"] = { "7z" },
-		["tar.bz2"] = { "tar", "bzip2" },
-		["tar.gz"] = { "tar", "gzip" },
-		["tar.xz"] = { "tar", "xz" },
-		bz2 = { "bzip2" },
-		gz = { "gzip" },
-		tar = { "tar" },
-		wim = { "wim" },
-		xz = { "xz" },
-		zip = { "zip" },
-	},
-}
+local M = {}
 
 function M:new() return setmetatable({ children = {} }, { __index = self }) end
 
-function M:init()
+function M:init(args)
 	ya.emit("escape", { visual = true })
 
-	self.to, self.paths = state()
+	self.to, self.paths = state(args.hovered)
 	assert(self.to and self.to.spec.is_regular, "Archive creation requires a local directory")
 	assert(#self.paths > 0, "No files selected")
 
@@ -48,7 +35,6 @@ function M:init()
 	end
 
 	self:init_root()
-	self:init_steps()
 	return true
 end
 
@@ -59,8 +45,8 @@ function M:init_name()
 		return false
 	end
 
-	self.name = assert(fs.safename(result.name ~= "" and result.name or name), "Invalid archive filename")
-	self.secret = result.secret
+	self.name, self.suffix, self.steps, self.secret, self.encrypt_header, self.absolute =
+		result.name, result.suffix, result.steps, result.secret, result.encrypt_header, result.absolute
 	return true
 end
 
@@ -72,19 +58,6 @@ function M:init_root()
 		end
 	end
 	assert(self.root, "Selected files have no shared parent directory")
-end
-
-function M:init_steps()
-	for i in self.name:gmatch("()%.") do
-		local suffix = self.name:sub(i + 1)
-		local steps = self.suffixes[suffix]
-		if steps then
-			self.suffix, self.steps = suffix, steps
-			assert(self.secret == "" or steps[1] == "zip" or steps[1] == "7z", "Password encryption requires ZIP or 7z")
-			return
-		end
-	end
-	fail("Unsupported archive filename: %s", self.name)
 end
 
 function M:init_task()
@@ -100,10 +73,10 @@ function M:init_task()
 	return self.task
 end
 
-function M:entry()
+function M:entry(job)
 	ya.async(function()
 		local me = self:new()
-		local ok, ready = pcall(me.init, me)
+		local ok, ready = pcall(me.init, me, job.args)
 		if not ok then
 			return ya.notify { title = "Compress", content = tostring(ready), level = "error", timeout = 5 }
 		elseif not ready then
@@ -134,7 +107,7 @@ function M:run()
 	end
 
 	local err
-	self.tmp, err = fs.unique("dir", Url(self.root:join(self:tmp_name())))
+	self.tmp, err = fs.unique_dir(Url(self.root:join(self:tmp_name())))
 	if not self.tmp then
 		fail("Failed to create temporary directory: %s", err)
 	end
@@ -167,9 +140,13 @@ function M:pack()
 end
 
 function M:place(from)
-	local dest, err = fs.unique("file", self.to:join(self.name))
-	if not dest then
-		fail("Failed to choose archive filename: %s", err)
+	local dest
+	do
+		local file <close>, err = fs.unique_file(self.to:join(self.name))
+		if not file then
+			fail("Failed to choose archive filename: %s", err)
+		end
+		dest = file.url
 	end
 	self.dest = dest
 
@@ -253,10 +230,10 @@ function M:cleanup()
 		return false, failure
 	end
 	if self.dest then
-		fs.remove("file", self.dest)
+		fs.remove_file(self.dest)
 	end
 	if self.tmp then
-		fs.remove("dir_all", self.tmp)
+		fs.remove_dir_all(self.tmp)
 	end
 
 	return true
@@ -275,7 +252,7 @@ function M:args(input)
 	end
 
 	local args = { "a", "-t" .. step, "-spd", "-sccUTF-8", "-bso0", progress }
-	if step == "tar" or step == "zip" or step == "7z" or step == "wim" then
+	if require(".common").can_absolute(step) then
 		args[#args + 1], args[#args + 2] = "-spf", "-snl"
 	end
 	if input then
@@ -287,12 +264,15 @@ function M:args(input)
 	if self.secret ~= "" then
 		args[#args + 1] = "-p" .. self.secret
 	end
+	if self.encrypt_header then
+		args[#args + 1] = "-mhe=on"
+	end
 
 	args[#args + 1] = "--"
 	args[#args + 1] = tostring(self.tmp:join(stream and tarname or name))
 	if not input then
 		for _, p in ipairs(self.paths) do
-			args[#args + 1] = tostring(p:strip_prefix(self.root))
+			args[#args + 1] = tostring(self.absolute and p or p:strip_prefix(self.root))
 		end
 	end
 
