@@ -134,9 +134,11 @@ later(function()
     -- Map of filetype to formatters
     -- Make sure that necessary CLI tool is available
     formatters_by_ft = { 
-      lua = { 'stylua' } },
+      lua = { 'stylua' },
 			tex = { "tex-fmt" },
       typst = { "typstyle" },
+    },
+  format_on_save = {},
   })
 end)
 

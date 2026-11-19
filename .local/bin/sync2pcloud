@@ -3,6 +3,7 @@ echo "Syncing Documents to PCloud"
 rclone sync ~/Documents pcloud:/"My Documents"
 
 echo "Syncing Narxoz to PCloud"
+find "/Users/nurlan/OneDrive - Некоммерческое Акционерное Общество Университет Нархоз" -name .DS_Store -type f -delete
 rclone sync "/Users/nurlan/OneDrive - Некоммерческое Акционерное Общество Университет Нархоз" pcloud:/Narxoz
 
 echo "Syncing Documents to PSpace"
